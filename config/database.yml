@@ -58,6 +58,11 @@ test:
 #
 production:
   <<: *default
-  database: hanger_talk_prototype_production
-  username: hanger_talk_prototype
-  password: <%= ENV["HANGER_TALK_PROTOTYPE_DATABASE_PASSWORD"] %>
+  # database: hanger_talk_prototype_production
+  # username: hanger_talk_prototype
+  # password: <%= ENV["HANGER_TALK_PROTOTYPE_DATABASE_PASSWORD"] %>
+
+  database: app_production
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %> # 環境変数を設定していない場合は空欄で
+  socket: /var/lib/mysql/mysql.sock
