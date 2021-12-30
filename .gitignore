@@ -30,9 +30,14 @@
 
 # ignore .env which is for database.ylm
 /.env
+
+# Node.js, webpacker周辺
 /public/packs
 /public/packs-test
 /node_modules
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Rspec
+/vendor/bundle
