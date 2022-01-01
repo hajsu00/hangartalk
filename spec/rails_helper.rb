@@ -62,6 +62,6 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  # for making instance of FactoryBot.
+  # for omiting indicating class name 
   config.include FactoryBot::Syntax::Methods
 end
