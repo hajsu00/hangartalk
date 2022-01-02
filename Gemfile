@@ -23,6 +23,10 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'spring'
+  gem 'solargraph'  # improve IntelliSense of VSCode
+  gem 'pre-commit'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :test do
