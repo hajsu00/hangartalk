@@ -9,7 +9,7 @@ RSpec.describe "StaticPages", type: :request do
       get root_path
     end
     it 'should respond top_page successfully' do
-      expect(response).to have_http_status 200
+      expect(response).to have_http_status(:success)
     end
     it 'has title: "Hanger Talk"' do
       expect(response.body).to include "#{@base_title}"
@@ -21,7 +21,7 @@ RSpec.describe "StaticPages", type: :request do
       get about_path
     end
     it 'should respond successfully' do
-      expect(response).to have_http_status 200
+      expect(response).to have_http_status(:success)
     end
     it 'has title: "Hanger Talkとは？ | Hanger Talk"' do
       expect(response.body).to include "Hanger Talkとは？ | #{@base_title}"
@@ -33,7 +33,7 @@ RSpec.describe "StaticPages", type: :request do
       get faq_path
     end
     it 'should respond successfully' do
-      expect(response).to have_http_status 200
+      expect(response).to have_http_status(:success)
     end
     it 'has title: "よくある質問 | Hanger Talk"' do
       expect(response.body).to include "よくある質問 | #{@base_title}"
@@ -45,7 +45,7 @@ RSpec.describe "StaticPages", type: :request do
       get inquiry_path
     end
     it 'should respond successfully' do
-      expect(response).to have_http_status 200
+      expect(response).to have_http_status(:success)
     end
     it 'has title: "お問合せ | Hanger Talk"' do
       expect(response.body).to include "お問合せ | #{@base_title}"
