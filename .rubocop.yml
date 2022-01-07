@@ -68,3 +68,12 @@ Metrics/MethodLength:
   Max: 20
   Exclude:
     - "db/migrate/*.rb"
+
+# 空のメソッドは1行で定義する。 また、アクションの後ろにセミコロンを付与する
+Style/EmptyMethod:
+  Enabled: false
+
+# １ファイルのプログラムの長さルールを省く
+Metrics/BlockLength:
+  Enabled: false
+  
