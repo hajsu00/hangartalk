@@ -22,7 +22,7 @@ production:
   adapter: mysql2
   encoding: utf8
   reconnect: false
-  database: <%= ENV[DATABASE_NAME] %>_production
+  database: hangertalk_production
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
