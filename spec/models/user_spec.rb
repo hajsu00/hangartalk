@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = User.new(name: "Example User", email: "user@example.com")
+    @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
-  describe 'create a new account' do
+  describe 'Name and email' do
     context 'when name or email is blank' do
-      it 'cannot be valid' do
+      it 'is not accepted' do
         @user.name = ' '
         @user.email = ' '
         expect(@user).to be_invalid
@@ -19,7 +19,7 @@ RSpec.describe User, type: :model do
       end
     end
     context 'when name and email is too long' do
-      it 'cannot be valid' do
+      it 'is not accepted' do
         @user.name = 'a' * 51
         expect(@user).to be_invalid
         @user.email = "#{'a' * 244}@example.com"
@@ -53,11 +53,24 @@ RSpec.describe User, type: :model do
       end
     end
     context 'when email address has mixed upper and down' do
-      it 'is save in ll downcase' do
+      it 'is saved in all downcase letter' do
         mixed_case_email = "Foo@ExAMPle.CoM"
         @user.email = mixed_case_email
         @user.save
         expect(@user.reload.email).to eq mixed_case_email.downcase
+      end
+    end
+  end
+
+  describe 'Passsword' do
+    context 'when password is entered' do
+      it 'has no blanks' do
+        @user.password = @user.password_confirmation = " " * 6
+        expect(@user).to be_invalid
+      end
+      it 'has minimum six letters' do
+        @user.password = @user.password_confirmation = "a" * 5
+        expect(@user).to be_invalid
       end
     end
   end

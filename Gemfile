@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.0.3'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
+gem 'bcrypt',  '3.1.16'
 gem 'mysql2', '~> 0.5'
 gem "dotenv-rails"    # MySQL用の環境変数管理gem
 gem 'puma', '~> 5.0'
