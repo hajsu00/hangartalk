@@ -6,17 +6,15 @@ default: &default
   username: <%= ENV['DATABASE_USER'] %>
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost
-  socket: /tmp/mysql.sock 
 
 development:
   <<: *default
-  database: hanger_talk_prototype_development
+  database: hangertalk_development
 
 test:
   <<: *default
-  database: hanger_talk_prototype_test
+  database: hangertalk_test
 
 production:
   <<: *default
   database: hangertalk_production
-  
