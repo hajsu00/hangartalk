@@ -76,4 +76,7 @@ Style/EmptyMethod:
 # １ファイルのプログラムの長さルールを省く
 Metrics/BlockLength:
   Enabled: false
+
+Layout/EmptyLineBetweenDefs:
+    Enabled: false
   
