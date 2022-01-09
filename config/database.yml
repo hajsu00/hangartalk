@@ -18,3 +18,4 @@ test:
 production:
   <<: *default
   database: hangertalk_production
+  socket: /var/run/mysqld/mysqld.sock
