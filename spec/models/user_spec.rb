@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   before do
-    @user = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
+    attributes_for = User.new(name: "Example User", email: "user@example.com", password: "foobar", password_confirmation: "foobar")
   end
   describe 'Name and email' do
     context 'when name or email is blank' do
