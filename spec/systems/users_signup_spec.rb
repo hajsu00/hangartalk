@@ -1,32 +1,49 @@
 require 'rails_helper'
 
-RSpec.describe 'Sign up', type: :system do
-  context 'when invalid terms are posted' do
-    # let(:user_params) do
-    #   attributes_for(:user, name: '', email: 'user@invalid', password: '', password_confirmation: '')
-    # end
-    it 'has no change in number of user' do
-      #visit signup_path
-      expect do
-        post users_path, params: { user: { name: '', email: 'user@invalid', password: '', password_confirmation: '' } }
-      end.to change{ User.count }.by(0)
-      expect(current_path).to eq signup_path
+RSpec.describe 'users', type: :system do
+  describe 'user create a new account' do
+    context 'When valid values are entered' do
+      before do
+        visit signup_path
+        fill_in '名前', with: 'Example User'
+        fill_in 'メールアドレス', with: 'user@example.com'
+        fill_in 'パスワード', with: 'password'
+        fill_in 'パスワード（確認）', with: 'password'
+        click_button '認証メールを送信する'
+      end
+      # it 'has one additional user' do
+      #   expect do
+      #     click_button '認証メールを送信する'
+      #   end.to change(User, :count).by(1)
+      # end
+      it 'gets an flash message' do
+        expect(page).to have_selector('.alert-success', text: 'ユーザー登録に成功しました！')
+      end
+      it 'render to /users/(id) url' do
+        expect(current_path).to eq user_path(User.last)
+      end
     end
-  end
-  context 'when valid terms are posted' do
-    # let(:user_params) do
-    #   attributes_for(:user, name: 'Example User', email: 'user@example.com', password: 'password', password_confirmation: 'password')
-    # end
-    before do
-      @user = { name: 'Example User', email: 'user@example.com', password: 'password', password_confirmation: 'password' }
-    end
-    it 'has no change in number of user' do
-      #visit signup_path
-      expect do
-        # post users_path, params: { user: { name: 'Example User', email: 'user@example.com', password: 'password', password_confirmation: 'password' } }
-        post users_path, params: { user: @user }
-      end.to change{ User.count }.by(1)
-      expect(response).to redirect_to user_path(@user)
+    context 'When invalid values are entered' do
+      before do
+        visit signup_path
+        fill_in '名前', with: ''
+        fill_in 'メールアドレス', with: 'user@invalid'
+        fill_in 'パスワード', with: ''
+        fill_in 'パスワード（確認）', with: ''
+        click_button '認証メールを送信する'
+      end
+      # it 'has no change in number of users' do
+      #   expect do
+      #     click_button '認証メールを送信する'
+      #   end.to change(User, :count).by(0)
+      # end
+      subject { page }
+      it 'gets an errors' do
+        is_expected.to have_selector('.alert-danger', text: 'ユーザー登録に失敗しました。入力内容を確認してください。')
+      end
+      it 'render to /signup url' do
+        is_expected.to have_current_path new_user_path
+      end
     end
   end
 end
