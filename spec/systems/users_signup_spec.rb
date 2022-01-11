@@ -11,11 +11,6 @@ RSpec.describe 'users', type: :system do
         fill_in 'パスワード（確認）', with: 'password'
         click_button '認証メールを送信する'
       end
-      # it 'has one additional user' do
-      #   expect do
-      #     click_button '認証メールを送信する'
-      #   end.to change(User, :count).by(1)
-      # end
       it 'gets an flash message' do
         expect(page).to have_selector('.alert-success', text: 'ユーザー登録に成功しました！')
       end
@@ -32,11 +27,6 @@ RSpec.describe 'users', type: :system do
         fill_in 'パスワード（確認）', with: ''
         click_button '認証メールを送信する'
       end
-      # it 'has no change in number of users' do
-      #   expect do
-      #     click_button '認証メールを送信する'
-      #   end.to change(User, :count).by(0)
-      # end
       subject { page }
       it 'gets an errors' do
         is_expected.to have_selector('.alert-danger', text: 'ユーザー登録に失敗しました。入力内容を確認してください。')
