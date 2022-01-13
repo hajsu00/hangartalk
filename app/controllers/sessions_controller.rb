@@ -9,9 +9,11 @@ class SessionsController < ApplicationController
       redirect_to user
     else
       flash.now[:danger] = 'ログインに失敗しました。入力内容を確認してください。'
-      redirect_to new_user_path
+      render 'new'
     end
   end
   def destroy
+    log_out
+    redirect_to root_url
   end
 end
