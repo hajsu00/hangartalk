@@ -79,4 +79,7 @@ Metrics/BlockLength:
 
 Layout/EmptyLineBetweenDefs:
     Enabled: false
-  
+
+# update_attributeはValidationを通したくない
+Rails/SkipsModelValidations:
+    Enabled: false
