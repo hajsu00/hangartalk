@@ -9,10 +9,11 @@ gem "dotenv-rails"    # MySQL用の環境変数管理gem
 gem 'puma', '~> 5.0'
 gem 'sass-rails', '>= 6'
 gem 'webpacker', '~> 5.0'
-gem 'turbolinks', '~> 5'  # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'jbuilder', '~> 2.7'  # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'bootsnap', '>= 1.4.4', require: false  # Reduces boot times through caching; required in config/boot.rb
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]  # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+gem 'turbolinks', '~> 5' 
+gem 'jbuilder', '~> 2.7'
+gem 'bootsnap', '>= 1.4.4', require: false
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -40,5 +41,4 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   gem 'factory_bot_rails'
-  gem 'faker'
 end
