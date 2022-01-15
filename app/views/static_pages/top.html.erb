@@ -1,8 +1,5 @@
-
-<div class="center">
-  <h1>Hanger Talk</h1>
-  <p>
-    This is the Top page for the Hanger Talk
-  </p>
-  <%= link_to "アカウントを作る", signup_path, class: "btn" %>
-</div>
+<% if logged_in? %>
+  <%= render 'static_pages/top_logged_in' %>
+<% else %>
+  <%= render 'static_pages/top_not_logged_in' %>
+<% end %>
