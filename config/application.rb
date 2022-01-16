@@ -8,15 +8,8 @@ Bundler.require(*Rails.groups)
 
 module HangerTalkPrototype
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
-
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
+    # ブラウザ側でJavaScriptが無効になっていた場合（Ajaxリクエストが送れない場合）でもうまく動くように
+    config.action_view.embed_authenticity_token_in_remote_forms = true
   end
 end
