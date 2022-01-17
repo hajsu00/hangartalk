@@ -23,3 +23,14 @@ following = users[2..50]
 followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
+
+# 一部のユーザーを対象にフライト記録を生成する
+users = User.order(:created_at).take(6)
+10.times do |n|
+  departure_date = Date.today
+  moving_time = Time.current
+  takeoff_time = moving_time + 6.minutes
+  landing_time = takeoff_time + 10.minutes * (n + 1)
+  stop_time = landing_time + 6.minutes
+  users.each { |user| user.aeroplane_flights.create!(departure_date: departure_date, aeroplane_type: 'ask21', aeroplane_ident: 'ja21ma', moving_time: moving_time, stop_time: stop_time) }
+end
