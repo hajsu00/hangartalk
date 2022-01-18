@@ -1,7 +1,7 @@
 class AeroplaneFlight < ApplicationRecord
   belongs_to :user
   default_scope -> { order(created_at: :desc) }
-  validates :user_id, :moving_time, :stop_time, presence: true
+  validates :departure_date, :aeroplane_type, :aeroplane_ident, :user_id, :moving_time, :stop_time, presence: true
   validate :time_order_check
 
   # Check if input time order is proper
