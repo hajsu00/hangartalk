@@ -1,0 +1,14 @@
+<%= form_with(model: @aeroplane_flight, local: true) do |f| %>
+
+  <%= f.label :departure_date, "出発日" %>
+  <%= f.date_field :departure_date, class: 'form-control' %>
+
+  <%= f.label :aeroplane_type, "型式" %>
+  <%= f.select :aeroplane_type, [["Cessna 152", "Cessna 152"], ["Cessna 172", "Cessna 172"]], include_blank: "型式を選択して下さい", class: 'form-control' %>
+
+  <%= f.label :aeroplane_ident, "登録番号" %>
+  <%= f.select :aeroplane_ident, [["JA21MA", "JA21MA"], ["JA2381", "JA2381"]], include_blank: "登録番号を選択して下さい", class: 'form-control' %>
+
+  <%= f.submit yield(:post_button), class: "btn btn-primary" %>
+  <%= f.submit yield(:register_button), class: "btn btn-primary" %>
+<% end %>
