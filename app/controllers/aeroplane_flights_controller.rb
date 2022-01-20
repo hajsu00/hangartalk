@@ -20,6 +20,10 @@ class AeroplaneFlightsController < ApplicationController
   def show
   end
 
+  def index
+    @aeroplane_flights = current_user.aeroplane_flights.all
+  end
+
   private
 
   def aeroplane_flight_params

@@ -1,0 +1,31 @@
+  <% n = 0 %>
+  <tr>
+    <!-- 基本事項 -->
+    <td><%= aeroplane_flight.log_number %></td>
+    <td><%= aeroplane_flight.departure_date %></td>
+    <td><%= '出発地' %></td>
+    <td><%= '到着地' %></td>
+    <td><%= aeroplane_flight.moving_time.strftime("%R") %></td>
+    <td><%= aeroplane_flight.stop_time.strftime("%R") %></td>
+    <td><%= '飛行内容' %></td>
+    <td><%= '離陸回数' %></td>
+    <td><%= '着陸回数' %></td>
+    <td><%= aeroplane_each_flight_time(aeroplane_flight) %></td>
+    <!-- 機長または単独の時間 -->
+    <td><%= '機長' %></td>
+    <td><%= '単独飛行' %></td>
+    <td><%= '野外飛行' %></td>
+    <td><%= '夜間飛行' %></td>
+    <!-- 教官同乗教育の時間 -->
+    <td><%= '同乗教育' %></td>
+    <td><%= '野外飛行' %></td>
+    <td><%= '夜間飛行' %></td>
+    <!-- 計器飛行時間 -->
+    <td><%= 'フード' %></td>
+    <td><%= '計器飛行' %></td>
+    <!-- その他飛行内容 -->
+    <td><%= '飛行訓練装置' %></td>
+    <td><%= '操縦教員' %></td>
+    <!-- その他飛行内容 -->
+    <td><%= aeroplane_flight.note %></td>
+  </tr>

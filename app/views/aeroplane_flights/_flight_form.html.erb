@@ -15,6 +15,21 @@
   <%= f.label :stop_time, "到着時刻" %>
   <%= f.time_field :stop_time, class: 'form-control' %>
 
+  <%= f.radio_button :is_pic, true, checked: true %>
+  <%= f.label :is_pic, "機長または単独飛行", {value: :is_pic, style: "display: inline-block;"} %>
+  <%= f.radio_button :is_pic, false %>
+  <%= f.label :is_pic, "同乗教育", {value: :is_pic, style: "display: inline-block;"} %>
+
+   <%= f.radio_button :is_cross_country, true %>
+  <%= f.label :is_cross_country, "クロスカントリー", {value: :is_cross_country, style: "display: inline-block;"} %>
+  <%= f.radio_button :is_cross_country, false, checked: true %>
+  <%= f.label :is_cross_country, "クロスカントリー以外", {value: :is_cross_country, style: "display: inline-block;"} %>
+
+   <%= f.radio_button :is_instructor, true %>
+  <%= f.label :is_instructor, "教育飛行", {value: :is_instructor, style: "display: inline-block;"} %>
+  <%= f.radio_button :is_instructor, false, checked: true %>
+  <%= f.label :is_instructor, "教育飛行以外", {value: :is_instructor, style: "display: inline-block;"} %>
+
   <%= f.submit yield(:add_flight_leg), class: "btn btn-primary" %>
   <%= f.submit yield(:register_button), class: "btn btn-primary" %>
 <% end %>

@@ -19,4 +19,14 @@ module AeroplaneFlightsHelper
     setup_user_flight
     @aeroplane_flights.count
   end
+
+  def aeroplane_each_flight_time(target_flight)
+    flight_hour = target_flight.stop_time.hour - target_flight.moving_time.hour
+    flight_min = target_flight.stop_time.min - target_flight.moving_time.min
+    if flight_min.negative?
+      flight_hour -= 1
+      flight_min = 60 + flight_min
+    end
+    "#{flight_hour}:#{format('%02d', flight_min)}"
+  end
 end
