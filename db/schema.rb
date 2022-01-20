@@ -41,11 +41,16 @@ ActiveRecord::Schema.define(version: 2022_01_20_051321) do
   end
 
   create_table "aeroplane_flights", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "log_number"
     t.date "departure_date"
     t.string "aeroplane_type"
     t.string "aeroplane_ident"
     t.datetime "moving_time"
     t.datetime "stop_time"
+    t.boolean "is_pic"
+    t.boolean "is_cross_country"
+    t.boolean "is_instructor"
+    t.string "note"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -58,6 +63,7 @@ ActiveRecord::Schema.define(version: 2022_01_20_051321) do
     t.string "arrival_point"
     t.datetime "takeoff_time"
     t.datetime "landing_time"
+    t.integer "number_of_takeoff"
     t.integer "number_of_landing"
     t.bigint "aeroplane_flight_id", null: false
     t.datetime "created_at", precision: 6, null: false

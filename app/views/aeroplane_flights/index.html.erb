@@ -1,0 +1,51 @@
+<% provide(:title, 'フライトログブック（飛行機）') %>
+<div class="row">
+  <aside class="col-md-4">
+    <section class="user_info">
+      <h1><%= 'フライトログブック（飛行機）' %></h1>
+    </section>
+    <section class="flight_experiences">
+      <%= render 'shared/flight_experiences' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if @user.aeroplane_flights.any? %>
+      <h3>フライトログ (<%= @user.aeroplane_flights.count %>)</h3>
+   <table border="1">
+    <tr>
+      <th rowspan="2">No.</th>
+      <th rowspan="2">出発日</th>
+      <th rowspan="2">出発地</th>
+      <th rowspan="2">到着地</th>
+      <th rowspan="2">出発時刻</th>
+      <th rowspan="2">到着時刻</th>
+      <th rowspan="2">飛行内容</th>
+      <th rowspan="2">離陸回数</th>
+      <th rowspan="2">着陸回数</th>
+      <th rowspan="2">飛行時間</th>
+      <th colspan="4">機長または単独の時間</th>
+      <th colspan="3">教官同乗教育の時間</th>
+      <th colspan="2">計器飛行時間</th>
+      <th rowspan="2">飛行訓練装置</th>
+      <th rowspan="2">操縦教員</th>
+      <th rowspan="2">補足事項</th>
+    </tr>
+    <tr>
+      <th>機長</th>
+      <th>単独飛行</th>
+      <th>野外飛行</th>
+      <th>夜間飛行</th>
+      <th>同乗教育</th>
+      <th>野外飛行</th>
+      <th>夜間飛行</th>
+      <th>フード</th>
+      <th>計器飛行</th>
+    </tr>   
+    <%= render partial: "aeroplane_flight", collection: @aeroplane_flights %>
+  </table>
+
+    <% else %>
+      <p>登録されたフライトログがありません。</p>
+    <% end %>
+  </div>
+</div>

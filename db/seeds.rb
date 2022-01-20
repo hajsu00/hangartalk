@@ -32,5 +32,5 @@ users = User.order(:created_at).take(6)
   moving_time = takeoff_time - 6.minutes
   landing_time = takeoff_time + 10.minutes * (n + 1)
   stop_time = landing_time + 6.minutes
-  users.each { |user| user.aeroplane_flights.create!(departure_date: departure_date, aeroplane_type: 'ask21', aeroplane_ident: 'ja21ma', moving_time: moving_time, stop_time: stop_time) }
+  users.each { |user| user.aeroplane_flights.create!(log_number: n + 1, departure_date: departure_date, aeroplane_type: 'ask21', aeroplane_ident: 'ja21ma', moving_time: moving_time, stop_time: stop_time, is_pic: true, is_cross_country: false, is_instructor: false, note: 'テストテスト') }
 end
