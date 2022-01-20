@@ -6,6 +6,6 @@ class AeroplaneFlight < ApplicationRecord
 
   # Check if input time order is proper
   def time_order_check
-    self.moving_time < stop_time
+    self.moving_time < stop_time unless self.moving_time.nil? && stop_time.nil?
   end
 end
