@@ -9,6 +9,12 @@
   <%= f.label :aeroplane_ident, "登録番号" %>
   <%= f.select :aeroplane_ident, [["JA21MA", "JA21MA"], ["JA2381", "JA2381"]], include_blank: "登録番号を選択して下さい", class: 'form-control' %>
 
-  <%= f.submit yield(:post_button), class: "btn btn-primary" %>
+  <%= f.label :moving_time, "出発時刻" %>
+  <%= f.time_field :moving_time, class: 'form-control' %>
+
+  <%= f.label :stop_time, "到着時刻" %>
+  <%= f.time_field :stop_time, class: 'form-control' %>
+
+  <%= f.submit yield(:add_flight_leg), class: "btn btn-primary" %>
   <%= f.submit yield(:register_button), class: "btn btn-primary" %>
 <% end %>
