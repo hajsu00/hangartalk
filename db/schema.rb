@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_20_051321) do
+ActiveRecord::Schema.define(version: 2022_01_16_100822) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -45,10 +45,20 @@ ActiveRecord::Schema.define(version: 2022_01_20_051321) do
     t.date "departure_date"
     t.string "aeroplane_type"
     t.string "aeroplane_ident"
+    t.string "departure_point"
+    t.string "arrival_point"
+    t.string "exercises_or_maneuvers"
+    t.integer "number_of_takeoff"
+    t.integer "number_of_landing"
     t.datetime "moving_time"
     t.datetime "stop_time"
     t.boolean "is_pic"
+    t.boolean "is_dual"
     t.boolean "is_cross_country"
+    t.boolean "is_night_flight"
+    t.boolean "is_hood"
+    t.boolean "is_instrument"
+    t.boolean "is_simulator"
     t.boolean "is_instructor"
     t.string "note"
     t.bigint "user_id", null: false
@@ -56,19 +66,6 @@ ActiveRecord::Schema.define(version: 2022_01_20_051321) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "created_at"], name: "index_aeroplane_flights_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_aeroplane_flights_on_user_id"
-  end
-
-  create_table "aeroplane_legs", charset: "utf8mb3", force: :cascade do |t|
-    t.string "departure_point"
-    t.string "arrival_point"
-    t.datetime "takeoff_time"
-    t.datetime "landing_time"
-    t.integer "number_of_takeoff"
-    t.integer "number_of_landing"
-    t.bigint "aeroplane_flight_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["aeroplane_flight_id"], name: "index_aeroplane_legs_on_aeroplane_flight_id"
   end
 
   create_table "microposts", charset: "utf8mb3", force: :cascade do |t|
@@ -109,6 +106,5 @@ ActiveRecord::Schema.define(version: 2022_01_20_051321) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "aeroplane_flights", "users"
-  add_foreign_key "aeroplane_legs", "aeroplane_flights"
   add_foreign_key "microposts", "users"
 end

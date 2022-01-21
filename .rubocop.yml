@@ -83,3 +83,7 @@ Layout/EmptyLineBetweenDefs:
 # update_attributeはValidationを通したくない
 Rails/SkipsModelValidations:
     Enabled: false
+
+# メソッド数の制限を外す
+Metrics/MethodLength:
+    Enabled: false
