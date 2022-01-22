@@ -13,7 +13,7 @@ AllCops:
     - "tmp/**/*"
     - "lib/**/*"
   DisplayCopNames: true
-  TargetRubyVersion: 2.6
+  TargetRubyVersion: 3.0.3
 
 # trueかfalseを設定しないと警告が出る
 Style/HashEachMethods:
@@ -86,4 +86,17 @@ Rails/SkipsModelValidations:
 
 # メソッド数の制限を外す
 Metrics/MethodLength:
+    Enabled: false
+
+# モジュールの桁数制限を外す
+Metrics/ModuleLength:
+    Enabled: false
+
+Metrics/AbcSize:
+    Enabled: false
+
+Metrics/CyclomaticComplexity:
+    Enabled: false
+
+Metrics/PerceivedComplexity:
     Enabled: false

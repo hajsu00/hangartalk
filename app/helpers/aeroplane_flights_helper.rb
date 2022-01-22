@@ -23,10 +23,115 @@ module AeroplaneFlightsHelper
   def aeroplane_each_flight_time(target_flight)
     flight_hour = target_flight.stop_time.hour - target_flight.moving_time.hour
     flight_min = target_flight.stop_time.min - target_flight.moving_time.min
-    if flight_min.negative?
-      flight_hour -= 1
-      flight_min = 60 + flight_min
-    end
-    "#{flight_hour}:#{format('%02d', flight_min)}"
+    [formt_time(flight_hour, flight_min)[:hour], formt_time(flight_hour, flight_min)[:min]]
   end
+
+  def show_flight_time(hour, min)
+    formt_time(hour, min)
+    "#{formt_time(hour, min)[:hour]}:#{format('%02d', formt_time(hour, min)[:min])}"
+  end
+
+  def formt_time(hour, min)
+    if min.negative?
+      hour -= 1
+      min = 60 + min
+    elsif min > 60
+      hour += min.div(60)
+      min -= 60 * min.div(60)
+    end
+    { hour: hour, min: min }
+  end
+
+  # ページ小計
+  def page_total_takoff_number
+
+  end
+  def page_total_landing_number
+
+  end
+  def page_total_time(which_page)
+    setup_user_flight
+    last_flight_log_number = @aeroplane_flights.last.log_number
+    number_of_last_page_flights = last_flight_log_number % 10
+    case which_page
+    when 'current_page'
+      number_of_target_flights = number_of_last_page_flights
+      flight_time = add(number_of_target_flights, last_flight_log_number)
+    when 'up_to_previous_page'
+      flight_time = add(10, last_flight_log_number - number_of_last_page_flights)
+    when 'all_page'
+      flight_time = add(last_flight_log_number, last_flight_log_number)
+    end
+    flight_time
+  end
+
+  def add(number_of_target_flights, last_flight_log_number)
+    flight_time = {
+      total_time: { hour: 0, min: 0 },
+      pic_time: { hour: 0, min: 0 },
+      solo_time: { hour: 0, min: 0 },
+      cross_country_time: { hour: 0, min: 0 },
+      night_time: { hour: 0, min: 0 },
+      dual_time: { hour: 0, min: 0 },
+      dual_crosss_country_time: {hour: 0, min: 0 },
+      dual_night_time: { hour: 0, min: 0 },
+      hood_time: { hour: 0, min: 0 },
+      instrument_time: { hour: 0, min: 0 },
+      simlator_time: { hour: 0, min: 0 },
+      instructor_time: { hour: 0, min: 0 },
+    }
+    (0..(number_of_target_flights - 1)).each do |n|
+      target_flight = @aeroplane_flights.find_by(log_number: last_flight_log_number - n)
+      target_flight_time = aeroplane_each_flight_time(target_flight)
+      if target_flight.is_pic?
+        flight_time[:pic_time][:hour] += target_flight_time[0]
+        flight_time[:pic_time][:min] += target_flight_time[1]
+      end
+      if !target_flight.is_pic? && !target_flight.is_dual?
+        flight_time[:solo_time][:hour] += target_flight_time[0]
+        flight_time[:solo_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_pic? && target_flight.is_cross_country?
+        flight_time[:cross_country_time][:hour] += target_flight_time[0]
+        flight_time[:cross_country_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_pic? && target_flight.is_night_flight?
+        flight_time[:night_time][:hour] += target_flight_time[0]
+        flight_time[:night_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_dual?
+        flight_time[:dual_time][:hour] += target_flight_time[0]
+        flight_time[:dual_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_dual? && target_flight.is_cross_country?
+        flight_time[:dual_crosss_country_time][:hour] += target_flight_time[0]
+        flight_time[:dual_crosss_country_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_dual? && target_flight.is_night_flight?
+        flight_time[:dual_night_time][:hour] += target_flight_time[0]
+        flight_time[:dual_night_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_hood?
+        flight_time[:hood_time][:hour] += target_flight_time[0]
+        flight_time[:hood_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_instrument?
+        flight_time[:instrument_time][:hour] += target_flight_time[0]
+        flight_time[:instrument_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_simulator?
+        flight_time[:simlator_time][:hour] += target_flight_time[0]
+        flight_time[:simlator_time][:min] += target_flight_time[1]
+      end
+      if target_flight.is_instructor?
+        flight_time[:instructor_time][:hour] += target_flight_time[0]
+        flight_time[:instructor_time][:min] += target_flight_time[1]
+      end
+      flight_time[:total_time][:hour] += target_flight_time[0]
+      flight_time[:total_time][:min] += target_flight_time[1]
+    end
+    p flight_time
+    flight_time
+  end
+
 end
