@@ -45,12 +45,13 @@
       <th>計器飛行</th>
     </tr>
     <!-- 一覧表（DBから取得） -->
+ <%= render partial: "aeroplane_flight", aeroplane_flights: @aeroplane_flights %> 
+
     <%
 =begin%>
- <%= render partial: "aeroplane_flight", aeroplane_flights: @aeroplane_flights %> 
+ <%= render 'aeroplane_flight' %> 
 <%
 =end%>
-    <%= render 'aeroplane_flight' %>
     <!-- まとめ表 -->
     <%
 =begin%>
