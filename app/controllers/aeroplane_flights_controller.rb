@@ -1,4 +1,5 @@
 class AeroplaneFlightsController < ApplicationController
+  include SessionsHelper
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
 
@@ -21,7 +22,14 @@ class AeroplaneFlightsController < ApplicationController
   end
 
   def index
-    @aeroplane_flights = current_user.aeroplane_flights.all
+    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page params[:page]
+    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
+    @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
+    # @aeroplane_flights = @aeroplane_flights.page(params[:page]).per(10)
+    
+    # @aeroplane_flights = current_user.aeroplane_flights.build
+    # @aeroplane_flights = AeroplaneFlight.page(:params[:page]).per(10)
+    # @aeroplane_flights = @aeroplane_flights.page(:params[:page]).per(10)
   end
 
   private
