@@ -24,12 +24,14 @@ class AeroplaneFlightsController < ApplicationController
   def index
     # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page params[:page]
     # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
-    @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
+    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
+    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page params[:page]
+    # @aeroplane_flights = AeroplaneFlight.page params[:page]
     # @aeroplane_flights = @aeroplane_flights.page(params[:page]).per(10)
-    
-    # @aeroplane_flights = current_user.aeroplane_flights.build
-    # @aeroplane_flights = AeroplaneFlight.page(:params[:page]).per(10)
+
+    @aeroplane_flights = AeroplaneFlight.all
     # @aeroplane_flights = @aeroplane_flights.page(:params[:page]).per(10)
+    @aeroplane_flights =Kaminari.paginate_array([], total_count: @aeroplane_flights.count).page(params[:page]).per(10)
   end
 
   private
