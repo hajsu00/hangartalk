@@ -20,17 +20,18 @@ module AeroplaneFlightsHelper
     @aeroplane_flights.count
   end
 
+  # 1フライト毎のフライトタイムを計算
   def aeroplane_each_flight_time(target_flight)
     flight_hour = target_flight.stop_time.hour - target_flight.moving_time.hour
     flight_min = target_flight.stop_time.min - target_flight.moving_time.min
     [formt_time(flight_hour, flight_min)[:hour], formt_time(flight_hour, flight_min)[:min]]
   end
-
+  # フライトタイムを「◯◯：◯◯」形式でビューに表示する
   def show_flight_time(hour, min)
     formt_time(hour, min)
     "#{formt_time(hour, min)[:hour]}:#{format('%02d', formt_time(hour, min)[:min])}"
   end
-
+  # 時刻表示のフォーマットを整える
   def formt_time(hour, min)
     if min.negative?
       hour -= 1
@@ -42,13 +43,7 @@ module AeroplaneFlightsHelper
     { hour: hour, min: min }
   end
 
-  # ページ小計
-  def page_total_takoff_number
-
-  end
-  def page_total_landing_number
-
-  end
+  # ページ毎のフライトタイム合計を計算する
   def page_total_time(which_page)
     setup_user_flight
     last_flight_log_number = @aeroplane_flights.last.log_number
@@ -56,16 +51,16 @@ module AeroplaneFlightsHelper
     case which_page
     when 'current_page'
       number_of_target_flights = number_of_last_page_flights
-      flight_time = add(number_of_target_flights, last_flight_log_number)
+      flight_time = total_time_calculation(number_of_target_flights, last_flight_log_number)
     when 'up_to_previous_page'
-      flight_time = add(10, last_flight_log_number - number_of_last_page_flights)
+      flight_time = total_time_calculation(10, last_flight_log_number - number_of_last_page_flights)
     when 'all_page'
-      flight_time = add(last_flight_log_number, last_flight_log_number)
+      flight_time = total_time_calculation(last_flight_log_number, last_flight_log_number)
     end
     flight_time
   end
-
-  def add(number_of_target_flights, last_flight_log_number)
+  # フライトタイム計算部分
+  def total_time_calculation(number_of_target, starts_from)
     flight_time = {
       total_time: { hour: 0, min: 0 },
       pic_time: { hour: 0, min: 0 },
@@ -80,8 +75,8 @@ module AeroplaneFlightsHelper
       simlator_time: { hour: 0, min: 0 },
       instructor_time: { hour: 0, min: 0 },
     }
-    (0..(number_of_target_flights - 1)).each do |n|
-      target_flight = @aeroplane_flights.find_by(log_number: last_flight_log_number - n)
+    (0..(number_of_target - 1)).each do |n|
+      target_flight = @aeroplane_flights.find_by(log_number: starts_from - n)
       target_flight_time = aeroplane_each_flight_time(target_flight)
       if target_flight.is_pic?
         flight_time[:pic_time][:hour] += target_flight_time[0]
@@ -130,8 +125,6 @@ module AeroplaneFlightsHelper
       flight_time[:total_time][:hour] += target_flight_time[0]
       flight_time[:total_time][:min] += target_flight_time[1]
     end
-    p flight_time
     flight_time
   end
-
 end
