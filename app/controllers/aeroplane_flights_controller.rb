@@ -22,21 +22,18 @@ class AeroplaneFlightsController < ApplicationController
   end
 
   def index
-    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page params[:page]
     # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
-    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
-    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page params[:page]
-    # @aeroplane_flights = AeroplaneFlight.page params[:page]
-    # @aeroplane_flights = @aeroplane_flights.page(params[:page]).per(10)
-
-    @aeroplane_flights = AeroplaneFlight.all
-    # @aeroplane_flights = @aeroplane_flights.page(:params[:page]).per(10)
-    @aeroplane_flights =Kaminari.paginate_array([], total_count: @aeroplane_flights.count).page(params[:page]).per(10)
+    # @aeroplane_flights = AeroplaneFlight.all
+    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id)
+    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(1)
+    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page])
+    @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
   end
 
   private
 
   def aeroplane_flight_params
-    params.require(:aeroplane_flight).permit(:departure_date, :aeroplane_type, :aeroplane_ident, :moving_time, :stop_time)
+    # params.require(:aeroplane_flight).permit(:departure_date, :aeroplane_type, :aeroplane_ident, :moving_time, :stop_time)
+    params.require(:aeroplane_flight).permit(:departure_date, :aeroplane_type, :aeroplane_ident, :departure_point, :arrival_point, :exercises_or_maneuvers, :number_of_takeoff, :number_of_landing, :moving_time, :stop_time, :is_pic, :is_dual, :is_cross_country, :is_night_flight, :is_hood, :is_instrument, :is_simulator, :is_instructor, :note)
   end
 end
