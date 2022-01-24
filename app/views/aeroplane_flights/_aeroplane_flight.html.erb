@@ -36,7 +36,7 @@
 =end%>
  
 
-<% @aeroplane_flights.each do |aeroplane_flight| %>  
+<% aeroplane_flights.each do |aeroplane_flight| %>
   <div class="panel panel-success">
     <div class="panel-body">
       <%= aeroplane_flight.log_number %>
@@ -44,4 +44,4 @@
   </div>
 <% end %>
 
- <%= paginate @aeroplane_flights %> 
+<%= paginate aeroplane_flights %>  
