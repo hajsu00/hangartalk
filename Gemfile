@@ -35,6 +35,7 @@ group :development do
   gem 'pre-commit'
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'pry-rails'
 end
 
 group :test do
