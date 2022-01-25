@@ -1,5 +1,6 @@
     <tr>
       <% flight_time = page_total_time('current_page') %>
+      <% binding.pry %>
       <th colspan="9">ページ小計</th>
       <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %>
     </tr>

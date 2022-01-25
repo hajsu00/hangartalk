@@ -52,6 +52,7 @@ user = User.find_by(id: 1)
                               is_instrument: false,
                               is_simulator: false,
                               is_instructor: true,
+                              is_stall_recovery: false,
                               note: '備考欄です。')
   # users.each { |user| user.aeroplane_flights.create!(log_number: n + 1, departure_date: departure_date, aeroplane_type: 'ask21', aeroplane_ident: 'ja21ma', moving_time: moving_time, stop_time: stop_time, is_pic: true, is_cross_country: false, is_instructor: false, note: 'テストテスト') }
 end
@@ -80,6 +81,7 @@ end
 #                               is_instrument: false,
 #                               is_simulator: false,
 #                               is_instructor: true,
+#                               is_stall_recovery: false,
 #                               note: '備考欄です。')
 # departure_date = Time.zone.today
 # takeoff_time = Time.current + 60.minutes
@@ -105,6 +107,7 @@ end
 #                               is_instrument: false,
 #                               is_simulator: false,
 #                               is_instructor: false,
+#                               is_stall_recovery: false,
 #                               note: '備考欄です。')
 # departure_date = Time.zone.today
 # takeoff_time = Time.current + 120.minutes
@@ -130,4 +133,5 @@ end
 #                               is_instrument: false,
 #                               is_simulator: false,
 #                               is_instructor: false,
+#                               is_stall_recovery: false,
 #                               note: '備考欄です。')

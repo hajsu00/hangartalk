@@ -46,17 +46,8 @@
     </tr>
     <!-- 一覧表（DBから取得） -->
     <%= render partial: "aeroplane_flight", locals: { aeroplane_flights: @aeroplane_flights } %>
-    <%
-=begin%>
- <%= render 'aeroplane_flight' %> 
-<%
-=end%>
     <!-- まとめ表 -->
-    <%
-=begin%>
- <%= render 'show_page_total' %> 
-<%
-=end%>
+  <%= render 'show_page_total' %> 
   </table>
     <% else %>
       <p>登録されたフライトログがありません。</p>

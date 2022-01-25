@@ -22,11 +22,6 @@ class AeroplaneFlightsController < ApplicationController
   end
 
   def index
-    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
-    # @aeroplane_flights = AeroplaneFlight.all
-    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id)
-    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(1)
-    # @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page])
     @aeroplane_flights = AeroplaneFlight.where("user_id = ?", current_user.id).page(params[:page]).per(10)
   end
 

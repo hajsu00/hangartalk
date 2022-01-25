@@ -1,47 +1,39 @@
-        <%
-=begin%>
- <tr>
-            <% flight_time = aeroplane_each_flight_time(aeroplane_flight) %>
-            <!-- 基本事項 -->
-            <td><%= aeroplane_flight.log_number %></td>
-            <td><%= aeroplane_flight.departure_date %></td>
-            <td><%= aeroplane_flight.aeroplane_type %></td>
-            <td><%= aeroplane_flight.aeroplane_ident %></td>
-            <td><%= aeroplane_flight.departure_point %></td>
-            <td><%= aeroplane_flight.arrival_point %></td>
-            <td><%= aeroplane_flight.moving_time.strftime("%R") %></td>
-            <td><%= aeroplane_flight.stop_time.strftime("%R") %></td>
-            <td><%= aeroplane_flight.exercises_or_maneuvers %></td>
-            <td><%= aeroplane_flight.number_of_takeoff %></td>
-            <td><%= aeroplane_flight.number_of_landing %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1]) %></td> 
-            <!-- 機長または単独の時間 -->
-            <td><%= show_flight_time(flight_time[0], flight_time[1]) if aeroplane_flight.is_pic? %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if !aeroplane_flight.is_pic? && !aeroplane_flight.is_dual? %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_pic? && aeroplane_flight.is_cross_country? %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_pic? && aeroplane_flight.is_night_flight? %></td>
-            <!-- 教官同乗教育の時間 -->
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_dual? %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_dual? && aeroplane_flight.is_cross_country? %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_dual? && aeroplane_flight.is_night_flight? %></td>
-            <!-- 計器飛行時間 -->
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_hood? %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_instrument? %></td>
-            <!-- その他飛行内容等 -->
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_simulator? %></td>
-            <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_instructor? %></td>
-            <td><%= aeroplane_flight.note %></td>
-          </tr>   
-<%
-=end%>
- 
-
 <% aeroplane_flights.each do |aeroplane_flight| %>
   <div class="panel panel-success">
     <div class="panel-body">
-      <%= aeroplane_flight.log_number %>
+      <tr>
+        <% flight_time = aeroplane_each_flight_time(aeroplane_flight) %>
+        <!-- 基本事項 -->
+        <td><%= aeroplane_flight.log_number %></td>
+        <td><%= aeroplane_flight.departure_date %></td>
+        <td><%= aeroplane_flight.aeroplane_type %></td>
+        <td><%= aeroplane_flight.aeroplane_ident %></td>
+        <td><%= aeroplane_flight.departure_point %></td>
+        <td><%= aeroplane_flight.arrival_point %></td>
+        <td><%= aeroplane_flight.moving_time.strftime("%R") %></td>
+        <td><%= aeroplane_flight.stop_time.strftime("%R") %></td>
+        <td><%= aeroplane_flight.exercises_or_maneuvers %></td>
+        <td><%= aeroplane_flight.number_of_takeoff %></td>
+        <td><%= aeroplane_flight.number_of_landing %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1]) %></td> 
+        <!-- 機長または単独の時間 -->
+        <td><%= show_flight_time(flight_time[0], flight_time[1]) if aeroplane_flight.is_pic? %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if !aeroplane_flight.is_pic? && !aeroplane_flight.is_dual? %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_pic? && aeroplane_flight.is_cross_country? %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_pic? && aeroplane_flight.is_night_flight? %></td>
+        <!-- 教官同乗教育の時間 -->
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_dual? %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_dual? && aeroplane_flight.is_cross_country? %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_dual? && aeroplane_flight.is_night_flight? %></td>
+        <!-- 計器飛行時間 -->
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_hood? %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_instrument? %></td>
+        <!-- その他飛行内容等 -->
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_simulator? %></td>
+        <td><%= show_flight_time(flight_time[0], flight_time[1])  if aeroplane_flight.is_instructor? %></td>
+        <td><%= aeroplane_flight.note %></td>
+      </tr>   
     </div>
   </div>
 <% end %>
-
 <%= paginate aeroplane_flights %>  
