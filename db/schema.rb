@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_16_100822) do
+ActiveRecord::Schema.define(version: 2022_01_25_114322) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -60,12 +60,36 @@ ActiveRecord::Schema.define(version: 2022_01_16_100822) do
     t.boolean "is_instrument"
     t.boolean "is_simulator"
     t.boolean "is_instructor"
+    t.boolean "is_stall_recovery"
     t.string "note"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id", "created_at"], name: "index_aeroplane_flights_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_aeroplane_flights_on_user_id"
+  end
+
+  create_table "aeroplane_initial_logs", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "total_flight_number"
+    t.integer "number_of_takeoff"
+    t.integer "number_of_landing"
+    t.integer "flight_time"
+    t.integer "pic_time"
+    t.integer "solo_time"
+    t.integer "xc_time"
+    t.integer "night_time"
+    t.integer "dual_time"
+    t.integer "dual_xc_time"
+    t.integer "dual_night_time"
+    t.integer "hood_time"
+    t.integer "instrument_time"
+    t.integer "simulator_time"
+    t.integer "instructor_time"
+    t.integer "number_of_stall_recovery"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_aeroplane_initial_logs_on_user_id"
   end
 
   create_table "microposts", charset: "utf8mb3", force: :cascade do |t|
@@ -106,5 +130,6 @@ ActiveRecord::Schema.define(version: 2022_01_16_100822) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "aeroplane_flights", "users"
+  add_foreign_key "aeroplane_initial_logs", "users"
   add_foreign_key "microposts", "users"
 end

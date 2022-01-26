@@ -44,7 +44,7 @@ user = User.find_by(id: 1)
                               number_of_landing: 3,
                               moving_time: moving_time,
                               stop_time: stop_time,
-                              is_pic: true,
+                              is_pic: false,
                               is_dual: false,
                               is_cross_country: true,
                               is_night_flight: true,
@@ -52,7 +52,7 @@ user = User.find_by(id: 1)
                               is_instrument: false,
                               is_simulator: false,
                               is_instructor: true,
-                              is_stall_recovery: false,
+                              is_stall_recovery: true,
                               note: '備考欄です。')
   # users.each { |user| user.aeroplane_flights.create!(log_number: n + 1, departure_date: departure_date, aeroplane_type: 'ask21', aeroplane_ident: 'ja21ma', moving_time: moving_time, stop_time: stop_time, is_pic: true, is_cross_country: false, is_instructor: false, note: 'テストテスト') }
 end
@@ -135,3 +135,6 @@ end
 #                               is_instructor: false,
 #                               is_stall_recovery: false,
 #                               note: '備考欄です。')
+
+user = User.find_by(id: 1)
+user.create_aeroplane_initial_log(total_flight_number: 20, number_of_takeoff: 30, number_of_landing: 30, flight_time: 1800, pic_time: 0, solo_time: 300, xc_time: 60, night_time: 0, dual_time: 1500, dual_xc_time: 180, dual_night_time: 60, hood_time: 60, instrument_time: 0, simulator_time: 0, instructor_time: 0, number_of_stall_recovery: 3)

@@ -1,16 +1,16 @@
-    <tr>
+ <tr>
       <% flight_time = page_total_time('current_page') %>
-      <% binding.pry %>
       <th colspan="9">ページ小計</th>
-      <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %>
+
+      <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %> 
     </tr>
     <tr>
       <th colspan="9">前ページまでの合計</th>
-      <% flight_time = page_total_time('up_to_previous_page') %>
+      <% flight_time = page_total_time('up_to_before_current_page') %>
       <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %>
     </tr>
     <tr>
       <th colspan="9">合計</th>
-      <% flight_time = page_total_time('all_page') %>
+      <% flight_time = page_total_time('all_pages') %>
       <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %>
-    </tr>
+    </tr>  
