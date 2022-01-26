@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :aeroplane_flights, dependent: :destroy
+  has_one :aeroplane_initial_log, dependent: :destroy
 
   before_save   :downcase_email
   before_create :create_activation_digest
