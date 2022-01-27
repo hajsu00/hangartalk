@@ -18,12 +18,12 @@ module AeroplaneFlightsHelper
   end
 
   # ページ毎のフライトタイム合計を計算する
-  def page_total_time(which_page)
+  def page_total_time_and_number(which_page)
     current_page = @aeroplane_flights.current_page
     target_flights = []
     # 「ページ小計」
     case which_page
-    when 'current_page'
+    when 'page_total'
       last_page = @aeroplane_flights.total_pages
       if current_page == last_page
         total_flights = current_user.aeroplane_flights.count
@@ -31,9 +31,9 @@ module AeroplaneFlightsHelper
         target_num.times do |n|
           target_flights.push(current_user.aeroplane_flights.find_by(log_number: total_flights - n))
         end
-        total_time_calculation(target_flights)
+        total_time_calculation(target_flights, 'page_total')
       else
-        total_time_calculation(@aeroplane_flights)
+        total_time_calculation(@aeroplane_flights, 'page_total')
       end
     # 前ページまでの合計
     when 'up_to_before_current_page'
@@ -43,6 +43,22 @@ module AeroplaneFlightsHelper
           target_flights.push(current_user.aeroplane_flights.find_by(log_number: target_num - n))
         end
         total_time_calculation(target_flights)
+      else
+        initial_flight_log = current_user.aeroplane_initial_log
+        { total_time: initial_flight_log.total_time,
+          pic_time: initial_flight_log.pic_time,
+          solo_time: initial_flight_log.solo_time,
+          cross_country_time: initial_flight_log.cross_country_time,
+          night_time: initial_flight_log.night_time,
+          dual_time: initial_flight_log.dual_time,
+          dual_crosss_country_time: initial_flight_log.dual_crosss_country_time,
+          dual_night_time: initial_flight_log.dual_night_time,
+          hood_time: initial_flight_log.hood_time,
+          instrument_time: initial_flight_log.instrument_time,
+          simulator_time: initial_flight_log.simulator_time,
+          instructor_time: initial_flight_log.instructor_time,
+          number_of_takeoff: initial_flight_log.number_of_takeoff,
+          number_of_landing: initial_flight_log.number_of_landing }
       end
     # 合計
     when 'all_pages'
@@ -59,38 +75,57 @@ module AeroplaneFlightsHelper
     end
   end
 
-  def total_time_calculation(targets)
-    flight_time = {
-      total_time: 0,
-      pic_time: 0,
-      solo_time: 0,
-      cross_country_time: 0,
-      night_time: 0,
-      dual_time: 0,
-      dual_crosss_country_time: 0,
-      dual_night_time: 0,
-      hood_time: 0,
-      instrument_time: 0,
-      simlator_time: 0,
-      instructor_time: 0
-    }
+  def total_time_calculation(targets, which_page = 'other_than_page_total')
+    initial_flight_log = current_user.aeroplane_initial_log
+    flight_info = if which_page == 'page_total'
+                    { total_time: 0,
+                      pic_time: 0,
+                      solo_time: 0,
+                      cross_country_time: 0,
+                      night_time: 0,
+                      dual_time: 0,
+                      dual_crosss_country_time: 0,
+                      dual_night_time: 0,
+                      hood_time: 0,
+                      instrument_time: 0,
+                      simulator_time: 0,
+                      instructor_time: 0,
+                      number_of_takeoff: 0,
+                      number_of_landing: 0 }
+                  else
+                    { total_time: initial_flight_log.total_time,
+                      pic_time: initial_flight_log.pic_time,
+                      solo_time: initial_flight_log.solo_time,
+                      cross_country_time: initial_flight_log.cross_country_time,
+                      night_time: initial_flight_log.night_time,
+                      dual_time: initial_flight_log.dual_time,
+                      dual_crosss_country_time: initial_flight_log.dual_crosss_country_time,
+                      dual_night_time: initial_flight_log.dual_night_time,
+                      hood_time: initial_flight_log.hood_time,
+                      instrument_time: initial_flight_log.instrument_time,
+                      simulator_time: initial_flight_log.simulator_time,
+                      instructor_time: initial_flight_log.instructor_time,
+                      number_of_takeoff: initial_flight_log.number_of_takeoff,
+                      number_of_landing: initial_flight_log.number_of_landing }
+                  end
     targets.each do |target|
       target_flight_time = target.stop_time - target.moving_time
 
-      flight_time[:pic_time] += target_flight_time if target.is_pic?
-      flight_time[:solo_time] += target_flight_time if !target.is_pic? && !target.is_dual?
-      flight_time[:cross_country_time] += target_flight_time if target.is_pic? && target.is_cross_country?
-      flight_time[:night_time] += target_flight_time if target.is_pic? && target.is_night_flight?
-      flight_time[:dual_time] += target_flight_time if target.is_dual?
-      flight_time[:dual_crosss_country_time] += target_flight_time if target.is_dual? && target.is_cross_country?
-      flight_time[:dual_night_time] += target_flight_time if target.is_dual? && target.is_night_flight?
-      flight_time[:hood_time] += target_flight_time if target.is_hood?
-      flight_time[:instrument_time] += target_flight_time if target.is_instrument?
-      flight_time[:simlator_time] += target_flight_time if target.is_simulator?
-      flight_time[:instructor_time] += target_flight_time if target.is_instructor?
-
-      flight_time[:total_time] += target_flight_time
+      flight_info[:total_time] += target_flight_time
+      flight_info[:pic_time] += target_flight_time if target.is_pic?
+      flight_info[:solo_time] += target_flight_time if !target.is_pic? && !target.is_dual?
+      flight_info[:cross_country_time] += target_flight_time if target.is_pic? && target.is_cross_country?
+      flight_info[:night_time] += target_flight_time if target.is_pic? && target.is_night_flight?
+      flight_info[:dual_time] += target_flight_time if target.is_dual?
+      flight_info[:dual_crosss_country_time] += target_flight_time if target.is_dual? && target.is_cross_country?
+      flight_info[:dual_night_time] += target_flight_time if target.is_dual? && target.is_night_flight?
+      flight_info[:hood_time] += target_flight_time if target.is_hood?
+      flight_info[:instrument_time] += target_flight_time if target.is_instrument?
+      flight_info[:simulator_time] += target_flight_time if target.is_simulator?
+      flight_info[:instructor_time] += target_flight_time if target.is_instructor?
+      flight_info[:number_of_takeoff] += target.number_of_takeoff
+      flight_info[:number_of_landing] += target.number_of_landing
     end
-    flight_time
+    flight_info
   end
 end

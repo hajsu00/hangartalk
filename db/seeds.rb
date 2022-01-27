@@ -137,4 +137,19 @@ end
 #                               note: '備考欄です。')
 
 user = User.find_by(id: 1)
-user.create_aeroplane_initial_log(total_flight_number: 20, number_of_takeoff: 30, number_of_landing: 30, flight_time: 1800, pic_time: 0, solo_time: 300, xc_time: 60, night_time: 0, dual_time: 1500, dual_xc_time: 180, dual_night_time: 60, hood_time: 60, instrument_time: 0, simulator_time: 0, instructor_time: 0, number_of_stall_recovery: 3)
+user.create_aeroplane_initial_log(total_flight_number: 20,
+                                  number_of_takeoff: 30,
+                                  number_of_landing: 30,
+                                  total_time: 108_000,
+                                  pic_time: 0,
+                                  solo_time: 18_000,
+                                  cross_country_time: 3600,
+                                  night_time: 0,
+                                  dual_time: 90_000,
+                                  dual_crosss_country_time: 10_800,
+                                  dual_night_time: 3600,
+                                  hood_time: 3600,
+                                  instrument_time: 0,
+                                  simulator_time: 0,
+                                  instructor_time: 0,
+                                  number_of_stall_recovery: 3)

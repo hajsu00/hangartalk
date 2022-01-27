@@ -1,15 +1,15 @@
-<td><%= '離陸回数' %></td>
-<td><%= '着陸回数' %></td>
-  <td><%= show_flight_time(flight_time[:total_time]) if !flight_time.nil? && flight_time[:total_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:pic_time]) if !flight_time.nil? && flight_time[:pic_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:solo_time]) if !flight_time.nil? && flight_time[:solo_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:cross_country_time]) if !flight_time.nil? && flight_time[:cross_country_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:night_time]) if !flight_time.nil? && flight_time[:night_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:dual_time]) if !flight_time.nil? && flight_time[:dual_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:dual_crosss_country_time]) if !flight_time.nil? && flight_time[:dual_crosss_country_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:dual_night_time]) if !flight_time.nil? && flight_time[:dual_night_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:hood_time]) if !flight_time.nil? && flight_time[:hood_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:instrument_time]) if !flight_time.nil? && flight_time[:instrument_time] != 0 %></td>
-  <td><%= show_flight_time(flight_time[:simlator_time]) if !flight_time.nil? && flight_time[:simlator_time] != 0  %></td>
-  <td><%= show_flight_time(flight_time[:instructor_time]) if !flight_time.nil? && flight_time[:instructor_time] != 0 %></td>
+<td><%= flight_info[:number_of_takeoff] %></td>
+<td><%= flight_info[:number_of_landing] %></td>
+  <td><%= show_flight_time(flight_info[:total_time]) if !flight_info.nil? && flight_info[:total_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:pic_time]) if !flight_info.nil? && flight_info[:pic_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:solo_time]) if !flight_info.nil? && flight_info[:solo_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:cross_country_time]) if !flight_info.nil? && flight_info[:cross_country_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:night_time]) if !flight_info.nil? && flight_info[:night_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:dual_time]) if !flight_info.nil? && flight_info[:dual_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:dual_crosss_country_time]) if !flight_info.nil? && flight_info[:dual_crosss_country_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:dual_night_time]) if !flight_info.nil? && flight_info[:dual_night_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:hood_time]) if !flight_info.nil? && flight_info[:hood_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:instrument_time]) if !flight_info.nil? && flight_info[:instrument_time] != 0 %></td>
+  <td><%= show_flight_time(flight_info[:simulator_time]) if !flight_info.nil? && flight_info[:simlator_time] != 0  %></td>
+  <td><%= show_flight_time(flight_info[:instructor_time]) if !flight_info.nil? && flight_info[:instructor_time] != 0 %></td>
   <td><%= '' %></td>

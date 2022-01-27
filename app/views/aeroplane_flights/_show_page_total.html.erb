@@ -1,16 +1,16 @@
  <tr>
-      <% flight_time = page_total_time('current_page') %>
+      <% flight_info = page_total_time_and_number('page_total') %>
       <th colspan="9">ページ小計</th>
 
-      <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %> 
+      <%= render partial: 'show_each_flight_time', locals: { flight_info: flight_info } %> 
     </tr>
     <tr>
       <th colspan="9">前ページまでの合計</th>
-      <% flight_time = page_total_time('up_to_before_current_page') %>
-      <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %>
+      <% flight_info = page_total_time_and_number('up_to_before_current_page') %>
+      <%= render partial: 'show_each_flight_time', locals: { flight_info: flight_info } %>
     </tr>
     <tr>
       <th colspan="9">合計</th>
-      <% flight_time = page_total_time('all_pages') %>
-      <%= render partial: 'show_each_flight_time', locals: { flight_time: flight_time } %>
+      <% flight_info = page_total_time_and_number('all_pages') %>
+      <%= render partial: 'show_each_flight_time', locals: { flight_info: flight_info } %>
     </tr>  
