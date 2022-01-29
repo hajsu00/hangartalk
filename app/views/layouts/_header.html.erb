@@ -3,27 +3,23 @@
         <%= link_to "Hanger Talk", root_path, id: "logo" %>
         <nav class="header-nav">
           <ul class="header-nav-list">
-            <li><%= link_to "Top", root_path %></li>
+          <% if logged_in? %>
+            <li><%= link_to "ホーム", root_path %></li>
+            <li><%= link_to "通知", "#" %></li>
+            <li><%= link_to "メッセージ", "#" %></li>
+            <li><a href="#">アカウント</a>
+              <ul>
+              <li><%= link_to "プロフィール", current_user %></li>
+                <li><%= link_to "ユーザー登録情報確認・変更", edit_user_path(current_user) %></li>
+                <li><%= link_to "ログアウト", logout_path, method: :delete %></li>
+              </ul>
+            </li>
+            <li><%= link_to "よくある質問", faq_path %></li>
+          <% else %>
+            <li><%= link_to "ログイン", login_path %></li>
             <li><%= link_to "Hanger Talkとは？", about_path %></li>
             <li><%= link_to "よくある質問", faq_path %></li>
             <li><%= link_to "お問合せ", inquiry_path %></li>
-          <% if logged_in? %>
-            <li><%= link_to "ホーム", users_path %></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                Account <b class="caret"></b>
-              </a>
-              <ul class="dropdown-menu">
-                <li><%= link_to "プロフィール", current_user %></li>
-                <li><%= link_to "ユーザー情報変更", edit_user_path(current_user) %></li>
-                <li class="divider"></li>
-                <li>
-                  <%= link_to "ログアウト", logout_path, method: :delete %>
-                </li>
-              </ul>
-            </li>
-          <% else %>
-            <li><%= link_to "ログイン", login_path %></li>
           <% end %>
           </ul>
         </nav>
