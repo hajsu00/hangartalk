@@ -26,8 +26,8 @@ followers.each { |follower| follower.follow(user) }
 
 # 一部のユーザーを対象にフライト記録を生成する
 # users = User.order(:created_at).take(6)
-user = User.find_by(id: 1)
-23.times do |n|
+user = User.find_by(email: "example@railstutorial.org")
+123.times do |n|
   departure_date = Time.zone.today
   takeoff_time = Time.current + ((n+1) * 60).minutes
   moving_time = takeoff_time + 6.minutes

@@ -25,11 +25,12 @@ module AeroplaneFlightsHelper
   # ページ毎のフライトタイム合計を計算する
   def page_total_time_and_number(which_page)
     current_page = @aeroplane_flights.current_page
+    last_page = @aeroplane_flights.total_pages
     target_flights = []
     # 「ページ小計」
     case which_page
     when 'page_total'
-      last_page = @aeroplane_flights.total_pages
+      # last_page = @aeroplane_flights.total_pages
       if current_page == last_page
         total_flights = current_user.aeroplane_flights.count
         target_num = total_flights % 10
@@ -58,7 +59,7 @@ module AeroplaneFlightsHelper
     when 'all_pages'
       if current_page != 1
         # 最終ページの場合は端数を計算してtarget_numに代入
-        target_num = current_page != 3 ? current_page * 10 : current_user.aeroplane_flights.count
+        target_num = current_page != last_page ? current_page * 10 : current_user.aeroplane_flights.count
         target_num.times do |n|
           target_flights.push(current_user.aeroplane_flights.find_by(log_number: target_num - n))
         end
