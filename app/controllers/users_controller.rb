@@ -58,6 +58,14 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def select_new_flight
+    render 'select_new_flight'
+  end
+
+  def select_flight_log
+    render 'select_flight_log'
+  end
+
   private
 
   def user_params

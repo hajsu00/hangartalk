@@ -1,18 +1,11 @@
 /* universal */
-body {
-  padding-top: 60px;
+ul {
+  padding-left: 20px;
+  padding-right: 20px;
 }
-section {
-  overflow: auto;
-}
-textarea {
-  resize: vertical;
-}
-.center {
-  text-align: center;
-}
-.center h1 {
-  margin-bottom: 10px;
+
+li {
+  list-style-type: none;
 }
 
 /* typography */
@@ -31,7 +24,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #777;
+  color: #333;
 }
 p {
   font-size: 1.1em;
@@ -53,31 +46,53 @@ p {
   color: #fff;
   text-decoration: none;
 }
-header {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
+
+/*ナビゲーションバー*/
+.header-nav {
+  list-style-type: none;
+  height: 80px;
+  width: 100%;
 }
-header a {
-  color: #555;
-}
-header a:hover {
-  color: #222;
-}
-header small {
-  float: left;
-}
-header ul {
+.header-nav-list {
   float: right;
-  list-style: none;
 }
-header ul li {
+.header-nav-list li{
+  width: 140px;
+  text-align: center;
+  // list-style-type: none;
+  position: relative;
   float: left;
-  margin-left: 15px;
+}
+.header-nav-list li ul{
+  // list-style-type: none;
+  display: none;
+  position: absolute;
+  padding: 0;
+  width: auto;
+}
+.header-nav-list li ul li{
+	margin: 0 auto;
+  margin-top: 10px;
+}
+.header-nav-list li:hover > ul {
+  color: #e4e4e4; /* メニュー項目にマウスが載ったときの文字色変更 */
+  display: block;
 }
 
 /* sidebar */
+.content{
+  display:flex;
+  margin-left:10px;
+  
+}
+.sidebar {
+  width: 30%;
+  text-align: center;
+}
+.sidebar-user-name {
+  text-align: center;
+}
+
 aside {
   section.user_info {
     margin-top: 20px;
@@ -127,6 +142,11 @@ aside {
 }
 .users.follow {
   padding: 0;
+}
+
+/*content*/
+.col-md-8 {
+  margin-left:50px;
 }
 
 /* footer */
@@ -246,4 +266,9 @@ th, td {
 th {
   color: #0d90f3;/* 見出しの文字色 */
   background-color: #d0ebfd; /* 見出しの背景色 */
+}
+
+//「新しいフライト」ページ
+.select-category {
+  flex-direction: column;
 }
