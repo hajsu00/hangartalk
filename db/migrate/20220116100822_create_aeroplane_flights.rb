@@ -21,6 +21,7 @@ class CreateAeroplaneFlights < ActiveRecord::Migration[6.1]
       t.boolean :is_simulator
       t.boolean :is_instructor
       t.boolean :is_stall_recovery
+      t.boolean :close_log
       t.string :note
       t.references :user, null: false, foreign_key: true
 

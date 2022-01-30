@@ -1,5 +1,5 @@
 <% @user ||= current_user %>
-<div class="flight_experiences">
+<div class="aeroplane_experiences">
   <% if @user.aeroplane_flights.any? %>
     <ul>
       <li>総飛行時間 <%= aeroplane_total_flight_time(:total_time) %></li>
