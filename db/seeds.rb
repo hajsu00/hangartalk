@@ -53,8 +53,85 @@ user = User.find_by(email: "example@railstutorial.org")
                               is_simulator: false,
                               is_instructor: true,
                               is_stall_recovery: true,
+                              close_log: false,
                               note: '備考欄です。')
-  # users.each { |user| user.aeroplane_flights.create!(log_number: n + 1, departure_date: departure_date, aeroplane_type: 'ask21', aeroplane_ident: 'ja21ma', moving_time: moving_time, stop_time: stop_time, is_pic: true, is_cross_country: false, is_instructor: false, note: 'テストテスト') }
+end
+
+user = User.find_by(email: "example@railstutorial.org")
+23.times do |n|
+  departure_date = Time.zone.today
+  takeoff_time = Time.current + ((n+1) * 60).minutes
+  landing_time = takeoff_time + 6.minutes
+  user.glider_flights.create!(log_number: 1 + n,
+                              departure_date: departure_date,
+                              glider_type: 'ASK21',
+                              glider_ident: 'JA21MA',
+                              departure_point: 'RJTT',
+                              arrival_point: 'RJTT',
+                              number_of_landing: 1,
+                              takeoff_time: takeoff_time,
+                              landing_time: landing_time,
+                              is_pic: true,
+                              is_dual: false,
+                              is_motor_glider: false,
+                              is_power_flight: false,
+                              is_winch: true,
+                              is_cross_country: false,
+                              is_instructor: false,
+                              is_stall_recovery: false,
+                              close_log: false,
+                              note: '備考欄です。')
+end
+
+user = User.find_by(email: "example@railstutorial.org")
+13.times do |n|
+  departure_date = Time.zone.today
+  takeoff_time = Time.current + ((n+1) * 60).minutes
+  landing_time = takeoff_time + 6.minutes
+  user.glider_flights.create!(log_number: 24 + n,
+                              departure_date: departure_date,
+                              glider_type: 'ASK21',
+                              glider_ident: 'JA21MA',
+                              departure_point: 'RJTT',
+                              arrival_point: 'RJTT',
+                              number_of_landing: 1,
+                              takeoff_time: takeoff_time,
+                              landing_time: landing_time,
+                              is_pic: false,
+                              is_dual: true,
+                              is_motor_glider: true,
+                              is_power_flight: true,
+                              is_winch: false,
+                              is_cross_country: false,
+                              is_instructor: false,
+                              is_stall_recovery: false,
+                              close_log: false,
+                              note: '備考欄です。')
+end
+user = User.find_by(email: "example@railstutorial.org")
+13.times do |n|
+  departure_date = Time.zone.today
+  takeoff_time = Time.current + ((n+1) * 60).minutes
+  landing_time = takeoff_time + 6.minutes
+  user.glider_flights.create!(log_number: 37 + n,
+                              departure_date: departure_date,
+                              glider_type: 'ASK21',
+                              glider_ident: 'JA21MA',
+                              departure_point: 'RJTT',
+                              arrival_point: 'RJTT',
+                              number_of_landing: 1,
+                              takeoff_time: takeoff_time,
+                              landing_time: landing_time,
+                              is_pic: false,
+                              is_dual: false,
+                              is_motor_glider: true,
+                              is_power_flight: true,
+                              is_winch: false,
+                              is_cross_country: true,
+                              is_instructor: false,
+                              is_stall_recovery: false,
+                              close_log: false,
+                              note: '備考欄です。')
 end
 # user = User.find_by(id: 1)
 # departure_date = Time.zone.today
@@ -153,3 +230,37 @@ user.create_aeroplane_initial_log(total_flight_number: 20,
                                   simulator_time: 0,
                                   instructor_time: 0,
                                   number_of_stall_recovery: 3)
+
+user = User.find_by(id: 1)
+user.create_glider_initial_log(non_power_total_time: 67_680,
+                              non_power_total_number: 188,
+                              pic_winch_time: 7_560,
+                              pic_winch_number: 21,
+                              pic_aero_tow_time: 0,
+                              pic_aero_tow_number: 0,
+                              solo_winch_time: 15_840,
+                              solo_winch_number: 44,
+                              solo_aero_tow_time: 0,
+                              solo_aero_tow_number: 0,
+                              dual_winch_time: 44_280,
+                              dual_winch_number: 123,
+                              dual_aero_tow_time: 0,
+                              dual_aero_tow_number: 0,
+                              power_total_time: 0,
+                              power_total_number: 0,
+                              pic_power_time: 0,
+                              pic_power_number: 0,
+                              pic_power_off_time: 0,
+                              pic_power_off_number: 0,
+                              solo_power_time: 0,
+                              solo_power_number: 0,
+                              solo_power_off_time: 0,
+                              solo_power_off_number: 0,
+                              dual_power_time: 0,
+                              dual_power_number: 0,
+                              dual_power_off_time: 0,
+                              dual_power_off_number: 0,
+                              cross_country_time: 0,
+                              instructor_time: 0,
+                              instructor_number: 0,
+                              number_of_stall_recovery: 3)

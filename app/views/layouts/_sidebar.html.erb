@@ -3,12 +3,14 @@
     <aside class="col-md-4">
       <%= render 'shared/user_info' %>
     </aside>
-      <ul>
-        <li><%= link_to "ホーム", root_path %></li>
-        <li><%= link_to "新しいフライト", users_select_new_flight_path %></li>
-        <li><%= link_to "フライトログブック", users_select_flight_log_path %></li>
-        <li><%= link_to "グループ", "#" %></li>
-        <li><%= link_to "設定", "#" %></li>
-      </ul>
+      <div class="side-menu">
+        <ul>
+          <li><%= link_to "ホーム", root_path %></li>
+          <li><%= link_to "新しいフライト", users_select_new_flight_path %></li>
+          <li><%= link_to "フライトログブック", users_select_flight_log_path %></li>
+          <li><%= link_to "グループ", "#" %></li>
+          <li><%= link_to "設定", "#" %></li>
+        </ul>
+      </div>
   </div> 
 <% end %>

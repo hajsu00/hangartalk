@@ -1,16 +1,16 @@
 <tr>
-  <% flight_info = aeroplane_page_total('page_total') %>
+  <% flight_info = glider_page_total('page_total') %>
   <th colspan="9">ページ小計</th>
 
   <%= render partial: 'show_each_flight_time', locals: { flight_info: flight_info } %> 
 </tr>
 <tr>
   <th colspan="9">前ページまでの合計</th>
-  <% flight_info = aeroplane_page_total('up_to_before_current_page') %>
+  <% flight_info = glider_page_total('up_to_before_current_page') %>
   <%= render partial: 'show_each_flight_time', locals: { flight_info: flight_info } %>
 </tr>
 <tr>
   <th colspan="9">合計</th>
-  <% flight_info = aeroplane_page_total('all_pages') %>
+  <% flight_info = glider_page_total('all_pages') %>
   <%= render partial: 'show_each_flight_time', locals: { flight_info: flight_info } %>
 </tr>  
