@@ -55,9 +55,9 @@
       <th>滑空</th>
     </tr>
     <!-- 一覧表（DBから取得） -->
-    <%= render partial: "glider_flight", locals: { glider_flights: @glider_flights } %>
+    <%= render partial: "show_glider_flight_log", locals: { glider_flights: @glider_flights } %>
     <!-- まとめ表 -->
-    <%= render 'show_page_total' %>  
+    <%= render 'glider_page_summary' %>
   </table>
     <% else %>
       <p>登録されたフライトログがありません。</p>
