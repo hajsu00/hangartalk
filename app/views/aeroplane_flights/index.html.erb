@@ -45,9 +45,9 @@
       <th>計器飛行</th>
     </tr>
     <!-- 一覧表（DBから取得） -->
-    <%= render partial: "aeroplane_flight", locals: { aeroplane_flights: @aeroplane_flights } %>
+    <%= render partial: "show_aeroplane_flight_log", locals: { aeroplane_flights: @aeroplane_flights } %>
     <!-- まとめ表 -->
-    <%= render 'show_page_total' %>  
+    <%= render 'aeroplane_page_summary' %>  
   </table>
     <% else %>
       <p>登録されたフライトログがありません。</p>

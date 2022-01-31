@@ -1,0 +1,30 @@
+<!-- 1段目-->
+<td><%= show_flight_time(flight_info[:non_power_total_time]) if flight_info[:non_power_total_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:pic_winch_time] + flight_info[:solo_winch_time]) if flight_info[:pic_winch_time] != 0 || flight_info[:solo_winch_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:pic_aero_tow_time] + flight_info[:solo_aero_tow_time]) if flight_info[:pic_aero_tow_time] != 0 || flight_info[:solo_aero_tow_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:dual_winch_time]) if flight_info[:dual_winch_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:dual_aero_tow_time]) if flight_info[:dual_aero_tow_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:power_total_time]) if flight_info[:power_total_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:pic_power_time] + flight_info[:solo_power_time]) if flight_info[:pic_power_time] != 0 || flight_info[:solo_power_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:pic_power_off_time] + flight_info[:solo_power_off_time]) if flight_info[:pic_power_off_time] != 0 || flight_info[:solo_power_off_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:dual_power_time]) if flight_info[:dual_power_time] != 0 %></td>
+<td><%= show_flight_time(flight_info[:dual_power_off_time]) if flight_info[:dual_power_off_time] != 0 %></td>
+<td rowspan="2"><%= show_flight_time(flight_info[:cross_country_time]) if flight_info[:cross_country_time] != 0  %></td>
+<td rowspan="2">離脱高度</td>
+<td><%= show_flight_time(flight_info[:instructor_time]) if flight_info[:instructor_time] != 0 %></td>
+<td rowspan="2">備考欄</td>
+
+<!-- 2段目-->
+<tr>
+  <td><%= flight_info[:non_power_total_number] if flight_info[:non_power_total_number] != 0 %></td>
+  <td><%= flight_info[:pic_winch_number] + flight_info[:solo_winch_number] if flight_info[:pic_winch_number] != 0 || flight_info[:solo_winch_number] != 0 %></td>
+  <td><%= flight_info[:pic_aero_tow_number] + flight_info[:solo_aero_tow_number] if flight_info[:pic_aero_tow_number] != 0 || flight_info[:solo_aero_tow_number] != 0 %></td>
+  <td><%= flight_info[:dual_winch_number] if flight_info[:dual_winch_number] != 0 %></td>
+  <td><%= flight_info[:dual_aero_tow_number] if flight_info[:dual_aero_tow_number] != 0 %></td>
+  <td><%= flight_info[:power_total_number] if flight_info[:power_total_number] != 0 %></td>
+  <td><%= flight_info[:pic_power_number] + flight_info[:solo_power_number] if flight_info[:pic_power_number] != 0 || flight_info[:solo_power_number] != 0 %></td>
+  <td><%= flight_info[:pic_power_off_number] + flight_info[:solo_power_off_number] if flight_info[:pic_power_off_number] != 0 || flight_info[:solo_power_off_number] != 0 %></td>
+  <td><%= flight_info[:dual_power_number] if flight_info[:dual_power_number] != 0 %></td>
+  <td><%= flight_info[:dual_power_off_number] if flight_info[:dual_power_off_number] != 0 %></td>
+  <td><%= flight_info[:instructor_number] if flight_info[:instructor_number] != 0 %></td>
+</tr>
