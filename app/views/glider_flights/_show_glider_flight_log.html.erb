@@ -56,7 +56,7 @@
         <% end %>
         <!-- その他の飛行時間 -->
         <td><%= show_flight_time(flight_time) if glider_flight.is_cross_country? %></td>
-        <td><%= '離脱高度' %></td>
+        <td><%= glider_flight.release_alt %></td>
         <td><%= show_flight_time(flight_time) if glider_flight.is_instructor? %></td>
         <td><%= glider_flight.note %></td>
       </tr> 

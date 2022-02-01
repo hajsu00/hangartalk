@@ -16,6 +16,7 @@ class CreateGliderFlights < ActiveRecord::Migration[6.1]
       t.boolean :is_power_flight
       t.boolean :is_winch
       t.boolean :is_cross_country
+      t.string :release_alt
       t.boolean :is_instructor
       t.boolean :is_stall_recovery
       t.boolean :close_log

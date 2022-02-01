@@ -4,7 +4,7 @@ class GliderFlightsController < ApplicationController
   before_action :correct_user,   only: :destroy
 
   def new
-    @glider_flight = AeroplaneFlight.new
+    @glider_flight = GliderFlight.new
   end
 
   def create
