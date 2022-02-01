@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_30_021008) do
+ActiveRecord::Schema.define(version: 2022_02_01_110514) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -109,6 +109,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_021008) do
     t.boolean "is_power_flight"
     t.boolean "is_winch"
     t.boolean "is_cross_country"
+    t.string "release_alt"
     t.boolean "is_instructor"
     t.boolean "is_stall_recovery"
     t.boolean "close_log"
@@ -158,6 +159,22 @@ ActiveRecord::Schema.define(version: 2022_01_30_021008) do
     t.index ["user_id"], name: "index_glider_initial_logs_on_user_id"
   end
 
+  create_table "group_users", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "group_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
+  end
+
+  create_table "groups", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "introduction"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "microposts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -199,5 +216,7 @@ ActiveRecord::Schema.define(version: 2022_01_30_021008) do
   add_foreign_key "aeroplane_initial_logs", "users"
   add_foreign_key "glider_flights", "users"
   add_foreign_key "glider_initial_logs", "users"
+  add_foreign_key "group_users", "groups"
+  add_foreign_key "group_users", "users"
   add_foreign_key "microposts", "users"
 end
