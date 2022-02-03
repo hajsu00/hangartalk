@@ -16,7 +16,8 @@
   <div class="group-menu">
     <h4>その他のメニュー</h4>
     <ul>
-      <li><%= link_to "＋新しいフライトを作成", "#" %></li>
+      <li><%= link_to "＋新しいフライトを作成", new_glider_group_flight_path(id: current_group.id) %></li>
+      <li><%= link_to "グループフライト一覧", glider_group_flights_path(id: current_group.id) %></li>
       <li><%= link_to "このグループを削除する", @current_group, method: :delete, data: { confirm: "本当にこのグループを削除しますか？" } %></li>
     </ul>
   </div>

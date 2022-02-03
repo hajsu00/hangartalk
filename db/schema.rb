@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_110514) do
+ActiveRecord::Schema.define(version: 2022_02_03_060611) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -120,6 +120,29 @@ ActiveRecord::Schema.define(version: 2022_02_01_110514) do
     t.index ["user_id"], name: "index_glider_flights_on_user_id"
   end
 
+  create_table "glider_group_flights", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "day_flight_number"
+    t.date "date"
+    t.string "place"
+    t.string "way_of_towing"
+    t.string "fleet"
+    t.string "front_seat"
+    t.string "front_seat_attribute"
+    t.string "rear_seat"
+    t.string "rear_seat_attribute"
+    t.datetime "takeoff_time"
+    t.datetime "release_time"
+    t.datetime "landing_time"
+    t.integer "release_alt"
+    t.string "creator"
+    t.string "updater"
+    t.string "notes"
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_glider_group_flights_on_group_id"
+  end
+
   create_table "glider_initial_logs", charset: "utf8mb3", force: :cascade do |t|
     t.integer "non_power_total_time"
     t.integer "non_power_total_number"
@@ -216,6 +239,7 @@ ActiveRecord::Schema.define(version: 2022_02_01_110514) do
   add_foreign_key "aeroplane_flights", "users"
   add_foreign_key "aeroplane_initial_logs", "users"
   add_foreign_key "glider_flights", "users"
+  add_foreign_key "glider_group_flights", "groups"
   add_foreign_key "glider_initial_logs", "users"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
