@@ -170,7 +170,8 @@ ActiveRecord::Schema.define(version: 2022_02_01_110514) do
 
   create_table "groups", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
-    t.string "introduction"
+    t.text "introduction"
+    t.string "privacy"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -1,0 +1,20 @@
+<% provide(:title, 'グループ') %>
+
+<div class="group">
+  <h1>グループ</h1>
+  <div class="create-group">
+      <p><%= link_to "＋新しいグループを作成", new_group_path %></p>
+  </div>
+  <div class="groups-belong-to">
+    <h3>管理しているグループ</h3>
+    <%= render partial: "show_group_list", locals: { groups: @groups_belonging_to } %>
+  </div>
+  <div class="find-groups">
+  <h3>参加しているグループ</h3>
+    <%= render partial: "show_group_list", locals: { groups: @groups_belonging_to } %>
+  </div>
+    <div class="find-groups">
+  <h3>グループを見つける</h3>
+    <%= render partial: "show_group_list", locals: { groups: @groups } %>
+  </div>
+</div>

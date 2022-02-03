@@ -216,7 +216,7 @@ end
 #                               is_stall_recovery: false,
 #                               note: '備考欄です。')
 
-user = User.find_by(id: 1)
+user = User.find_by(email: "example@railstutorial.org")
 user.create_aeroplane_initial_log(total_flight_number: 20,
                                   number_of_takeoff: 30,
                                   number_of_landing: 30,
@@ -234,7 +234,7 @@ user.create_aeroplane_initial_log(total_flight_number: 20,
                                   instructor_time: 0,
                                   number_of_stall_recovery: 3)
 
-user = User.find_by(id: 1)
+user = User.find_by(email: "example@railstutorial.org")
 user.create_glider_initial_log(non_power_total_time: 67_680,
                               non_power_total_number: 188,
                               pic_winch_time: 7_560,
@@ -267,3 +267,16 @@ user.create_glider_initial_log(non_power_total_time: 67_680,
                               instructor_time: 0,
                               instructor_number: 0,
                               number_of_stall_recovery: 3)
+
+user = User.find_by(email: "example@railstutorial.org")
+3.times do |n|
+  n += 1
+  group = Group.new(name: "テストグループ#{n}", introduction: "これはグループ#{n}の紹介文です。字数制限は今のところありません。", privacy: "プライベート")
+  group.users << user if group.save
+end
+
+users = User.order(created_at: :DESC).take(3)
+group = Group.find_by(name: "テストグループ1")
+users.each do |user|
+  group.users << user
+end
