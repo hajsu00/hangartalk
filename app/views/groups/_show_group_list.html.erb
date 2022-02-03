@@ -1,0 +1,6 @@
+<% groups.each do |group| %>
+  <ul>
+    <li><%= link_to "#{group.name}", group_path(id: group.id) %></li>
+    <li><%= "メンバー #{group.users.count} 人" %></li>
+  </ul>
+<% end %>

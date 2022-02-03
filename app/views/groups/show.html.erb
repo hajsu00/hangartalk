@@ -1,0 +1,23 @@
+<% provide(:title, @current_group.name) %>
+<div class="group-container">
+  <h1><%= @current_group.name %></h1>
+  <div class="group-introduction">
+    <h4>このグループについて</h4>
+    <p><%= @current_group.introduction %></p>
+  </div>
+  <div class="group-member">
+    <h4><%= "メンバー#{@current_group.users.count}人" %></h4>
+    <% @current_group.users .each do |user| %>
+      <ul>
+        <li><%= link_to "#{user.name}", user_path(id: user.id) %></li>
+      </ul>
+    <% end %>
+  </div>
+  <div class="group-menu">
+    <h4>その他のメニュー</h4>
+    <ul>
+      <li><%= link_to "＋新しいフライトを作成", "#" %></li>
+      <li><%= link_to "このグループを削除する", @current_group, method: :delete, data: { confirm: "本当にこのグループを削除しますか？" } %></li>
+    </ul>
+  </div>
+</div>
