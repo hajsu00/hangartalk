@@ -19,7 +19,6 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
     @groups_belonging_to = current_user.groups
-    # @groups_managing = @groups
   end
 
   def show
