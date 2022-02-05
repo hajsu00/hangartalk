@@ -284,3 +284,60 @@ tr p{
 .select-category {
   flex-direction: column;
 }
+
+//フォーム
+.main {
+  display: block;
+}
+.content-block {
+  display: block;
+}
+
+.input-field {
+  display: block;
+	margin:0 auto;
+  height:50px;
+}
+.label{
+	// margin-right: 20px;
+	width: auto;
+  height:50px;
+	border-left: solid 3px #FF6701;
+	padding-left: 10px;
+}
+.form-control {
+  float: right;
+  width:300px;
+  height:50px;
+}
+.radio-buttonblock {
+  display: flex;
+}
+
+.radio-element {
+  // display:inline-block;
+  display:inline;
+  float: left;
+  // display: flex;
+  // display: flex
+}
+.radio-button {
+  display: inline-block;
+
+}
+.radio-label {
+  // display:inline-block;
+  // display:inline;
+}
+.check-box-block {
+  display: flex;
+}
+.check-box-element {
+  width: 300px;
+  height:50px;
+  display: flex
+}
+.check-box-label {
+  width: 600px;
+}
+

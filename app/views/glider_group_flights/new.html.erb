@@ -1,99 +1,137 @@
 <% provide(:title, '新しいグループフライト') %>
 <% provide(:button_text, '登録する') %>
 
-<div class="create-group-form">
+<div class="main">
   <h1>新しいグループフライトを作成</h1>
   <%= form_with(model: @glider_group_flight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
-    <%= f.hidden_field :group, value: @glider_group_flight.group %>
-    <%= f.hidden_field :day_flight_number, value: day_flight_number %>
-
-    <div class=""></div>
-    <h2>基本情報</h2>
-    <div class="front-seat">
-      <%= f.label :date, "日付" %>
-      <%= f.date_field :date, class: 'form-control' %>
-
-      <%= f.label :place, "場所" %>
-      <%= f.text_field :place, class: 'form-control' %>
-
-      <div class="fleet">
-        <h3>使用機材</h3>
-        <div class="way-of-towing">
-          <h4>曳航タイプ</h4>
-          <%= f.radio_button :way_of_towing, :"ウインチ曳航" %>
-          <%= f.label :way_of_towing, "ウインチ曳航", value: :"ウインチ曳航" %>
-          <%= f.radio_button :way_of_towing, :"航空機曳航" %>
-          <%= f.label :way_of_towing, "航空機曳航", value: :"航空機曳航" %>
-          <%= f.radio_button :way_of_towing, :"モーターグライダー" %>
-          <%= f.label :way_of_towing, "モーターグライダー", value: :"モーターグライダー" %>
-        </div>
+    
+    <div class="content-block">
+      <h2>基本情報</h2>
+      <!-- 裏処理用データ -->
+      <%= f.hidden_field :group, value: @glider_group_flight.group %>
+      <%= f.hidden_field :day_flight_number, value: day_flight_number %>
+      <%= f.hidden_field :creator, value: current_user.id %>
+      <%= f.hidden_field :updater, value: current_user.id %>
+      <!-- 基本情報 -->
+      <div class="input-field">
+        <%= f.label :date, "日付", class: 'label' %>
+        <%= f.date_field :date, class: 'form-control' %>
       </div>
-      <%= f.label :fleet, "使用機体" %>
-      <%= f.select :fleet, [["ASK21(JA21MA)", "ASK21(JA21MA)"], ["ASK23(JA2381)", "ASK23(JA2381)"]], include_blank: "型式を選択して下さい", class: 'form-control' %>
+      <div class="input-field">
+        <%= f.label :departure_and_arrival_point, "離着陸の区間", class: 'label' %>
+        <%= f.text_field :departure_and_arrival_point, class: 'form-control' %>
+      </div>
     </div>
 
-    <div class="pilot-info">
+    <div class="content-block">
+      <h2>使用機体および曳航方式</h2>
+      <div class="check-box-element">
+        <%= f.label :is_motor_glider, "モーターグライダー", class: "check-label"  %>
+        <%= f.check_box :is_motor_glider, {}, true, false %>
+      </div>
+      <div class="input-field">
+        <%= f.label :fleet, "搭乗機体", class: 'label' %>
+        <%= f.select :fleet, [["ASK21(JA21MA)", "ASK21(JA21MA)"], ["ASK23(JA2381)", "ASK23(JA2381)"]], include_blank: "搭乗機体を選択して下さい", class: 'form-control' %>
+      </div>
+      <h3>曳航タイプ</h3>
+      <div class="radio-button-block">
+        <div class="radio-element">
+          <%= f.label :is_winch, "ウインチ曳航", value: true, class: "radio-label"  %>
+          <%= f.radio_button :is_winch, :true, checked: true %>
+        </div>
+        <div class="radio-element">
+          <%= f.label :is_winch, "航空機曳航", value: false, class: "radio-label"  %>
+          <%= f.radio_button :is_winch, :false %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="content-block">
       <h2>搭乗者情報</h2>
-      <div class="front-seat">
-        <h3>前席搭乗者</h3>
-        <%= f.label :front_seat, "前席搭乗者" %>
+      <h3>前席搭乗者</h3>
+      <div class="input-field">
+        <%= f.label :front_seat, "前席搭乗者", class: 'label' %>
         <%= f.text_field :front_seat, class: 'form-control' %>
+      </div>
 
-        <div class="front-seat-attribute">
-          <h4>前席属性</h4>
-          <%= f.radio_button :front_seat_attribute, :"機長" %>
-          <%= f.label :front_seat_attribute, "機長", value: :"機長" %>
-          <%= f.radio_button :front_seat_attribute, :"単独" %>
-          <%= f.label :front_seat_attribute, "単独", value: :"単独" %>
-          <%= f.radio_button :front_seat_attribute, :"同乗教育" %>
-          <%= f.label :front_seat_attribute, "同乗教育", value: :"同乗教育" %>
-          <%= f.radio_button :front_seat_attribute, :"教官" %>
-          <%= f.label :front_seat_attribute, "教官", value: :"教官" %>
-          <%= f.radio_button :front_seat_attribute, :"ゲスト" %>
-          <%= f.label :front_seat_attribute, "ゲスト", value: :"ゲスト" %>
+      <div class="radio-button-block">
+        <h3>前席属性</h3>
+        <div class="radio-element">
+          <%= f.radio_button :front_flight_role, :"機長", checked: true, class: "radio-bnutton" %>
+          <%= f.label :front_flight_role, "機長", value: :"機長", class: "radio-label" %>
+        </div>
+        <div class="radio-element">
+          <%= f.radio_button :front_flight_role, :"単独飛行" %>
+          <%= f.label :front_flight_role, "単独飛行", value: :"単独飛行", class: "radio-label" %>
+        </div>
+        <div class="radio-element">
+          <%= f.radio_button :front_flight_role, :"同乗教育" %>
+          <%= f.label :front_flight_role, "同乗教育", value: :"同乗教育", class: "radio-label" %>
+        </div>
+        <div class="radio-element">
+          <%= f.radio_button :front_flight_role, :"教官" %>
+          <%= f.label :front_flight_role, "教官", value: :"教官", class: "radio-label" %>
+        </div>
+        <div class="radio-element">
+          <%= f.radio_button :front_flight_role, :"ログ対象外" %>
+          <%= f.label :front_flight_role, "ログ対象外", value: :"ログ対象外", class: "radio-label" %>
         </div>
       </div>
-      <div class="rear-seat">
-        <h3>後席搭乗者</h3>
-        <%= f.label :rear_seat, "後席搭乗者" %>
+
+      <h3>後席搭乗者</h3>
+      <div class="input-field">
+        <%= f.label :rear_seat, "後席搭乗者", class: 'label' %>
         <%= f.text_field :rear_seat, class: 'form-control' %>
-
-        <div class="rear-seat-attribute">
-          <h4>後席属性</h4>
-          <%= f.radio_button :rear_seat_attribute, :"機長" %>
-          <%= f.label :rear_seat_attribute, "機長", value: :"機長" %>
-          <%= f.radio_button :rear_seat_attribute, :"同乗教育" %>
-          <%= f.label :rear_seat_attribute, "同乗教育", value: :"同乗教育" %>
-          <%= f.radio_button :rear_seat_attribute, :"教官" %>
-          <%= f.label :rear_seat_attribute, "教官", value: :"教官" %>
-          <%= f.radio_button :rear_seat_attribute, :"ゲスト" %>
-          <%= f.label :rear_seat_attribute, "ゲスト", value: :"ゲスト" %>
+      </div>
+      <div class="radio-button-block">
+        <h4>後席属性</h4>
+        <div class="radio-element">
+          <%= f.radio_button :rear_flight_role, :"機長", checked: true, class: "radio-bnutton" %>
+          <%= f.label :rear_flight_role, "機長", value: :"機長", class: "radio-label" %>
+        </div>
+        <div class="radio-element">
+          <%= f.radio_button :rear_flight_role, :"同乗教育" %>
+          <%= f.label :rear_flight_role, "同乗教育", value: :"同乗教育", class: "radio-label" %>
+        </div>
+        <div class="radio-element">
+          <%= f.radio_button :rear_flight_role, :"教官" %>
+          <%= f.label :rear_flight_role, "教官", value: :"教官", class: "radio-label" %>
+        </div>
+        <div class="radio-element">
+          <%= f.radio_button :rear_flight_role, :"ログ対象外" %>
+          <%= f.label :rear_flight_role, "ログ対象外", value: :"ログ対象外", class: "radio-label" %>
         </div>
       </div>
     </div>
 
-    <div class="time-record">
-      <h3>飛行時間</h3>
-      <%= f.label :takeoff_time, "離陸時刻" %>
-      <%= f.time_field :takeoff_time, class: 'form-control' %>
-      <%= f.label :release_time, "離脱時刻" %>
-      <%= f.time_field :release_time, class: 'form-control' %>
-      <%= f.label :landing_time, "着陸時刻" %>
-      <%= f.time_field :landing_time, class: 'form-control' %>
-      <%= f.label :release_alt, "離脱高度" %>
-      <%= f.number_field :release_alt, class: 'form-control' %>
+    <div class="content-block">
+      <h2>飛行時間等</h2>
+      <div class="input-field">
+        <%= f.label :takeoff_time, "離陸時刻", class: 'label' %>
+        <%= f.time_field :takeoff_time, class: 'form-control' %>
+      </div>
+      <div class="input-field">
+        <%= f.label :release_time, "離脱時刻", class: 'label' %>
+        <%= f.time_field :release_time, class: 'form-control' %>
+      </div>
+      <div class="input-field">
+        <%= f.label :landing_time, "着陸時刻", class: 'label' %>
+        <%= f.time_field :landing_time, class: 'form-control' %>
+      </div>
+      <div class="input-field">
+        <%= f.label :release_alt, "離脱高度", class: 'label' %>
+        <%= f.number_field :release_alt, class: 'form-control' %>
+      </div>
     </div>
-
-    <div class="others">
-      <h3>その他</h3>
-      <%= f.label :notes, "備考" %>
-      <%= f.text_area :notes, class: 'form-control' %>
+    <div class="content-block">
+      <h2>その他</h2>
+      <div class="input-field">
+        <%= f.label :notes, "備考", class: 'label' %>
+        <%= f.text_area :notes, class: 'form-control' %>
+      </div>
     </div>
-
-    <%= f.hidden_field :creator, value: current_user.id %>
-    <%= f.hidden_field :updater, value: current_user.id %>
 
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-  <% end %>
-</div>
+  </div>
+<% end %>
