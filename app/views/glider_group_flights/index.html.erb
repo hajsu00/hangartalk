@@ -1,13 +1,13 @@
 <% provide(:title, "グループフライト") %>
 <div class="create-group-form">
   <h1><%= "#{@current_group.name}のグループフライト" %></h1>
-<% if @glider_group_flights.any? %>
-  <% @glider_group_flights.each do |glider_group_flight| %>
+  <% if @glider_group_flights.any? %>
     <table>
       <tr>
         <th>日付</th>
         <th>発航No.</th>
-        <th>機体</th>
+        <th>航空機の型式</th>
+        <th>登録記号</th>
         <th>前席</th>
         <th>後席</th>
         <th>曳航タイプ</th>
@@ -18,25 +18,25 @@
         <th>離脱高度</th>
         <th>備考</th>
       </tr>
-      <tr>
-        <td><%= glider_group_flight.date %></td>
-        <td><%= glider_group_flight.day_flight_number %></td>
-        <td><%= glider_group_flight.fleet %></td>
-        <td><%= glider_group_flight.front_seat %></td>
-        <td><%= glider_group_flight.rear_seat %></td>
-        <td><%= glider_group_flight.way_of_towing %></td>
-        <td><%= glider_group_flight.takeoff_time %></td>
-        <td><%= glider_group_flight.release_time %></td>
-        <td><%= glider_group_flight.landing_time %></td>
-        <td>飛行時間</td>
-        <td><%= glider_group_flight.release_alt %></td>
-        <td><%= glider_group_flight.notes %></td>
-      </tr>
-    </table>
-  <% end %>
-<% else %>
-  <p>まだフライトログが登録されていません。</p>
-<% end %>
-
-
+      <% @glider_group_flights.each do |glider_group_flight| %>
+        <tr>
+          <td><%= glider_group_flight.date %></td>
+          <td><%= glider_group_flight.day_flight_number %></td>
+          <td><%= glider_group_flight.glider_type %></td>
+          <td><%= glider_group_flight.glider_ident %></td>
+          <td><%= glider_group_flight.front_seat %></td>
+          <td><%= glider_group_flight.rear_seat %></td>
+          <td><%= towing_way(glider_group_flight) %></td>
+          <td><%= glider_group_flight.takeoff_time.strftime("%R") %></td>
+          <td><%= glider_group_flight.release_time.strftime("%R") %></td>
+          <td><%= glider_group_flight.landing_time.strftime("%R") %></td>
+          <td>飛行時間</td>
+          <td><%= glider_group_flight.release_alt %></td>
+          <td><%= glider_group_flight.notes %></td>
+        </tr>
+      <% end %>
+  </table>
+    <% else %>
+      <p>まだフライトログが登録されていません。</p>
+    <% end %>
 </div>

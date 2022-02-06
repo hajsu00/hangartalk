@@ -23,8 +23,21 @@ h2 {
   letter-spacing: -1px;
   margin-bottom: 30px;
   text-align: center;
+  font-weight: bold;
+  color: #333;
+  text-decoration: underline;
+  text-underline-offset: 15px;
+  text-decoration-color: orange;
+}
+h3 {
+  font-size: 1em;
+  letter-spacing: -1px;
+  margin-bottom: 30px;
+  text-align: left;
   font-weight: normal;
   color: #333;
+  text-decoration: underline;
+  text-underline-offset: 5px;
 }
 p {
   font-size: 1.1em;
@@ -197,23 +210,7 @@ $gray-medium-light: #eaeaea;
 }
 
 /* forms */
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
-input {
-  height: auto !important;
-}
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
-  }
-}
+
 #session_remember_me {
   width: auto;
   margin-left: 0;
@@ -289,13 +286,27 @@ tr p{
 .main {
   display: block;
 }
-.content-block {
+.content-outer-block {
   display: block;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
+}
+.content-inner-block {
+  display: block;
+  padding: 20px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
 }
 
 .input-field {
-  display: block;
-	margin:0 auto;
+  // display: block;
   height:50px;
 }
 .label{
@@ -310,34 +321,52 @@ tr p{
   width:300px;
   height:50px;
 }
-.radio-buttonblock {
-  display: flex;
+.radio-button-block {
+  // display: inline-block;
+  // float: left;
 }
 
 .radio-element {
-  // display:inline-block;
-  display:inline;
-  float: left;
+  display:inline-block;
+  // display: flex;
+  // float: left;
   // display: flex;
   // display: flex
 }
 .radio-button {
-  display: inline-block;
+  // display: inline-block;
 
 }
 .radio-label {
-  // display:inline-block;
+  display:inline-block;
   // display:inline;
 }
 .check-box-block {
-  display: flex;
+  display: inline-block;
 }
 .check-box-element {
-  width: 300px;
-  height:50px;
-  display: flex
+  // height:50px;
+  display: inline-block;
 }
 .check-box-label {
-  width: 600px;
+
+}
+
+input, textarea, select, .uneditable-input {
+  border: 1px solid #bbb;
+  width: 100%;
+  margin-bottom: 15px;
+  @include box_sizing;
+}
+input {
+  height: auto !important;
+}
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+  span {
+    margin-left: 20px;
+    font-weight: normal;
+  }
 }
 

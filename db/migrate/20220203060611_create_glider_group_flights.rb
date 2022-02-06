@@ -3,13 +3,14 @@ class CreateGliderGroupFlights < ActiveRecord::Migration[6.1]
     create_table :glider_group_flights do |t|
       t.integer :day_flight_number
       t.date :date
-      t.string :place
-      t.string :way_of_towing
-      t.string :fleet
+      t.string :departure_and_arrival_point
+      t.boolean :is_winch
+      t.string :glider_type
+      t.string :glider_ident
       t.string :front_seat
-      t.string :front_seat_attribute
+      t.string :front_flight_role
       t.string :rear_seat
-      t.string :rear_seat_attribute
+      t.string :rear_flight_role
       t.datetime :takeoff_time
       t.datetime :release_time
       t.datetime :landing_time

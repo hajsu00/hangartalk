@@ -9,11 +9,10 @@ class GliderGroupFlightsController < ApplicationController
   end
 
   def create
-    binding.pry
     current_group = Group.find_by(params[:id])
     @glider_group_flight = current_group.glider_group_flights.build(glider_group_flight_params)
     if @glider_group_flight.save
-      redirect_to glider_group_flights_path(id: @glider_group_flight.id), notice: 'フライト記録を登録しました'
+      redirect_to glider_group_flights_path(id: current_group.id), notice: 'フライト記録を登録しました'
     else
       render :new
     end
@@ -36,7 +35,7 @@ class GliderGroupFlightsController < ApplicationController
   private
 
   def glider_group_flight_params
-    params.require(:glider_group_flight).permit(:day_flight_number, :date, :place, :way_of_towing, :fleet, :front_seat, :front_seat_attribute, :rear_seat, :rear_seat_attribute, :is_front_dual, :is_front_instructor, :is_front_guest, :rear_seat, :takeoff_time, :release_time, :landing_time, :release_alt, :creator, :updater, :notes)
+    params.require(:glider_group_flight).permit(:day_flight_number, :date, :departure_and_arrival_point, :is_winch, :glider_type, :glider_ident, :front_seat, :front_flight_role, :rear_seat, :rear_flight_role, :takeoff_time, :release_time, :landing_time, :release_alt, :creator, :updater, :notes)
   end
 
   # def correct_user
