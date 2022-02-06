@@ -6,8 +6,8 @@
   <%= form_with(model: @glider_flight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <div class="content-block">
-      <h2>基本事項</h2>
+    <h2>基本事項</h2>
+    <div class="content-inner-block">
       <!-- 裏処理用データ -->
       <%= f.hidden_field :log_number, value: 'ヘルパーでlog_number取得のメソッドを作る' %>
       <%= f.hidden_field :log_number, value: '' %>
@@ -22,31 +22,35 @@
       </div>
     </div>
 
-    <div class="content-block">
-      <h2>使用機体および曳航方式</h2>
+    <h2>使用機体および曳航方式</h2>
+    <div class="content-inner-block">
       <div class="check-box-element">
-        <%= f.label :is_motor_glider, "モーターグライダー", class: "check-label"  %>
         <%= f.check_box :is_motor_glider, {}, true, false %>
+        <%= f.label :is_motor_glider, "モーターグライダー", class: "check-label"  %>
       </div>
       <div class="input-field">
-        <%= f.label :fleet, "搭乗機体", class: 'label' %>
-        <%= f.select :fleet, [["ASK21(JA21MA)", "ASK21(JA21MA)"], ["ASK23(JA2381)", "ASK23(JA2381)"]], include_blank: "搭乗機体を選択して下さい", class: 'form-control' %>
+        <%= f.label :glider_type, "航空機の型式", class: 'label' %>
+        <%= f.select :glider_type, [["ASK21", "ASK21"], ["ASK23b ", "ASK23b"]], include_blank: "航空機の型式を選択して下さい", class: 'form-control' %>
+      </div>
+      <div class="input-field">
+        <%= f.label :glider_ident, "登録記号", class: 'label' %>
+        <%= f.select :glider_ident, [["JA21MA", "JA21MA"], ["JA2381", "JA2381"]], include_blank: "登録記号を選択して下さい", class: 'form-control' %>
       </div>
       <h3>曳航タイプ</h3>
       <div class="radio-button-block">
         <div class="radio-element">
-          <%= f.label :is_winch, "ウインチ曳航", value: true, class: "radio-label"  %>
           <%= f.radio_button :is_winch, :true, checked: true %>
+          <%= f.label :is_winch, "ウインチ曳航", value: true, class: "radio-label"  %>
         </div>
         <div class="radio-element">
-          <%= f.label :is_winch, "航空機曳航", value: false, class: "radio-label"  %>
           <%= f.radio_button :is_winch, :false %>
+          <%= f.label :is_winch, "航空機曳航", value: false, class: "radio-label"  %>
         </div>
       </div>
     </div>
 
-    <div class="content-block">
-      <h2>操縦種別</h2>
+    <h2>操縦種別</h2>
+    <div class="content-inner-block">
       <div class="radio-button-block">
         <div class="radio-element">
           <%= f.radio_button :flight_role, :"機長", checked: true, class: "radio-bnutton" %>
@@ -58,7 +62,7 @@
         </div>
         <div class="radio-element">
           <%= f.radio_button :flight_role, :"同乗教育" %>
-          <%= f.label :flight_role, "同乗教育", value: :"同乗教育", class: "radio-label" %>
+          <%= f.label :is_dual, "同乗教育", value: :"同乗教育", class: "radio-label" %>
         </div>
       </div>
       <div class="check-box-block">
@@ -69,8 +73,8 @@
       </div>
     </div>
 
-    <div class="content-block">
-      <h2>フライトの詳細</h2>
+    <h2>フライトの詳細</h2>
+    <div class="content-inner-block">
       <div class="input-field">
         <%= f.label :takeoff_time, "離陸時刻", class: 'label' %>
         <%= f.time_field :takeoff_time, class: 'form-control' %>
@@ -94,12 +98,12 @@
       <h3>飛行内容等</h3>
       <div class="check-box-block">
         <div class="check-box-element">
-          <%= f.label :is_cross_country, "野外飛行" %>
           <%= f.check_box :is_cross_country, {}, true, false %>
+          <%= f.label :is_cross_country, "野外飛行" %>
         </div>
         <div class="check-box-element">
-          <%= f.label :is_stall_recovery, "失速からの回復" %>
           <%= f.check_box :is_stall_recovery, {}, true, false %>
+          <%= f.label :is_stall_recovery, "失速からの回復" %>
         </div>
       </div>
     </div>

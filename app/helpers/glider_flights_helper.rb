@@ -151,7 +151,8 @@ module GliderFlightsHelper
       if !target.is_motor_glider?
         flight_info[:non_power_total_time] += target_flight_time
         flight_info[:non_power_total_number] += 1
-        if target.is_pic?
+        case target.flight_role
+        when '機長'
           if target.is_winch?
             flight_info[:pic_winch_time] += target_flight_time
             flight_info[:pic_winch_number] += 1
@@ -159,7 +160,7 @@ module GliderFlightsHelper
             flight_info[:pic_aero_tow_time] += target_flight_time
             flight_info[:pic_aero_tow_number] += 1
           end
-        elsif !target.is_pic? && !target.is_dual?
+        when '単独飛行'
           if target.is_winch?
             flight_info[:solo_winch_time] += target_flight_time
             flight_info[:solo_winch_number] += 1
@@ -167,7 +168,7 @@ module GliderFlightsHelper
             flight_info[:solo_aero_tow_time] += target_flight_time
             flight_info[:solo_aero_tow_number] += 1
           end
-        elsif target.is_dual?
+        when '同乗教育'
           if target.is_winch?
             flight_info[:dual_winch_time] += target_flight_time
             flight_info[:dual_winch_number] += 1
@@ -180,7 +181,8 @@ module GliderFlightsHelper
       elsif target.is_motor_glider?
         flight_info[:power_total_time] += target_flight_time
         flight_info[:power_total_number] += 1
-        if target.is_pic?
+        case target.flight_role
+        when '機長'
           if target.is_power_flight?
             flight_info[:pic_power_time] += target_flight_time
             flight_info[:pic_power_number] += 1
@@ -188,7 +190,7 @@ module GliderFlightsHelper
             flight_info[:pic_power_off_time] += target_flight_time
             flight_info[:pic_power_off_number] += 1
           end
-        elsif !target.is_pic? && !target.is_dual?
+        when '単独飛行'
           if target.is_power_flight?
             flight_info[:solo_power_time] += target_flight_time
             flight_info[:solo_power_number] += 1
@@ -196,7 +198,7 @@ module GliderFlightsHelper
             flight_info[:solo_power_off_time] += target_flight_time
             flight_info[:solo_power_off_number] += 1
           end
-        elsif target.is_dual?
+        when '同乗教育'
           if target.is_power_flight?
             flight_info[:dual_power_time] += target_flight_time
             flight_info[:dual_power_number] += 1

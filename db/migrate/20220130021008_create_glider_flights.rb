@@ -10,8 +10,7 @@ class CreateGliderFlights < ActiveRecord::Migration[6.1]
       t.integer :number_of_landing
       t.datetime :takeoff_time
       t.datetime :landing_time
-      t.boolean :is_pic
-      t.boolean :is_dual
+      t.string :flight_role
       t.boolean :is_motor_glider
       t.boolean :is_power_flight
       t.boolean :is_winch
