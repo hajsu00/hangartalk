@@ -5,8 +5,7 @@ class CreateGliderFlights < ActiveRecord::Migration[6.1]
       t.date :departure_date
       t.string :glider_type
       t.string :glider_ident
-      t.string :departure_point
-      t.string :arrival_point
+      t.string :departure_and_arrival_point
       t.integer :number_of_landing
       t.datetime :takeoff_time
       t.datetime :landing_time

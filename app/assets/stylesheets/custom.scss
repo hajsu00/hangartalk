@@ -92,79 +92,108 @@ p {
   display: block;
 }
 
-/* sidebar */
-.content{
-  display:flex;
-  margin-left:10px;
-  
+// body{
+//   width:100%; /*ページ全体の幅は100%と指定する*/	
+//   text-align:center; /*ページ全体を中央揃えにする*/
+// }
+// #wrap{ 
+//   width: 960px;	   /*全体の幅を指定する*/  
+//   margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
+//   text-align:left;   /*全体を左揃えにする。*/
+// }
+.content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
-.sidebar {
-  width: 30%;
-  text-align: center;
+
+/* sidebar */
+.main-sidebar {
+  width: 250px;
+  margin: 10px 40px;
+  display: inline-block;
 }
 .sidebar-user-name {
   text-align: center;
   font-weight: bold; 
 }
+.user-stats {
+  text-align: center;
+}
+.user-stats a{
+  display: inline-block;
+  margin: 10px 5px;
+}
+.user-stats p{
+  margin-top: 0;
+}
+.side-menu {
+  text-align: center;
+}
 .side-menu li{
   margin-top: 20px;
 }
 
-aside {
-  section.user_info {
-    margin-top: 20px;
-  }
-  section {
-    padding: 10px 0;
-    margin-top: 20px;
-    &:first-child {
-      border: 0;
-      padding-top: 0;
-    }
-    span {
-      display: block;
-      margin-bottom: 3px;
-      line-height: 1;
-    }
-    h1 {
-      font-size: 1.4em;
-      text-align: left;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-      margin-top: 0px;
-    }
-  }
-}
-.stats {
-  overflow: auto;
-  margin-top: 0;
-  padding: 0;
-  a {
-    float: left;
-    padding: 0 10px;
-    border-left: 1px solid;
-    color: gray;
-    &:first-child {
-      padding-left: 0;
-      border: 0;
-    }
-    &:hover {
-      text-decoration: none;
-      color: blue;
-    }
-  }
-  strong {
-    display: block;
-  }
-}
-.users.follow {
-  padding: 0;
-}
 
-/*content*/
-.col-md-8 {
-  margin-left:50px;
-}
+
+
+// aside {
+//   section.user_info {
+//     margin-top: 20px;
+//   }
+//   section {
+//     padding: 10px 0;
+//     margin-top: 20px;
+//     &:first-child {
+//       border: 0;
+//       padding-top: 0;
+//     }
+//     span {
+//       display: block;
+//       margin-bottom: 3px;
+//       line-height: 1;
+//     }
+//     h1 {
+//       font-size: 1.4em;
+//       text-align: left;
+//       letter-spacing: -1px;
+//       margin-bottom: 3px;
+//       margin-top: 0px;
+//     }
+//   }
+// }
+// .stats {
+//   overflow: auto;
+//   display: inline-block;
+//   margin-top: 0;
+//   padding: 0;
+//   a {
+//     float: left;
+//     padding: 0 10px;
+//     border-left: 1px solid;
+//     color: gray;
+//     &:first-child {
+//       padding-left: 0;
+//       border: 0;
+//     }
+//     &:hover {
+//       text-decoration: none;
+//       color: blue;
+//     }
+//   }
+//   strong {
+//     display: block;
+//   }
+// }
+// .users.follow {
+//   padding: 0;
+// }
+
+// /*content*/
+// .content {
+//   // margin-left:50px;
+//   display: inline-block;
+// }
 
 /* footer */
 footer {
@@ -210,7 +239,6 @@ $gray-medium-light: #eaeaea;
 }
 
 /* forms */
-
 #session_remember_me {
   width: auto;
   margin-left: 0;
@@ -228,14 +256,14 @@ $gray-medium-light: #eaeaea;
     margin-top: 5em;
     padding-top: 0;
   }
-  .content {
-    display: block;
-    margin-left: 60px;
-    img {
-      display: block;
-      padding: 5px 0;
-    }
-  }
+  // .content {
+  //   display: block;
+  //   margin-left: 60px;
+  //   img {
+  //     display: block;
+  //     padding: 5px 0;
+  //   }
+  // }
   .timestamp {
     display: block;
     margin-left: 60px;
@@ -255,11 +283,106 @@ span.image {
 }
 
 /* フライトログ */
-table {
-  border-collapse: collapse;
-  color: #333; /* 全体の文字色 */
-  background-color: #FFF; /* 全体の背景色 */
+.logbook-table {
+  display: block;
+  overflow-x: scroll;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  text-align: center;
+  .logbook-header {
+    // display: table;
+    display: flex;
+    // height: 180px;
+    .three-rows-block {
+      display: inline-block;
+      // height: 180px;
+      .second-row-block {
+        display: flex;
+        .two-rows-block {
+          display: inline-block;
+          // height: 120px;
+          .third-row-block {
+            display: flex;
+          }
+      }
+      }
+    }
+  }
 }
+.three-rows-table-header {
+  border: solid 1px #a5d1f1;
+  height: 180px;
+  width: 80px;
+  text-align:center;
+}
+.two-rows-table-header {
+  border: solid 1px #a5d1f1;
+  height: 120px;
+  width: 80px;
+}
+.one-row-table-header {
+  border: solid 1px #a5d1f1;
+  height: 60px;
+  // width: 80px;
+}
+.logbook-data-row {
+  display: flex;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
+}
+.log-number-cell, .landing-number-cell {
+  width: 60px;
+  text-align:center;
+}
+
+.departure-date-cell {
+  width: 120px;
+  text-align:center;
+}
+.departure-and-arrival-point-cell {
+  width: 150px;
+  text-align:center;
+}
+
+.glider-type-cell, .glider-ident-cell, .takeoff-time-cell, .landing-time-cell {
+  width: 80px;
+  text-align:center;
+}
+.table-data {
+  width: 80px;
+  text-align:center;
+}
+.table-row {
+  display: flex;
+}
+.block {
+  display: block;
+}
+
+//ページ合計
+.page-total-block {
+  display: block;
+}
+.page-total-row {
+  display: flex;
+  border: solid 1px #a5d1f1;
+  padding: 10px 0;
+}
+.page-total-header {
+  width: 720px;
+  text-align:center;
+}
+.glider-total-block {
+  display: block;
+}
+
+
+
 th, td {
   padding: 5px 15px;
   border: solid 1px #a5d1f1;
@@ -285,6 +408,8 @@ tr p{
 //フォーム
 .main {
   display: block;
+  margin-right: 40px;
+  margin-left: 40px;
 }
 .content-outer-block {
   display: block;
@@ -369,4 +494,52 @@ input {
     font-weight: normal;
   }
 }
+
+// *,
+// *:before,
+// *:after {
+//   -webkit-box-sizing: inherit;
+//   box-sizing: inherit;
+// }
+
+// html {
+//   -webkit-box-sizing: border-box;
+//   box-sizing: border-box;
+//   // font-size: 62.5%;/*rem算出をしやすくするために*/
+// }
+
+// .btn,
+// a.btn,
+// button.btn {
+//   font-size: 1.6rem;
+//   font-weight: 700;
+//   line-height: 1.5;
+//   position: relative;
+//   display: inline-block;
+//   padding: 1rem 4rem;
+//   cursor: pointer;
+//   -webkit-user-select: none;
+//   -moz-user-select: none;
+//   -ms-user-select: none;
+//   user-select: none;
+//   -webkit-transition: all 0.3s;
+//   transition: all 0.3s;
+//   text-align: center;
+//   vertical-align: middle;
+//   text-decoration: none;
+//   letter-spacing: 0.1em;
+//   color: #212529;
+//   border-radius: 0.5rem;
+// }
+
+// a.btn-border {
+//   border: 2px solid #000;
+//   border-radius: 0;
+//   background: #fff;
+// }
+
+// a.btn-border:hover {
+//   color: #fff;
+//   background: #000;
+// }
 

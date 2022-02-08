@@ -2,40 +2,42 @@
 <div class="create-group-form">
   <h1><%= "#{@current_group.name}のグループフライト" %></h1>
   <% if @glider_group_flights.any? %>
-    <table>
-      <tr>
-        <th>日付</th>
-        <th>発航No.</th>
-        <th>航空機の型式</th>
-        <th>登録記号</th>
-        <th>前席</th>
-        <th>後席</th>
-        <th>曳航タイプ</th>
-        <th>離陸時刻</th>
-        <th>離脱時刻</th>
-        <th>着陸時刻</th>
-        <th>飛行時間</th>
-        <th>離脱高度</th>
-        <th>備考</th>
-      </tr>
-      <% @glider_group_flights.each do |glider_group_flight| %>
+    <div class="table-contents">
+      <table>
         <tr>
-          <td><%= glider_group_flight.date %></td>
-          <td><%= glider_group_flight.day_flight_number %></td>
-          <td><%= glider_group_flight.glider_type %></td>
-          <td><%= glider_group_flight.glider_ident %></td>
-          <td><%= glider_group_flight.front_seat %></td>
-          <td><%= glider_group_flight.rear_seat %></td>
-          <td><%= towing_way(glider_group_flight) %></td>
-          <td><%= glider_group_flight.takeoff_time.strftime("%R") %></td>
-          <td><%= glider_group_flight.release_time.strftime("%R") %></td>
-          <td><%= glider_group_flight.landing_time.strftime("%R") %></td>
-          <td>飛行時間</td>
-          <td><%= glider_group_flight.release_alt %></td>
-          <td><%= glider_group_flight.notes %></td>
+          <th>日付</th>
+          <th>発航<br>No.</th>
+          <th>航空機<br>の型式</th>
+          <th>登録記号</th>
+          <th>前席</th>
+          <th>後席</th>
+          <th>曳航タイプ</th>
+          <th>離陸<br>時刻</th>
+          <th>離脱<br>時刻</th>
+          <th>着陸<br>時刻</th>
+          <th>飛行<br>時間</th>
+          <th>離脱<br>高度</th>
+          <th>備考</th>
         </tr>
-      <% end %>
-  </table>
+        <% @glider_group_flights.each do |glider_group_flight| %>
+          <tr>
+            <td><%= glider_group_flight.date %></td>
+            <td><%= glider_group_flight.day_flight_number %></td>
+            <td><%= glider_group_flight.glider_type %></td>
+            <td><%= glider_group_flight.glider_ident %></td>
+            <td><%= glider_group_flight.front_seat %></td>
+            <td><%= glider_group_flight.rear_seat %></td>
+            <td><%= towing_way(glider_group_flight) %></td>
+            <td><%= glider_group_flight.takeoff_time.strftime("%R") %></td>
+            <td><%= glider_group_flight.release_time.strftime("%R") %></td>
+            <td><%= glider_group_flight.landing_time.strftime("%R") %></td>
+            <td>飛行<br>時間</td>
+            <td><%= glider_group_flight.release_alt %></td>
+            <td><%= glider_group_flight.notes %></td>
+          </tr>
+        <% end %>
+    </table>
+  </div>
     <% else %>
       <p>まだフライトログが登録されていません。</p>
     <% end %>

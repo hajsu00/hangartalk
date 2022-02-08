@@ -9,8 +9,11 @@
     <h2>基本事項</h2>
     <div class="content-inner-block">
       <!-- 裏処理用データ -->
-      <%= f.hidden_field :log_number, value: 'ヘルパーでlog_number取得のメソッドを作る' %>
-      <%= f.hidden_field :log_number, value: '' %>
+      <%
+=begin%>
+ <%= f.hidden_field :log_number, value: log_number %> 
+<%
+=end%>
 
       <div class="input-field">
         <%= f.label :date, "出発日", class: 'label' %>

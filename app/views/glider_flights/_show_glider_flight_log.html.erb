@@ -1,67 +1,64 @@
 <% glider_flights.each do |glider_flight| %>
-  <div class="panel panel-success">
-    <div class="panel-body">
-      <tr>
-        <% flight_time = glider_each_flight_time(glider_flight) %>
-        <!-- 基本事項 -->
-        <td><%= glider_flight.log_number %></td>
-        <td><%= glider_flight.departure_date %></td>
-        <td><%= glider_flight.glider_type %></td>
-        <td><%= glider_flight.glider_ident %></td>
-        <td><%= glider_flight.departure_point %></td>
-        <td><%= glider_flight.arrival_point %></td>
-        <td><%= glider_flight.takeoff_time.strftime("%R") %></td>
-        <td><%= glider_flight.landing_time.strftime("%R") %></td>
-        <td><%= glider_flight.number_of_landing %></td>
-        <!-- 滑空機による時間 -->
-        <% if !glider_flight.is_motor_glider? %>
-          <td><%= show_flight_time(flight_time) %></td> 
-          <% if glider_flight.flight_role == '機長' %>
-            <td><%= show_flight_time(flight_time) if glider_flight.is_winch? %></td>
-            <td><%= show_flight_time(flight_time) if !glider_flight.is_winch? %></td>
-          <% elsif glider_flight.flight_role == '単独飛行' %>
-            <td><%= show_flight_time(flight_time) if glider_flight.is_winch? %></td>
-            <td><%= show_flight_time(flight_time) if !glider_flight.is_winch? %></td>
-          <% else %>
-            <td></td>
-            <td></td>
-          <% end %>
-          <td><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && glider_flight.is_winch? %></td>
-          <td><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && !glider_flight.is_winch? %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        <!-- 動力滑空機による時間  -->
+  <%= link_to glider_flight_path(id: glider_flight.id), class:"link" do %> 
+    <div class="logbook-data-row">
+      <% flight_time = glider_each_flight_time(glider_flight) %>
+      <!-- 基本事項 -->
+      <div class="log-number-cell"><%= glider_flight.log_number %></div>
+      <div class="departure-date-cell"><%= glider_flight.departure_date %></div>
+      <div class="glider-type-cell"><%= glider_flight.glider_type %></div>
+      <div class="glider-ident-cell"><%= glider_flight.glider_ident %></div>
+      <div class="departure-and-arrival-point-cell"><%= glider_flight.departure_and_arrival_point %></div>
+      <div class="takeoff-time-cell"><%= glider_flight.takeoff_time.strftime("%R") %></div>
+      <div class="landing-time-cell"><%= glider_flight.landing_time.strftime("%R") %></div>
+      <div class="landing-number-cell"><%= glider_flight.number_of_landing %></div>
+      <!-- 滑空機による時間 -->
+      <% if !glider_flight.is_motor_glider? %>
+        <div class="table-data"><%= show_flight_time(flight_time) %></div> 
+        <% if glider_flight.flight_role == '機長' %>
+          <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.is_winch? %></div>
+          <div class="table-data"><%= show_flight_time(flight_time) if !glider_flight.is_winch? %></div>
+        <% elsif glider_flight.flight_role == '単独飛行' %>
+          <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.is_winch? %></div>
+          <div class="table-data"><%= show_flight_time(flight_time) if !glider_flight.is_winch? %></div>
         <% else %>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><%= show_flight_time(flight_time) %></td> 
-          <% if glider_flight.flight_role == '機長' %>
-            <td><%= show_flight_time(flight_time) if glider_flight.is_power_flight? %></td>
-            <td><%= show_flight_time(flight_time) if !glider_flight.is_power_flight? %></td>
-          <% elsif glider_flight.flight_role == '単独飛行' %>
-            <td><%= show_flight_time(flight_time) if glider_flight.is_power_flight? %></td>
-            <td><%= show_flight_time(flight_time) if !glider_flight.is_power_flight? %></td>
-          <% else %>
-            <td></td>
-            <td></td>
-          <% end %>
-          <td><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && glider_flight.is_power_flight? %></td>
-          <td><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && !glider_flight.is_power_flight? %></td>
+          <div class="table-data"></div>
+          <div class="table-data"></div>
         <% end %>
-        <!-- その他の飛行時間 -->
-        <td><%= show_flight_time(flight_time) if glider_flight.is_cross_country? %></td>
-        <td><%= glider_flight.release_alt %></td>
-        <td><%= show_flight_time(flight_time) if glider_flight.is_instructor? %></td>
-        <td><%= glider_flight.note %></td>
-      </tr> 
-    </div>
-  </div>
+        <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && glider_flight.is_winch? %></div>
+        <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && !glider_flight.is_winch? %></div>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+      <!-- 動力滑空機による時間  -->
+      <% else %>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+        <div class="table-data"></div>
+        <div class="table-data"><%= show_flight_time(flight_time) %></div> 
+        <% if glider_flight.flight_role == '機長' %>
+          <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.is_power_flight? %></div>
+          <div class="table-data"><%= show_flight_time(flight_time) if !glider_flight.is_power_flight? %></div>
+        <% elsif glider_flight.flight_role == '単独飛行' %>
+          <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.is_power_flight? %></div>
+          <div class="table-data"><%= show_flight_time(flight_time) if !glider_flight.is_power_flight? %></div>
+        <% else %>
+          <div class="table-data"></div>
+          <div class="table-data"></div>
+        <% end %>
+        <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && glider_flight.is_power_flight? %></div>
+        <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.flight_role == '同乗教育' && !glider_flight.is_power_flight? %></div>
+      <% end %>
+      <!-- その他の飛行時間 -->
+      <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.is_cross_country? %></div>
+      <div class="table-data"><%= glider_flight.release_alt %></div>
+      <div class="table-data"><%= show_flight_time(flight_time) if glider_flight.is_instructor? %></div>
+      <div class="table-data"><%= glider_flight.note %></div>
+    </div> 
+  <% end %> 
+  <%= link_to "削除", glider_flight, method: :delete,data: { confirm: "本当に削除しますか？" } %>
 <% end %>
-      
 <%= paginate glider_flights, left: 3, right: 3 %>  

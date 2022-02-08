@@ -11,44 +11,46 @@
   <div class="col-md-8">
     <% if @user.aeroplane_flights.any? %>
       <h3>フライトログ (<%= @user.aeroplane_flights.count %>)</h3>
-    <table border="1">
-    <!-- 見出し部分 -->
-    <tr>
-      <th rowspan="2">No.</th>
-      <th rowspan="2">出発日</th>
-      <th rowspan="2">航空機の型式</th>
-      <th rowspan="2">登録記号</th>
-      <th rowspan="2">出発地</th>
-      <th rowspan="2">到着地</th>
-      <th rowspan="2">出発時刻</th>
-      <th rowspan="2">到着時刻</th>
-      <th rowspan="2">飛行内容</th>
-      <th rowspan="2">離陸回数</th>
-      <th rowspan="2">着陸回数</th>
-      <th rowspan="2">飛行時間</th>
-      <th colspan="4">機長または単独の時間</th>
-      <th colspan="3">教官同乗教育の時間</th>
-      <th colspan="2">計器飛行時間</th>
-      <th rowspan="2">飛行訓練装置</th>
-      <th rowspan="2">操縦教員</th>
-      <th rowspan="2">補足事項</th>
-    </tr>
-    <tr>
-      <th>機長</th>
-      <th>単独飛行</th>
-      <th>野外飛行</th>
-      <th>夜間飛行</th>
-      <th>同乗教育</th>
-      <th>野外飛行</th>
-      <th>夜間飛行</th>
-      <th>フード</th>
-      <th>計器飛行</th>
-    </tr>
-    <!-- 一覧表（DBから取得） -->
-    <%= render partial: "show_aeroplane_flight_log", locals: { aeroplane_flights: @aeroplane_flights } %>
-    <!-- まとめ表 -->
-    <%= render 'aeroplane_page_summary' %>  
-  </table>
+    <div class="table-contents">
+      <table border="1">
+      <!-- 見出し部分 -->
+      <tr>
+        <th rowspan="2">No.</th>
+        <th rowspan="2">出発日</th>
+        <th rowspan="2">航空機<br>の型式</th>
+        <th rowspan="2">登録記号</th>
+        <th rowspan="2">出発地</th>
+        <th rowspan="2">到着地</th>
+        <th rowspan="2">出発<br>時刻</th>
+        <th rowspan="2">到着<br>時刻</th>
+        <th rowspan="2">飛行内容</th>
+        <th rowspan="2">離陸<br>回数</th>
+        <th rowspan="2">着陸<br>回数</th>
+        <th rowspan="2">飛行<br>時間</th>
+        <th colspan="4">機長または単独の時間</th>
+        <th colspan="3">教官同乗教育の時間</th>
+        <th colspan="2">計器飛行時間</th>
+        <th rowspan="2">飛行<br>訓練<br>装置</th>
+        <th rowspan="2">操縦<br>教員</th>
+        <th rowspan="2">補足事項</th>
+      </tr>
+      <tr>
+        <th>機長</th>
+        <th>単独<br>飛行</th>
+        <th>野外<br>飛行</th>
+        <th>夜間<br>飛行</th>
+        <th>同乗<br>教育</th>
+        <th>野外<br>飛行</th>
+        <th>夜間<br>飛行</th>
+        <th>フード</th>
+        <th>計器<br>飛行</th>
+      </tr>
+      <!-- 一覧表（DBから取得） -->
+      <%= render partial: "show_aeroplane_flight_log", locals: { aeroplane_flights: @aeroplane_flights } %>
+      <!-- まとめ表 -->
+      <%= render 'aeroplane_page_summary' %>  
+    </table>
+  </div>
     <% else %>
       <p>登録されたフライトログがありません。</p>
     <% end %>
