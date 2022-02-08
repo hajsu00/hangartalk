@@ -1,66 +1,82 @@
 <% provide(:title, 'フライトログブック（滑空機）') %>
 <% @user ||= current_user %>
-<div class="row">
-  <aside class="col-md-4">
-    <section class="user_info">
-      <h1><%= 'フライトログブック（滑空機）' %></h1>
-    </section>
-    <%
-=begin%>
- <section class="flight_experiences">
-      <%= render 'shared/flight_experiences' %>
-    </section> 
-<%
-=end%>
-  </aside>
-  <div class="col-md-8">
-    <% if @user.glider_flights.any? %>
-      <h3>フライトログ (<%= @user.glider_flights.count %>)</h3>
-    <table border="1">
-    <!-- 見出し部分 -->
-    <tr>
-      <th rowspan="3">No.</th>
-      <th rowspan="3">出発日</th>
-      <th rowspan="3">航空機の型式</th>
-      <th rowspan="3">登録記号</th>
-      <th rowspan="3">出発地</th>
-      <th rowspan="3">到着地</th>
-      <th rowspan="3">離陸時刻</th>
-      <th rowspan="3">着陸時刻</th>
-      <th rowspan="3">着陸回数</th>
-      <!-- 滑空機による時間 -->
-      <th colspan="5">滑空機による時間</th>
-      <th colspan="5">動力滑空機による時間</th>
-      <th rowspan="3">野外飛行</th>
-      <th rowspan="3">離脱高度 又は 動力停止高度</th>
-      <th rowspan="3">操縦教員としての飛行時間</th>
-      <th rowspan="3">補足事項</th>
-    </tr>
-    <tr>
-      <th rowspan="2">飛行時間</th>
-      <th colspan="2">単独又は機長</th>
-      <th colspan="2">同乗教育</th>
-      <th rowspan="2">飛行時間</th>
-      <th colspan="2">単独又は機長</th>
-      <th colspan="2">同乗教育</th>
-    </tr>
-    <tr>
-      <th>ウインチ（自動車）曳航</th>
-      <th>航空機曳航</th>
-      <th>ウインチ（自動車）曳航</th>
-      <th>航空機曳航</th>
-      <th>動力</th>
-      <th>滑空</th>
-      <th>動力</th>
-      <th>滑空</th>
-    </tr>
+<div class="main">
+  <h1><%= 'フライトログブック（滑空機）' %></h1>
+  <% if @user.glider_flights.any? %>
+    <h3>フライトログ (<%= @user.glider_flights.count %>)</h3>
+    <div class="logbook-table">
+      <div class="logbook-header">
+        <div class="log-number-cell">No.</div>
+        <div class="departure-date-cell">出発日</div>
+        <div class="glider-type-cell">航空機<br>の型式</div>
+        <div class="glider-ident-cell">登録記号</div>
+        <div class="departure-and-arrival-point-cell">離着陸の区間</div>
+        <div class="takeoff-time-cell">離陸<br>時刻</div>
+        <div class="landing-time-cell">着陸<br>時刻</div>
+        <div class="landing-number-cell">着陸<br>回数</div>
+        <!-- 滑空機による時間 -->
+        <div class="three-rows-block">
+          <div class="one-row-table-header">滑空機による時間</div>
+          <div class="second-row-block">
+            <div class="two-rows-table-header">飛行<br>時間</div>
+            <div class="two-rows-block">
+              <div class="one-row-table-header">単独又は機長</div>
+
+                <div class="third-row-block">
+                  <div class="table-data">ウインチ<br>曳航</div>
+                  <div class="table-data">航空機<br>曳航</div>
+                </div>
+
+            </div>
+            <div class="two-rows-block">
+              <div class="one-row-table-header">同乗教育</div>
+
+                <div class="third-row-block">
+                  <div class="table-data">ウインチ<br>曳航</div>
+                  <div class="table-data">航空機<br>曳航</div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- 滑空機による時間 -->
+        <div class="three-rows-block">
+          <div class="one-row-table-header">動力滑空機による時間</div>
+          <div class="second-row-block">
+            <div class="two-rows-table-header">飛行<br>時間</div>
+            <div class="two-rows-block">
+              <div class="one-row-table-header">単独又は機長</div>
+
+                <div class="third-row-block">
+                  <div class="table-data">動力</div>
+                  <div class="table-data">滑空</div>
+                </div>
+
+            </div>
+            <div class="two-rows-block">
+              <div class="one-row-table-header">同乗教育</div>
+
+                <div class="third-row-block">
+                  <div class="table-data">動力</div>
+                  <div class="table-data">滑空</div>
+                </div>
+
+            </div>
+          </div>
+        </div>
+        <!-- その他 -->
+        <div class="three-rows-table-header">野外<br>飛行</div>
+        <div class="three-rows-table-header">離脱高度<br>又は<br>動力停止<br>高度</div>
+        <div class="three-rows-table-header">操縦教員<br>としての<br>飛行時間</div>
+        <div class="three-rows-table-header">補足事項</div>
+      </div> 
+    </div>
     <!-- 一覧表（DBから取得） -->
     <%= render partial: "show_glider_flight_log", locals: { glider_flights: @glider_flights } %>
     <!-- まとめ表 -->
     <%= render 'glider_page_summary' %>
-  </table>
-    <% else %>
-      <p>登録されたフライトログがありません。</p>
-    <% end %>
-  </div>
-</div>
+  <% else %>
+    <h3>フライトログ (<%= @user.glider_flights.count %>)</h3>
+    <p>登録されたフライトログがありません。</p>
+  <% end %>
+</div> 

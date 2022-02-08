@@ -208,7 +208,6 @@ module GliderFlightsHelper
           end
         end
       end
-
       # その他の飛行時間
       if target.is_instructor?
         flight_info[:instructor_time] += target_flight_time

@@ -1,11 +1,28 @@
 <% if logged_in? %>
-  <div class="sidebar">
-    <aside class="col-md-4">
-      <%= render 'shared/user_info' %>
-    </aside>
+  <% @user ||= current_user %>
+  <div class="main-sidebar">
+      <div class="user-info-block">
+        <h2 class="sidebar-user-name"><%= @user.name %></h2>
+        <div class="user-stats">
+          <a href="<%= following_user_path(@user) %>">
+            <strong id="following" class="stat">
+              <%= @user.following.count %>
+            </strong>
+            <p>following</p>
+          </a>
+          <a href="<%= followers_user_path(@user) %>">
+            <strong id="followers" class="stat">
+              <%= @user.followers.count %>
+            </strong>
+            <p>followers</p>
+          </a>
+        </div>
+      </div>
+      
       <div class="side-menu">
         <ul>
           <li><%= link_to "ホーム", root_path %></li>
+          <li><%= link_to "プロフィール", @user %></li>
           <li><%= link_to "新しいフライト", users_select_new_flight_path %></li>
           <li><%= link_to "フライトログブック", users_select_flight_log_path %></li>
           <li><%= link_to "グループ", groups_path %></li>
