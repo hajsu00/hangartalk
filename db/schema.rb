@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_060611) do
 
   create_table "glider_flights", charset: "utf8mb3", force: :cascade do |t|
     t.integer "log_number"
-    t.date "departure_date"
+    t.date "date"
     t.string "glider_type"
     t.string "glider_ident"
     t.string "departure_and_arrival_point"
@@ -107,7 +107,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_060611) do
     t.boolean "is_power_flight"
     t.boolean "is_winch"
     t.boolean "is_cross_country"
-    t.string "release_alt"
+    t.integer "release_alt"
     t.boolean "is_instructor"
     t.boolean "is_stall_recovery"
     t.boolean "close_log"
