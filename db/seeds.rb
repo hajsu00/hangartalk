@@ -59,11 +59,12 @@ end
 
 user = User.find_by(email: "example@railstutorial.org")
 23.times do |n|
-  departure_date = Time.zone.today
+  # departure_date = Time.zone.today
   takeoff_time = Time.current + ((n+1) * 60).minutes
+  departure_date = Date.new(takeoff_time.year, takeoff_time.month, takeoff_time.day)
   landing_time = takeoff_time + 6.minutes
   user.glider_flights.create!(log_number: 1 + n,
-                              departure_date: departure_date,
+                              date: departure_date,
                               glider_type: 'ASK21',
                               glider_ident: 'JA21MA',
                               departure_and_arrival_point: '宝珠花滑空場',
@@ -82,54 +83,54 @@ user = User.find_by(email: "example@railstutorial.org")
                               note: '備考欄です。')
 end
 
-user = User.find_by(email: "example@railstutorial.org")
-13.times do |n|
-  departure_date = Time.zone.today
-  takeoff_time = Time.current + ((n+1) * 60).minutes
-  landing_time = takeoff_time + 6.minutes
-  user.glider_flights.create!(log_number: 24 + n,
-                              departure_date: departure_date,
-                              glider_type: 'ASK21',
-                              glider_ident: 'JA21MA',
-                              departure_and_arrival_point: '宝珠花滑空場',
-                              number_of_landing: 1,
-                              takeoff_time: takeoff_time,
-                              landing_time: landing_time,
-                              flight_role: '同乗教育',
-                              is_motor_glider: true,
-                              is_power_flight: true,
-                              is_winch: false,
-                              is_cross_country: false,
-                              release_alt: 420,
-                              is_instructor: false,
-                              is_stall_recovery: false,
-                              close_log: false,
-                              note: '備考欄です。')
-end
-user = User.find_by(email: "example@railstutorial.org")
-13.times do |n|
-  departure_date = Time.zone.today
-  takeoff_time = Time.current + ((n+1) * 60).minutes
-  landing_time = takeoff_time + 6.minutes
-  user.glider_flights.create!(log_number: 37 + n,
-                              departure_date: departure_date,
-                              glider_type: 'ASK21',
-                              glider_ident: 'JA21MA',
-                              departure_and_arrival_point: '宝珠花滑空場',
-                              number_of_landing: 1,
-                              takeoff_time: takeoff_time,
-                              landing_time: landing_time,
-                              flight_role: '単独飛行',
-                              is_motor_glider: true,
-                              is_power_flight: true,
-                              is_winch: false,
-                              is_cross_country: true,
-                              release_alt: 420,
-                              is_instructor: false,
-                              is_stall_recovery: false,
-                              close_log: false,
-                              note: '備考欄です。')
-end
+# user = User.find_by(email: "example@railstutorial.org")
+# 13.times do |n|
+#   departure_date = Time.zone.today
+#   takeoff_time = Time.current + ((n+1) * 60).minutes
+#   landing_time = takeoff_time + 6.minutes
+#   user.glider_flights.create!(log_number: 24 + n,
+#                               date: departure_date,
+#                               glider_type: 'ASK21',
+#                               glider_ident: 'JA21MA',
+#                               departure_and_arrival_point: '宝珠花滑空場',
+#                               number_of_landing: 1,
+#                               takeoff_time: takeoff_time,
+#                               landing_time: landing_time,
+#                               flight_role: '同乗教育',
+#                               is_motor_glider: true,
+#                               is_power_flight: true,
+#                               is_winch: false,
+#                               is_cross_country: false,
+#                               release_alt: 420,
+#                               is_instructor: false,
+#                               is_stall_recovery: false,
+#                               close_log: false,
+#                               note: '備考欄です。')
+# end
+# user = User.find_by(email: "example@railstutorial.org")
+# 13.times do |n|
+#   departure_date = Time.zone.today
+#   takeoff_time = Time.current + ((n+1) * 60).minutes
+#   landing_time = takeoff_time + 6.minutes
+#   user.glider_flights.create!(log_number: 37 + n,
+#                               date: departure_date,
+#                               glider_type: 'ASK21',
+#                               glider_ident: 'JA21MA',
+#                               departure_and_arrival_point: '宝珠花滑空場',
+#                               number_of_landing: 1,
+#                               takeoff_time: takeoff_time,
+#                               landing_time: landing_time,
+#                               flight_role: '単独飛行',
+#                               is_motor_glider: true,
+#                               is_power_flight: true,
+#                               is_winch: false,
+#                               is_cross_country: true,
+#                               release_alt: 420,
+#                               is_instructor: false,
+#                               is_stall_recovery: false,
+#                               close_log: false,
+#                               note: '備考欄です。')
+#end
 # user = User.find_by(id: 1)
 # departure_date = Time.zone.today
 # takeoff_time = Time.current

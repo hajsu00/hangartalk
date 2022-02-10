@@ -29,7 +29,11 @@
     <div class="content-inner-block">
       <div class="check-box-element">
         <%= f.check_box :is_motor_glider, {}, true, false %>
-        <%= f.label :is_motor_glider, "モーターグライダー", class: "check-label"  %>
+        <%= f.label :is_motor_glider, "モーターグライダー", class: "check-label" %>
+      </div>
+      <div class="check-box-element">
+        <%= f.check_box :is_power_flight, {}, true, false %>
+        <%= f.label :is_power_flight, "動力フライト", class: "check-label"  %>
       </div>
       <div class="input-field">
         <%= f.label :glider_type, "航空機の型式", class: 'label' %>
@@ -65,7 +69,7 @@
         </div>
         <div class="radio-element">
           <%= f.radio_button :flight_role, :"同乗教育" %>
-          <%= f.label :is_dual, "同乗教育", value: :"同乗教育", class: "radio-label" %>
+          <%= f.label :flight_role, "同乗教育", value: :"同乗教育", class: "radio-label" %>
         </div>
       </div>
       <div class="check-box-block">
