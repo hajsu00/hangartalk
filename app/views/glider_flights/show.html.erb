@@ -1,1 +1,27 @@
-showのViewです
+<% provide(:title, 'フライトの詳細') %>
+
+<div class="main">
+  <h1>フライトの詳細</h1>
+  <div class="edit-button"><%= link_to "編集", edit_glider_flight_path(id: params[:id]) %></div>
+  <div class="content-outer-block">
+      <p>フライトログNo.：<span class="value"><%= @glider_flight.log_number %></span></p>
+      <p>日付：<span class="value"><%= @glider_flight.date %></span></p>
+      <p>航空機の型式：<span class="value"><%= @glider_flight.glider_type %></span></p>
+      <p>登録記号：<span class="value"><%= @glider_flight.glider_ident %></span></p>
+      <p>離着陸の区間：<span class="value"><%= @glider_flight.departure_and_arrival_point %></span></p>
+    <div class="content-inner-block">
+      <p>離陸時刻：<span class="value"><%= @glider_flight.takeoff_time.strftime("%R") %></span></p>
+      <p>着陸回数：<span class="value"><%= @glider_flight.number_of_landing %></span></p>
+      <p>着陸時刻：<span class="value"><%= @glider_flight.landing_time.strftime("%R") %></span></p>
+      <p>離脱高度：<span class="value"><%= @glider_flight.release_alt %></span></p>
+    </div>
+    <div class="content-inner-block">
+      <p>操縦区分.：<span class="value"><%= @glider_flight.flight_role %></span></p>
+      <p><span class="value"><%= show_flight_info(@glider_flight.is_instructor, 'instructor') %></span></p>
+      <p>曳航方式：<span class="value"><%= show_flight_info(@glider_flight.is_winch, 'winch') %></span></p>
+      <p>補足事項：<span class="value"><%= show_flight_info(@glider_flight.is_cross_country, 'cross_country') %></span>
+      <span class="value"><%= show_flight_info(@glider_flight.is_instructor, 'instructor') %></span>
+      <span class="value"><%= @glider_flight.note %></span></p>
+    </div>
+  </div>
+</div>

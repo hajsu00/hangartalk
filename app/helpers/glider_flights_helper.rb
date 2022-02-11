@@ -1,4 +1,16 @@
 module GliderFlightsHelper
+  # showページ用
+  def show_flight_info(flag, category)
+    case category
+    when 'winch'
+      flag == true ? 'ウインチ曳航' : '航空機曳航'
+    when 'instructor'
+      '操縦教員としてのフライト' if flag == true
+    when 'cross_country'
+      '野外飛行' if flag == true
+    end
+  end
+
   # 飛行機の総飛行時間を計算
   def glider_total_flight_time(attribute)
     all_flights = current_user.glider_flights

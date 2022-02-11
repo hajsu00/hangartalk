@@ -1,8 +1,8 @@
-<% provide(:title, '新しいフライト（滑空機）') %>
-<% provide(:button_text, '登録する') %>
+<% provide(:title, 'フライトの修正（滑空機）') %>
+<% provide(:button_text, '修正する') %>
 
 <div class="main">
-  <h1>新しいフライトを作成（滑空機）</h1>
+  <h1>フライトの修正（滑空機）</h1>
   <%= form_with(model: @glider_flight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 

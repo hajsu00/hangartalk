@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
   resources :aeroplane_flights,   only: [:new, :create, :show, :index, :destroy]
-  resources :glider_flights,   only: [:new, :create, :show, :index, :destroy]
+  resources :glider_flights,   only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :groups, only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :glider_group_flights, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 end

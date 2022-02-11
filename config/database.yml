@@ -10,11 +10,11 @@ default: &default
 development:
   <<: *default
   database: hangertalk_development
-
+  socket: /tmp/mysql.sock
 test:
   <<: *default
   database: hangertalk_test
-
+  socket: /tmp/mysql.sock
 production:
   <<: *default
   database: hangertalk_production
