@@ -21,6 +21,24 @@ class GliderFlightsController < ApplicationController
   end
 
   def show
+    @glider_flight = GliderFlight.find_by(id: params[:id])
+  end
+
+  def edit
+    @glider_flight = GliderFlight.find_by(id: params[:id])
+  end
+
+  def update
+    @glider_flight = GliderFlight.find_by(id: params[:id])
+    if @glider_flight.update(glider_flight_params)
+      glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(takeoff_time: :asc)
+      new_log_number(glider_flights)
+      flash[:success] = "フライトログの更新に成功しました！"
+      redirect_to glider_flights_url
+    else
+      flash[:danger] = "フライトログの更新に失敗しました。"
+      render 'glider_flights/edit'
+    end
   end
 
   def index
@@ -55,7 +73,7 @@ class GliderFlightsController < ApplicationController
   def glider_flight_params
     # チェックボックスがアンチェック時にnilではなくfalseを代入する
     params[:glider_flight][:takeoff_time] = fix_inputed_time(:takeoff_time)
-    params[:glider_flight][:landing_time] = false if params[:glider_flight][:landing_time].nil?
+    params[:glider_flight][:landing_time] = fix_inputed_time(:landing_time)
     params[:glider_flight][:is_motor_glider] = false if params[:glider_flight][:is_motor_glider].nil?
     params[:glider_flight][:is_power_flight] = false if params[:glider_flight][:is_power_flight].nil?
     params[:glider_flight][:is_cross_country] = false if params[:glider_flight][:is_cross_country].nil?
