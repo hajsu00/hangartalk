@@ -71,6 +71,9 @@
         <div class="three-rows-table-header">補足事項</div>
       </div> 
     </div>
+
+    <!-- 過去のフライトログ -->
+    <%= render 'glider_initial_log' if @glider_flights.current_page == 1 %> 
     <!-- 一覧表（DBから取得） -->
     <%= render partial: "show_glider_flight_log", locals: { glider_flights: @glider_flights } %>
     <!-- まとめ表 -->
@@ -78,5 +81,13 @@
   <% else %>
     <h3>フライトログ (<%= @user.glider_flights.count %>)</h3>
     <p>登録されたフライトログがありません。</p>
+    <%= link_to new_glider_initial_log_path, class:"link" do %> 
+    <div class="entire-row">
+      <div class="logbook-data-row">
+        <p>すでに紙ベースのログブックをお持ちですか？<br>まずはこれまでの飛行経験を登録しよう！</p>
+      </div> 
+    </div>
+    <p><%= link_to "新しいフライトを登録する", new_glider_flight_path %></p>
+    <% end %>
   <% end %>
 </div> 

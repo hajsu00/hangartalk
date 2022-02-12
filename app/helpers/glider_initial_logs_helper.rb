@@ -1,0 +1,2 @@
+module GliderInitialLogsHelper
+end

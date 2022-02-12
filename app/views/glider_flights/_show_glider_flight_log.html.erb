@@ -1,5 +1,6 @@
 <% glider_flights.each do |glider_flight| %>
   <%= link_to glider_flight_path(id: glider_flight.id), class:"link" do %> 
+  <div class="entire-row">
     <div class="logbook-data-row">
       <% flight_time = glider_each_flight_time(glider_flight) %>
       <!-- 基本事項 -->
@@ -59,7 +60,11 @@
       <div class="table-data"><%= glider_flight.note %></div>
     </div> 
   <% end %> 
-  <%= link_to "編集", edit_glider_flight_path(id: glider_flight.id) %>
-  <%= link_to "削除", glider_flight, method: :delete,data: { confirm: "本当に削除しますか？" } %>
+  <div class="edit-delete-link">
+    <%= link_to "編集", edit_glider_flight_path(id: glider_flight.id) %>
+    <%= link_to "削除", glider_flight, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  </div> 
+  </div> 
 <% end %>
+<p><%= link_to "新しいフライトを登録する", new_glider_flight_path %></p>
 <%= paginate glider_flights, left: 3, right: 3 %>  

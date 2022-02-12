@@ -43,6 +43,7 @@ class GliderFlightsController < ApplicationController
 
   def index
     @glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc).page(params[:page]).per(10)
+    @glider_initial_log = current_user.glider_initial_log
   end
 
   def destroy
