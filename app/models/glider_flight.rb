@@ -1,7 +1,5 @@
 class GliderFlight < ApplicationRecord
   include ActionView::Helpers
-
-  belongs_to :user
   belongs_to :user, optional: true
 
   validates :takeoff_time, :landing_time, presence: true

@@ -1,0 +1,76 @@
+<% if !@glider_initial_log.nil? %>
+  <%= link_to glider_initial_log_path(id: @glider_initial_log.id), class:"link" do %> 
+  <div class="entire-row">
+    <div class="logbook-data-row">
+      <!-- 基本事項 -->
+      <div class="initial-log_header">ログ運用開始前の飛行経歴（基準日：<%= '　　　' %>）</div>
+      <!-- 滑空機による時間 -->
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.non_power_total_time) if @glider_initial_log.non_power_total_time != 0 %></div> 
+        <div class="table-data"><%= @glider_initial_log.non_power_total_number if @glider_initial_log.non_power_total_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.pic_winch_time + @glider_initial_log.solo_winch_time) if @glider_initial_log.pic_winch_time != 0 || @glider_initial_log.solo_winch_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.pic_winch_number + @glider_initial_log.solo_winch_number if @glider_initial_log.pic_winch_number != 0 || @glider_initial_log.solo_winch_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.pic_aero_tow_time + @glider_initial_log.solo_aero_tow_time) if @glider_initial_log.pic_aero_tow_time != 0 || @glider_initial_log.solo_aero_tow_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.pic_aero_tow_number + @glider_initial_log.solo_aero_tow_number if @glider_initial_log.pic_aero_tow_number != 0 || @glider_initial_log.solo_aero_tow_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.dual_winch_time) if @glider_initial_log.dual_winch_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.dual_winch_number if @glider_initial_log.dual_winch_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.dual_aero_tow_time) if @glider_initial_log.dual_aero_tow_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.dual_aero_tow_number if @glider_initial_log.dual_aero_tow_number != 0 %></div>
+      </div>
+      <!-- 動力滑空機による時間 -->
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.power_total_time) if @glider_initial_log.power_total_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.power_total_number if @glider_initial_log.power_total_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.pic_power_time + @glider_initial_log.solo_power_time) if @glider_initial_log.pic_power_time != 0 || @glider_initial_log.solo_power_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.pic_power_number + @glider_initial_log.solo_power_number if @glider_initial_log.pic_power_number != 0 || @glider_initial_log.solo_power_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.pic_power_off_time + @glider_initial_log.solo_power_off_time) if @glider_initial_log.pic_power_off_time != 0 || @glider_initial_log.solo_power_off_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.pic_power_off_number + @glider_initial_log.solo_power_off_number if @glider_initial_log.pic_power_off_number != 0 || @glider_initial_log.solo_power_off_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.dual_power_time) if @glider_initial_log.dual_power_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.dual_power_number if @glider_initial_log.dual_power_number != 0 %></div>
+      </div>
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.dual_power_off_time) if @glider_initial_log.dual_power_off_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.dual_power_off_number if @glider_initial_log.dual_power_off_number != 0 %></div>
+      </div>
+
+      <!-- その他の飛行時間 -->
+      <div class="table-data"><%= show_flight_time(@glider_initial_log.cross_country_time) if @glider_initial_log.cross_country_time != 0 %></div>
+
+      <div class="table-data"><!-- 離脱高度欄 --></div>
+
+      <div class="glider-total-block">
+        <div class="table-data"><%= show_flight_time(@glider_initial_log.instructor_time) if @glider_initial_log.instructor_time != 0 %></div>
+        <div class="table-data"><%= @glider_initial_log.instructor_number if @glider_initial_log.instructor_number != 0 %></div>
+      </div>
+
+      <div class="table-data"><!-- 補足事項欄 --></div>
+    </div> 
+  <% end %> 
+    <div class="edit-delete-link">
+      <%= link_to "編集", edit_glider_initial_log_path(id: @glider_initial_log.id) %>
+      <%= link_to "削除", @glider_initial_log, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    </div> 
+  </div>
+<% else %>
+  <%= link_to new_glider_initial_log_path, class:"link" do %> 
+  <div class="entire-row">
+    <div class="logbook-data-row">
+      <p>過去のフライト経験のまとめを登録できます。<br>作成はこちら！</p>
+    </div> 
+  </div>
+  <% end %>
+<% end %>

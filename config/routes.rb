@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'glider_initial_logs/new'
+  get 'glider_initial_logs/create'
+  get 'glider_initial_logs/show'
+  get 'glider_initial_logs/edit'
+  get 'glider_initial_logs/update'
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'sessions/new'
@@ -28,4 +33,5 @@ Rails.application.routes.draw do
   resources :glider_flights,   only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :groups, only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :glider_group_flights, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :glider_initial_logs, only: [:new, :create, :show, :edit, :update, :destroy]
 end

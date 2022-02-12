@@ -321,14 +321,23 @@ span.image {
   padding: 10px 0;
 }
 .page-total-header {
-  width: 720px;
+  width: 710px;
   text-align:center;
 }
 .glider-total-block {
   display: block;
 }
+.entire-row {
+  display: flex;
+}
+.edit-delete-link {
+  margin-top: 26px;
+  margin-left: 15px;
+}
 
-
+.initial-log_header {
+  width: 710px;
+}
 
 th, td {
   padding: 5px 15px;
