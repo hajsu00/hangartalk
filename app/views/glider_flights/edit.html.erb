@@ -1,8 +1,11 @@
-<% provide(:title, 'フライトの修正（滑空機）') %>
+<% provide(:title, 'フライトの編集') %>
 <% provide(:button_text, '修正する') %>
 
 <div class="main">
-  <h1>フライトの修正（滑空機）</h1>
+  <h1>フライトの編集</h1>
+  <div class="display-flex">
+    <button class="page-nav"><%= link_to "戻る", :back %></button>
+  </div>
   <%= form_with(model: @glider_flight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
@@ -108,6 +111,6 @@
       </div>
     </div>
 
-    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <%= f.submit yield(:button_text), class: "page-nav" %>
   </div>
 <% end %>

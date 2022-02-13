@@ -27,12 +27,6 @@ module GliderFlightsHelper
   def glider_each_flight_time(target_flight)
     target_flight.landing_time - target_flight.takeoff_time
   end
-  # フライトタイムを「◯◯：◯◯」形式でビューに表示する
-  def show_flight_time(time)
-    hour = time.div(3600)
-    min = (time % 3600) / 60
-    "#{hour}:#{format('%02d', min)}"
-  end
 
   # ページ毎のフライトタイム合計を計算する
   def glider_page_total(which_page)

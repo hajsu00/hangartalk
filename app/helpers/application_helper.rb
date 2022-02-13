@@ -7,4 +7,11 @@ module ApplicationHelper
       "#{page_title} | #{base_title}"
     end
   end
+
+  # フライトタイムを「◯◯：◯◯」形式でビューに表示する
+  def show_flight_time(time)
+    hour = time.div(3600)
+    min = (time % 3600) / 60
+    "#{hour}:#{format('%02d', min)}"
+  end
 end
