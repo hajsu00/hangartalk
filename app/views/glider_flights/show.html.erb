@@ -2,7 +2,10 @@
 
 <div class="main">
   <h1>フライトの詳細</h1>
-  <div class="edit-button"><%= link_to "編集", edit_glider_flight_path(id: params[:id]) %></div>
+  <div class="display-flex">
+    <button class="page-nav"><%= link_to "戻る", glider_flights_path %></button>
+    <button class="page-nav"><%= link_to "編集", edit_glider_flight_path(id: params[:id]) %></button>
+  </div>
   <div class="content-outer-block">
       <p>フライトログNo.：<span class="value"><%= @glider_flight.log_number %></span></p>
       <p>日付：<span class="value"><%= @glider_flight.date %></span></p>

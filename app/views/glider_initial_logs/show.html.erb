@@ -1,6 +1,151 @@
-<% provide(:title, '過去のフライト記録を登録する') %>
-
+ <% provide(:title, "過去のフライト記録") %> 
 <div class="main">
-  <h1>過去のフライト記録を登録する</h1>
-  <div class="edit-button"><%= link_to "編集", edit_glider_initial_log_path(id: params[:id]) %></div>
+  <h1>過去のフライト記録</h1>
+  <div class="display-flex">
+    <button class="page-nav"><%= link_to "戻る", glider_flights_path %></button>
+    <button class="page-nav"><%= link_to "編集", edit_glider_initial_log_path(id: params[:id]) %></button>
+  </div>
+
+  <!-- 滑空機による時間 -->
+  <h2>滑空機による飛行時間</h2>
+  <div class="content-outer-block">
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "総飛行時間： #{show_flight_time(@glider_initial_log.non_power_total_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "総飛行回数：#{@glider_initial_log.non_power_total_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "ウインチ曳航による機長時間：#{show_flight_time(@glider_initial_log.pic_winch_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "ウインチ曳航による機長回数：#{@glider_initial_log.pic_winch_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "航空機曳航による機長時間：#{show_flight_time(@glider_initial_log.pic_aero_tow_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "航空機曳航による機長回数：#{@glider_initial_log.pic_aero_tow_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "ウインチ曳航による単独飛行時間：#{show_flight_time(@glider_initial_log.solo_winch_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "ウインチ曳航による単独飛行回数：#{@glider_initial_log.solo_winch_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "航空機曳航による単独飛行時間：#{show_flight_time(@glider_initial_log.solo_aero_tow_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "航空機曳航による単独飛行回数：#{@glider_initial_log.solo_aero_tow_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "ウインチ曳航による同乗教育時間：#{show_flight_time(@glider_initial_log.dual_winch_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "ウインチ曳航による同乗教育回数：#{@glider_initial_log.dual_winch_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "航空機曳航による同乗教育時間：#{show_flight_time(@glider_initial_log.dual_aero_tow_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "航空機曳航による同乗教育回数：#{@glider_initial_log.dual_aero_tow_number}" %>
+      </div>
+    </div>
+  </div>
+  <!-- 動力滑空機による時間 -->
+  <h2>動力滑空機による飛行時間</h2>
+  <div class="content-outer-block">
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "総飛行時間：#{show_flight_time(@glider_initial_log.power_total_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "総飛行回数：#{@glider_initial_log.power_total_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "動力による機長時間：#{show_flight_time(@glider_initial_log.pic_power_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "動力による機長回数：#{@glider_initial_log.pic_power_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "滑空による機長時間：#{show_flight_time(@glider_initial_log.pic_power_off_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "滑空による機長回数：#{@glider_initial_log.pic_power_off_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "動力による単独飛行時間：#{show_flight_time(@glider_initial_log.solo_power_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "動力による単独飛行回数：#{@glider_initial_log.solo_power_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "滑空による単独飛行時間：#{show_flight_time(@glider_initial_log.solo_power_off_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "滑空による単独飛行回数：#{@glider_initial_log.solo_power_off_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "動力による同乗教育時間：#{show_flight_time(@glider_initial_log.dual_power_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "動力による同乗教育回数：#{@glider_initial_log.dual_power_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "滑空による同乗教育時間：#{show_flight_time(@glider_initial_log.dual_power_off_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "滑空による同乗教育回数：#{@glider_initial_log.dual_power_off_number}" %>
+      </div>
+    </div>
+  </div>
+  <!-- その他の時間 -->
+  <h2>その他の飛行時間</h2>
+  <div class="content-outer-block">
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "野外飛行時間：#{show_flight_time(@glider_initial_log.cross_country_time)}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "操縦教員としての時間：#{show_flight_time(@glider_initial_log.instructor_time)}" %>
+      </div>
+      <div class="input-field">
+        <%= "操縦教員としての飛行回数：#{@glider_initial_log.instructor_number}" %>
+      </div>
+    </div>
+    <div class="content-inner-block">
+      <div class="input-field">
+        <%= "「失速からの回復」実施回数：#{@glider_initial_log.number_of_stall_recovery}" %>
+      </div>
+    </div>
+  </div>
 </div>
