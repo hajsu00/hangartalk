@@ -1,2 +1,42 @@
-<h1>GliderGroupFlights#show</h1>
-<p>Find me in app/views/glider_group_flights/show.html.erb</p>
+<% provide(:title, 'グループフライトの詳細') %>
+
+<div class="main">
+  <h1>フライトの詳細</h1>
+  <div class="display-flex">
+    <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
+    <button class="page-nav"><%= link_to "編集", edit_glider_group_flight_path(id: params[:id]) %></button>
+  </div>
+  <div class="content-outer-block">
+      <p>日付<span class="value"><%= @glider_group_flight.date.strftime("%Y年%-m月%-d日 ") %></span></p>
+      <p>発航No.<span class="value"><%= @glider_group_flight.day_flight_number %></span></p>
+      <p>離着陸の区間<span class="value"><%= @glider_group_flight.departure_and_arrival_point %></span></p>
+      <p>航空機の型式：<span class="value"><%= @glider_group_flight.glider_type %></span></p>
+      <p>登録記号：<span class="value"><%= @glider_group_flight.glider_ident %></span></p>
+      <p>離着陸の区間：<span class="value"><%= @glider_group_flight.departure_and_arrival_point %></span></p>
+    <div class="content-inner-block">
+      <p>離陸時刻：<span class="value"><%= @glider_group_flight.takeoff_time.strftime("%R") %></span></p>
+      <p>着陸時刻：<span class="value"><%= @glider_group_flight.landing_time.strftime("%R") %></span></p>
+      <p>離脱高度：<span class="value"><%= @glider_group_flight.release_alt %></span></p>
+    </div>
+    <div class="content-inner-block">
+      <div class="display-flex">
+        <p>前席搭乗者：<span class="value"><%= show_user_name(@glider_group_flight.front_seat) %></span></p>
+        <p>区分：<span class="value"><%= @glider_group_flight.front_flight_role %></span></p>
+      </div>
+      <div class="display-flex">
+        <p>後席搭乗者：<span class="value"><%= show_user_name(@glider_group_flight.rear_seat) %></span></p>
+        <p>区分：<span class="value"><%= @glider_group_flight.rear_flight_role %></span></p>
+      </div>
+      <p>曳航方式：<span class="value"><%= show_flight_info(@glider_group_flight.is_winch, 'winch') %></span></p>
+      <p>補足事項：<span class="value"><%= @glider_group_flight.notes %></span></p>
+    </div>
+    <div class="display-flex">
+      <p>記録者：<span class="value"><%= show_user_name(@glider_group_flight.creator) %></span></p>
+      <p>記録日時：<span class="value"><%= @glider_group_flight.created_at.strftime("%Y年%-m月%-d日 %R") %></span></p>
+    </div>
+    <div class="display-flex">
+      <p>更新者：<span class="value"><%= show_user_name(@glider_group_flight.updater) %></span></p>
+      <p>更新日時：<span class="value"><%= @glider_group_flight.updated_at.strftime("%Y年%-m月%-d日 %R") %></span></p>
+    </div>
+  </div>
+</div>

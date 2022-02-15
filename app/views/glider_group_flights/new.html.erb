@@ -3,6 +3,9 @@
 
 <div class="main">
   <h1>新しいグループフライトを作成</h1>
+  <div class="display-flex">
+    <button class="page-nav"><%= link_to "戻る", :back %></button>
+  </div>
   <%= form_with(model: @glider_group_flight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     
@@ -55,7 +58,7 @@
       <div class="content-inner-block">
         <div class="input-field">
           <%= f.label :front_seat, "前席搭乗者", class: 'label' %>
-          <%= f.text_field :front_seat, class: 'form-control' %>
+          <%= f.collection_select :front_seat, @group_members, :id, :name, prompt: "搭乗者を選択してください", class: 'form-control' %>
         </div>
         <h3>前席属性</h3>
         <div class="radio-button-block">
@@ -84,7 +87,7 @@
       <div class="content-inner-block">
         <div class="input-field">
           <%= f.label :rear_seat, "後席搭乗者", class: 'label' %>
-          <%= f.text_field :rear_seat, class: 'form-control' %>
+          <%= f.collection_select :rear_seat, @group_members, :id, :name, prompt: "搭乗者を選択してください", class: 'form-control' %>
         </div>
         <h3>後席属性</h3>
         <div class="radio-button-block">

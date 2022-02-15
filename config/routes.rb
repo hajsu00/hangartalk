@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   delete '/logout',  to: 'sessions#destroy'
   get    '/users/select_new_flight', to: 'users#select_new_flight'
   get    '/users/select_flight_log', to: 'users#select_flight_log'
+  resources :groups do
+    member do
+      get :join, :leave
+    end
+  end
   resources :users do
     member do
       get :following, :followers

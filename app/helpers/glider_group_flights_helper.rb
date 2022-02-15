@@ -10,4 +10,8 @@ module GliderGroupFlightsHelper
       '航空機曳航'
     end
   end
+
+  def show_user_name(name_id)
+    User.find_by(id: name_id).name
+  end
 end
