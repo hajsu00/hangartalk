@@ -4,7 +4,7 @@
 <div class="main">
   <h1>過去のフライト記録を編集</h1>
   <div class="display-flex">
-    <button class="page-nav"><%= link_to "戻る", :back %></button>
+    <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
   </div>
   <%= form_with(model: @glider_initial_log, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>

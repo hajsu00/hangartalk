@@ -1,6 +1,11 @@
 <% provide(:title, @current_group.name) %>
 <div class="group-container">
   <h1><%= @current_group.name %></h1>
+  <% if @current_group.users.include?(current_user) %>
+    <button class="page-nav"><%= link_to "グループを退会", controller: :groups, action: :leave %></button>
+  <% else %>
+    <button class="page-nav"><%= link_to "グループに参加", controller: :groups, action: :join %></button>
+  <% end %>
   <div class="group-introduction">
     <h4>このグループについて</h4>
     <p><%= @current_group.introduction %></p>
@@ -13,6 +18,7 @@
       </ul>
     <% end %>
   </div>
+  <% if @current_group.users.include?(current_user) %>
   <div class="group-menu">
     <h4>その他のメニュー</h4>
     <ul>
@@ -21,4 +27,5 @@
       <li><%= link_to "このグループを削除する", @current_group, method: :delete, data: { confirm: "本当にこのグループを削除しますか？" } %></li>
     </ul>
   </div>
+  <% end %>
 </div>

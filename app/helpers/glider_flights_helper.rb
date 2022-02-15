@@ -11,6 +11,15 @@ module GliderFlightsHelper
     end
   end
 
+  # ログNo.を新しくふり直す
+  def new_log_number(flights)
+    n = 1
+    flights.each do |flight|
+      flight.update(log_number: n)
+      n += 1
+    end
+  end
+
   # 飛行機の総飛行時間を計算
   def glider_total_flight_time(attribute)
     all_flights = current_user.glider_flights

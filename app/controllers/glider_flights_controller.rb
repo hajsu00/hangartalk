@@ -1,5 +1,7 @@
 class GliderFlightsController < ApplicationController
   include SessionsHelper
+  include GliderFlightsHelper
+  include ApplicationHelper
   before_action :logged_in_user, only: [:create, :select, :destroy]
   before_action :correct_user,   only: :destroy
 
@@ -53,28 +55,13 @@ class GliderFlightsController < ApplicationController
     flash[:success] = "選択したフライトログを削除しました。"
     redirect_to request.referrer || root_url
   end
-  # 指定フライト以降のログNo.を新しくふり直す
-  def new_log_number(flights)
-    n = 1
-    flights.each do |flight|
-      flight.update(log_number: n)
-      n += 1
-    end
-  end
-
-  # 離陸時刻の日付をユーザーが入力した日付に合わせる
-  def fix_inputed_time(attribute)
-    inputed_time = Time.parse(params[:glider_flight][attribute])
-    inputed_date = Date.parse(params[:glider_flight][:date])
-    Time.local(inputed_date.year, inputed_date.month, inputed_date.day, inputed_time.hour, inputed_time.min, 0, 0)
-  end
 
   private
 
   def glider_flight_params
     # チェックボックスがアンチェック時にnilではなくfalseを代入する
-    params[:glider_flight][:takeoff_time] = fix_inputed_time(:takeoff_time)
-    params[:glider_flight][:landing_time] = fix_inputed_time(:landing_time)
+    params[:glider_flight][:takeoff_time] = fix_inputed_time(:glider_flight, :takeoff_time)
+    params[:glider_flight][:landing_time] = fix_inputed_time(:glider_flight, :landing_time)
     params[:glider_flight][:is_motor_glider] = false if params[:glider_flight][:is_motor_glider].nil?
     params[:glider_flight][:is_power_flight] = false if params[:glider_flight][:is_power_flight].nil?
     params[:glider_flight][:is_cross_country] = false if params[:glider_flight][:is_cross_country].nil?
