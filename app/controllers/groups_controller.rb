@@ -31,18 +31,6 @@ class GroupsController < ApplicationController
     redirect_to request.referrer || root_url
   end
 
-  def join
-    @group = Group.find(params[:id])
-    @group.users << current_user
-    redirect_to request.referrer || root_url
-  end
-
-  def leave
-    @group = Group.find(params[:id])
-    @group.users.delete(current_user)
-    redirect_to request.referrer || root_url
-  end
-
   private
 
   def group_params

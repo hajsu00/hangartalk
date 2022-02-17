@@ -4,4 +4,14 @@ class Group < ApplicationRecord
   
   has_many :glider_group_flights, dependent: :destroy
   validates :name, presence: true
+
+  # ユーザーをメンバーに加える
+  def join(target_user)
+    users << target_user
+  end
+
+  # ユーザーを退会させる
+  def leave(target_user)
+    group_users.find_by(user_id: target_user.id).destroy
+  end
 end

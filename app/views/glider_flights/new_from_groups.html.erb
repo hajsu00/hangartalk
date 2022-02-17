@@ -1,0 +1,42 @@
+<% provide(:title, '所属グループでのフライトを取得') %>
+<% provide(:button_text, '登録する') %>
+
+<div class="main">
+  <h1>所属グループでのフライトを取得</h1>
+  <%= form_with(model: @glider_flight, local: true) do |f| %>
+
+  <% end %>
+
+
+
+
+  <div class="logbook-table">
+    <div class="logbook-header">
+
+
+
+
+    </div>
+
+
+    
+<% glider_flights.each do |glider_flight| %>
+  <div class="entire-row">
+    <div class="logbook-data-row">
+    </div>
+  </div>
+<% end %>
+
+
+  </div>
+
+
+  <%= form_with(model: @glider_flight, local: true) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+  <% end %>
+
+
+
+
+
+</div>

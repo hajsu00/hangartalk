@@ -1,11 +1,7 @@
 <% provide(:title, @current_group.name) %>
 <div class="group-container">
   <h1><%= @current_group.name %></h1>
-  <% if @current_group.users.include?(current_user) %>
-    <button class="page-nav"><%= link_to "グループを退会", controller: :groups, action: :leave %></button>
-  <% else %>
-    <button class="page-nav"><%= link_to "グループに参加", controller: :groups, action: :join %></button>
-  <% end %>
+  <%= render 'join_form' %>
   <div class="group-introduction">
     <h4>このグループについて</h4>
     <p><%= @current_group.introduction %></p>

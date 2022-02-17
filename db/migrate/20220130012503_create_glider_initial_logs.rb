@@ -1,6 +1,7 @@
 class CreateGliderInitialLogs < ActiveRecord::Migration[6.1]
   def change
     create_table :glider_initial_logs do |t|
+      t.date :date
       t.integer :non_power_total_time
       t.integer :non_power_total_number
       t.integer :pic_winch_time

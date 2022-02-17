@@ -56,6 +56,10 @@ class GliderFlightsController < ApplicationController
     redirect_to request.referrer || root_url
   end
 
+  def new_from_groups
+    @glider_flight = GliderFlight.new
+  end
+
   private
 
   def glider_flight_params

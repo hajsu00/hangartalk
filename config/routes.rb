@@ -17,11 +17,14 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
-  get    '/users/select_new_flight', to: 'users#select_new_flight'
-  get    '/users/select_flight_log', to: 'users#select_flight_log'
-  resources :groups do
-    member do
-      get :join, :leave
+  resources :users do
+    collection do
+      get :select_new_flight, :select_flight_log
+    end
+  end
+  resources :glider_flights do
+    collection do
+      get :new_from_groups
     end
   end
   resources :users do
@@ -30,13 +33,14 @@ Rails.application.routes.draw do
     end
   end
   resources :users
-  resources :account_activations, only: [:edit]
-  resources :password_resets,     only: [:new, :create, :edit, :update]
-  resources :microposts,          only: [:create, :destroy]
-  resources :relationships,       only: [:create, :destroy]
-  resources :aeroplane_flights,   only: [:new, :create, :show, :index, :destroy]
-  resources :glider_flights,   only: [:new, :create, :show, :index, :edit, :update, :destroy]
-  resources :groups, only: [:new, :create, :show, :index, :edit, :update, :destroy]
-  resources :glider_group_flights, only: [:new, :create, :show, :index, :edit, :update, :destroy]
-  resources :glider_initial_logs, only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :account_activations,   only: [:edit]
+  resources :password_resets,       only: [:new, :create, :edit, :update]
+  resources :microposts,            only: [:create, :destroy]
+  resources :relationships,         only: [:create, :destroy]
+  resources :aeroplane_flights,     only: [:new, :create, :show, :index, :destroy]
+  resources :glider_flights,        only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :groups,                only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :glider_group_flights,  only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :glider_initial_logs,   only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :group_users,           only: [:create, :destroy]
 end

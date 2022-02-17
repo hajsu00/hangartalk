@@ -230,7 +230,9 @@ user.create_aeroplane_initial_log(total_flight_number: 20,
                                   number_of_stall_recovery: 3)
 
 user = User.find_by(email: "example@railstutorial.org")
-user.create_glider_initial_log(non_power_total_time: 67_680,
+date = Date.new(2022, 02, 10)
+user.create_glider_initial_log(date: date,
+                              non_power_total_time: 67_680,
                               non_power_total_number: 188,
                               pic_winch_time: 7_560,
                               pic_winch_number: 21,

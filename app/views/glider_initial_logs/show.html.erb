@@ -5,6 +5,11 @@
     <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
     <button class="page-nav"><%= link_to "編集", edit_glider_initial_log_path(id: params[:id]) %></button>
   </div>
+  <h2>基準日</h2>
+  <div class="content-outer-block">
+    <%= "過去ログ計算上の最終日： #{@glider_initial_log.date}" %>
+    <p>※個人ログブックでは、この日付以降のログを自動で取得できるようになります。</p>
+  </div>
 
   <!-- 滑空機による時間 -->
   <h2>滑空機による飛行時間</h2>
