@@ -8,6 +8,16 @@
   </div>
   <%= form_with(model: @glider_initial_log, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
+    <!-- 過去ログ計算上の最終日 -->
+    <h2>基準日</h2>
+    <div class="content-outer-block">
+      <div class="input-field">
+        <%= f.label :date, "過去ログ計算上の最終日", class: 'label' %>
+        <%= f.date_field :date, class: 'form-control' %>
+      </div>
+      <p>※個人ログブックでは、この日付以降のログを自動で取得できるようになります。</p>
+      <p>※過去ログとして登録する既存の飛行経歴のうち、最新の日付を入力してください。</p>
+    </div>
     <div class="content-outer-block">
       <!-- 動力滑空機による時間 -->
       <h2>滑空機による飛行時間</h2>

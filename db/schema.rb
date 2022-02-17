@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_060611) do
   end
 
   create_table "glider_initial_logs", charset: "utf8mb3", force: :cascade do |t|
+    t.date "date"
     t.integer "non_power_total_time"
     t.integer "non_power_total_number"
     t.integer "pic_winch_time"
