@@ -8,6 +8,7 @@ class GliderGroupFlightsController < ApplicationController
     current_group = Group.find_by(params[:id])
     @glider_group_flight = current_group.glider_group_flights.build
     @group_members = current_group.users
+    @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def create
@@ -35,6 +36,7 @@ class GliderGroupFlightsController < ApplicationController
     @glider_group_flight = GliderGroupFlight.find_by(id: params[:id])
     current_group = Group.find_by(params[:id])
     @group_members = current_group.users
+    @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def update

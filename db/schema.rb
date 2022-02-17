@@ -93,10 +93,17 @@ ActiveRecord::Schema.define(version: 2022_02_03_060611) do
     t.index ["user_id"], name: "index_aeroplane_initial_logs_on_user_id"
   end
 
+  create_table "aircraft_types", charset: "utf8mb3", force: :cascade do |t|
+    t.string "aircraft_type"
+    t.string "category"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "glider_flights", charset: "utf8mb3", force: :cascade do |t|
     t.integer "log_number"
     t.date "date"
-    t.string "glider_type"
+    t.integer "glider_type"
     t.string "glider_ident"
     t.string "departure_and_arrival_point"
     t.integer "number_of_landing"

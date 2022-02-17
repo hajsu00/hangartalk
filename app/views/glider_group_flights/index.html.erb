@@ -34,7 +34,7 @@
           <div class="logbook-data-row">
             <div class="table-data"><%= glider_group_flight.date %></div>
             <div class="table-data"><%= glider_group_flight.day_flight_number %></div>
-            <div class="table-data"><%= glider_group_flight.glider_type %></div>
+            <div class="table-data"><%= show_aircraft_type(glider_group_flight.glider_type) %></div>
             <div class="table-data"><%= glider_group_flight.glider_ident %></div>
             <div class="table-data"><%= show_user_name(glider_group_flight.front_seat) %></div>
             <div class="table-data"><%= show_user_name(glider_group_flight.rear_seat) %></div>

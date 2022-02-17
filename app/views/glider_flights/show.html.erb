@@ -9,7 +9,7 @@
   <div class="content-outer-block">
       <p>フライトログNo.：<span class="value"><%= @glider_flight.log_number %></span></p>
       <p>日付：<span class="value"><%= @glider_flight.date %></span></p>
-      <p>航空機の型式：<span class="value"><%= @glider_flight.glider_type %></span></p>
+      <p>航空機の型式：<span class="value"><%= show_aircraft_type(@glider_flight.glider_type) %></span></p>
       <p>登録記号：<span class="value"><%= @glider_flight.glider_ident %></span></p>
       <p>離着陸の区間：<span class="value"><%= @glider_flight.departure_and_arrival_point %></span></p>
     <div class="content-inner-block">

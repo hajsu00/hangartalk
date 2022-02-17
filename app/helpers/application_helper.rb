@@ -21,4 +21,8 @@ module ApplicationHelper
     inputed_date = Date.parse(params[model_name][:date])
     Time.local(inputed_date.year, inputed_date.month, inputed_date.day, inputed_time.hour, inputed_time.min, 0, 0)
   end
+
+  def show_aircraft_type(aircraft_id)
+    AircraftType.find(aircraft_id).aircraft_type
+  end
 end

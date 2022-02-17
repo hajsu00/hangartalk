@@ -65,7 +65,7 @@ user = User.find_by(email: "example@railstutorial.org")
   landing_time = takeoff_time + 6.minutes
   user.glider_flights.create!(log_number: 1 + n,
                               date: departure_date,
-                              glider_type: 'ASK21',
+                              glider_type: 1,
                               glider_ident: 'JA21MA',
                               departure_and_arrival_point: '宝珠花滑空場',
                               number_of_landing: 1,
@@ -90,8 +90,8 @@ end
 #   landing_time = takeoff_time + 6.minutes
 #   user.glider_flights.create!(log_number: 24 + n,
 #                               date: departure_date,
-#                               glider_type: 'ASK21',
-#                               glider_ident: 'JA21MA',
+#                               aircraft_type: 'ASK21',
+#                               glider_ident: 1,
 #                               departure_and_arrival_point: '宝珠花滑空場',
 #                               number_of_landing: 1,
 #                               takeoff_time: takeoff_time,
@@ -114,7 +114,7 @@ end
 #   landing_time = takeoff_time + 6.minutes
 #   user.glider_flights.create!(log_number: 37 + n,
 #                               date: departure_date,
-#                               glider_type: 'ASK21',
+#                               aircraft_type: 1,
 #                               glider_ident: 'JA21MA',
 #                               departure_and_arrival_point: '宝珠花滑空場',
 #                               number_of_landing: 1,
@@ -277,3 +277,9 @@ group = Group.find_by(name: "テストグループ1")
 users.each do |user|
   group.users << user
 end
+
+AircraftType.create(aircraft_type: 'ASK21', category: 'glider')
+AircraftType.create(aircraft_type: 'ASK21B', category: 'glider')
+AircraftType.create(aircraft_type: 'ASK23b', category: 'glider')
+AircraftType.create(aircraft_type: 'Cessna 152', category: 'aeroplane')
+AircraftType.create(aircraft_type: 'Cessna 172', category: 'aeroplane')
