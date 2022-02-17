@@ -7,6 +7,7 @@ class GliderFlightsController < ApplicationController
 
   def new
     @glider_flight = GliderFlight.new
+    @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def create
@@ -28,6 +29,7 @@ class GliderFlightsController < ApplicationController
 
   def edit
     @glider_flight = GliderFlight.find_by(id: params[:id])
+    @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def update

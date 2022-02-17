@@ -6,7 +6,7 @@
       <!-- 基本事項 -->
       <div class="log-number-cell"><%= glider_flight.log_number %></div>
       <div class="departure-date-cell"><%= glider_flight.date %></div>
-      <div class="glider-type-cell"><%= glider_flight.glider_type %></div>
+      <div class="glider-type-cell"><%= show_aircraft_type(glider_flight.glider_type) %></div>
       <div class="glider-ident-cell"><%= glider_flight.glider_ident %></div>
       <div class="departure-and-arrival-point-cell"><%= glider_flight.departure_and_arrival_point %></div>
       <div class="takeoff-time-cell"><%= glider_flight.takeoff_time.strftime("%R") %></div>

@@ -30,7 +30,7 @@
       </div>
       <div class="input-field">
         <%= f.label :glider_type, "航空機の型式", class: 'label' %>
-        <%= f.select :glider_type, [["ASK21", "ASK21"], ["ASK23b ", "ASK23b"]], include_blank: "航空機の型式を選択して下さい", class: 'form-control' %>
+        <%= f.collection_select :glider_type, @glider_type, :id, :aircraft_type, prompt: "航空機の型式を選択してください", class: 'form-control' %>
       </div>
       <div class="input-field">
         <%= f.label :glider_ident, "登録記号", class: 'label' %>

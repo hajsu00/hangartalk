@@ -3,7 +3,7 @@ class CreateGliderFlights < ActiveRecord::Migration[6.1]
     create_table :glider_flights do |t|
       t.integer :log_number
       t.date :date
-      t.string :glider_type
+      t.integer :glider_type
       t.string :glider_ident
       t.string :departure_and_arrival_point
       t.integer :number_of_landing
