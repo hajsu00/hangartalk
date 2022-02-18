@@ -14,13 +14,12 @@
     <% end %>
     <div class="logbook-table">
       <div class="logbook-header">
-        <div class="table-data">日付</div>
-        <div class="table-data">発航<br>No.</div>
-        <div class="table-data">航空機<br>の型式</div>
-        <div class="table-data">登録記号</div>
-        <div class="table-data">前席</div>
-        <div class="table-data">後席</div>
-        <div class="table-data">曳航タイプ</div>
+        <div class="departure-date-cell">日付</div>
+        <div class="log-number-cell">発航<br>No.</div>
+        <div class="departure-and-arrival-point-cell">航空機<br>の型式<br>および<br>登録記号</div>
+        <div class="departure-and-arrival-point-cell">前席</div>
+        <div class="departure-and-arrival-point-cell">後席</div>
+        <div class="departure-date-cell">曳航タイプ</div>
         <div class="table-data">離陸<br>時刻</div>
         <div class="table-data">離脱<br>時刻</div>
         <div class="table-data">着陸<br>時刻</div>
@@ -32,13 +31,12 @@
         <%= link_to glider_group_flight_path(id: glider_group_flight.id), class:"link" do %> 
         <div class="entire-row">
           <div class="logbook-data-row">
-            <div class="table-data"><%= glider_group_flight.date %></div>
-            <div class="table-data"><%= glider_group_flight.day_flight_number %></div>
-            <div class="table-data"><%= show_aircraft_type(glider_group_flight.glider_type) %></div>
-            <div class="table-data"><%= glider_group_flight.glider_ident %></div>
-            <div class="table-data"><%= show_user_name(glider_group_flight.front_seat) %></div>
-            <div class="table-data"><%= show_user_name(glider_group_flight.rear_seat) %></div>
-            <div class="table-data"><%= towing_way(glider_group_flight) %></div>
+            <div class="departure-date-cell"><%= glider_group_flight.date %></div>
+            <div class="log-number-cell"><%= glider_group_flight.day_flight_number %></div>
+            <div class="departure-and-arrival-point-cell"><%= show_aircraft(glider_group_flight.fleet) %></div>
+            <div class="departure-and-arrival-point-cell"><%= show_user_name(glider_group_flight.front_seat) %></div>
+            <div class="departure-and-arrival-point-cell"><%= show_user_name(glider_group_flight.rear_seat) %></div>
+            <div class="departure-date-cell"><%= towing_way(glider_group_flight) %></div>
             <div class="table-data"><%= glider_group_flight.takeoff_time.strftime("%R") %></div>
             <div class="table-data"><%= glider_group_flight.release_time.strftime("%R") %></div>
             <div class="table-data"><%= glider_group_flight.landing_time.strftime("%R") %></div>

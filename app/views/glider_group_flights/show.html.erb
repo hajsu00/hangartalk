@@ -10,8 +10,7 @@
       <p>日付<span class="value"><%= @glider_group_flight.date.strftime("%Y年%-m月%-d日 ") %></span></p>
       <p>発航No.<span class="value"><%= @glider_group_flight.day_flight_number %></span></p>
       <p>離着陸の区間<span class="value"><%= @glider_group_flight.departure_and_arrival_point %></span></p>
-      <p>航空機の型式：<span class="value"><%= show_aircraft_type(@glider_group_flight.glider_type) %></span></p>
-      <p>登録記号：<span class="value"><%= @glider_group_flight.glider_ident %></span></p>
+      <p>使用機体：<span class="value"><%= show_aircraft(@glider_group_flight.fleet) %></span></p>
       <p>離着陸の区間：<span class="value"><%= @glider_group_flight.departure_and_arrival_point %></span></p>
     <div class="content-inner-block">
       <p>離陸時刻：<span class="value"><%= @glider_group_flight.takeoff_time.strftime("%R") %></span></p>

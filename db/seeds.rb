@@ -278,8 +278,13 @@ users.each do |user|
   group.users << user
 end
 
-AircraftType.create(aircraft_type: 'ASK21', category: 'glider')
-AircraftType.create(aircraft_type: 'ASK21B', category: 'glider')
-AircraftType.create(aircraft_type: 'ASK23b', category: 'glider')
-AircraftType.create(aircraft_type: 'Cessna 152', category: 'aeroplane')
-AircraftType.create(aircraft_type: 'Cessna 172', category: 'aeroplane')
+AircraftType.create!(aircraft_type: 'ASK21', category: 'glider')
+AircraftType.create!(aircraft_type: 'ASK21B', category: 'glider')
+AircraftType.create!(aircraft_type: 'ASK23b', category: 'glider')
+AircraftType.create!(aircraft_type: 'Cessna 152', category: 'aeroplane')
+AircraftType.create!(aircraft_type: 'Cessna 172', category: 'aeroplane')
+
+group = Group.find(1)
+group.fleets.create!(ident: 'JA21MA', aircraft_type_id: 1)
+group.fleets.create!(ident: 'JA21MB', aircraft_type_id: 2)
+group.fleets.create!(ident: 'JA2381', aircraft_type_id: 3)

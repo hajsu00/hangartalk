@@ -14,4 +14,10 @@ module GliderGroupFlightsHelper
   def show_user_name(name_id)
     User.find_by(id: name_id).name
   end
+
+  def show_aircraft(fleet_id)
+    fleet = Fleet.find_by(id: fleet_id)
+    glider_type = AircraftType.find_by(id: fleet.aircraft_type_id)
+    "#{glider_type.aircraft_type} (#{fleet.ident})"
+  end
 end

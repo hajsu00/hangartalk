@@ -5,8 +5,7 @@ class CreateGliderGroupFlights < ActiveRecord::Migration[6.1]
       t.date :date
       t.string :departure_and_arrival_point
       t.boolean :is_winch
-      t.string :glider_type
-      t.string :glider_ident
+      t.integer :fleet
       t.integer :front_seat
       t.string :front_flight_role
       t.integer :rear_seat
