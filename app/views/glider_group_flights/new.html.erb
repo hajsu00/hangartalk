@@ -33,14 +33,25 @@
         <%= f.check_box :is_motor_glider, {}, true, false %>
         <%= f.label :is_motor_glider, "モーターグライダー", class: "check-label"  %>
       </div>
-      <div class="input-field">
+      <%
+=begin%>
+ <div class="input-field">
         <%= f.label :glider_type, "航空機の型式", class: 'label' %>
         <%= f.collection_select :glider_type, @glider_type, :id, :aircraft_type, prompt: "航空機の型式を選択してください", class: 'form-control' %>
       </div>
       <div class="input-field">
         <%= f.label :glider_ident, "登録記号", class: 'label' %>
         <%= f.select :glider_ident, ["JA21MA", "JA2381"], include_blank: "登録記号を選択して下さい", class: 'form-control' %>
+      </div> 
+<%
+=end%>
+      <div class="input-field">
+        <%= f.label :glider_type, "航空機の型式", class: 'label' %>
+        <%= f.collection_select :fleet, @fleet, :id, :show_fleet, prompt: "使用機体を選択してください", class: 'form-control' %>
       </div>
+
+
+
       <h3>曳航タイプ</h3> 
       <div class="radio-button-block">
         <div class="radio-element">
@@ -127,7 +138,7 @@
       </div>
       <div class="input-field">
         <%= f.label :release_alt, "離脱高度", class: 'label' %>
-        <%= f.number_field :release_alt, class: 'form-control' %>
+        <%= f.number_field :release_alt, value: 400, class: 'form-control' %>
       </div>
     </div>
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_03_060611) do
+ActiveRecord::Schema.define(version: 2022_02_18_122532) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -100,6 +100,15 @@ ActiveRecord::Schema.define(version: 2022_02_03_060611) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "fleets", charset: "utf8mb3", force: :cascade do |t|
+    t.string "ident"
+    t.integer "aircraft_type_id"
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_fleets_on_group_id"
+  end
+
   create_table "glider_flights", charset: "utf8mb3", force: :cascade do |t|
     t.integer "log_number"
     t.date "date"
@@ -130,8 +139,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_060611) do
     t.date "date"
     t.string "departure_and_arrival_point"
     t.boolean "is_winch"
-    t.string "glider_type"
-    t.string "glider_ident"
+    t.integer "fleet"
     t.integer "front_seat"
     t.string "front_flight_role"
     t.integer "rear_seat"
@@ -245,6 +253,7 @@ ActiveRecord::Schema.define(version: 2022_02_03_060611) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "aeroplane_flights", "users"
   add_foreign_key "aeroplane_initial_logs", "users"
+  add_foreign_key "fleets", "groups"
   add_foreign_key "glider_flights", "users"
   add_foreign_key "glider_group_flights", "groups"
   add_foreign_key "glider_initial_logs", "users"
