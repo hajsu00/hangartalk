@@ -1,4 +1,12 @@
 module GliderFlightsHelper
+  # 
+  def match_takeoff_time?(glider_flight, logged_flights)
+    matched_flight = logged_flights.detect { |flight| flight.takeoff_time == glider_flight.takeoff_time }
+    !matched_flight.nil? ? true : false
+  end
+
+
+
   # showページ用
   def show_flight_info(flag, category)
     case category

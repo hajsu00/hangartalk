@@ -8,7 +8,6 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :aeroplane_flights, dependent: :destroy
   has_many :glider_flights, dependent: :destroy
-  
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
 
@@ -100,6 +99,12 @@ class User < ApplicationRecord
   # 現在のユーザーがフォローしてたらtrueを返す
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  # 現在のユーザーがグループに所属していたらtrueを返す
+  def belong_any_groups?
+    any_group = GroupUser.find_by(user_id: self.id)
+    true if !any_group.nil?
   end
 
   private

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'glider_flight_collection/new'
+  get 'glider_flight_collection/create'
   get 'glider_initial_logs/new'
   get 'glider_initial_logs/create'
   get 'glider_initial_logs/show'
@@ -33,14 +35,15 @@ Rails.application.routes.draw do
     end
   end
   resources :users
-  resources :account_activations,   only: [:edit]
-  resources :password_resets,       only: [:new, :create, :edit, :update]
-  resources :microposts,            only: [:create, :destroy]
-  resources :relationships,         only: [:create, :destroy]
-  resources :aeroplane_flights,     only: [:new, :create, :show, :index, :destroy]
-  resources :glider_flights,        only: [:new, :create, :show, :index, :edit, :update, :destroy]
-  resources :groups,                only: [:new, :create, :show, :index, :edit, :update, :destroy]
-  resources :glider_group_flights,  only: [:new, :create, :show, :index, :edit, :update, :destroy]
-  resources :glider_initial_logs,   only: [:new, :create, :show, :edit, :update, :destroy]
-  resources :group_users,           only: [:create, :destroy]
+  resources :account_activations,       only: [:edit]
+  resources :password_resets,           only: [:new, :create, :edit, :update]
+  resources :microposts,                only: [:create, :destroy]
+  resources :relationships,             only: [:create, :destroy]
+  resources :aeroplane_flights,         only: [:new, :create, :show, :index, :destroy]
+  resources :glider_flights,            only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :groups,                    only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :glider_group_flights,      only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :glider_initial_logs,       only: [:new, :create, :show, :edit, :update, :destroy]
+  resources :group_users,               only: [:create, :destroy]
+  resources :glider_flight_collection,  only: [:new, :create]
 end
