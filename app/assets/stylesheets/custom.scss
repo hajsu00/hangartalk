@@ -111,7 +111,7 @@ p {
 .main-sidebar {
   width: 250px;
   margin: 10px 40px;
-  display: inline-block;
+  display: block;
 }
 .sidebar-user-name {
   text-align: center;
@@ -399,7 +399,7 @@ tr p{
 }
 .form-control {
   float: right;
-  width:300px;
+  width:120px;
   height:50px;
 }
 .radio-button-block {
@@ -505,5 +505,13 @@ input {
 }
 .page-nav {
   margin-right: 10px;
+}
+
+.table_body {
+  display: block;
+}
+
+.glider_flights_collection_header {
+  display: flex;
 }
 

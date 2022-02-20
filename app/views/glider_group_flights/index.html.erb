@@ -35,7 +35,7 @@
             <div class="log-number-cell"><%= glider_group_flight.day_flight_number %></div>
             <div class="departure-and-arrival-point-cell"><%= show_aircraft(glider_group_flight.fleet) %></div>
             <div class="departure-and-arrival-point-cell"><%= show_user_name(glider_group_flight.front_seat) %></div>
-            <div class="departure-and-arrival-point-cell"><%= show_user_name(glider_group_flight.rear_seat) %></div>
+            <div class="departure-and-arrival-point-cell"><%= show_user_name(glider_group_flight.rear_seat) if !glider_group_flight.rear_seat.nil? %></div>
             <div class="departure-date-cell"><%= towing_way(glider_group_flight) %></div>
             <div class="table-data"><%= glider_group_flight.takeoff_time.strftime("%R") %></div>
             <div class="table-data"><%= glider_group_flight.release_time.strftime("%R") %></div>

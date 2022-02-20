@@ -51,7 +51,7 @@ class GliderFlightsController < ApplicationController
   end
 
   def destroy
-    @glider_flights.destroy
+    @glider_flight.destroy
     glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
     new_log_number(glider_flights)
     flash[:success] = "選択したフライトログを削除しました。"
@@ -59,7 +59,10 @@ class GliderFlightsController < ApplicationController
   end
 
   def new_from_groups
-    @glider_flight = GliderFlight.new
+    flights_from_groups = GliderGroupFlight.where("front_seat = ? OR rear_seat = ?", current_user.id, current_user.id)
+    @logged_flights = GliderFlight.where("user_id = ?", current_user.id)
+    @flights_from_groups = Form::GliderFlightCollection.new(flights_from_groups, current_user.id)
+    @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   private
@@ -79,7 +82,7 @@ class GliderFlightsController < ApplicationController
   end
 
   def correct_user
-    @glider_flights = current_user.glider_flights.find_by(id: params[:id])
-    redirect_to root_url if @glider_flights.nil?
+    @glider_flight = current_user.glider_flights.find_by(id: params[:id])
+    redirect_to root_url if @glider_flight.nil?
   end
 end
