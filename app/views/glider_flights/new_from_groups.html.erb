@@ -3,7 +3,7 @@
 
 <div class="main">
   <h1>グループフライトから取得</h1>
-  <%= form_with model: @glider_flights, url: new_from_groups_glider_flights_path, local: true do |f| %>
+  <%= form_with model: @glider_flights, url: {controller: 'glider_flights', action: 'create_from_groups' }, local: true do |f| %>
   <div class="glider_flights_collection_header">
     <div class="log-number-cell">No.</div>
     <div class="departure-date-cell">出発日</div>
@@ -20,26 +20,22 @@
     <div class="table-data">備考</div>
   </div>
   <div class="table_body">
-  
-    <% @flights_from_groups.collection.each do |glider_flight|%>
-    <% if !match_takeoff_time?(glider_flight, @logged_flights) %>
+  <% n = 0 %>
+    <% @glider_flights.collection.each do |glider_flight| %>
     <div class="logbook-data-row">
       <%= fields_for 'glider_flights[]', glider_flight do |field| %>
       
         <!-- 基本事項 -->
+        <%= f.hidden_field :user_id, value: glider_flight.user_id %>
         <div class="log-number-cell">
-          <%
-=begin%>
- <%= glider_flight.log_number %> 
-<%
-=end%>
-          
+          <% n += 1 %>
+          <%= n %>
         </div>
         <div class="departure-date-cell">
           <%= field.date_field :date, value: glider_flight.date, class: 'departure-date-cell' %>
         </div>
         <div class="glider-type-cell">
-          <%= f.collection_select :glider_type, @glider_type, :id, :aircraft_type, selected: show_aircraft_type(glider_flight.glider_type), class: 'glider-ident-cell' %>
+          <%= field.collection_select :glider_type, @glider_type, :id, :aircraft_type, selected: show_aircraft_type(glider_flight.glider_type), class: 'glider-ident-cell' %>
         </div>
         <div class="glider-ident-cell">
           <%= field.text_field :glider_ident, value: glider_flight.glider_ident, class: 'glider-ident-cell' %>
@@ -48,11 +44,11 @@
           <%= field.text_field :departure_and_arrival_point, value: glider_flight.departure_and_arrival_point, class: 'departure-and-arrival-point-cell' %>
         </div>
         <div class="takeoff-time-cell">
-          <%= field.time_field :takeoff_time, value: glider_flight.takeoff_time.strftime('%R'), class: 'takeoff-time-cell' %>
+          <%= field.time_field :takeoff_time, class: 'takeoff-time-cell' %>
         </div>
         <div class="landing-time-cell">
-          <%= field.time_field :landing_time, value: glider_flight.landing_time.strftime('%R'), class: 'landing-time-cell' %>
-        </div>
+          <%= field.time_field :landing_time, class: 'landing-time-cell' %>
+        </div> 
         <div class="landing-number-cell">
           <%= field.number_field :number_of_landing, value: 1, class: 'landing-number-cell' %>
         </div>
@@ -73,12 +69,16 @@
         </div> 
       <% end %>
         </div>
-    <% end %>
+    <%
+=begin%>
+ <% end %> 
+<%
+=end%>
     <% end %>
 
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
     </div>
   <% end %>
 

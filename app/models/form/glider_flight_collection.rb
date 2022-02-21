@@ -4,39 +4,46 @@ class Form::GliderFlightCollection
   extend ActiveModel::Translation
   include ActiveModel::AttributeMethods
   include ActiveModel::Validations
-  USER_NUM = 10  # 同時にフライトを作成する数
+  FLIGHT_NUM = 10  # 同時にフライトを作成する数
   attr_accessor :collection # ここに作成したglider_flightsモデルが格納される
 
   # 初期化メソッド
-  def initialize(attributes = [], pilot_id)
-    self.collection = if attributes.present?
+  def initialize(attributes, pilot, init_type)
+    self.collection = if init_type == 'create'
+                        attributes.map do |value|
+                          pilot.glider_flights.build(
+                            date: value['date'],
+                            glider_type: value['glider_type'],
+                            glider_ident: value['glider_ident'],
+                            departure_and_arrival_point: value['departure_and_arrival_point'],
+                            number_of_landing: value['number_of_landing'],
+                            takeoff_time: value['takeoff_time'],
+                            landing_time: value['landing_time'],
+                            flight_role: value['flight_role'],
+                            is_winch: value['is_winch'],
+                            release_alt: value['release_alt'],
+                            note: value['notes']
+                          )
+                        end
+                      elsif init_type == 'new'
                         attributes.map do |value|
                           fleet = Fleet.find_by(id: value.fleet)
-                          GliderFlight.new(
+                          pilot.glider_flights.build(
                             date: value.date,
-                            # glider_type: get_glider_type(fleet.aircraft_type_id),
                             glider_type: fleet.aircraft_type_id,
                             glider_ident: fleet.ident,
                             departure_and_arrival_point: value.departure_and_arrival_point,
                             number_of_landing: 1,
                             takeoff_time: value.takeoff_time,
                             landing_time: value.landing_time,
-                            flight_role: get_flight_role(value, pilot_id),
+                            flight_role: get_flight_role(value, pilot.id),
                             is_winch: value.is_winch,
                             release_alt: value.release_alt,
                             note: value.notes
                           )
                         end
-                      else
-                        USER_NUM.times.map{ GliderFlight.new }
                       end
   end
-
-  # def get_glider_type(aircraft_type_id)
-  #   binding.pry
-  #   glider_type = AircraftType.find_by(id: aircraft_type_id)
-  #   glider_type.aircraft_type
-  # end
 
   def get_flight_role(value, pilot_id)
     case pilot_id
@@ -45,6 +52,23 @@ class Form::GliderFlightCollection
     when value.rear_seat
       value.rear_flight_role
     end
+  end
+
+  # コレクションをDBに保存するメソッド
+  def save_collection
+    is_success = true
+    ActiveRecord::Base.transaction do
+      collection.each do |result|
+        # バリデーションを全てかけたいからsave!ではなくsaveを使用
+        is_success = false unless result.save
+      end
+      # バリデーションエラーがあった時は例外を発生させてロールバックさせる
+      raise ActiveRecord::RecordInvalid unless is_success
+    end
+    rescue
+      p 'フライトログの保存中にエラーが発生しました。'
+    ensure
+      return is_success
   end
 
   # レコードが存在するか確認するメソッド
