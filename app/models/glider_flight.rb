@@ -10,7 +10,6 @@ class GliderFlight < ApplicationRecord
       if self.takeoff_time > landing_time
         errors.add(:base, "離陸時刻が着陸時刻よりも遅くなっています。")
       elsif self.takeoff_time == landing_time
-        binding.pry
         errors.add(:base, "離陸時刻と着陸時刻が同じです。")
       # else
       #   glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(takeoff_time: :asc)

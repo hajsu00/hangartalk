@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :glider_flights do
     collection do
       get :new_from_groups
+      post :create_from_groups
     end
   end
   resources :users do

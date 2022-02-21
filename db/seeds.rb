@@ -291,3 +291,38 @@ group.fleets.create!(ident: 'JA2381', aircraft_type_id: 3)
 
 group = Group.find(3)
 group.fleets.create!(ident: 'JA2400', aircraft_type_id: 1)
+
+group = Group.find(1)
+date = Date.new(2022, 2, 21)
+takeoff_time = Time.new(2022,2,21,21,0,0)
+group.glider_group_flights.create(day_flight_number: nil,
+                                date: date,
+                                departure_and_arrival_point: '宝珠花滑空場',
+                                is_winch: false,
+                                fleet: 1,
+                                front_seat: 100,
+                                front_flight_role: '同乗教育',
+                                rear_seat: 1,
+                                rear_flight_role: '教官',
+                                takeoff_time: takeoff_time,
+                                release_time: takeoff_time + 1.minutes,
+                                landing_time: takeoff_time + 12.minutes,
+                                release_alt: 400,
+                                notes: '備考欄です')
+group = Group.find(1)
+date = Date.new(2022, 2, 21)
+takeoff_time = Time.new(2022,2,21,21,20,0)
+group.glider_group_flights.create(day_flight_number: nil,
+                                date: date,
+                                departure_and_arrival_point: '宝珠花滑空場',
+                                is_winch: false,
+                                fleet: 1,
+                                front_seat: 99,
+                                front_flight_role: '同乗教育',
+                                rear_seat: 1,
+                                rear_flight_role: '教官',
+                                takeoff_time: takeoff_time,
+                                release_time: takeoff_time + 1.minutes,
+                                landing_time: takeoff_time + 12.minutes,
+                                release_alt: 400,
+                                notes: '備考欄です')
