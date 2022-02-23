@@ -15,6 +15,7 @@
     <div class="landing-number-cell">着陸<br>回数</div>
     <div class="table-data">離脱<br>高度</div>
     <div class="table-data">操縦<br>種別</div>
+    <div class="departure-date-cell">曳航<br>タイプ</div>
     <div class="table-data">野外<br>飛行</div>
     <div class="table-data">失速<br>からの<br>回復</div>
     <div class="table-data">備考</div>
@@ -56,7 +57,10 @@
         <%= field.number_field :release_alt, {value: glider_flight.release_alt, step: 10, class: 'table-data'} %>
         </div> 
         <div class="table-data">
-          <%= f.select :flight_role, [["機長", "機長"], ["単独飛行", "単独飛行"], ["同乗教育", "同乗教育"], ["操縦教員", "操縦教員"]], selected: glider_flight.flight_role %>
+          <%= field.select :flight_role, [["機長", "機長"], ["単独飛行", "単独飛行"], ["同乗教育", "同乗教育"], ["操縦教員", "操縦教員"]], selected: glider_flight.flight_role %>
+        </div>
+        <div class="departure-date-cell">
+          <%= field.select :is_winch, [["ウインチ曳航", true], ["航空機曳航", false]], selected: glider_flight.is_winch ? true : false %>
         </div>
         <div class="table-data">
           <%= field.check_box :is_cross_country, {}, true, false %>
@@ -66,16 +70,10 @@
         </div>
         <div class="table-data">
           <%= field.text_area :note, value: glider_flight.note, class: 'table-data' %>
-        </div> 
+        </div>
       <% end %>
         </div>
-    <%
-=begin%>
- <% end %> 
-<%
-=end%>
     <% end %>
-
 
     <div class="actions">
       <%= f.submit yield(:button_text), class: "btn btn-primary" %>

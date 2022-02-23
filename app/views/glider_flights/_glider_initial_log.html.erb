@@ -3,7 +3,7 @@
   <div class="entire-row">
     <div class="logbook-data-row">
       <!-- 基本事項 -->
-      <div class="initial-log_header">ログ運用開始前の飛行経歴（基準日：<%= '　　　' %>）</div>
+      <div class="initial-log_header">ログ運用開始前の飛行経歴（基準日：<%= @glider_initial_log.at_present %>）</div>
       <!-- 滑空機による時間 -->
       <div class="glider-total-block">
         <div class="table-data"><%= show_flight_time(@glider_initial_log.non_power_total_time) if @glider_initial_log.non_power_total_time != 0 %></div> 

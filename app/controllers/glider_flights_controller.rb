@@ -13,12 +13,11 @@ class GliderFlightsController < ApplicationController
   def create
     @glider_flight = current_user.glider_flights.build(glider_flight_params)
     if @glider_flight.save
-      glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(takeoff_time: :asc)
-      new_log_number(glider_flights)
+      new_log_number
       flash[:success] = "フライトログの登録に成功しました！"
       redirect_to glider_flights_url
     else
-      flash[:danger] = "フライトログの登録に失敗しました。"
+      @glider_type = AircraftType.where("category = ?", 'glider')
       render 'glider_flights/new'
     end
   end
@@ -35,12 +34,11 @@ class GliderFlightsController < ApplicationController
   def update
     @glider_flight = GliderFlight.find_by(id: params[:id])
     if @glider_flight.update(glider_flight_params)
-      glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(takeoff_time: :asc)
-      new_log_number(glider_flights)
+      new_log_number
       flash[:success] = "フライトログの更新に成功しました！"
       redirect_to glider_flights_url
     else
-      flash[:danger] = "フライトログの更新に失敗しました。"
+      @glider_type = AircraftType.where("category = ?", 'glider')
       render 'glider_flights/edit'
     end
   end
@@ -52,8 +50,8 @@ class GliderFlightsController < ApplicationController
 
   def destroy
     @glider_flight.destroy
-    glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
-    new_log_number(glider_flights)
+    # glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
+    new_log_number
     flash[:success] = "選択したフライトログを削除しました。"
     redirect_to request.referrer || root_url
   end
@@ -65,13 +63,11 @@ class GliderFlightsController < ApplicationController
   def create_from_groups
     @glider_flights = Form::GliderFlightCollection.new(new_from_groups_params, current_user, 'create')
     if @glider_flights.save_collection
-      glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(takeoff_time: :asc)
-      new_log_number(glider_flights)
+      new_log_number
       flash[:success] = "グループフライトからのログ取得に成功しました！"
       @glider_type = AircraftType.where("category = ?", 'glider')
       redirect_to glider_flights_url
     else
-      flash[:danger] = "グループフライトからのログ取得に失敗しました。"
       set_values
       render :new_from_groups
     end
@@ -87,35 +83,10 @@ class GliderFlightsController < ApplicationController
   private
 
   def glider_flight_params
-    # チェックボックスがアンチェック時にnilではなくfalseを代入する
-    params[:glider_flight][:takeoff_time] = fix_inputed_time(:glider_flight, :takeoff_time)
-    params[:glider_flight][:landing_time] = fix_inputed_time(:glider_flight, :landing_time)
-    params[:glider_flight][:is_motor_glider] = false if params[:glider_flight][:is_motor_glider].nil?
-    params[:glider_flight][:is_power_flight] = false if params[:glider_flight][:is_power_flight].nil?
-    params[:glider_flight][:is_cross_country] = false if params[:glider_flight][:is_cross_country].nil?
-    params[:glider_flight][:is_instructor] = false if params[:glider_flight][:is_instructor].nil?
-    params[:glider_flight][:is_stall_recovery] = false if params[:glider_flight][:is_stall_recovery].nil?
-    params[:glider_flight][:close_log] = false if params[:glider_flight][:close_log].nil?
-    # ストロングパラメーターの設定
     params.require(:glider_flight).permit(:log_number, :date, :glider_type, :glider_ident, :departure_and_arrival_point, :number_of_landing, :takeoff_time, :landing_time, :release_alt, :flight_role, :is_motor_glider, :is_power_flight, :is_winch, :is_cross_country, :is_instructor, :is_stall_recovery, :close_log, :note)
   end
 
   def new_from_groups_params
-    # binding.pry
-    # params = params[:glider_flights]
-    # params.each do |param|
-    #   binding.pry
-    #   param.takeoff_time = fix_inputed_time(:glider_flight, :takeoff_time)
-    #   param.landing_time = fix_inputed_time(:glider_flight, :landing_time)
-    #   param.is_motor_glider = false if param.is_motor_glider.nil?
-    #   param.is_power_flight = false if param.is_power_flight.nil?
-    #   param.is_cross_country = false if param.is_cross_country.nil?
-    #   param.is_instructor = false if param.is_instructor.nil?
-    #   param.is_stall_recovery = false if param.is_stall_recovery.nil?
-    #   param.close_log = false if param.close_log.nil?
-    # end
-    # binding.pry
-    # params.require(:glider_flights).permit(:date, :glider_type, :glider_ident, :departure_and_arrival_point, :number_of_landing, :takeoff_time, :landing_time, :release_alt, :flight_role, :is_winch, :note)
     params.require(:glider_flights)
   end
 

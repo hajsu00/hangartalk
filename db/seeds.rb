@@ -24,6 +24,60 @@ followers = users[3..40]
 following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 
+user = User.find_by(email: "example@railstutorial.org")
+user.create_aeroplane_initial_log(total_flight_number: 20,
+                                  number_of_takeoff: 30,
+                                  number_of_landing: 30,
+                                  total_time: 108_000,
+                                  pic_time: 0,
+                                  solo_time: 18_000,
+                                  cross_country_time: 3600,
+                                  night_time: 0,
+                                  dual_time: 90_000,
+                                  dual_crosss_country_time: 10_800,
+                                  dual_night_time: 3600,
+                                  hood_time: 3600,
+                                  instrument_time: 0,
+                                  simulator_time: 0,
+                                  instructor_time: 0,
+                                  number_of_stall_recovery: 3)
+
+user = User.find_by(email: "example@railstutorial.org")
+date = Date.new(2022, 02, 10)
+user.create_glider_initial_log(at_present: date,
+                              non_power_total_time: 67_680,
+                              non_power_total_number: 188,
+                              pic_winch_time: 7_560,
+                              pic_winch_number: 21,
+                              pic_aero_tow_time: 0,
+                              pic_aero_tow_number: 0,
+                              solo_winch_time: 15_840,
+                              solo_winch_number: 44,
+                              solo_aero_tow_time: 0,
+                              solo_aero_tow_number: 0,
+                              dual_winch_time: 44_280,
+                              dual_winch_number: 123,
+                              dual_aero_tow_time: 0,
+                              dual_aero_tow_number: 0,
+                              power_total_time: 0,
+                              power_total_number: 0,
+                              pic_power_time: 0,
+                              pic_power_number: 0,
+                              pic_power_off_time: 0,
+                              pic_power_off_number: 0,
+                              solo_power_time: 0,
+                              solo_power_number: 0,
+                              solo_power_off_time: 0,
+                              solo_power_off_number: 0,
+                              dual_power_time: 0,
+                              dual_power_number: 0,
+                              dual_power_off_time: 0,
+                              dual_power_off_number: 0,
+                              cross_country_time: 0,
+                              instructor_time: 0,
+                              instructor_number: 0,
+                              number_of_stall_recovery: 3)
+
 # 一部のユーザーを対象にフライト記録を生成する
 # users = User.order(:created_at).take(6)
 user = User.find_by(email: "example@railstutorial.org")
@@ -212,60 +266,6 @@ end
 #                               note: '備考欄です。')
 
 user = User.find_by(email: "example@railstutorial.org")
-user.create_aeroplane_initial_log(total_flight_number: 20,
-                                  number_of_takeoff: 30,
-                                  number_of_landing: 30,
-                                  total_time: 108_000,
-                                  pic_time: 0,
-                                  solo_time: 18_000,
-                                  cross_country_time: 3600,
-                                  night_time: 0,
-                                  dual_time: 90_000,
-                                  dual_crosss_country_time: 10_800,
-                                  dual_night_time: 3600,
-                                  hood_time: 3600,
-                                  instrument_time: 0,
-                                  simulator_time: 0,
-                                  instructor_time: 0,
-                                  number_of_stall_recovery: 3)
-
-user = User.find_by(email: "example@railstutorial.org")
-date = Date.new(2022, 02, 10)
-user.create_glider_initial_log(date: date,
-                              non_power_total_time: 67_680,
-                              non_power_total_number: 188,
-                              pic_winch_time: 7_560,
-                              pic_winch_number: 21,
-                              pic_aero_tow_time: 0,
-                              pic_aero_tow_number: 0,
-                              solo_winch_time: 15_840,
-                              solo_winch_number: 44,
-                              solo_aero_tow_time: 0,
-                              solo_aero_tow_number: 0,
-                              dual_winch_time: 44_280,
-                              dual_winch_number: 123,
-                              dual_aero_tow_time: 0,
-                              dual_aero_tow_number: 0,
-                              power_total_time: 0,
-                              power_total_number: 0,
-                              pic_power_time: 0,
-                              pic_power_number: 0,
-                              pic_power_off_time: 0,
-                              pic_power_off_number: 0,
-                              solo_power_time: 0,
-                              solo_power_number: 0,
-                              solo_power_off_time: 0,
-                              solo_power_off_number: 0,
-                              dual_power_time: 0,
-                              dual_power_number: 0,
-                              dual_power_off_time: 0,
-                              dual_power_off_number: 0,
-                              cross_country_time: 0,
-                              instructor_time: 0,
-                              instructor_number: 0,
-                              number_of_stall_recovery: 3)
-
-user = User.find_by(email: "example@railstutorial.org")
 3.times do |n|
   n += 1
   group = Group.new(name: "テストグループ#{n}", introduction: "これはグループ#{n}の紹介文です。字数制限は今のところありません。", privacy: "プライベート")
@@ -298,7 +298,7 @@ takeoff_time = Time.new(2022,2,21,21,0,0)
 group.glider_group_flights.create(day_flight_number: nil,
                                 date: date,
                                 departure_and_arrival_point: '宝珠花滑空場',
-                                is_winch: false,
+                                is_winch: true,
                                 fleet: 1,
                                 front_seat: 100,
                                 front_flight_role: '同乗教育',
@@ -315,7 +315,7 @@ takeoff_time = Time.new(2022,2,21,21,20,0)
 group.glider_group_flights.create(day_flight_number: nil,
                                 date: date,
                                 departure_and_arrival_point: '宝珠花滑空場',
-                                is_winch: false,
+                                is_winch: true,
                                 fleet: 1,
                                 front_seat: 99,
                                 front_flight_role: '同乗教育',

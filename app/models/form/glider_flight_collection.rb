@@ -22,7 +22,7 @@ class Form::GliderFlightCollection
                             flight_role: value['flight_role'],
                             is_winch: value['is_winch'],
                             release_alt: value['release_alt'],
-                            note: value['notes']
+                            note: value['note']
                           )
                         end
                       elsif init_type == 'new'
