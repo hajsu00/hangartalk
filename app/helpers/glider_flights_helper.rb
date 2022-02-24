@@ -1,8 +1,13 @@
 module GliderFlightsHelper
   # グループから取得したフライトがすでにログブックに記載されていた場合、trueを返す
   def match_takeoff_time?(glider_flight, logged_flights)
-    matched_flight = logged_flights.detect { |flight| flight.takeoff_time.strftime('%F-%R') == glider_flight.takeoff_time.strftime('%F-%R') }
-    !matched_flight.nil? ? true : false
+
+    # matched_flight = logged_flights.detect { |flight| flight.takeoff_time.strftime('%F-%R') == glider_flight.takeoff_time.strftime('%F-%R') }
+    # !matched_flight.nil? ? true : false
+    logged_flights.each do |logged_flight|
+      return true if logged_flight.takeoff_time == glider_flight.takeoff_time
+    end
+    return false
   end
 
   # showページ用
