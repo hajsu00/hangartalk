@@ -4,6 +4,8 @@
 <div class="main">
   <h1>グループフライトから取得</h1>
   <%= form_with model: @glider_flights, url: {controller: 'glider_flights', action: 'create_from_groups' }, local: true do |f| %>
+  <% binding.pry %>
+  <%= render 'shared/error_messages', object: f.object %>
   <div class="glider_flights_collection_header">
     <div class="log-number-cell">No.</div>
     <div class="departure-date-cell">出発日</div>

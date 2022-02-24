@@ -2,10 +2,12 @@ class Form::GliderFlightCollection
   include ActiveModel::Conversion
   extend ActiveModel::Naming
   extend ActiveModel::Translation
+  extend ActiveModel::Callbacks
   include ActiveModel::AttributeMethods
   include ActiveModel::Validations
+
   FLIGHT_NUM = 10  # 同時にフライトを作成する数
-  attr_accessor :collection # ここに作成したglider_flightsモデルが格納される
+  attr_accessor :collection # ここに、作成したglider_flightsモデルが格納される
 
   # 初期化メソッド
   def initialize(attributes, pilot, init_type)
@@ -59,7 +61,6 @@ class Form::GliderFlightCollection
     is_success = true
     ActiveRecord::Base.transaction do
       collection.each do |result|
-        # バリデーションを全てかけたいからsave!ではなくsaveを使用
         is_success = false unless result.save
       end
       # バリデーションエラーがあった時は例外を発生させてロールバックさせる

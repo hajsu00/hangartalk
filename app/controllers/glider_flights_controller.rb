@@ -50,14 +50,15 @@ class GliderFlightsController < ApplicationController
 
   def destroy
     @glider_flight.destroy
-    # glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
     new_log_number
     flash[:success] = "選択したフライトログを削除しました。"
     redirect_to request.referrer || root_url
   end
 
   def new_from_groups
-    set_values
+    flights_from_groups = GliderGroupFlight.where("front_seat = ? OR rear_seat = ?", current_user.id, current_user.id)
+    @glider_flights = Form::GliderFlightCollection.new(flights_from_groups, current_user, 'new')
+    @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def create_from_groups
@@ -68,16 +69,9 @@ class GliderFlightsController < ApplicationController
       @glider_type = AircraftType.where("category = ?", 'glider')
       redirect_to glider_flights_url
     else
-      set_values
+      @glider_type = AircraftType.where("category = ?", 'glider')
       render :new_from_groups
     end
-  end
-
-  def set_values
-    @logged_flights = GliderFlight.where("user_id = ?", current_user.id)
-    @flights_from_groups = GliderGroupFlight.where("front_seat = ? OR rear_seat = ?", current_user.id, current_user.id)
-    @glider_flights = Form::GliderFlightCollection.new(@flights_from_groups, current_user, 'new')
-    @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   private
