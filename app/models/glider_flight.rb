@@ -5,7 +5,8 @@ class GliderFlight < ApplicationRecord
   validates :takeoff_time, :landing_time, presence: true
   validate :check_glider_timeline, :duplication_check
 
-  before_save :fix_takeoff_time, :fix_landing_time, :convert_nil_to_false, 
+  before_validation :fix_takeoff_time, :fix_landing_time
+  before_save :convert_nil_to_false
 
   # 離陸時刻の日付をユーザーが入力した日付に合わせる
   def fix_takeoff_time
@@ -48,7 +49,7 @@ class GliderFlight < ApplicationRecord
   end
 
   def duplication_check
-    glider_flights = GliderFlight.where("user_id = ?", user.id).order(log_number: :asc)
+    glider_flights = GliderFlight.where("user_id = ?", user.id).order(takeoff_time: :asc)
     glider_flights.each do |glider_flight|
       if self.log_number != glider_flight.log_number
         if (self.takeoff_time..self.landing_time).cover? glider_flight.takeoff_time
