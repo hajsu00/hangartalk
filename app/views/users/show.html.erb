@@ -5,7 +5,7 @@
     <%= render 'follow_form' if logged_in? %>
     <% if @user.microposts.any? %>
       <h3>投稿 (<%= @user.microposts.count %>)</h3>
-      <%= render partial: 'layouts/microposts_container' %>
+      <%= render partial: 'microposts/microposts_container' %>
     <% end %>
   </div>
 </div>
