@@ -56,7 +56,7 @@ class GliderFlightsController < ApplicationController
   end
 
   def new_from_groups
-    flights_from_groups = GliderGroupFlight.where("front_seat = ? OR rear_seat = ?", current_user.id, current_user.id)
+    flights_from_groups = GliderGroupFlight.where("front_seat = ? OR rear_seat = ?", current_user.id, current_user.id).order(takeoff_time: :asc)
     @glider_flights = Form::GliderFlightCollection.new(flights_from_groups, current_user, 'new')
     @logged_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
     @glider_type = AircraftType.where("category = ?", 'glider')

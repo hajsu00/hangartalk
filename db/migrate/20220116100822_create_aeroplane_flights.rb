@@ -2,7 +2,7 @@ class CreateAeroplaneFlights < ActiveRecord::Migration[6.1]
   def change
     create_table :aeroplane_flights do |t|
       t.integer :log_number
-      t.date :departure_date
+      t.date :date
       t.string :aeroplane_type
       t.string :aeroplane_ident
       t.string :departure_point
@@ -12,8 +12,7 @@ class CreateAeroplaneFlights < ActiveRecord::Migration[6.1]
       t.integer :number_of_landing
       t.datetime :moving_time
       t.datetime :stop_time
-      t.boolean :is_pic
-      t.boolean :is_dual
+      t.string :flight_role
       t.boolean :is_cross_country
       t.boolean :is_night_flight
       t.boolean :is_hood

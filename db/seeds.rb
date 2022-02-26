@@ -11,9 +11,9 @@ end
 
 # ユーザーの一部を対象にマイクロポストを生成する
 users = User.order(:created_at).take(6)
-50.times do
+50.times do |n|
   content = Faker::Lorem.sentence(word_count: 5)
-  users.each { |user| user.microposts.create!(content: content) }
+  users.each { |user| user.microposts.create!(content: content, created_at: Time.zone.now + n.minutes) }
 end
 
 # 以下のリレーションシップを作成する
@@ -88,7 +88,7 @@ user = User.find_by(email: "example@railstutorial.org")
   landing_time = takeoff_time + 20.minutes
   stop_time = landing_time + 6.minutes
   user.aeroplane_flights.create!(log_number: 1 + n,
-                              departure_date: departure_date,
+                              date: departure_date,
                               aeroplane_type: 'ASK21',
                               aeroplane_ident: 'JA21MA',
                               departure_point: 'RJTT',
@@ -98,8 +98,7 @@ user = User.find_by(email: "example@railstutorial.org")
                               number_of_landing: 3,
                               moving_time: moving_time,
                               stop_time: stop_time,
-                              is_pic: false,
-                              is_dual: false,
+                              flight_role: '単独飛行',
                               is_cross_country: true,
                               is_night_flight: true,
                               is_hood: false,

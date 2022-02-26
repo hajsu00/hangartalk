@@ -5,12 +5,18 @@
       <h1><%= 'フライトログブック（飛行機）' %></h1>
     </section>
     <section class="flight_experiences">
-      <%= render 'shared/aeroplane_experiences' %>
+      <%
+=begin%>
+ <%= render 'shared/aeroplane_experiences' %> 
+<%
+=end%>
     </section>
   </aside>
   <div class="col-md-8">
-    <% if @user.aeroplane_flights.any? %>
-      <h3>フライトログ (<%= @user.aeroplane_flights.count %>)</h3>
+
+ <% if current_user.aeroplane_flights.any? %> 
+
+      <h3>フライトログ (<%= current_user.aeroplane_flights.count %>)</h3>
     <div class="table-contents">
       <table border="1">
       <!-- 見出し部分 -->

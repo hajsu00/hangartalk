@@ -192,42 +192,42 @@ $gray-medium-light: #eaeaea;
 }
 
 /* microposts */
-.microposts {
-  list-style: none;
-  padding: 0;
-  li {
-    padding: 10px 0;
-    border-top: 1px solid #e8e8e8;
-  }
-  .user {
-    margin-top: 5em;
-    padding-top: 0;
-  }
-  // .content {
+// .microposts {
+//   list-style: none;
+//   padding: 0;
+//   li {
+//     padding: 10px 0;
+//     border-top: 1px solid #e8e8e8;
+//   }
+  // .user {
+  //   margin-top: 5em;
+  //   padding-top: 0;
+  // }
+  // // .content {
+  // //   display: block;
+  // //   margin-left: 60px;
+  // //   img {
+  // //     display: block;
+  // //     padding: 5px 0;
+  // //   }
+  // // }
+  // .timestamp {
   //   display: block;
   //   margin-left: 60px;
-  //   img {
-  //     display: block;
-  //     padding: 5px 0;
-  //   }
   // }
-  .timestamp {
-    display: block;
-    margin-left: 60px;
-  }
-}
-aside {
-  textarea {
-    height: 100px;
-    margin-bottom: 5px;
-  }
-}
-span.image {
-  margin-top: 10px;
-  input {
-    border: 0;
-  }
-}
+
+// aside {
+//   textarea {
+//     height: 100px;
+//     margin-bottom: 5px;
+//   }
+// }
+// span.image {
+//   margin-top: 10px;
+//   input {
+//     border: 0;
+//   }
+// }
 
 /* フライトログ */
 .logbook-table {
@@ -515,3 +515,21 @@ input {
   display: flex;
 }
 
+.twitter_container {
+  padding: 0;
+  background: #ffffff;
+  overflow: hidden;
+  //max-width: 400px; ←コメントアウトする
+  margin: 20px auto;
+  font-size: 80%;
+  border: solid 1px #eeeeee;
+}
+
+.micropost_actions {
+  display: flex;
+  margin-top: 10px;
+}
+
+.micropost_action_block {
+  margin-right: 50px;
+}

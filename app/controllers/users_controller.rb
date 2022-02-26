@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts
+    @microposts = @user.microposts.order(created_at: :desc)
     redirect_to root_url and return unless @user.activated?
   end
   def new
@@ -56,14 +56,6 @@ class UsersController < ApplicationController
     @user  = User.find(params[:id])
     @users = @user.followers
     render 'show_follow'
-  end
-
-  def select_new_flight
-    render 'select_new_flight'
-  end
-
-  def select_flight_log
-    render 'select_flight_log'
   end
 
   private
