@@ -14,6 +14,12 @@
         <%= image_tag micropost.display_image if micropost.image.attached? %>
       </div>
     </div>
+    <%
+=begin%>
+ <%= render partial: 'microposts/flight_info', locals: { flight_info: @flight_info } %> 
+<%
+=end%>
+    <%= render partial: 'microposts/flight_info' %>
     <div class="micropost_actions">
       <div class="micropost_action_block">
         <i class="fa-solid fa-comment"></i>

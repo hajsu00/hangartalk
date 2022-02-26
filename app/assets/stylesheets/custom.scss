@@ -524,6 +524,10 @@ input {
   margin-right: 50px;
 }
 
+.display_block {
+  display: block;
+}
+
 // color
 $baseColor:   #58aeed; //ベースカラー
 
@@ -533,7 +537,7 @@ $baseColor:   #58aeed; //ベースカラー
   padding:0;
   background: #ffffff;
   overflow: hidden;
-  max-width: 400px;
+  max-width: 600px;
   margin: 20px auto;
   font-size: 80%;
   border: solid 1px #eeeeee;
