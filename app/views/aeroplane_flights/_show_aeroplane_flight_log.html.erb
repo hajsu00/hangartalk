@@ -1,11 +1,13 @@
-<% aeroplane_flights.each do |aeroplane_flight| %>
+<%
+=begin%>
+ <% aeroplane_flights.each do |aeroplane_flight| %>
   <div class="panel panel-success">
     <div class="panel-body">
       <tr>
         <% flight_time = aeroplane_each_flight_time(aeroplane_flight) %>
         <!-- 基本事項 -->
         <td><%= aeroplane_flight.log_number %></td>
-        <td><%= aeroplane_flight.departure_date %></td>
+        <td><%= aeroplane_flight.date %></td>
         <td><%= aeroplane_flight.aeroplane_type %></td>
         <td><%= aeroplane_flight.aeroplane_ident %></td>
         <td><%= aeroplane_flight.departure_point %></td>
@@ -37,4 +39,6 @@
   </div>
 <% end %>
       
-<%= paginate aeroplane_flights, left: 3, right: 3 %>  
+<%= paginate aeroplane_flights, left: 3, right: 3 %>   
+<%
+=end%>

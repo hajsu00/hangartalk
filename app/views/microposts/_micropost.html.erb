@@ -1,7 +1,10 @@
-<li id="micropost-<%= micropost.id %>">
+<%
+=begin%>
+ <li id="micropost-<%= micropost.id %>">
 <%= link_to micropost.user, class:"link" do %>
   <div class="content-outer-block">
     <h3><%= micropost.user.name %></h3>
+    <%= micropost.created_at.strftime('%R') %>
     <span class="content">
       <%= micropost.content %>
       <%= image_tag micropost.display_image if micropost.image.attached? %>
@@ -14,4 +17,40 @@
     </span>
   </div>
 <% end %>
-</li>
+</li> 
+<%
+=end%>
+
+
+<div class="twitter_block">
+  <figure>
+    <img src="icon.png" />
+  </figure>
+  <div class="twitter_block-text">
+    <div class="name"><%= micropost.user.name %><span class="name_reply">@usa_tan(アカウント名)</span></div>
+    <div class="date"><%= time_ago_in_words(micropost.created_at) %>前</div>
+    <% if current_user?(micropost.user) %>
+      <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
+    <% end %>
+    <div class="text">
+      <%= micropost.content %>
+      <div class="in-pict">
+        <%= image_tag micropost.display_image if micropost.image.attached? %>
+      </div>
+    </div>
+    <div class="micropost_actions">
+      <div class="micropost_action_block">
+        <i class="fa-solid fa-comment"></i>
+        <span>1</span>
+      </div>
+      <div class="micropost_action_block">
+        <i class="fa-solid fa-retweet"></i>
+        <span>14</span>
+      </div>
+      <div class="micropost_action_block">
+        <i class="fa-solid fa-thumbs-up"></i>
+        <span>122</span>
+      </div>
+    </div>
+  </div>
+</div>

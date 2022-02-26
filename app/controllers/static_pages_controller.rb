@@ -2,7 +2,7 @@ class StaticPagesController < ApplicationController
   def top
     if logged_in?
       @micropost  = current_user.microposts.build
-      @feed_items = current_user.feed.page(params[:page]).per(25)
+      @feed_items = current_user.feed.order(created_at: :desc).page(params[:page]).per(25)
     end
   end
 

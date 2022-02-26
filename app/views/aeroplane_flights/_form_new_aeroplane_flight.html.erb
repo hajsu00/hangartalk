@@ -1,7 +1,7 @@
 <%= form_with(model: @aeroplane_flight, local: true) do |f| %>
 
-  <%= f.label :departure_date, "出発日" %>
-  <%= f.date_field :departure_date, class: 'form-control' %>
+  <%= f.label :date, "出発日" %>
+  <%= f.date_field :date, class: 'form-control' %>
 
   <%= f.label :aeroplane_type, "型式" %>
   <%= f.select :aeroplane_type, [["Cessna 152", "Cessna 152"], ["Cessna 172", "Cessna 172"]], include_blank: "型式を選択して下さい", class: 'form-control' %>

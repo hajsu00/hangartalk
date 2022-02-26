@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2022_02_18_122532) do
 
   create_table "aeroplane_flights", charset: "utf8mb3", force: :cascade do |t|
     t.integer "log_number"
-    t.date "departure_date"
+    t.date "date"
     t.string "aeroplane_type"
     t.string "aeroplane_ident"
     t.string "departure_point"
@@ -52,8 +52,7 @@ ActiveRecord::Schema.define(version: 2022_02_18_122532) do
     t.integer "number_of_landing"
     t.datetime "moving_time"
     t.datetime "stop_time"
-    t.boolean "is_pic"
-    t.boolean "is_dual"
+    t.string "flight_role"
     t.boolean "is_cross_country"
     t.boolean "is_night_flight"
     t.boolean "is_hood"
