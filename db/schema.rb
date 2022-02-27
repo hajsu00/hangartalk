@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_18_122532) do
+ActiveRecord::Schema.define(version: 2022_02_26_123819) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -196,6 +196,15 @@ ActiveRecord::Schema.define(version: 2022_02_18_122532) do
     t.index ["user_id"], name: "index_glider_initial_logs_on_user_id"
   end
 
+  create_table "glider_micropost_relationships", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "micropost_id", null: false
+    t.bigint "glider_flight_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["glider_flight_id"], name: "index_glider_micropost_relationships_on_glider_flight_id"
+    t.index ["micropost_id"], name: "index_glider_micropost_relationships_on_micropost_id"
+  end
+
   create_table "group_users", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "group_id", null: false
     t.bigint "user_id", null: false
@@ -256,6 +265,8 @@ ActiveRecord::Schema.define(version: 2022_02_18_122532) do
   add_foreign_key "glider_flights", "users"
   add_foreign_key "glider_group_flights", "groups"
   add_foreign_key "glider_initial_logs", "users"
+  add_foreign_key "glider_micropost_relationships", "glider_flights"
+  add_foreign_key "glider_micropost_relationships", "microposts"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "microposts", "users"

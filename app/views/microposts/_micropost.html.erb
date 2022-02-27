@@ -1,8 +1,8 @@
-<div class="twitter_block">
+<div class="twitter-block">
   <figure>
     <img src="app/assets/icon.png" />
   </figure>
-  <div class="twitter_block-text">
+  <div class="twitter-block-text">
     <div class="name"><%= micropost.user.name %><span class="name_reply">@t_kyab</span></div>
     <div class="date"><%= time_ago_in_words(micropost.created_at) %></div> 
     <% if current_user?(micropost.user) %>
@@ -14,12 +14,7 @@
         <%= image_tag micropost.display_image if micropost.image.attached? %>
       </div>
     </div>
-    <%
-=begin%>
- <%= render partial: 'microposts/flight_info', locals: { flight_info: @flight_info } %> 
-<%
-=end%>
-    <%= render partial: 'microposts/flight_info' %>
+    <%= render 'microposts/flight_card' if !GliderMicropostRelationship.find_by(micropost_id: micropost.id).nil? %>
     <div class="micropost_actions">
       <div class="micropost_action_block">
         <i class="fa-solid fa-comment"></i>

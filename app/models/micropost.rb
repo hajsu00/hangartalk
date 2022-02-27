@@ -1,7 +1,8 @@
 class Micropost < ApplicationRecord
   belongs_to :user
+  has_many :glider_flight, through: :glider_micropost_relationships
+  has_many :glider_micropost_relationships
   has_one_attached :image
-  # default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
   validates :image,   content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" },
