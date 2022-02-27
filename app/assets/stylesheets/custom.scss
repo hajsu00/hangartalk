@@ -524,7 +524,7 @@ input {
   margin-right: 50px;
 }
 
-.display_block {
+.display-block {
   display: block;
 }
 
@@ -533,7 +533,7 @@ $baseColor:   #58aeed; //ベースカラー
 
 /*///////////////////////////////////////////////*/
 
-.twitter_container {
+.twitter-container {
   padding:0;
   background: #ffffff;
   overflow: hidden;
@@ -547,7 +547,7 @@ $baseColor:   #58aeed; //ベースカラー
   }
 
   /* タイトル部分 */
-  .twitter_title {
+  .twitter-title {
     background: $baseColor;
     padding: 10px;
     text-align: center;
@@ -568,7 +568,7 @@ $baseColor:   #58aeed; //ベースカラー
   }
 
   /* タイムライン部分 */
-  .twitter_contents {
+  .twitter-contents {
     overflow: hidden;
     position: relative;
     line-height: 135%;
@@ -578,7 +578,7 @@ $baseColor:   #58aeed; //ベースカラー
       overflow-y: scroll;
     }
 
-    .twitter_block {
+    .twitter-block {
       width: 100%;
       display: block;
       padding: 10px;
@@ -606,7 +606,7 @@ $baseColor:   #58aeed; //ベースカラー
         }
       }
       /* コメントエリア */
-      .twitter_block-text {
+      .twitter-block-text {
         margin: 0;
         position: relative;
         margin-left: 60px;
@@ -615,7 +615,7 @@ $baseColor:   #58aeed; //ベースカラー
         .name {
           font-weight: bold;
 
-          .name_reply {
+          .name-reply {
             color: #8a9aa4;
             margin-left: 10px;
           }
@@ -646,4 +646,14 @@ $baseColor:   #58aeed; //ベースカラー
       }
     }
   }
+}
+
+.flight-card {
+  display: block;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
 }

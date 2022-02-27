@@ -6,10 +6,13 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
+      if !params[:micropost][:glider_flight_id].nil?
+        @micropost.glider_micropost_relationships.create!(glider_micropost_relationship_params)
+      end
       flash[:success] = "マイクロポストを投稿しました！"
       redirect_to root_url
     else
-      @feed_items = current_user.feed
+      @microposts = current_user.feed
       render 'static_pages/top'
     end
   end
@@ -24,6 +27,10 @@ class MicropostsController < ApplicationController
 
   def micropost_params
     params.require(:micropost).permit(:content, :image)
+  end
+
+  def glider_micropost_relationship_params
+    params.require(:micropost).permit(:glider_flight_id)
   end
 
   def correct_user
