@@ -224,6 +224,7 @@ ActiveRecord::Schema.define(version: 2022_02_26_123819) do
 
   create_table "microposts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
+    t.boolean "is_flight_attached"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
