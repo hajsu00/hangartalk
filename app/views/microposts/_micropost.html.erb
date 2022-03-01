@@ -4,7 +4,12 @@
   </figure>
   <div class="twitter-block-text">
     <div class="name"><%= micropost.user.name %><span class="name_reply">@t_kyab</span></div>
-    <div class="date"><%= time_ago_in_words(micropost.created_at) %></div> 
+ <%
+=begin%>
+ <div class="date"><%= time_ago_in_words(micropost.created_at) %></div>   
+<%
+=end%>
+ <div class="date"><%= micropost.created_at %></div>  
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
@@ -14,7 +19,9 @@
         <%= image_tag micropost.display_image if micropost.image.attached? %>
       </div>
     </div>
-    <%= render 'microposts/flight_card' if !GliderMicropostRelationship.find_by(micropost_id: micropost.id).nil? %>
+
+ <%= render 'microposts/flight_card' if micropost.is_flight_attached %>  
+
     <div class="micropost_actions">
       <div class="micropost_action_block">
         <i class="fa-solid fa-comment"></i>

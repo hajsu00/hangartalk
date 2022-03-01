@@ -1,5 +1,5 @@
 # メインのサンプルユーザーを1人作成する
-User.create!(name: "株木 達郎", email: "example@railstutorial.org", password: "foobar", password_confirmation: "foobar", admin: true, activated: true, activated_at: Time.zone.now)
+User.create!(name: "Example User", email: "example@railstutorial.org", password: "foobar", password_confirmation: "foobar", admin: true, activated: true, activated_at: Time.zone.now)
 
 # 追加のユーザーをまとめて生成する
 99.times do |n|
@@ -13,7 +13,7 @@ end
 users = User.order(:created_at).take(6)
 50.times do |n|
   content = Faker::Lorem.sentence(word_count: 5)
-  users.each { |user| user.microposts.create!(content: content, created_at: Time.zone.now + n.minutes) }
+  users.each { |user| user.microposts.create!(content: content, is_flight_attached: false, created_at: Time.zone.now - n.minutes, updated_at: Time.zone.now - n.minutes) }
 end
 
 # 以下のリレーションシップを作成する

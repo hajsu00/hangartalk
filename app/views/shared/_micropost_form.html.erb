@@ -8,7 +8,10 @@
   </span>
   <% if !@target_flight.nil? %>
     <%= f.hidden_field :glider_flight_id, value: @target_flight.id %>
+    <%= f.hidden_field :is_flight_attached, value: true %>
     <%= render 'microposts/flight_card' %>
+  <% else %>
+    <%= f.hidden_field :is_flight_attached, value: false %>
   <% end %>
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

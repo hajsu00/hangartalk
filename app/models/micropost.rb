@@ -1,7 +1,7 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   has_many :glider_flight, through: :glider_micropost_relationships
-  has_many :glider_micropost_relationships
+  has_many :glider_micropost_relationships, dependent: :destroy
   has_one_attached :image
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
