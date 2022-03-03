@@ -1,7 +1,7 @@
 <div class="main">
   <aside class="col-md-4">
     <section class="micropost_form">
-      <%= render 'shared/micropost_form' %>
+      <%= render partial: 'shared/micropost_form', locals: { target_flight: nil } %>
     </section>
   </aside>
   <div class="col-md-8">

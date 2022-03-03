@@ -24,6 +24,7 @@ class GliderFlightsController < ApplicationController
 
   def show
     @glider_flight = GliderFlight.find_by(id: params[:id])
+    @micropost = Micropost.new
   end
 
   def edit

@@ -1,13 +1,14 @@
+
 <div class="flight-card">
   <div class=" display-flex">
-    <div class="departure_date">出発日：２０２２年２月２６日</div>
-    <div class="fleet">搭乗機体</div>
+    <div class="departure_date">出発日：<%= target_flight.date %></div>
+    <div class="fleet">搭乗機体：<%= target_flight.date %></div>
   </div>
   <div class="display-block">
-    <div class="fleet">離陸時刻</div>
+    <div class="fleet">離陸時刻：<%= target_flight.takeoff_time.strftime("%R") %></div>
     <div class="fleet">（飛行時間）</div>
-    <div class="fleet">着陸時刻</div>
-    <div class="fleet">出発地</div>
-    <div class="fleet">到着地</div>
+    <div class="fleet">着陸時刻：<%= target_flight.landing_time.strftime("%R") %></div>
+    <div class="fleet">出発地：<%= target_flight.departure_and_arrival_point %></div>
+    <div class="fleet">到着地：<%= target_flight.departure_and_arrival_point %></div>
   </div>
 </div>

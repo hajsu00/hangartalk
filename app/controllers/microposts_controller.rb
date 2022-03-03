@@ -4,10 +4,9 @@ class MicropostsController < ApplicationController
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
-    @micropost.image.attach(params[:micropost][:image])
+    # @micropost.images.attach(params[:micropost][:images])
     if @micropost.save
       if !params[:micropost][:glider_flight_id].nil?
-        # 「フライトログブック」→「フライトの詳細（glider_flightモデルのshowページ）」→「シェア」ボタン押下によるマイクロポスト投稿時の処理
         @micropost.glider_micropost_relationships.create!(glider_micropost_relationship_params)
       end
       flash[:success] = "マイクロポストを投稿しました！"
@@ -28,7 +27,7 @@ class MicropostsController < ApplicationController
   private
 
   def micropost_params
-    params.require(:micropost).permit(:content, :is_flight_attached, :image)
+    params.require(:micropost).permit(:content, :is_flight_attached, images: [])
   end
 
   def glider_micropost_relationship_params

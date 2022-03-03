@@ -4,17 +4,18 @@
     <%= f.text_area :content, placeholder: "今どうしてる？" %>
   </div>
   <span class="image">
-    <%= f.file_field :image, accept: "image/jpeg,image/gif,image/png" %>
+    <%= f.file_field :images, accept: "image/jpeg,image/gif,image/png", multiple: true %>
   </span>
-  <% if !@target_flight.nil? %>
-    <%= f.hidden_field :glider_flight_id, value: @target_flight.id %>
+  
+  <% if !target_flight.nil? %>
+    <%= f.hidden_field :glider_flight_id, value: target_flight.id %>
     <%= f.hidden_field :is_flight_attached, value: true %>
-    <%= render 'microposts/flight_card' %>
   <% else %>
     <%= f.hidden_field :is_flight_attached, value: false %>
   <% end %>
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
+
 <script type="text/javascript">
   $("#micropost_image").bind("change", function() {
     var size_in_megabytes = this.files[0].size/1024/1024;

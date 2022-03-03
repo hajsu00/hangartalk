@@ -4,24 +4,27 @@
   </figure>
   <div class="twitter-block-text">
     <div class="name"><%= micropost.user.name %><span class="name_reply">@t_kyab</span></div>
- <%
-=begin%>
- <div class="date"><%= time_ago_in_words(micropost.created_at) %></div>   
-<%
-=end%>
- <div class="date"><%= micropost.created_at %></div>  
+    <div class="date"><%= time_ago_in_words(micropost.created_at) %></div>   
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
     <div class="text">
       <%= micropost.content %>
       <div class="in-pict">
-        <%= image_tag micropost.display_image if micropost.image.attached? %>
+        <% if micropost.images.attached? %>
+        <% images = micropost.display_image %>
+        <% number_of_picture = images.size %>
+          <% number_of_picture.times do |i|%>
+            <%= image_tag images[i] %>
+          <% end %>
+        <% end %>
       </div>
     </div>
-
- <%= render 'microposts/flight_card' if micropost.is_flight_attached %>  
-
+    <% if micropost.is_flight_attached %>
+      <% target_relationship = GliderMicropostRelationship.find_by(micropost_id: micropost.id) %>
+      <% target_flight = GliderFlight.find(target_relationship.glider_flight_id) %>
+      <%= render partial: 'microposts/flight_card', locals: { target_flight: target_flight } %>  
+  <% end %>
     <div class="micropost_actions">
       <div class="micropost_action_block">
         <i class="fa-solid fa-comment"></i>
