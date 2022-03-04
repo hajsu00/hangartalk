@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_26_123819) do
+ActiveRecord::Schema.define(version: 2022_03_03_070458) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -240,6 +240,16 @@ ActiveRecord::Schema.define(version: 2022_02_26_123819) do
     t.index ["followed_id"], name: "index_relationships_on_followed_id"
     t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
+  end
+
+  create_table "reply_relationships", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "replying_id"
+    t.integer "replied_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["replied_id"], name: "index_reply_relationships_on_replied_id"
+    t.index ["replying_id", "replied_id"], name: "index_reply_relationships_on_replying_id_and_replied_id"
+    t.index ["replying_id"], name: "index_reply_relationships_on_replying_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|

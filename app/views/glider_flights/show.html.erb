@@ -5,11 +5,6 @@
   <div class="display-flex">
     <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
     <button class="page-nav"><%= link_to "編集", edit_glider_flight_path(id: params[:id]) %></button>
-    <%
-=begin%>
- <button class="page-nav"><%= link_to "シェア", new_glider_micropost_relationship_path(id: params[:id]) %></button> 
-<%
-=end%>
   </div>
   <div class="content-outer-block">
       <p>フライトログNo.：<span class="value"><%= @glider_flight.log_number %></span></p>
@@ -32,5 +27,5 @@
       <span class="value"><%= @glider_flight.note %></span></p>
     </div>
   </div>
-  <%= render partial: 'shared/micropost_form', locals: { target_flight: @glider_flight } %> 
+  <%= render partial: 'shared/micropost_form', locals: { target_flight: @glider_flight } %>  
 </div>

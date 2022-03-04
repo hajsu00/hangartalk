@@ -1,0 +1,14 @@
+<% provide(:title, '投稿の詳細') %>
+
+<div class="main">
+  <h1>投稿の詳細</h1>
+  <div class="display-flex">
+    <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
+  </div>
+  <div class="twitter-container">
+    <div class="twitter-contents">
+      <%= render partial: 'micropost', locals: { micropost: @replied_micropost } %>
+    </div>
+  </div>
+  <%= render partial: 'shared/micropost_form' %> 
+</div>
