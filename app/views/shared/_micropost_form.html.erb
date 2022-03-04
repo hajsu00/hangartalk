@@ -1,18 +1,21 @@
 <% provide(:button_text, '投稿') %>
 <%= form_with(model: @micropost, local: true) do |f| %>
   <div class="field">
-    <%= f.text_area :content, placeholder: "今どうしてる？" %>
+    <%= f.text_area :content, value: nil, placeholder: "今どうしてる？" %>
   </div>
   <span class="image">
     <%= f.file_field :images, accept: "image/jpeg,image/gif,image/png", multiple: true %>
   </span>
-  
-  <% if !target_flight.nil? %>
+  <!-- 「フライトの投稿」の場合は対象のフライトデータを保持しておく -->
+  <% if !defined? target_flight %>
+    <%= f.hidden_field :is_flight_attached, value: false %>
+  <% else %>
     <%= f.hidden_field :glider_flight_id, value: target_flight.id %>
     <%= f.hidden_field :is_flight_attached, value: true %>
-  <% else %>
-    <%= f.hidden_field :is_flight_attached, value: false %>
   <% end %>
+  <!-- 返信の宛先 -->
+  <%= f.hidden_field :replied_id, value: @replied_micropost.id unless !defined? @replied_micropost %> 
+  <!-- 送信ボタン -->
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
 

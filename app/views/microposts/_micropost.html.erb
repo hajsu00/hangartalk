@@ -1,3 +1,4 @@
+<%= link_to micropost_path(id: micropost.id), class:"link" do %>
 <div class="twitter-block">
   <figure>
     <img src="app/assets/icon.png" />
@@ -8,12 +9,15 @@
     <% if current_user?(micropost.user) %>
       <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
+    <% if micropost.replying_micropost? %>
+      <div class="reply-to">返信先：<%= link_to "@#{micropost.replied_user_name}さん", user_path(id: micropost.replied_user_id) %></div>
+    <% end %>
     <div class="text">
       <%= micropost.content %>
       <div class="in-pict">
         <% if micropost.images.attached? %>
-        <% images = micropost.display_image %>
-        <% number_of_picture = images.size %>
+          <% images = micropost.display_image %>
+          <% number_of_picture = images.size %>
           <% number_of_picture.times do |i|%>
             <%= image_tag images[i] %>
           <% end %>
@@ -24,11 +28,13 @@
       <% target_relationship = GliderMicropostRelationship.find_by(micropost_id: micropost.id) %>
       <% target_flight = GliderFlight.find(target_relationship.glider_flight_id) %>
       <%= render partial: 'microposts/flight_card', locals: { target_flight: target_flight } %>  
-  <% end %>
+    <% end %>
     <div class="micropost_actions">
       <div class="micropost_action_block">
-        <i class="fa-solid fa-comment"></i>
-        <span>1</span>
+        <%= link_to micropost_path(id: micropost.id) do %>
+          <i class="fa-solid fa-comment"></i>
+        <% end %>
+        <span><%= micropost.number_of_replied%></span>
       </div>
       <div class="micropost_action_block">
         <i class="fa-solid fa-retweet"></i>
@@ -41,3 +47,4 @@
     </div>
   </div>
 </div> 
+<% end %>

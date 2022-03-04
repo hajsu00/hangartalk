@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   resources :users
   resources :account_activations,       only: [:edit]
   resources :password_resets,           only: [:new, :create, :edit, :update]
-  resources :microposts,                only: [:new, :create, :destroy]
+  resources :microposts,                only: [:new, :create, :show, :destroy]
   resources :relationships,             only: [:create, :destroy]
   resources :aeroplane_flights,         only: [:new, :create, :show, :index, :destroy]
   resources :glider_flights,            only: [:new, :create, :show, :index, :edit, :update, :destroy]
@@ -48,4 +48,5 @@ Rails.application.routes.draw do
   resources :group_users,               only: [:create, :destroy]
   resources :glider_flight_collection,  only: [:new, :create]
   resources :glider_micropost_relationships,  only: [:new, :create]
+  resources :reply_relationships,  only: [:new, :create]
 end
