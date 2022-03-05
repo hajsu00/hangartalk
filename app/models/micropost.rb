@@ -1,23 +1,14 @@
 class Micropost < ApplicationRecord
   belongs_to :user
   # 返信機能
-  has_many :replying, through: :replying_relationships, source: :reply_tweet_id
   has_many :replying_relationships, class_name: 'ReplyRelationship',
-                                   foreign_key: 'reply_tweet_id',
+                                   foreign_key: 'replying_id',
                                    dependent: :destroy
-  has_one :replied, through: :replied_relationships, source: :main_tweet_id
   has_one :replied_relationships, class_name: 'ReplyRelationship',
-                                  foreign_key: 'main_tweet_id',
+                                  foreign_key: 'replied_id',
                                   dependent: :destroy
-  # シェア機能
-  has_many :sharing, through: :replying_relationships, source: :share_tweet_id
-  has_many :sharing_relationships, class_name: 'ReplyRelationship',
-                                   foreign_key: 'share_tweet_id',
-                                   dependent: :destroy
-  has_one :replied, through: :replied_relationships, source: :main_tweet_id
-  has_one :replied_relationships, class_name: 'ReplyRelationship',
-                                  foreign_key: 'main_tweet_id',
-                                  dependent: :destroy
+  has_many :replying, through: :replying_relationships
+  has_one :replied, through: :replied_relationships
   # フライト投稿機能（グライダー）
   has_many :glider_flight, through: :glider_micropost_relationships
   has_many :glider_micropost_relationships, dependent: :destroy
@@ -36,7 +27,8 @@ class Micropost < ApplicationRecord
   end
 
   def replying_micropost?
-    reply_relationship = ReplyRelationship.find_by(reply_tweet_id: self.id)
+
+    reply_relationship = ReplyRelationship.find_by(replying_id: self.id)
     reply_relationship.nil? ? false : true
   end
 
@@ -49,11 +41,15 @@ class Micropost < ApplicationRecord
   end
 
   def replied_micropost
-    reply_relationship = ReplyRelationship.find_by(reply_tweet_id: self.id)
-    Micropost.find(reply_relationship.main_tweet_id)
+    reply_relationship = ReplyRelationship.find_by(replying_id: self.id)
+    Micropost.find(reply_relationship.replied_id)
   end
 
   def number_of_replied
-    ReplyRelationship.where("main_tweet_id = ?", self.id).count
+    ReplyRelationship.where("replied_id = ?", self.id).count
   end
+
+  # def reply(target_micropost)
+  #   replying << target_micropost
+  # end
 end

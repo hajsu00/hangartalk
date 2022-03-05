@@ -6,8 +6,12 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
         @micropost.glider_micropost_relationships.create!(glider_micropost_relationship_params) if !params[:micropost][:glider_flight_id].nil?
-        # @micropost.replying_relationships.create!(reply_relationship_params) if !params[:micropost][:main_tweet_id].nil?
-        @micropost.replying_relationships.create!(reply_relationship_params) if !params[:micropost][:main_tweet_id].nil?
+        if !params[:micropost][:replied_id].nil?
+          replied_micropost = Micropost.find(reply_relationship_params[:replied_id])
+          # replied_micropost.reply(@micropost)
+          binding.pry
+          replied_micropost.replying << @micropost
+        end
       flash[:success] = "マイクロポストを投稿しました！"
       redirect_to root_url
     else
@@ -23,7 +27,7 @@ class MicropostsController < ApplicationController
 
   def destroy
     @glider_micropost = GliderMicropostRelationship.find_by(micropost_id: @micropost.id)
-    @replied_relationship = ReplyRelationship.find_by(reply_tweet_id: @micropost.id)
+    @replied_relationship = ReplyRelationship.find_by(replying_id: @micropost.id)
     @micropost.destroy
     @glider_micropost.destroy if !@glider_micropost.nil?
     @replied_relationship.destroy if !@replied_relationship.nil?
@@ -42,7 +46,7 @@ class MicropostsController < ApplicationController
   end
 
   def reply_relationship_params
-    params.require(:micropost).permit(:main_tweet_id)
+    params.require(:micropost).permit(:replied_id)
   end
 
   def correct_user

@@ -14,7 +14,7 @@
     <%= f.hidden_field :is_flight_attached, value: true %>
   <% end %>
   <!-- 返信の宛先 -->
-  <%= f.hidden_field :main_tweet_id, value: @replied_micropost.id unless !defined? @replied_micropost %> 
+  <%= f.hidden_field :replied_id, value: @replied_micropost.id unless !defined? @replied_micropost %> 
   <!-- 送信ボタン -->
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>
