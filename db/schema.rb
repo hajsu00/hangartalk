@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_03_070458) do
+ActiveRecord::Schema.define(version: 2022_03_04_224813) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -243,13 +243,23 @@ ActiveRecord::Schema.define(version: 2022_03_03_070458) do
   end
 
   create_table "reply_relationships", charset: "utf8mb3", force: :cascade do |t|
-    t.integer "replying_id"
-    t.integer "replied_id"
+    t.integer "reply_tweet_id"
+    t.integer "main_tweet_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["replied_id"], name: "index_reply_relationships_on_replied_id"
-    t.index ["replying_id", "replied_id"], name: "index_reply_relationships_on_replying_id_and_replied_id"
-    t.index ["replying_id"], name: "index_reply_relationships_on_replying_id"
+    t.index ["main_tweet_id"], name: "index_reply_relationships_on_main_tweet_id"
+    t.index ["reply_tweet_id", "main_tweet_id"], name: "index_reply_relationships_on_reply_tweet_id_and_main_tweet_id"
+    t.index ["reply_tweet_id"], name: "index_reply_relationships_on_reply_tweet_id"
+  end
+
+  create_table "share_relationships", charset: "utf8mb3", force: :cascade do |t|
+    t.integer "share_tweet_id"
+    t.integer "main_tweet_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["main_tweet_id"], name: "index_share_relationships_on_main_tweet_id"
+    t.index ["share_tweet_id", "main_tweet_id"], name: "index_share_relationships_on_share_tweet_id_and_main_tweet_id"
+    t.index ["share_tweet_id"], name: "index_share_relationships_on_share_tweet_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
