@@ -243,8 +243,8 @@ ActiveRecord::Schema.define(version: 2022_03_04_224813) do
   end
 
   create_table "reply_relationships", charset: "utf8mb3", force: :cascade do |t|
-    t.integer "replying_id"
-    t.integer "replied_id"
+    t.bigint "replying_id", null: false
+    t.bigint "replied_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["replied_id"], name: "index_reply_relationships_on_replied_id"
@@ -291,4 +291,6 @@ ActiveRecord::Schema.define(version: 2022_03_04_224813) do
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "microposts", "users"
+  add_foreign_key "reply_relationships", "microposts", column: "replied_id"
+  add_foreign_key "reply_relationships", "microposts", column: "replying_id"
 end

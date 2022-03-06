@@ -4,11 +4,11 @@ class Micropost < ApplicationRecord
   has_many :replying_relationships, class_name: 'ReplyRelationship',
                                    foreign_key: 'replying_id',
                                    dependent: :destroy
-  has_one :replied_relationships, class_name: 'ReplyRelationship',
+  has_many :replied_relationships, class_name: 'ReplyRelationship',
                                   foreign_key: 'replied_id',
                                   dependent: :destroy
   has_many :replying, through: :replying_relationships
-  has_one :replied, through: :replied_relationships
+  has_many :replied, through: :replied_relationships
   # フライト投稿機能（グライダー）
   has_many :glider_flight, through: :glider_micropost_relationships
   has_many :glider_micropost_relationships, dependent: :destroy
