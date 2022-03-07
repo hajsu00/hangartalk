@@ -10,7 +10,12 @@
       <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
     <% end %>
     <% if micropost.replying_micropost? %>
-      <div class="reply-to">返信先：<%= link_to "@#{micropost.replied_user_name}さん", user_path(id: micropost.replied_user_id) %></div>
+    <% replied_microposts = micropost.get_replied_microposts %>
+      <% replied_microposts.each do |replied_micropost| %>
+        <% if replied_micropost != micropost%>
+          <div class="reply-to">返信先：<%= link_to "@#{replied_micropost.user.name}さん", user_path(id: replied_micropost.user.id) %></div>
+        <% end %>
+      <% end %>
     <% end %>
     <div class="text">
       <%= micropost.content %>
