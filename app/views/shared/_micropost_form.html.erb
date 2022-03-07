@@ -14,7 +14,19 @@
     <%= f.hidden_field :is_flight_attached, value: true %>
   <% end %>
   <!-- 返信の宛先 -->
-  <%= f.hidden_field :replied_id, value: @replied_micropost.id unless !defined? @replied_micropost %> 
+  <%
+=begin%>
+ <%= f.hidden_field :replied_id, value: @replied_micropost.id unless !defined? @replied_micropost %> 
+<%
+=end%>
+  <% unless !defined? @replied_micropost %>
+    <%= f.hidden_field :replied_micropost, multiple: true, value: @replied_micropost.to_json %>
+    <%
+=begin%>
+ <%= f.hidden_field :replying_id, multiple: true, value: @replying_micropost_ids %>  
+<%
+=end%>
+  <% end %>
   <!-- 送信ボタン -->
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

@@ -7,7 +7,7 @@
   </div>
   <div class="twitter-container">
     <div class="twitter-contents">
-      <%= render partial: 'micropost', locals: { micropost: @replied_micropost } %>
+      <%= render partial: 'micropost', locals: { micropost: @replied_micropost[0] } %>
     </div>
   </div>
   <%= render partial: 'shared/micropost_form' %> 
