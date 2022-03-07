@@ -9,6 +9,15 @@ class Micropost < ApplicationRecord
                                   dependent: :destroy
   has_many :replying, through: :replying_relationships
   has_many :replied, through: :replied_relationships
+  # シェア機能
+  has_one :sharing_relationships, class_name: 'ShareRelationship',
+                                  foreign_key: 'sharing_id',
+                                  dependent: :destroy
+  has_many :shared_relationships, class_name: 'ShareRelationship',
+                                  foreign_key: 'shared_id',
+                                  dependent: :destroy
+  has_one :sharing, through: :sharing_relationships
+  has_many :shared, through: :shared_relationships
   # フライト投稿機能（グライダー）
   has_many :glider_flight, through: :glider_micropost_relationships
   has_many :glider_micropost_relationships, dependent: :destroy
@@ -42,5 +51,9 @@ class Micropost < ApplicationRecord
 
   def number_of_replied
     ReplyRelationship.where("replied_id = ?", self.id).count
+  end
+
+  def number_of_shared
+    ShareRelationship.where("shared_id = ?", self.id).count
   end
 end

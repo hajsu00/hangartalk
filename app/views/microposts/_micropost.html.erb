@@ -42,8 +42,19 @@
         <span><%= micropost.number_of_replied%></span>
       </div>
       <div class="micropost_action_block">
-        <i class="fa-solid fa-retweet"></i>
-        <span>14</span>
+      <%= link_to 'シェアボタン', share_relationships_path(shared_id: micropost.id), method: :post %>  
+          <%
+=begin%>
+ <%= link_to controller: "micropost", action: "share_micropost" do %> 
+<%
+=end%>
+          <%
+=begin%>
+ <i class="fa-solid fa-retweet"></i>
+        <% end %>  
+<%
+=end%>
+        <span><%= micropost.number_of_shared%></span>
       </div>
       <div class="micropost_action_block">
         <i class="fa-solid fa-thumbs-up"></i>
