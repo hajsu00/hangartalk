@@ -225,6 +225,7 @@ ActiveRecord::Schema.define(version: 2022_03_04_224813) do
   create_table "microposts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
     t.boolean "is_flight_attached"
+    t.boolean "is_sharing_micropost"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -253,13 +254,13 @@ ActiveRecord::Schema.define(version: 2022_03_04_224813) do
   end
 
   create_table "share_relationships", charset: "utf8mb3", force: :cascade do |t|
-    t.integer "share_tweet_id"
-    t.integer "main_tweet_id"
+    t.bigint "sharing_id", null: false
+    t.bigint "shared_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["main_tweet_id"], name: "index_share_relationships_on_main_tweet_id"
-    t.index ["share_tweet_id", "main_tweet_id"], name: "index_share_relationships_on_share_tweet_id_and_main_tweet_id"
-    t.index ["share_tweet_id"], name: "index_share_relationships_on_share_tweet_id"
+    t.index ["shared_id"], name: "index_share_relationships_on_shared_id"
+    t.index ["sharing_id", "shared_id"], name: "index_share_relationships_on_sharing_id_and_shared_id"
+    t.index ["sharing_id"], name: "index_share_relationships_on_sharing_id"
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
@@ -293,4 +294,6 @@ ActiveRecord::Schema.define(version: 2022_03_04_224813) do
   add_foreign_key "microposts", "users"
   add_foreign_key "reply_relationships", "microposts", column: "replied_id"
   add_foreign_key "reply_relationships", "microposts", column: "replying_id"
+  add_foreign_key "share_relationships", "microposts", column: "shared_id"
+  add_foreign_key "share_relationships", "microposts", column: "sharing_id"
 end

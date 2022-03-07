@@ -1,0 +1,2 @@
+module ShareRelationshipsHelper
+end
