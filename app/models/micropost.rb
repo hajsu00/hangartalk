@@ -27,29 +27,20 @@ class Micropost < ApplicationRecord
   end
 
   def replying_micropost?
-
     reply_relationship = ReplyRelationship.find_by(replying_id: self.id)
     reply_relationship.nil? ? false : true
   end
 
-  def replied_user_name
-    replied_micropost.user.name
-  end
-
-  def replied_user_id
-    replied_micropost.user.id
-  end
-
-  def replied_micropost
-    reply_relationship = ReplyRelationship.find_by(replying_id: self.id)
-    Micropost.find(reply_relationship.replied_id)
+  def get_replied_microposts
+    reply_relationships = ReplyRelationship.where("replying_id = ?", self.id)
+    replied_microposts = []
+    reply_relationships.each do |reply_relationship|
+      replied_microposts << Micropost.find(reply_relationship.replied_id)
+    end
+    replied_microposts
   end
 
   def number_of_replied
     ReplyRelationship.where("replied_id = ?", self.id).count
   end
-
-  # def reply(target_micropost)
-  #   replying << target_micropost
-  # end
 end
