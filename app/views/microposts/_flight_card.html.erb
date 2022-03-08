@@ -1,4 +1,5 @@
-
+<% target_relationship = GliderMicropostRelationship.find_by(micropost_id: micropost.id) %>
+<% target_flight = GliderFlight.find(target_relationship.glider_flight_id) %>
 <div class="flight-card">
   <div class=" display-flex">
     <div class="departure_date">出発日：<%= target_flight.date %></div>

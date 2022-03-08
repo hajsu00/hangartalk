@@ -42,17 +42,24 @@ class MicropostsController < ApplicationController
 
   def destroy
     @glider_micropost = GliderMicropostRelationship.find_by(micropost_id: @micropost.id)
-    @replied_relationship = ReplyRelationship.find_by(replying_id: @micropost.id)
+    @replying_relationship = ReplyRelationship.find_by(replying_id: @micropost.id)
+    @replied_relationship = ReplyRelationship.find_by(replied_id: @micropost.id)
+    @shared_relationship = ShareRelationship.find_by(shared_id: @micropost.id)
+    @sharing_relationship = ShareRelationship.find_by(sharing_id: @micropost.id)
     @micropost.destroy
     @glider_micropost.destroy if !@glider_micropost.nil?
+    @replying_relationship.destroy if !@replying_relationship.nil?
     @replied_relationship.destroy if !@replied_relationship.nil?
+    @shared_relationship.destroy if !@shared_relationship.nil?
+    @sharing_relationship.destroy if !@sharing_relationship.nil?
+
+
     flash[:success] = "マイクロポストを削除しました。"
     redirect_to request.referrer || root_url
   end
 
   def share_micropost
     @micropost = Micropost.find(params[:id])
-    binding.pry
   end
 
   private

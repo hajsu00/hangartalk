@@ -1,0 +1,7 @@
+<% shared_micropost = micropost.get_shared_micropost %>
+<% if !shared_micropost.nil? %>
+  <%= render partial: 'microposts/micropost', locals: { micropost: shared_micropost } %>
+  <%= render partial: 'microposts/micropost_action', locals: { micropost: shared_micropost } %>
+<% else %>
+ <p>ツイートは削除されました</p>
+<% end %>

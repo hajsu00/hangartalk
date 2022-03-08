@@ -1,0 +1,41 @@
+<%= link_to micropost_path(id: micropost.id), class:"link" do %>
+<div class="twitter-block">
+  <figure>
+    <img src="app/assets/icon.png" />
+  </figure>
+  <div class="twitter-block-text">
+    <% if micropost.is_sharing_micropost? %>
+      <i class="fa-solid fa-retweet"></i>
+      <span class="name_reply"><%= micropost.user.name %>さんがシェアしました</span>
+      <% if !micropost.content.nil? %>
+        <%= render partial: 'microposts/micropost_content', locals: { micropost: micropost } %>
+      <% end %>
+      <%= render partial: 'microposts/shared_micropost', locals: { micropost: micropost } %>
+    <% else %>
+      <%= render partial: 'microposts/micropost', locals: { micropost: micropost } %>
+    <% end %>
+  </div>
+  <div class="micropost_actions">
+    <div class="micropost_action_block">
+      <%= link_to micropost_path(id: micropost.id) do %>
+        <i class="fa-solid fa-comment"></i>
+      <% end %>
+      <span><%= micropost.number_of_replied%></span>
+    </div>
+    <div class="micropost_action_block">
+    <% if micropost.is_shared_by_current_user?(current_user) %>
+      <i class="fa-solid fa-retweet"></i>
+    <% else %>
+      <%= link_to share_relationships_path(shared_id: micropost.id), method: :post do %>
+        <i class="fa-solid fa-retweet"></i>
+      <% end %>
+    <% end %>  
+      <span><%= micropost.number_of_shared%></span>
+    </div>
+    <div class="micropost_action_block">
+      <i class="fa-solid fa-thumbs-up"></i>
+      <span>122</span>
+    </div>
+  </div>
+</div> 
+<% end %>
