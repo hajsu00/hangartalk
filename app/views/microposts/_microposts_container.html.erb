@@ -6,9 +6,9 @@
   <!-- ▼タイムラインエリア scrollを外すと高さ固定解除 -->
   <div class="twitter-contents">
   <!-- ここに吹き出しやスタンプのタグを追加していく -->
-  <%= render partial: 'microposts/micropost', collection: @microposts %>
-  </div>
+  <%= render partial: 'microposts/micropost_block', collection: @microposts, as: :micropost %>
   <!--　▲タイムラインエリア ここまで -->
+  </div>
 </div>
 
 <%= paginate @microposts, left: 3, right: 3 %>  

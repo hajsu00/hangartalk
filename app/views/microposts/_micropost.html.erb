@@ -1,66 +1,17 @@
-<%= link_to micropost_path(id: micropost.id), class:"link" do %>
-<div class="twitter-block">
-  <figure>
-    <img src="app/assets/icon.png" />
-  </figure>
-  <div class="twitter-block-text">
-    <div class="name"><%= micropost.user.name %><span class="name_reply">@t_kyab</span></div>
-    <div class="date"><%= time_ago_in_words(micropost.created_at) %></div>   
-    <% if current_user?(micropost.user) %>
-      <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+<div class="name"><%= micropost.user.name %><span class="name_reply">@t_kyab</span></div>
+<div class="date"><%= time_ago_in_words(micropost.created_at) %></div>   
+<% if current_user?(micropost.user) %>
+  <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+<% end %>
+<% if micropost.replying_micropost? %>
+<% replied_microposts = micropost.get_replied_microposts %>
+  <% replied_microposts.each do |replied_micropost| %>
+    <% if replied_micropost != micropost%>
+      <div class="reply-to">返信先：<%= link_to "@#{replied_micropost.user.name}さん", user_path(id: replied_micropost.user.id) %></div>
     <% end %>
-    <% if micropost.replying_micropost? %>
-    <% replied_microposts = micropost.get_replied_microposts %>
-      <% replied_microposts.each do |replied_micropost| %>
-        <% if replied_micropost != micropost%>
-          <div class="reply-to">返信先：<%= link_to "@#{replied_micropost.user.name}さん", user_path(id: replied_micropost.user.id) %></div>
-        <% end %>
-      <% end %>
-    <% end %>
-    <div class="text">
-      <%= micropost.content %>
-      <div class="in-pict">
-        <% if micropost.images.attached? %>
-          <% images = micropost.display_image %>
-          <% number_of_picture = images.size %>
-          <% number_of_picture.times do |i|%>
-            <%= image_tag images[i] %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <% if micropost.is_flight_attached %>
-      <% target_relationship = GliderMicropostRelationship.find_by(micropost_id: micropost.id) %>
-      <% target_flight = GliderFlight.find(target_relationship.glider_flight_id) %>
-      <%= render partial: 'microposts/flight_card', locals: { target_flight: target_flight } %>  
-    <% end %>
-    <div class="micropost_actions">
-      <div class="micropost_action_block">
-        <%= link_to micropost_path(id: micropost.id) do %>
-          <i class="fa-solid fa-comment"></i>
-        <% end %>
-        <span><%= micropost.number_of_replied%></span>
-      </div>
-      <div class="micropost_action_block">
-      <%= link_to 'シェアボタン', share_relationships_path(shared_id: micropost.id), method: :post %>  
-          <%
-=begin%>
- <%= link_to controller: "micropost", action: "share_micropost" do %> 
-<%
-=end%>
-          <%
-=begin%>
- <i class="fa-solid fa-retweet"></i>
-        <% end %>  
-<%
-=end%>
-        <span><%= micropost.number_of_shared%></span>
-      </div>
-      <div class="micropost_action_block">
-        <i class="fa-solid fa-thumbs-up"></i>
-        <span>122</span>
-      </div>
-    </div>
-  </div>
-</div> 
+  <% end %>
+<% end %>
+<%= render partial: 'microposts/micropost_content', locals: { micropost: micropost } %>
+<% if micropost.is_flight_attached %>
+  <%= render partial: 'microposts/flight_card', locals: { micropost: micropost } %>
 <% end %>

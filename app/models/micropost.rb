@@ -25,7 +25,7 @@ class Micropost < ApplicationRecord
   has_many_attached :images
   #バリデーション
   validates :user_id, presence: true
-  validates :content, presence: true, length: { maximum: 140 }
+  validates :content, presence: true, length: { maximum: 140 }, if: :is_sharing_micropost?
   validates :images,   content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" },
                       size: { less_than: 5.megabytes, message: "should be less than 5MB" }
   def display_image
@@ -49,11 +49,29 @@ class Micropost < ApplicationRecord
     replied_microposts
   end
 
+  def get_shared_micropost
+    share_relationship = ShareRelationship.find_by(sharing_id: self.id)
+    share_relationship.nil? ? nil : Micropost.find(share_relationship.shared_id)
+  end
+
   def number_of_replied
     ReplyRelationship.where("replied_id = ?", self.id).count
   end
 
   def number_of_shared
     ShareRelationship.where("shared_id = ?", self.id).count
+  end
+
+  def is_shared_by_current_user?(user)
+    share_relationships = ShareRelationship.where("shared_id = ?", self.id)
+    current_user_micropost_ids = user.microposts.ids
+    share_relationships.each do |share_relationship|
+      return true if current_user_micropost_ids.include?(share_relationship.sharing_id)
+    end
+    return false
+  end
+
+  def is_sharing_micropost?
+    self.is_sharing_micropost ? true : false
   end
 end

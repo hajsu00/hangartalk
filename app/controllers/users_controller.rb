@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(25)
+    @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(10)
     redirect_to root_url and return unless @user.activated?
   end
   def new
