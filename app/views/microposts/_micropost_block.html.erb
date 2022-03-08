@@ -7,6 +7,9 @@
     <% if micropost.is_sharing_micropost? %>
       <i class="fa-solid fa-retweet"></i>
       <span class="name_reply"><%= micropost.user.name %>さんがシェアしました</span>
+      <% if current_user?(micropost.user) %>
+        <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+      <% end %>
       <% if !micropost.content.nil? %>
         <%= render partial: 'microposts/micropost_content', locals: { micropost: micropost } %>
       <% end %>
@@ -26,6 +29,7 @@
     <% if micropost.is_shared_by_current_user?(current_user) %>
       <i class="fa-solid fa-retweet"></i>
     <% else %>
+
       <%= link_to share_relationships_path(shared_id: micropost.id), method: :post do %>
         <i class="fa-solid fa-retweet"></i>
       <% end %>
