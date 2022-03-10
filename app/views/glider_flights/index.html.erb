@@ -11,7 +11,12 @@
     <!-- 過去のフライトログ -->
     <%= render 'glider_initial_log' if @glider_flights.current_page == 1 %> 
     <!-- 一覧表（DBから取得） -->
-    <%= render partial: "show_glider_flight_log", locals: { glider_flights: @glider_flights } %>
+    <%= render partial: "show_glider_flight_log", collection: @glider_flights, as: :glider_flight %>
+    <div class="display-flex">
+      <p><%= link_to "新しいフライトを登録する", new_glider_flight_path %></p>
+      <p><%= link_to "所属グループでのフライトを取得する", new_from_groups_glider_flights_path %></p>
+    </div> 
+    <%= paginate @glider_flights, left: 3, right: 3 %> 
     <!-- まとめ表 -->
     <%= render 'glider_page_summary' %>
   <% else %>

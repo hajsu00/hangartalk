@@ -6,14 +6,17 @@ class UsersController < ApplicationController
   def index
     @users = User.where(activated: true)
   end
+
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(10)
+    @microposts = @user.microposts.order(created_at: :desc).includes([:like_relationships, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
     redirect_to root_url and return unless @user.activated?
   end
+
   def new
     @user = User.new
   end
+
   def create
     @user = User.new(user_params)
     if @user.save
