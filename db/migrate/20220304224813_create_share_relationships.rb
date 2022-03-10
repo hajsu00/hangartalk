@@ -6,6 +6,6 @@ class CreateShareRelationships < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-      add_index :share_relationships, [:sharing_id, :shared_id]
+    add_index :share_relationships, [:sharing_id, :shared_id]
   end
 end

@@ -7,12 +7,7 @@
   </div>
   <div class="micropost_action_block">
   <% if micropost.is_shared_by_current_user?(current_user) %>
-    <%
-=begin%>
- <%= link_to micropost, method: :delete do %> 
-<%
-=end%>
-      <%= link_to share_relationship_url(id: micropost.id), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+      <%= link_to share_relationship_url(id: micropost.id), method: :delete do %>
       <i class="fa-solid fa-retweet"></i>
     <% end %>
   <% else %>
@@ -20,10 +15,18 @@
       <i class="fa-solid fa-retweet"></i>
     <% end %>
   <% end %>  
-    <span><%= micropost.number_of_shared%></span>
+    <span><%= micropost.number_of_shared %></span>
   </div>
   <div class="micropost_action_block">
-    <i class="fa-solid fa-thumbs-up"></i>
-    <span>122</span>
+  <% if micropost.is_liked_by_current_user?(current_user) %>
+    <%= link_to like_relationship_path(id: micropost.id), method: :delete do %>
+      <i class="fa-solid fa-thumbs-up"></i>
+    <% end %>
+  <% else %>
+    <%= link_to like_relationships_path(id: micropost.id), method: :post do %>
+      <i class="fa-solid fa-thumbs-up"></i>
+    <% end %>
+  <% end %>
+    <span><%= micropost.number_of_liked %></span>
   </div>
 </div>

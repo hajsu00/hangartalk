@@ -51,4 +51,5 @@ Rails.application.routes.draw do
   resources :glider_micropost_relationships,  only: [:new, :create]
   resources :reply_relationships,  only: [:new, :create]
   resources :share_relationships,  only: [:new, :create, :destroy]
+  resources :like_relationships,  only: [:create, :destroy]
 end
