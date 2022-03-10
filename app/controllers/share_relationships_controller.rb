@@ -7,10 +7,10 @@ class ShareRelationshipsController < ApplicationController
     if @sharing_micropost.save
       @sharing_micropost.create_sharing_relationships!(shared_id: @shared_micropost.id)
       flash[:success] = "投稿をシェアしました！"
-      redirect_to root_url
+      redirect_to request.referrer || root_url
     else
       @microposts = current_user.feed
-      render 'static_pages/top'
+      redirect_to request.referrer || root_url
     end
   end
 
