@@ -18,7 +18,9 @@
       <%= render partial: 'microposts/micropost', locals: { micropost: micropost } %>
     <% end %>
   </div>
-  <div class="micropost_actions">
+  <%
+=begin%>
+ <div class="micropost_actions">
     <div class="micropost_action_block">
       <%= link_to micropost_path(id: micropost.id) do %>
         <i class="fa-solid fa-comment"></i>
@@ -27,7 +29,9 @@
     </div>
     <div class="micropost_action_block">
     <% if micropost.is_shared_by_current_user?(current_user) %>
-      <i class="fa-solid fa-retweet"></i>
+      <%= link_to "#" do %>
+        <i class="fa-solid fa-retweet"></i>
+      <% end %>
     <% else %>
 
       <%= link_to share_relationships_path(shared_id: micropost.id), method: :post do %>
@@ -40,6 +44,8 @@
       <i class="fa-solid fa-thumbs-up"></i>
       <span>122</span>
     </div>
-  </div>
+  </div> 
+<%
+=end%>
 </div> 
 <% end %>

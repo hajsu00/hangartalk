@@ -20,11 +20,11 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
   # post '/share_micropost/:id', to: 'microposts#share_micropost'
-  resources :users do
-    collection do
-      get :select_new_flight, :select_flight_log
-    end
-  end
+  # resources :users do
+  #   collection do
+  #     get :select_new_flight, :select_flight_log
+  #   end
+  # end
   resources :glider_flights do
     collection do
       get :new_from_groups
@@ -50,5 +50,5 @@ Rails.application.routes.draw do
   resources :glider_flight_collection,  only: [:new, :create]
   resources :glider_micropost_relationships,  only: [:new, :create]
   resources :reply_relationships,  only: [:new, :create]
-  resources :share_relationships,  only: [:new, :create]
+  resources :share_relationships,  only: [:new, :create, :destroy]
 end
