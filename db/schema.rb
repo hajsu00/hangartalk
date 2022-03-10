@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_04_224813) do
+ActiveRecord::Schema.define(version: 2022_03_10_013111) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -222,6 +222,16 @@ ActiveRecord::Schema.define(version: 2022_03_04_224813) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "like_relationships", charset: "utf8mb3", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "micropost_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["micropost_id"], name: "index_like_relationships_on_micropost_id"
+    t.index ["user_id", "micropost_id"], name: "index_like_relationships_on_user_id_and_micropost_id"
+    t.index ["user_id"], name: "index_like_relationships_on_user_id"
+  end
+
   create_table "microposts", charset: "utf8mb3", force: :cascade do |t|
     t.text "content"
     t.boolean "is_flight_attached"
@@ -291,6 +301,8 @@ ActiveRecord::Schema.define(version: 2022_03_04_224813) do
   add_foreign_key "glider_micropost_relationships", "microposts"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
+  add_foreign_key "like_relationships", "microposts"
+  add_foreign_key "like_relationships", "users"
   add_foreign_key "microposts", "users"
   add_foreign_key "reply_relationships", "microposts", column: "replied_id"
   add_foreign_key "reply_relationships", "microposts", column: "replying_id"

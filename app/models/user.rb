@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :glider_flights, dependent: :destroy
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
+  has_many :like_rekationships, dependent: :destroy
 
   has_one :aeroplane_initial_log, dependent: :destroy
   has_one :glider_initial_log, dependent: :destroy
