@@ -7,7 +7,14 @@
   </div>
   <div class="micropost_action_block">
   <% if micropost.is_shared_by_current_user?(current_user) %>
-    <i class="fa-solid fa-retweet"></i>
+    <%
+=begin%>
+ <%= link_to micropost, method: :delete do %> 
+<%
+=end%>
+      <%= link_to share_relationship_url(id: micropost.id), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+      <i class="fa-solid fa-retweet"></i>
+    <% end %>
   <% else %>
     <%= link_to share_relationships_path(shared_id: micropost.id), method: :post do %>
       <i class="fa-solid fa-retweet"></i>

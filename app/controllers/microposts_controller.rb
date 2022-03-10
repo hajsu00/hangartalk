@@ -41,6 +41,7 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
+    binding.pry
     @glider_micropost = GliderMicropostRelationship.find_by(micropost_id: @micropost.id)
     @replying_relationship = ReplyRelationship.find_by(replying_id: @micropost.id)
     @replied_relationship = ReplyRelationship.find_by(replied_id: @micropost.id)
@@ -77,6 +78,7 @@ class MicropostsController < ApplicationController
   end
 
   def correct_user
+    binding.pry
     @micropost = current_user.microposts.find_by(id: params[:id])
     redirect_to root_url if @micropost.nil?
   end
