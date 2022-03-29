@@ -1,5 +1,5 @@
 {
-  "name": "hanger-talk-prototype",
+  "name":"hanger_talk",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.0.0",
@@ -14,5 +14,25 @@
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^3"
-  }
+  },
+  "description": "This README would normally document whatever steps are necessary to get the application up and running.",
+  "main": "babel.config.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hajsu00/hanger-talk_prototype.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hajsu00/hanger-talk_prototype/issues"
+  },
+  "homepage": "https://github.com/hajsu00/hanger-talk_prototype#readme"
 }
