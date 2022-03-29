@@ -1,8 +1,35 @@
 <% provide(:title, 'アカウントを作る') %>
 <% provide(:button_text, '認証メールを送信する') %>
-<h1>Sign up</h1>
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= render 'form' %>
+
+
+<div class="c-section-container">
+  <h2 class="u-text-center u-text__headline">アカウント登録</h2>
+  <div class="module-spacer--medium"></div>
+  <div class="c-section-display-flex">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <div class="form-item">
+        <%= f.label :name, "アカウントネーム" %>
+        <%= f.text_field :name, class: 'input' %>
+      </div>
+      <div class="form-item">
+        <%= f.label :email, "メールアドレス" %>
+        <%= f.email_field :email, class: 'input' %>
+      <div class="form-item">
+        <%= f.label :password, "パスワード" %>
+        <%= f.password_field :password, class: 'input' %>
+      </div>
+      <div class="form-item">
+        <%= f.label :password_confirmation, "パスワード（確認）" %>
+        <%= f.password_field :password_confirmation, class: 'input' %>
+      </div>
+      <div class="module-spacer--medium"></div>
+      <div class="center">
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% end %>
+      <div class="module-spacer--small"></div>
+      <%= link_to 'アカウントをお持ちの方はこちら', login_path, class: "u-text-small" %>
+    </div>
   </div>
 </div>
+
