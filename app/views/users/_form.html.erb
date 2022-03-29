@@ -1,7 +1,9 @@
-<%= form_with(model: @user, local: true) do |f| %>
+<%
+=begin%>
+ <%= form_with(model: @user, local: true) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
-  <%= f.label :name, "名前" %>
+  <%= f.label :name, "アカウントネーム" %>
   <%= f.text_field :name, class: 'form-control' %>
 
   <%= f.label :email, "メールアドレス" %>
@@ -14,4 +16,6 @@
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
+<% end %> 
+<%
+=end%>

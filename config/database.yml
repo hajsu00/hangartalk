@@ -3,19 +3,19 @@ default: &default
   encoding: utf8
   reconnect: false
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV['DATABASE_USER'] %>
+  username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost
 
 development:
   <<: *default
-  database: hangertalk_development
+  database: hanger-talk_development
   socket: /tmp/mysql.sock
 test:
   <<: *default
-  database: hangertalk_test
+  database: hanger-talk_test
   socket: /tmp/mysql.sock
 production:
   <<: *default
-  database: hangertalk_production
+  database: hanger-talk_production
   socket: /var/run/mysqld/mysqld.sock
