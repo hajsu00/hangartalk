@@ -5,7 +5,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module HangerTalkPrototype
+module HangerTalk
   class Application < Rails::Application
     config.load_defaults 6.1
     # ブラウザ側でJavaScriptが無効になっていた場合（Ajaxリクエストが送れない場合）でもうまく動くように
