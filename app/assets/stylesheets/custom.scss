@@ -1,866 +1,866 @@
-/* universal */
-ul {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-li {
-  list-style-type: none;
-}
-
-/* typography */
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1;
-}
-h1 {
-  font-size: 3em;
-  letter-spacing: -2px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-h2 {
-  font-size: 1.2em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: center;
-  font-weight: bold;
-  color: #333;
-  text-decoration: underline;
-  text-underline-offset: 15px;
-  text-decoration-color: orange;
-}
-h3 {
-  font-size: 1em;
-  letter-spacing: -1px;
-  margin-bottom: 30px;
-  text-align: left;
-  font-weight: normal;
-  color: #333;
-  text-decoration: underline;
-  text-underline-offset: 5px;
-}
-p {
-  font-size: 1.1em;
-  line-height: 1.7em;
-}
-
-/* header */
-#logo {
-  float: left;
-  margin-right: 10px;
-  font-size: 1.7em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: -1px;
-  padding-top: 9px;
-  font-weight: bold;
-}
-#logo:hover {
-  color: #fff;
-  text-decoration: none;
-}
-
-/*ナビゲーションバー*/
-.header-nav {
-  list-style-type: none;
-  height: 80px;
-  width: 100%;
-}
-.header-nav-list {
-  float: right;
-}
-.header-nav-list li{
-  width: 140px;
-  text-align: center;
-  // list-style-type: none;
-  position: relative;
-  float: left;
-}
-.header-nav-list li ul{
-  // list-style-type: none;
-  display: none;
-  position: absolute;
-  padding: 0;
-  width: auto;
-}
-.header-nav-list li ul li{
-	margin: 0 auto;
-  margin-top: 10px;
-}
-.header-nav-list li:hover > ul {
-  color: #e4e4e4; /* メニュー項目にマウスが載ったときの文字色変更 */
-  display: block;
-}
-
-// body{
-//   width:100%; /*ページ全体の幅は100%と指定する*/	
-//   text-align:center; /*ページ全体を中央揃えにする*/
-// }
-// #wrap{ 
-//   width: 960px;	   /*全体の幅を指定する*/  
-//   margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
-//   text-align:left;   /*全体を左揃えにする。*/
-// }
-.content {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-/* sidebar */
-.main-sidebar {
-  width: 250px;
-  margin: 10px 40px;
-  display: block;
-}
-.sidebar-user-name {
-  text-align: center;
-  font-weight: bold; 
-}
-.user-stats {
-  text-align: center;
-}
-.user-stats a{
-  display: inline-block;
-  margin: 10px 5px;
-}
-.user-stats p{
-  margin-top: 0;
-}
-.side-menu {
-  text-align: center;
-}
-.side-menu li{
-  margin-top: 20px;
-}
-
-.edit-button {
-  display: flex;
-}
-
-.value {
-  float: right;
-}
-
-/* footer */
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-}
-footer a {
-  color: #555;
-}
-footer a:hover {
-  color: #222;
-}
-footer small {
-  float: left;
-}
-footer ul {
-  float: right;
-  list-style: none;
-}
-footer ul li {
-  float: left;
-  margin-left: 15px;
-}
-
-/* mixins, variables, etc. */
-$gray-medium-light: #eaeaea;
-
-@mixin box_sizing {
-  -moz-box-sizing:    border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing:         border-box;
-}
-
-/* miscellaneous */
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
-}
-
-/* forms */
-#session_remember_me {
-  width: auto;
-  margin-left: 0;
-}
-
-/* microposts */
-// .microposts {
-//   list-style: none;
-//   padding: 0;
-//   li {
-//     padding: 10px 0;
-//     border-top: 1px solid #e8e8e8;
-//   }
-  // .user {
-  //   margin-top: 5em;
-  //   padding-top: 0;
-  // }
-  // // .content {
-  // //   display: block;
-  // //   margin-left: 60px;
-  // //   img {
-  // //     display: block;
-  // //     padding: 5px 0;
-  // //   }
-  // // }
-  // .timestamp {
-  //   display: block;
-  //   margin-left: 60px;
-  // }
-
-// aside {
-//   textarea {
-//     height: 100px;
-//     margin-bottom: 5px;
-//   }
-// }
-// span.image {
-//   margin-top: 10px;
-//   input {
-//     border: 0;
-//   }
+// /* universal */
+// ul {
+//   padding-left: 20px;
+//   padding-right: 20px;
 // }
 
-/* フライトログ */
-.logbook-table {
-  display: block;
-  overflow-x: scroll;
-  white-space: nowrap;
-  -webkit-overflow-scrolling: touch;
-  text-align: center;
-  .logbook-header {
-    // display: table;
-    display: flex;
-    // height: 180px;
-    .three-rows-block {
-      display: inline-block;
-      // height: 180px;
-      .second-row-block {
-        display: flex;
-        .two-rows-block {
-          display: inline-block;
-          // height: 120px;
-          .third-row-block {
-            display: flex;
-          }
-      }
-      }
-    }
-  }
-}
-.three-rows-table-header {
-  border: solid 1px #a5d1f1;
-  height: 180px;
-  width: 80px;
-  text-align:center;
-}
-.two-rows-table-header {
-  border: solid 1px #a5d1f1;
-  height: 120px;
-  width: 80px;
-}
-.one-row-table-header {
-  border: solid 1px #a5d1f1;
-  height: 60px;
-  // width: 80px;
-}
-.logbook-data-row {
-  display: flex;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px #ccc;
-}
-.log-number-cell, .landing-number-cell {
-  width: 60px;
-  text-align:center;
-}
-
-.departure-date-cell {
-  width: 120px;
-  text-align:center;
-}
-.departure-and-arrival-point-cell {
-  width: 150px;
-  text-align:center;
-}
-
-.glider-type-cell, .glider-ident-cell, .takeoff-time-cell, .landing-time-cell {
-  width: 80px;
-  text-align:center;
-}
-.table-data {
-  width: 80px;
-  text-align:center;
-}
-.table-row {
-  display: flex;
-}
-.block {
-  display: block;
-}
-
-//ページ合計
-.page-total-block {
-  display: block;
-}
-.page-total-row {
-  display: flex;
-  border: solid 1px #a5d1f1;
-  padding: 10px 0;
-}
-.page-total-header {
-  width: 710px;
-  text-align:center;
-}
-.glider-total-block {
-  display: block;
-}
-.entire-row {
-  display: flex;
-}
-.edit-delete-link {
-  margin-top: 26px;
-  margin-left: 15px;
-}
-
-.initial-log_header {
-  width: 710px;
-}
-
-th, td {
-  padding: 5px 15px;
-  border: solid 1px #a5d1f1;
-}
-th {
-  color: #0d90f3;/* 見出しの文字色 */
-  background-color: #d0ebfd; /* 見出しの背景色 */
-}
-tr p{
-  text-align: right;
-}
-
-//グループ
-.group-detail {
-  display:block;
-}
-
-//「新しいフライト」ページ
-.select-category {
-  flex-direction: column;
-}
-
-//フォーム
-.main {
-  display: block;
-  margin-right: 40px;
-  margin-left: 40px;
-}
-.content-outer-block {
-  display: block;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px #ccc;
-}
-.content-inner-block {
-  display: block;
-  padding: 20px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px #ccc;
-}
-
-.input-field {
-  // display: block;
-  height:50px;
-}
-.label{
-	// margin-right: 20px;
-	width: auto;
-  height:50px;
-	border-left: solid 3px #FF6701;
-	padding-left: 10px;
-}
-.form-control {
-  float: right;
-  width:120px;
-  height:50px;
-}
-.radio-button-block {
-  // display: inline-block;
-  // float: left;
-}
-
-.radio-element {
-  display:inline-block;
-  // display: flex;
-  // float: left;
-  // display: flex;
-  // display: flex
-}
-.radio-button {
-  // display: inline-block;
-
-}
-.radio-label {
-  display:inline-block;
-  // display:inline;
-}
-.check-box-block {
-  display: inline-block;
-}
-.check-box-element {
-  // height:50px;
-  display: inline-block;
-}
-.check-box-label {
-
-}
-
-input, textarea, select, .uneditable-input {
-  border: 1px solid #bbb;
-  width: 100%;
-  margin-bottom: 15px;
-  @include box_sizing;
-}
-input {
-  height: auto !important;
-}
-.checkbox {
-  margin-top: -10px;
-  margin-bottom: 10px;
-  span {
-    margin-left: 20px;
-    font-weight: normal;
-  }
-}
-
-// *,
-// *:before,
-// *:after {
-//   -webkit-box-sizing: inherit;
-//   box-sizing: inherit;
+// li {
+//   list-style-type: none;
 // }
 
-// html {
-//   -webkit-box-sizing: border-box;
-//   box-sizing: border-box;
-//   // font-size: 62.5%;/*rem算出をしやすくするために*/
+// /* typography */
+// h1, h2, h3, h4, h5, h6 {
+//   line-height: 1;
 // }
-
-// .btn,
-// a.btn,
-// button.btn {
-//   font-size: 1.6rem;
-//   font-weight: 700;
-//   line-height: 1.5;
-//   position: relative;
-//   display: inline-block;
-//   padding: 1rem 4rem;
-//   cursor: pointer;
-//   -webkit-user-select: none;
-//   -moz-user-select: none;
-//   -ms-user-select: none;
-//   user-select: none;
-//   -webkit-transition: all 0.3s;
-//   transition: all 0.3s;
+// h1 {
+//   font-size: 3em;
+//   letter-spacing: -2px;
+//   margin-bottom: 30px;
 //   text-align: center;
-//   vertical-align: middle;
-//   text-decoration: none;
-//   letter-spacing: 0.1em;
-//   color: #212529;
-//   border-radius: 0.5rem;
+// }
+// h2 {
+//   font-size: 1.2em;
+//   letter-spacing: -1px;
+//   margin-bottom: 30px;
+//   text-align: center;
+//   font-weight: bold;
+//   color: #333;
+//   text-decoration: underline;
+//   text-underline-offset: 15px;
+//   text-decoration-color: orange;
+// }
+// h3 {
+//   font-size: 1em;
+//   letter-spacing: -1px;
+//   margin-bottom: 30px;
+//   text-align: left;
+//   font-weight: normal;
+//   color: #333;
+//   text-decoration: underline;
+//   text-underline-offset: 5px;
+// }
+// p {
+//   font-size: 1.1em;
+//   line-height: 1.7em;
 // }
 
-// a.btn-border {
-//   border: 2px solid #000;
-//   border-radius: 0;
-//   background: #fff;
-// }
-
-// a.btn-border:hover {
+// /* header */
+// #logo {
+//   float: left;
+//   margin-right: 10px;
+//   font-size: 1.7em;
 //   color: #fff;
-//   background: #000;
+//   text-transform: uppercase;
+//   letter-spacing: -1px;
+//   padding-top: 9px;
+//   font-weight: bold;
+// }
+// #logo:hover {
+//   color: #fff;
+//   text-decoration: none;
 // }
 
-//その場しのぎコード
-.display-flex {
-  display: flex;
-}
-.page-nav {
-  margin-right: 10px;
-}
+// /*ナビゲーションバー*/
+// .header-nav {
+//   list-style-type: none;
+//   height: 80px;
+//   width: 100%;
+// }
+// .header-nav-list {
+//   float: right;
+// }
+// .header-nav-list li{
+//   width: 140px;
+//   text-align: center;
+//   // list-style-type: none;
+//   position: relative;
+//   float: left;
+// }
+// .header-nav-list li ul{
+//   // list-style-type: none;
+//   display: none;
+//   position: absolute;
+//   padding: 0;
+//   width: auto;
+// }
+// .header-nav-list li ul li{
+// 	margin: 0 auto;
+//   margin-top: 10px;
+// }
+// .header-nav-list li:hover > ul {
+//   color: #e4e4e4; /* メニュー項目にマウスが載ったときの文字色変更 */
+//   display: block;
+// }
 
-.table_body {
-  display: block;
-}
+// // body{
+// //   width:100%; /*ページ全体の幅は100%と指定する*/	
+// //   text-align:center; /*ページ全体を中央揃えにする*/
+// // }
+// // #wrap{ 
+// //   width: 960px;	   /*全体の幅を指定する*/  
+// //   margin: 0 auto;    /*マージンの指定をする、ブラウザ対策*/
+// //   text-align:left;   /*全体を左揃えにする。*/
+// // }
+// .content {
+//   display: flex;
+//   justify-content: center;
+//   flex-wrap: wrap;
+// }
 
-.glider_flights_collection_header {
-  display: flex;
-}
+// /* sidebar */
+// .main-sidebar {
+//   width: 250px;
+//   margin: 10px 40px;
+//   display: block;
+// }
+// .sidebar-user-name {
+//   text-align: center;
+//   font-weight: bold; 
+// }
+// .user-stats {
+//   text-align: center;
+// }
+// .user-stats a{
+//   display: inline-block;
+//   margin: 10px 5px;
+// }
+// .user-stats p{
+//   margin-top: 0;
+// }
+// .side-menu {
+//   text-align: center;
+// }
+// .side-menu li{
+//   margin-top: 20px;
+// }
 
-.micropost_actions {
-  display: flex;
-  margin-top: 10px;
-}
+// .edit-button {
+//   display: flex;
+// }
 
-.micropost_action_block {
-  margin-right: 50px;
-}
+// .value {
+//   float: right;
+// }
 
-.display-block {
-  display: block;
-}
+// /* footer */
+// footer {
+//   margin-top: 45px;
+//   padding-top: 5px;
+//   border-top: 1px solid #eaeaea;
+//   color: #777;
+// }
+// footer a {
+//   color: #555;
+// }
+// footer a:hover {
+//   color: #222;
+// }
+// footer small {
+//   float: left;
+// }
+// footer ul {
+//   float: right;
+//   list-style: none;
+// }
+// footer ul li {
+//   float: left;
+//   margin-left: 15px;
+// }
 
-// color
-$baseColor:   #58aeed; //ベースカラー
+// /* mixins, variables, etc. */
+// $gray-medium-light: #eaeaea;
 
-/*///////////////////////////////////////////////*/
+// @mixin box_sizing {
+//   -moz-box-sizing:    border-box;
+//   -webkit-box-sizing: border-box;
+//   box-sizing:         border-box;
+// }
 
-.twitter-container {
-  padding:0;
-  background: #ffffff;
-  overflow: hidden;
-  max-width: 600px;
-  margin: 20px auto;
-  font-size: 80%;
-  border: solid 1px #eeeeee;
+// /* miscellaneous */
+// .debug_dump {
+//   clear: both;
+//   float: left;
+//   width: 100%;
+//   margin-top: 45px;
+//   @include box_sizing;
+// }
 
-  a {
-    color: $baseColor;
-  }
+// /* forms */
+// #session_remember_me {
+//   width: auto;
+//   margin-left: 0;
+// }
 
-  /* タイトル部分 */
-  .twitter-title {
-    background: $baseColor;
-    padding: 10px;
-    text-align: center;
-    font-size: 150%;
-    color: #ffffff;
+// /* microposts */
+// // .microposts {
+// //   list-style: none;
+// //   padding: 0;
+// //   li {
+// //     padding: 10px 0;
+// //     border-top: 1px solid #e8e8e8;
+// //   }
+//   // .user {
+//   //   margin-top: 5em;
+//   //   padding-top: 0;
+//   // }
+//   // // .content {
+//   // //   display: block;
+//   // //   margin-left: 60px;
+//   // //   img {
+//   // //     display: block;
+//   // //     padding: 5px 0;
+//   // //   }
+//   // // }
+//   // .timestamp {
+//   //   display: block;
+//   //   margin-left: 60px;
+//   // }
 
-    .twitter-logo {
-      margin:  0 auto;
-      width: 20px;
-      height: 20px;
-      display: block;
-      background: url(../svg/twitter-logo.svg) center no-repeat;
-    }
+// // aside {
+// //   textarea {
+// //     height: 100px;
+// //     margin-bottom: 5px;
+// //   }
+// // }
+// // span.image {
+// //   margin-top: 10px;
+// //   input {
+// //     border: 0;
+// //   }
+// // }
 
-    span {
-      font-size: 20px;
-    }
-  }
+// /* フライトログ */
+// .logbook-table {
+//   display: block;
+//   overflow-x: scroll;
+//   white-space: nowrap;
+//   -webkit-overflow-scrolling: touch;
+//   text-align: center;
+//   .logbook-header {
+//     // display: table;
+//     display: flex;
+//     // height: 180px;
+//     .three-rows-block {
+//       display: inline-block;
+//       // height: 180px;
+//       .second-row-block {
+//         display: flex;
+//         .two-rows-block {
+//           display: inline-block;
+//           // height: 120px;
+//           .third-row-block {
+//             display: flex;
+//           }
+//       }
+//       }
+//     }
+//   }
+// }
+// .three-rows-table-header {
+//   border: solid 1px #a5d1f1;
+//   height: 180px;
+//   width: 80px;
+//   text-align:center;
+// }
+// .two-rows-table-header {
+//   border: solid 1px #a5d1f1;
+//   height: 120px;
+//   width: 80px;
+// }
+// .one-row-table-header {
+//   border: solid 1px #a5d1f1;
+//   height: 60px;
+//   // width: 80px;
+// }
+// .logbook-data-row {
+//   display: flex;
+//   padding-top: 5px;
+//   padding-bottom: 5px;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   background: #fff;
+//   border-radius: 5px;
+//   box-shadow: 0 2px 5px #ccc;
+// }
+// .log-number-cell, .landing-number-cell {
+//   width: 60px;
+//   text-align:center;
+// }
 
-  /* タイムライン部分 */
-  .twitter-contents {
-    overflow: hidden;
-    position: relative;
-    line-height: 135%;
+// .departure-date-cell {
+//   width: 120px;
+//   text-align:center;
+// }
+// .departure-and-arrival-point-cell {
+//   width: 150px;
+//   text-align:center;
+// }
 
-    &.scroll {
-      height: 500px;
-      overflow-y: scroll;
-    }
+// .glider-type-cell, .glider-ident-cell, .takeoff-time-cell, .landing-time-cell {
+//   width: 80px;
+//   text-align:center;
+// }
+// .table-data {
+//   width: 80px;
+//   text-align:center;
+// }
+// .table-row {
+//   display: flex;
+// }
+// .block {
+//   display: block;
+// }
 
-    .twitter-block {
-      width: 100%;
-      display: block;
-      padding: 10px;
-      margin-bottom: 5px;
-      border-bottom: solid 1px #eeeeee;
-      overflow: hidden;
+// //ページ合計
+// .page-total-block {
+//   display: block;
+// }
+// .page-total-row {
+//   display: flex;
+//   border: solid 1px #a5d1f1;
+//   padding: 10px 0;
+// }
+// .page-total-header {
+//   width: 710px;
+//   text-align:center;
+// }
+// .glider-total-block {
+//   display: block;
+// }
+// .entire-row {
+//   display: flex;
+// }
+// .edit-delete-link {
+//   margin-top: 26px;
+//   margin-left: 15px;
+// }
 
-      &:last-child {
-        border-bottom: solid 0px;
-      }
+// .initial-log_header {
+//   width: 710px;
+// }
 
-      /* アイコン画像 */
-      figure {
-        width: 50px;
-        padding: 0;
-        margin: 0;
-        float: left;
-        width: 50px;
+// th, td {
+//   padding: 5px 15px;
+//   border: solid 1px #a5d1f1;
+// }
+// th {
+//   color: #0d90f3;/* 見出しの文字色 */
+//   background-color: #d0ebfd; /* 見出しの背景色 */
+// }
+// tr p{
+//   text-align: right;
+// }
 
-        /* 正方形を用意 */
-        img{
-          border-radius: 50%;
-          width: 50px;
-          height: 50px;
-        }
-      }
-      /* コメントエリア */
-      .twitter-block-text {
-        margin: 0;
-        position: relative;
-        margin-left: 60px;
-        padding-right: 10px;
+// //グループ
+// .group-detail {
+//   display:block;
+// }
 
-        .name {
-          font-weight: bold;
+// //「新しいフライト」ページ
+// .select-category {
+//   flex-direction: column;
+// }
 
-          .name-reply {
-            color: #8a9aa4;
-            margin-left: 10px;
-          }
-        }
+// //フォーム
+// .main {
+//   display: block;
+//   margin-right: 40px;
+//   margin-left: 40px;
+// }
+// .content-outer-block {
+//   display: block;
+//   padding: 20px;
+//   margin-top: 20px;
+//   margin-bottom: 20px;
+//   background: #fff;
+//   border-radius: 5px;
+//   box-shadow: 0 2px 5px #ccc;
+// }
+// .content-inner-block {
+//   display: block;
+//   padding: 20px;
+//   margin-top: 10px;
+//   margin-bottom: 20px;
+//   background: #fff;
+//   border-radius: 5px;
+//   box-shadow: 0 2px 5px #ccc;
+// }
 
-        .date {
-          position: absolute;
-          top:0;
-          right: 20px;
-          text-align:right;
-          color: #8a9aa4;
-        }
+// .input-field {
+//   // display: block;
+//   height:50px;
+// }
+// .label{
+// 	// margin-right: 20px;
+// 	width: auto;
+//   height:50px;
+// 	border-left: solid 3px #FF6701;
+// 	padding-left: 10px;
+// }
+// .form-control {
+//   float: right;
+//   width:120px;
+//   height:50px;
+// }
+// .radio-button-block {
+//   // display: inline-block;
+//   // float: left;
+// }
 
-        .text {
+// .radio-element {
+//   display:inline-block;
+//   // display: flex;
+//   // float: left;
+//   // display: flex;
+//   // display: flex
+// }
+// .radio-button {
+//   // display: inline-block;
 
-          margin: 5px 0;
+// }
+// .radio-label {
+//   display:inline-block;
+//   // display:inline;
+// }
+// .check-box-block {
+//   display: inline-block;
+// }
+// .check-box-element {
+//   // height:50px;
+//   display: inline-block;
+// }
+// .check-box-label {
 
-          .in-pict img{
-            border-radius: 20px;
-            -webkit-border-radius: 20px;
-            -moz-border-radius: 20px;
-            margin: 5px 0;
-            width: 95%;
-            height: 200px;
-            object-fit: cover;
-          }
-        }
-      }
-    }
-  }
-}
+// }
 
-.flight-card {
-  display: block;
-  padding: 20px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  background: #fff;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px #ccc;
-}
+// input, textarea, select, .uneditable-input {
+//   border: 1px solid #bbb;
+//   width: 100%;
+//   margin-bottom: 15px;
+//   @include box_sizing;
+// }
+// input {
+//   height: auto !important;
+// }
+// .checkbox {
+//   margin-top: -10px;
+//   margin-bottom: 10px;
+//   span {
+//     margin-left: 20px;
+//     font-weight: normal;
+//   }
+// }
 
-.display-block{
-  display: block;
-}
+// // *,
+// // *:before,
+// // *:after {
+// //   -webkit-box-sizing: inherit;
+// //   box-sizing: inherit;
+// // }
+
+// // html {
+// //   -webkit-box-sizing: border-box;
+// //   box-sizing: border-box;
+// //   // font-size: 62.5%;/*rem算出をしやすくするために*/
+// // }
+
+// // .btn,
+// // a.btn,
+// // button.btn {
+// //   font-size: 1.6rem;
+// //   font-weight: 700;
+// //   line-height: 1.5;
+// //   position: relative;
+// //   display: inline-block;
+// //   padding: 1rem 4rem;
+// //   cursor: pointer;
+// //   -webkit-user-select: none;
+// //   -moz-user-select: none;
+// //   -ms-user-select: none;
+// //   user-select: none;
+// //   -webkit-transition: all 0.3s;
+// //   transition: all 0.3s;
+// //   text-align: center;
+// //   vertical-align: middle;
+// //   text-decoration: none;
+// //   letter-spacing: 0.1em;
+// //   color: #212529;
+// //   border-radius: 0.5rem;
+// // }
+
+// // a.btn-border {
+// //   border: 2px solid #000;
+// //   border-radius: 0;
+// //   background: #fff;
+// // }
+
+// // a.btn-border:hover {
+// //   color: #fff;
+// //   background: #000;
+// // }
+
+// //その場しのぎコード
+// .display-flex {
+//   display: flex;
+// }
+// .page-nav {
+//   margin-right: 10px;
+// }
+
+// .table_body {
+//   display: block;
+// }
+
+// .glider_flights_collection_header {
+//   display: flex;
+// }
+
+// .micropost_actions {
+//   display: flex;
+//   margin-top: 10px;
+// }
+
+// .micropost_action_block {
+//   margin-right: 50px;
+// }
+
+// .display-block {
+//   display: block;
+// }
+
+// // color
+// $baseColor:   #58aeed; //ベースカラー
+
+// /*///////////////////////////////////////////////*/
+
+// .twitter-container {
+//   padding:0;
+//   background: #ffffff;
+//   overflow: hidden;
+//   max-width: 600px;
+//   margin: 20px auto;
+//   font-size: 80%;
+//   border: solid 1px #eeeeee;
+
+//   a {
+//     color: $baseColor;
+//   }
+
+//   /* タイトル部分 */
+//   .twitter-title {
+//     background: $baseColor;
+//     padding: 10px;
+//     text-align: center;
+//     font-size: 150%;
+//     color: #ffffff;
+
+//     .twitter-logo {
+//       margin:  0 auto;
+//       width: 20px;
+//       height: 20px;
+//       display: block;
+//       background: url(../svg/twitter-logo.svg) center no-repeat;
+//     }
+
+//     span {
+//       font-size: 20px;
+//     }
+//   }
+
+//   /* タイムライン部分 */
+//   .twitter-contents {
+//     overflow: hidden;
+//     position: relative;
+//     line-height: 135%;
+
+//     &.scroll {
+//       height: 500px;
+//       overflow-y: scroll;
+//     }
+
+//     .twitter-block {
+//       width: 100%;
+//       display: block;
+//       padding: 10px;
+//       margin-bottom: 5px;
+//       border-bottom: solid 1px #eeeeee;
+//       overflow: hidden;
+
+//       &:last-child {
+//         border-bottom: solid 0px;
+//       }
+
+//       /* アイコン画像 */
+//       figure {
+//         width: 50px;
+//         padding: 0;
+//         margin: 0;
+//         float: left;
+//         width: 50px;
+
+//         /* 正方形を用意 */
+//         img{
+//           border-radius: 50%;
+//           width: 50px;
+//           height: 50px;
+//         }
+//       }
+//       /* コメントエリア */
+//       .twitter-block-text {
+//         margin: 0;
+//         position: relative;
+//         margin-left: 60px;
+//         padding-right: 10px;
+
+//         .name {
+//           font-weight: bold;
+
+//           .name-reply {
+//             color: #8a9aa4;
+//             margin-left: 10px;
+//           }
+//         }
+
+//         .date {
+//           position: absolute;
+//           top:0;
+//           right: 20px;
+//           text-align:right;
+//           color: #8a9aa4;
+//         }
+
+//         .text {
+
+//           margin: 5px 0;
+
+//           .in-pict img{
+//             border-radius: 20px;
+//             -webkit-border-radius: 20px;
+//             -moz-border-radius: 20px;
+//             margin: 5px 0;
+//             width: 95%;
+//             height: 200px;
+//             object-fit: cover;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }
+
+// .flight-card {
+//   display: block;
+//   padding: 20px;
+//   margin-top: 20px;
+//   margin-bottom: 20px;
+//   background: #fff;
+//   border-radius: 5px;
+//   box-shadow: 0 2px 5px #ccc;
+// }
+
+// .display-block{
+//   display: block;
+// }
 
 
 
-/*********** 自作CSS ***********/
-.c-section-display-flex {
-  display:flex;
-}
+// /*********** 自作CSS ***********/
+// .c-section-display-flex {
+//   display:flex;
+// }
 
-.form-item {
-  margin-bottom: 0.75em;
-  width: 100%;
-}
+// .form-item {
+//   margin-bottom: 0.75em;
+//   width: 100%;
+// }
 
-/*********** ログイン/アカウント登録ボタン ***********/
-.form-item input {
-  background: #fafafa;
-  border: none;
-  border-bottom: 2px solid #e9e9e9;
-  color: #666;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1em;
-  height: 50px;
-  transition: border-color 0.3s;
-  width: 100%;
-}
+// /*********** ログイン/アカウント登録ボタン ***********/
+// .form-item input {
+//   background: #fafafa;
+//   border: none;
+//   border-bottom: 2px solid #e9e9e9;
+//   color: #666;
+//   font-family: 'Open Sans', sans-serif;
+//   font-size: 1em;
+//   height: 50px;
+//   transition: border-color 0.3s;
+//   width: 100%;
+// }
 
-.form-item input:focus {
-  border-bottom: 2px solid #c0c0c0;
-  outline: none;
-}
+// .form-item input:focus {
+//   border-bottom: 2px solid #c0c0c0;
+//   outline: none;
+// }
 
-/*********** Module Spacer ***********/
-.module-spacer--extra-extra-small {
-  height: 12px
-}
-.module-spacer--extra-small {
-  height: 12px
-}
-.module-spacer--small {
-  height: 20px
-}
-.module-spacer--medium {
-  height: 32px
-}
-/*********** Section ***********/
-.c-main {
-  padding: 96px 0
-}
-.c-section-wrapin {
-  margin: 0 auto;
-  max-width: 575px;
-  position: relative;
-  padding: 0 1rem;
-  text-align: center;
-  width: 100%;
-}
+// /*********** Module Spacer ***********/
+// .module-spacer--extra-extra-small {
+//   height: 12px
+// }
+// .module-spacer--extra-small {
+//   height: 12px
+// }
+// .module-spacer--small {
+//   height: 20px
+// }
+// .module-spacer--medium {
+//   height: 32px
+// }
+// /*********** Section ***********/
+// .c-main {
+//   padding: 96px 0
+// }
+// .c-section-wrapin {
+//   margin: 0 auto;
+//   max-width: 575px;
+//   position: relative;
+//   padding: 0 1rem;
+//   text-align: center;
+//   width: 100%;
+// }
 
-.c-section-container {
-  margin: 0 auto;
-  max-width: 400px;
-  padding: 1rem;
-  height: auto;
-  width: calc(100% - 2rem);
-}
+// .c-section-container {
+//   margin: 0 auto;
+//   max-width: 400px;
+//   padding: 1rem;
+//   height: auto;
+//   width: calc(100% - 2rem);
+// }
 
-.c-section__loading {
-  align-items: center;
-  background: rgba(255, 255, 255, 0.7);
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  opacity: 0.9;
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-  z-index: 9999;
-}
+// .c-section__loading {
+//   align-items: center;
+//   background: rgba(255, 255, 255, 0.7);
+//   display: flex;
+//   flex-flow: column;
+//   justify-content: center;
+//   opacity: 0.9;
+//   position: fixed;
+//   top: 0;
+//   left: 0;
+//   height: 100vh;
+//   width: 100%;
+//   z-index: 9999;
+// }
 
-.c-section__loading > p {
-  color: #444;
-  font-weight: 600;
-  margin-top: 1rem;
-  text-align: center;
-}
+// .c-section__loading > p {
+//   color: #444;
+//   font-weight: 600;
+//   margin-top: 1rem;
+//   text-align: center;
+// }
 
-.center {
-  margin: 0 auto;
-  text-align: center;
-}
+// .center {
+//   margin: 0 auto;
+//   text-align: center;
+// }
 
-.p-grid__column {
-  align-items: center;
-  display: flex;
-  flex-flow: column;
-}
+// .p-grid__column {
+//   align-items: center;
+//   display: flex;
+//   flex-flow: column;
+// }
 
-.p-grid__row {
-  display: flex;
-  flex-flow: row wrap;
-}
+// .p-grid__row {
+//   display: flex;
+//   flex-flow: row wrap;
+// }
 
-.p-grid__list-images {
-  display: flex;
-  flex-flow: wrap;
-}
+// .p-grid__list-images {
+//   display: flex;
+//   flex-flow: wrap;
+// }
 
-.p-grid__list-images > .p-media__thumb {
-  margin: .5rem;
-  width: calc(50% - 1rem);
-}
+// .p-grid__list-images > .p-media__thumb {
+//   margin: .5rem;
+//   width: calc(50% - 1rem);
+// }
 
-.p-media__thumb {
-  position: relative;
-  overflow: hidden;
-  width: 100%
-}
+// .p-media__thumb {
+//   position: relative;
+//   overflow: hidden;
+//   width: 100%
+// }
 
-.p-media__thumb::before {
-  content: "";
-  display: block;
-  padding-top: 100%;
-}
+// .p-media__thumb::before {
+//   content: "";
+//   display: block;
+//   padding-top: 100%;
+// }
 
-.p-media__thumb > img {
-  position: absolute;
-  object-fit: cover;
-  object-position: center;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-}
+// .p-media__thumb > img {
+//   position: absolute;
+//   object-fit: cover;
+//   object-position: center;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: auto;
+// }
 
-/*********** Footer ***********/
-.l-footer {
-  display: flex;
-  flex-flow: row wrap;
-  list-style: none;
-  margin: 0 1rem;
-}
+// /*********** Footer ***********/
+// .l-footer {
+//   display: flex;
+//   flex-flow: row wrap;
+//   list-style: none;
+//   margin: 0 1rem;
+// }
 
-.l-footer > a {
-  color: #444;
-  font-size: .9rem;
-  margin-right: 1rem;
-}
+// .l-footer > a {
+//   color: #444;
+//   font-size: .9rem;
+//   margin-right: 1rem;
+// }
 
-.u-text-small {
-  font-size: .9rem;
-}
+// .u-text-small {
+//   font-size: .9rem;
+// }
 
-.u-text__link-none {
-  text-decoration: none;
-}
+// .u-text__link-none {
+//   text-decoration: none;
+// }
 
-.u-text-left {
-  text-align: left;
-}
+// .u-text-left {
+//   text-align: left;
+// }
 
-.u-text-right {
-  text-align: right;
-}
+// .u-text-right {
+//   text-align: right;
+// }
 
-.u-text-center {
-  text-align: center;
-}
+// .u-text-center {
+//   text-align: center;
+// }
 
-.u-text__headline {
-  color: #4dd0e1;
-  font-size: 1.563rem;
-  margin: 0 auto 1rem auto;
-}
+// .u-text__headline {
+//   color: #4dd0e1;
+//   font-size: 1.563rem;
+//   margin: 0 auto 1rem auto;
+// }
 
-.u-display-none {
-  display: none;
-}
+// .u-display-none {
+//   display: none;
+// }
 
-@media screen and (min-width: 576px) {
-  /*********** Module Spacer ***********/
-  .module-spacer--extra-extra-small {
-      height: 16px
-  }
-  .module-spacer--extra-small {
-      height: 20px
-  }
-  .module-spacer--small {
-      height: 32px
-  }
+// @media screen and (min-width: 576px) {
+//   /*********** Module Spacer ***********/
+//   .module-spacer--extra-extra-small {
+//       height: 16px
+//   }
+//   .module-spacer--extra-small {
+//       height: 20px
+//   }
+//   .module-spacer--small {
+//       height: 32px
+//   }
 
-  /*********** Section ***********/
-  .c-section-wrapin {
-      max-width: 1024px;
-  }
-}
+//   /*********** Section ***********/
+//   .c-section-wrapin {
+//       max-width: 1024px;
+//   }
+// }
 
-@media screen and (min-width:1024px) {
-  /*********** Module Spacer ***********/
-  .module-spacer--medium {
-      height: 48px
-  }
-}
+// @media screen and (min-width:1024px) {
+//   /*********** Module Spacer ***********/
+//   .module-spacer--medium {
+//       height: 48px
+//   }
+// }
