@@ -1,51 +1,52 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: :destroy
+  before_action :logged_in_user, only: [:index, :following, :followers]
+  # before_action :correct_user,   only: [:edit, :update]
+  # before_action :admin_user,     only: :destroy
 
   def index
-    @users = User.where(activated: true)
+    # @users = User.where(activated: true)
+    @users = User.all
   end
 
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc).includes([:like_relationships, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
-    redirect_to root_url and return unless @user.activated?
+    # redirect_to root_url and return unless @user.activated?
   end
 
-  def new
-    @user = User.new
-  end
+  # def new
+  #   @user = User.new
+  # end
 
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      @user.send_activation_email
-      flash[:info] = "入力されたメールアドレスに認証メールを送信しました。アカウントの有効化を行ってください。"
-      redirect_to root_url
-    else
-      flash[:danger] = "ユーザー登録に失敗しました。入力内容を確認してください。"
-      redirect_to new_user_path
-    end
-  end
+  # def create
+  #   @user = User.new(user_params)
+  #   if @user.save
+  #     @user.send_activation_email
+  #     flash[:info] = "入力されたメールアドレスに認証メールを送信しました。アカウントの有効化を行ってください。"
+  #     redirect_to root_url
+  #   else
+  #     flash[:danger] = "ユーザー登録に失敗しました。入力内容を確認してください。"
+  #     redirect_to new_user_path
+  #   end
+  # end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def update
-    if @user.update(user_params)
-      flash[:success] = "プロフィールを更新しました"
-      redirect_to @user
-    else
-      render 'edit'
-    end
-  end
+  # def update
+  #   if @user.update(user_params)
+  #     flash[:success] = "プロフィールを更新しました"
+  #     redirect_to @user
+  #   else
+  #     render 'edit'
+  #   end
+  # end
 
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to users_url
-  end
+  # def destroy
+  #   User.find(params[:id]).destroy
+  #   flash[:success] = "User deleted"
+  #   redirect_to users_url
+  # end
 
   def following
     @title = "Following"
