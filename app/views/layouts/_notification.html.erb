@@ -1,0 +1,8 @@
+<% flash.each do |message_type, message| %>
+  <% case message_type %>
+    <% when 'success', 'info', 'notice' %>
+      <%= render partial: 'layouts/message', locals: { message: message, bg_color: 'bg-teal-100', border_color: 'border-teal-500', text_color: 'text-teal-900' } %>
+    <% when 'warning', 'danger', 'alert' %>
+      <%= render partial: 'layouts/message', locals: { message: message, bg_color: 'bg-red-100', border_color: 'border-red-400', text_color: 'text-red-700' } %>
+  <% end %> 
+<% end %> 
