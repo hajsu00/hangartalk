@@ -14,12 +14,11 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="content">
-      <%= render 'layouts/sidebar' %> 
-      <% flash.each do |message_type, message| %>
-        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <%= render 'layouts/sidebar' %>
+
+      <% if flash.any? %>
+        <%= render 'layouts/notification' %>
       <% end %>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
       
       <!-- 仮コード-->
       <% if user_signed_in? %>
