@@ -2,7 +2,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :confirmable
 
   has_many :microposts, dependent: :destroy
   has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
@@ -28,7 +28,7 @@ class User < ApplicationRecord
   # has_secure_password
   # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
 
-  # ookieを使いログイン情報を保持
+  # cookieを使いログイン情報を保持
   def remember_me
     true
   end

@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
-  # devise_for :users, :controllers => {
-  #   sessions: 'users/sessions'
-  # }
+  # devise_for :users
+  devise_for :users, controllers: {
+    registrations: 'users/registrations',
+    sessions: 'users/sessions',
+    passwords: 'users/passwords',
+    confirmations: 'users/confirmations'
+  }
 
   devise_scope :user do
     root "devise/sessions#new"
@@ -35,8 +38,8 @@ Rails.application.routes.draw do
     end
   end
   resources :users, only: [:show]
-  resources :account_activations,       only: [:edit]
-  resources :password_resets,           only: [:new, :create, :edit, :update]
+  # resources :account_activations,       only: [:edit]
+  # resources :password_resets,           only: [:new, :create, :edit, :update]
   resources :microposts,                only: [:new, :create, :show, :destroy]
   resources :relationships,             only: [:create, :destroy]
   resources :aeroplane_flights,         only: [:new, :create, :show, :index, :destroy]

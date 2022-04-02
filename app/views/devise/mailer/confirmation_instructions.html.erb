@@ -1,5 +1,15 @@
-<p>Welcome <%= @email %>!</p>
+<%
+=begin%>
+ <p><%= @email %>さん</p> 
+<%
+=end%>
 
-<p>You can confirm your account email through the link below:</p>
+<p><%= @name %>さん</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>「Hanger Talk」へようこそ！</p>
+<p>以下のURLをクリックして、メールアドレスの認証を完了してください。</p>
+
+<p><%= link_to 'メールアドレスの認証', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p>※有効期限は本メールの発行から２４時間以内です。</p>
+<p>※このメールは送信専用です。ご返信をいただいてもご連絡できかねますのでご了承ください。</p>
