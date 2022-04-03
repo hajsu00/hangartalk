@@ -1,0 +1,23 @@
+<% provide(:title, @user.name) %>
+<div class="user-container">
+  <h1><%= @user.name %></h1>
+  <div class="user-microposts">
+    <%= render 'follow_form' if user_signed_in? %>
+
+      <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
+      <% binding.pry %>
+    <% if user_signed_in? %>
+      <p>ユーザー詳細です。</p>
+      <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
+    <% end %>
+    <%
+=begin%>
+ <% if @user.microposts.any? %>
+      <h3>投稿 (<%= @user.microposts.count %>)</h3>
+      <%= render partial: 'microposts/microposts_container' %> 
+
+    <% end %>
+<%
+=end%>
+  </div>
+</div>
