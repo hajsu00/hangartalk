@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "noreply@example.com"
+  default from: 'Hanger Talk(ハンガートーク)'
   layout 'mailer'
 end
