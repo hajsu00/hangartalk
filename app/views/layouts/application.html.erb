@@ -14,14 +14,13 @@
   <body>
     <%= render 'layouts/header' %>
     <div class="content">
-      <%= render 'layouts/sidebar' %>
-
       <% if flash.any? %>
         <%= render 'layouts/notification' %>
       <% end %>
       
       <!-- 仮コード-->
       <% if user_signed_in? %>
+        <%= render 'layouts/sidebar' %>
         <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
       <% end %>
       <!-- 仮コード-->

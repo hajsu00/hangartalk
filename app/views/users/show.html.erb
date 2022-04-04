@@ -3,9 +3,6 @@
   <h1><%= @user.name %></h1>
   <div class="user-microposts">
     <%= render 'follow_form' if user_signed_in? %>
-
-      <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
-      <% binding.pry %>
     <% if user_signed_in? %>
       <p>ユーザー詳細です。</p>
       <p><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></p>
