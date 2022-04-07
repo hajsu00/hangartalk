@@ -1,20 +1,19 @@
 <% provide(:title, 'グループ') %>
 
-<div class="group">
-  <h1>グループ</h1>
-  <div class="create-group">
-      <p><%= link_to "＋新しいグループを作成", new_group_path %></p>
+<div class='mx-auto px-4 py-10'>
+  <!-- 管理しているグループ -->
+  <h2 class="text-xl font-bold underline underline-offset-8">管理しているグループ</h2>
+  <div class='flex flex-row mx-auto px-4 py-10'>
+    <%= render partial: "group_card", collection: @groups_belonging_to, as: :group %> 
   </div>
-  <div class="groups-belong-to">
-    <h3>管理しているグループ</h3>
-    <%= render partial: "show_group_list", locals: { groups: @groups_belonging_to } %>
+  <!-- 参加しているグループ -->
+  <h2 class="text-xl font-bold underline underline-offset-8">参加しているグループ</h2>
+  <div class='flex flex-row mx-auto px-4 py-10'>
+    <%= render partial: "group_card", collection: @groups_belonging_to, as: :group %> 
   </div>
-  <div class="find-groups">
-  <h3>参加しているグループ</h3>
-    <%= render partial: "show_group_list", locals: { groups: @groups_belonging_to } %>
-  </div>
-    <div class="find-groups">
-  <h3>グループを見つける</h3>
-    <%= render partial: "show_group_list", locals: { groups: @groups } %>
+  <!-- グループを見つける -->
+  <h2 class="text-xl font-bold underline underline-offset-8">グループを見つける</h2>
+  <div class='flex flex-row mx-auto px-4 py-10'>
+    <%= render partial: "group_card", collection: @groups, as: :group %> 
   </div>
 </div>
