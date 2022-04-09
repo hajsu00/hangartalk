@@ -3,7 +3,7 @@ class ShareRelationshipsController < ApplicationController
   before_action :correct_user,   only: :destroy
   def create
     @shared_micropost = Micropost.find(params[:shared_id])
-    @sharing_micropost = current_user.microposts.new(content: '引用リツイート', is_flight_attached: false, is_sharing_micropost: true, images: [])
+    @sharing_micropost = current_user.microposts.new(content: nil, is_flight_attached: false, is_sharing_micropost: true, images: [])
     if @sharing_micropost.save
       @sharing_micropost.create_sharing_relationships!(shared_id: @shared_micropost.id)
       flash[:success] = "投稿をシェアしました！"
