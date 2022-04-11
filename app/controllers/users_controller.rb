@@ -5,13 +5,17 @@ class UsersController < ApplicationController
   # before_action :admin_user,     only: :destroy
 
   def index
-    # @users = User.where(activated: true)
-    @users = User.all
+    @user = User.find(params[:id])
+    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
+    render 'users/index'
   end
 
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.order(created_at: :desc).includes([:like_relationships, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
+    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
+    
+    
     # redirect_to root_url and return unless @user.activated?
   end
 
@@ -50,16 +54,18 @@ class UsersController < ApplicationController
   # end
 
   def following
-    @title = "Following"
+    @title = "フォロー"
     @user  = User.find(params[:id])
-    @users = @user.following
+    @users = @user.following.order(created_at: :desc).includes([following: :active_relationships, followers: :passive_relationships]).page(params[:page]).per(10)
+    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
     render 'show_follow'
   end
 
   def followers
-    @title = "Followers"
+    @title = "フォロワー"
     @user  = User.find(params[:id])
-    @users = @user.followers
+    @users = @user.followers.order(created_at: :desc).includes([following: :active_relationships, followers: :passive_relationships]).page(params[:page]).per(10)
+    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
     render 'show_follow'
   end
 
