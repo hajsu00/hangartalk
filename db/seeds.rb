@@ -1,13 +1,29 @@
 # メインのサンプルユーザーを1人作成する
 # User.create!(name: "Example User", email: "example@railstutorial.org", password: "foobar", password_confirmation: "foobar", admin: true, activated: true, activated_at: Time.zone.now)
-User.create!(name: "Example User", email: "example@railstutorial.org", password: "foobar", password_confirmation: "foobar", admin: true, confirmed_at: Time.zone.now)
+User.create!(name: "Example User",
+            email: "example@railstutorial.org",
+            introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
+            ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
+            location: "東京",
+            password: "foobar",
+            password_confirmation: "foobar",
+            admin: true,
+            confirmed_at: Time.zone.now
+)
 
 # 追加のユーザーをまとめて生成する
 99.times do |n|
   name  = Faker::Name.name
   email = "example-#{n + 1}@railstutorial.org"
   password = "password"
-  User.create!(name: name, email: email, password: password, password_confirmation: password)
+  User.create!(name: name,
+    email: email,
+    introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
+    ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
+    location: "東京",
+    password: password,
+    password_confirmation: password
+  )
 end
 
 # ユーザーの一部を対象にマイクロポストを生成する

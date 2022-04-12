@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   get  '/inquiry', to: 'static_pages#inquiry'
   get  '/policy', to: 'static_pages#policy'
 
+  # get  'users/:id/following', to: 'relationships#following_index'
+  # get  'users/:id/followers', to: 'relationships#followers_index'
+  
   resources :glider_flights do
     collection do
       get :new_from_groups
@@ -36,6 +39,7 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
+    resources :glider_flights
   end
   resources :users, only: [:show]
   # resources :account_activations,       only: [:edit]
@@ -43,7 +47,7 @@ Rails.application.routes.draw do
   resources :microposts,                only: [:new, :create, :show, :destroy]
   resources :relationships,             only: [:create, :destroy]
   resources :aeroplane_flights,         only: [:new, :create, :show, :index, :destroy]
-  resources :glider_flights,            only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  # resources :glider_flights,            only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :groups,                    only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :glider_group_flights,      only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :glider_initial_logs,       only: [:new, :create, :show, :edit, :update, :destroy]
