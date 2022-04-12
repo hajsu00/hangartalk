@@ -20,18 +20,4 @@ class RelationshipsController < ApplicationController
     #   format.js
     # end
   end
-
-  # def following_index
-  #   @user = User.find(params[:id])
-  #   @users = @user.following.order(created_at: :desc).includes([following: :active_relationships, followers: :passive_relationships]).page(params[:page]).per(10)
-  #   @glider_flights = current_user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
-  #   render 'users/index'
-  # end
-
-  # def followers_index
-  #   @user = User.find(params[:id])
-  #   @users = @user.followers.order(created_at: :desc).includes([following: :active_relationships, followers: :passive_relationships]).page(params[:page]).per(10)
-  #   @glider_flights = current_user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
-  #   render 'users/index'
-  # end
 end

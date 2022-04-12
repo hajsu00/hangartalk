@@ -25,9 +25,6 @@ Rails.application.routes.draw do
   get  '/faq',   to: 'static_pages#faq'
   get  '/inquiry', to: 'static_pages#inquiry'
   get  '/policy', to: 'static_pages#policy'
-
-  # get  'users/:id/following', to: 'relationships#following_index'
-  # get  'users/:id/followers', to: 'relationships#followers_index'
   
   resources :glider_flights do
     collection do

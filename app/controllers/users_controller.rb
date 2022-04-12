@@ -11,7 +11,9 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
+    users = User.includes([following: :active_relationships, followers: :passive_relationships])
+    @user = users.find(params[:id])
+    # @microposts = @user.microposts.order(created_at: :desc).page(params[:page]).per(10)
     @microposts = @user.microposts.order(created_at: :desc).includes([:like_relationships, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
     @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
     
@@ -35,8 +37,11 @@ class UsersController < ApplicationController
   #   end
   # end
 
-  # def edit
-  # end
+  def edit
+    users = User.includes([following: :active_relationships, followers: :passive_relationships])
+    @user = users.find(params[:id])
+    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
+  end
 
   # def update
   #   if @user.update(user_params)

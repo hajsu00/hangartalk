@@ -50,10 +50,12 @@
                 <div class="py-6 px-6 mt-32 sm:mt-0">
                   <% if @user != current_user %>
                     <% if current_user.following?(@user) %>
-                      <%= render partial: "shared/remove_button", locals: { item: "フォロー中" } %>
+                      <%= render partial: "shared/unfollow_button", locals: { item: "フォロー中" } %>
                     <% else %>
-                      <%= render partial: "shared/add_button", locals: { item: "フォロー" } %>
+                      <%= render partial: "shared/follow_button", locals: { item: "フォロー" } %>
                     <% end %>
+                  <% else %>
+                    <%= render partial: "shared/user_edit_button", locals: { item: "編集" } %>
                   <% end %>
                 </div>
               </div>
