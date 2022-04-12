@@ -12,7 +12,7 @@ module ApplicationHelper
   def show_flight_time(time)
     hour = time.div(3600)
     min = (time % 3600) / 60
-    "#{hour}:#{format('%02d', min)}"
+    "#{hour} + #{format('%02d', min)}"
   end
 
   def show_aircraft_type(aircraft_id)
