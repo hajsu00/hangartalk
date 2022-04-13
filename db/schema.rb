@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_10_013111) do
+ActiveRecord::Schema.define(version: 2022_04_12_223845) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -90,6 +90,12 @@ ActiveRecord::Schema.define(version: 2022_03_10_013111) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_aeroplane_initial_logs_on_user_id"
+  end
+
+  create_table "aircraft_categories", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "aircraft_types", charset: "utf8mb3", force: :cascade do |t|
@@ -222,6 +228,23 @@ ActiveRecord::Schema.define(version: 2022_03_10_013111) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "license_categories", charset: "utf8mb3", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "licenses", charset: "utf8mb3", force: :cascade do |t|
+    t.string "code"
+    t.integer "license_category"
+    t.integer "aircraft_category"
+    t.date "date_of_issue"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_licenses_on_user_id"
+  end
+
   create_table "like_relationships", charset: "utf8mb3", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "micropost_id", null: false
@@ -305,6 +328,7 @@ ActiveRecord::Schema.define(version: 2022_03_10_013111) do
   add_foreign_key "glider_micropost_relationships", "microposts"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
+  add_foreign_key "licenses", "users"
   add_foreign_key "like_relationships", "microposts"
   add_foreign_key "like_relationships", "users"
   add_foreign_key "microposts", "users"

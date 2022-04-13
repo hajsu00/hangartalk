@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'licenses/show'
+  get 'licenses/edit'
+  get 'licenses/index'
   # devise_for :users
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -37,6 +40,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
     resources :glider_flights
+    resources :licenses, only: [:new, :create, :index, :show]
   end
   resources :users, only: [:show]
   # resources :account_activations,       only: [:edit]

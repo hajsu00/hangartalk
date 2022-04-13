@@ -93,7 +93,7 @@
                   <%= render partial: "users/group_link", collection: @user.groups, as: :group %>
                 </div>
                 <div class="py-2">
-                  <%= render partial: "users/license_link" %>
+                  <%= render partial: "users/license_link", collection: @user.licenses, as: :license  %>
                 </div>
               </div>
             </div>

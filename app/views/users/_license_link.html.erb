@@ -1,5 +1,6 @@
-
+<%= link_to user_license_path(@user, @licenses) do %>
 <div class="mb-2 text-blueGray-600">
   <i class="fa-solid fa-address-card mr-2 text-lg text-blueGray-400"></i>
-  自家用操縦士（上級滑空）
+  <%= license.show_license_category %>
 </div>
+<% end %>

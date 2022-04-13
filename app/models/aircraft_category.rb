@@ -1,0 +1,2 @@
+class AircraftCategory < ApplicationRecord
+end
