@@ -13,15 +13,15 @@ User.create!(name: "Example User",
 
 user = User.find(1)
 user.licenses.create!(code: 'A1111111',
-                    license_category: 1,
-                    aircraft_category: 1,
+                    license_category_id: 1,
+                    aircraft_category_id: 1,
                     date_of_issue: Date.today
 )
 
 user = User.find(1)
 user.licenses.create!(code: 'A2222222',
-                    license_category: 2,
-                    aircraft_category: 1,
+                    license_category_id: 2,
+                    aircraft_category_id: 1,
                     date_of_issue: Date.today
 )
 

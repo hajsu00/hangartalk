@@ -55,7 +55,7 @@
                       <%= render partial: "shared/follow_button", locals: { item: "フォロー" } %>
                     <% end %>
                   <% else %>
-                    <%= render partial: "shared/user_edit_button", locals: { item: "編集" } %>
+                    <%= render partial: "shared/edit_user_button", locals: { item: "編集" } %>
                   <% end %>
                 </div>
               </div>
@@ -93,7 +93,13 @@
                   <%= render partial: "users/group_link", collection: @user.groups, as: :group %>
                 </div>
                 <div class="py-2">
-                  <%= render partial: "users/license_link", collection: @user.licenses, as: :license  %>
+                  <% if @user == current_user %>
+                    <%= link_to user_glider_flights_path(@user, @gliderflights) do %> 
+                      <%= render partial: "users/license_link", collection: @user.licenses, as: :license  %>
+                    <% end %>
+                  <% else %>
+                    <%= render partial: "users/license_link", collection: @user.licenses, as: :license  %>
+                  <% end %>
                 </div>
               </div>
             </div>
@@ -135,15 +141,15 @@
 
 <script>
 //初期表示は非表示
-document.getElementById("user-detail").style.visibility ="hidden";
+document.getElementById("user-detail").style.display == "none";
 function clickBtn(){
   const userDetail = document.getElementById("user-detail");
-  if(userDetail.style.visibility=="visible"){
+  if(userDetail.style.display == "none"){
     // hiddenで非表示
-    userDetail.style.visibility ="hidden";
+    userDetail.style.display = "block";
   }else{
     // visibleで表示
-    userDetail.style.visibility ="visible";
+    userDetail.style.display = "none";
   }
 }
 </script>

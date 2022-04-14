@@ -40,7 +40,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
     resources :glider_flights
-    resources :licenses, only: [:new, :create, :index, :show]
+    resources :licenses, only: [:new, :create, :index, :show, :edit]
   end
   resources :users, only: [:show]
   # resources :account_activations,       only: [:edit]

@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_223845) do
   end
 
   create_table "aircraft_categories", charset: "utf8mb3", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -229,20 +229,20 @@ ActiveRecord::Schema.define(version: 2022_04_12_223845) do
   end
 
   create_table "license_categories", charset: "utf8mb3", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "licenses", charset: "utf8mb3", force: :cascade do |t|
-    t.string "code"
-    t.integer "license_category"
-    t.integer "aircraft_category"
-    t.date "date_of_issue"
+    t.string "code", null: false
+    t.integer "license_category_id", null: false
+    t.integer "aircraft_category_id", null: false
+    t.date "date_of_issue", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_licenses_on_user_id"
+    t.index ["user_id", "license_category_id", "aircraft_category_id"], name: "index_for_user_license", unique: true
   end
 
   create_table "like_relationships", charset: "utf8mb3", force: :cascade do |t|
