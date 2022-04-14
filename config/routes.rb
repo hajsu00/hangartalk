@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'reccurent_histories/new'
+  get 'reccurent_histories/edit'
+  get 'reccurent_histories/show'
   get 'licenses/show'
   get 'licenses/edit'
   get 'licenses/index'

@@ -1,4 +1,67 @@
-<div>
-  <h1 class="font-bold text-4xl">Licenses#index</h1>
-  <p>Find me in app/views/licenses/index.html.erb</p>
-</div>
+<% provide(:title, '保有ライセンス管理') %>
+<% glider_licenses = @licenses.where("aircraft_category_id = ?", 1) %>
+<% aeroplane_licenses = @licenses.where("aircraft_category_id = ?", 2) %>
+
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4">
+    <%= link_to :back do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
+      <% if controller.action_name == "following_index" %>
+        <div class="text-xs"><%= "#{@user.following.count}人をフォロー中" %></div>
+      <% else %>
+        <div class="text-xs"><%= "#{@user.followers.count}人のフォロワー" %></div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class='mt-10'>
+    <%= render partial: "shared/add_license_button", locals: { item: "ライセンスを追加する" } %>
+  </div>
+
+  <div class='mx-auto px-4 py-10'>
+    <!-- 上級滑空機 -->
+    <h2 class="text-xl font-bold underline underline-offset-8">上級滑空機</h2>
+    <% if glider_licenses.any? %>
+      <div class='flex flex-row mx-auto px-4 py-10'>
+        <%= render partial: "licenses/license_card", collection: glider_licenses, as: :license %>
+      </div>
+    <% else %>
+      <p class="mt-5">まだライセンスを保有していません。</p>
+    <% end %>
+    <!-- 管理しているグループ -->
+    <h2 class="text-xl font-bold underline underline-offset-8">飛行機</h2>
+    <% if aeroplane_licenses.any? %>
+      <div class='flex flex-row mx-auto px-4 py-10'>
+        <%= render partial: "licenses/license_card", collection: aeroplane_licenses, as: :license %>
+      </div>
+    <% else %>
+      <p class="mt-5">まだライセンスを保有していません。</p>
+    <% end %>
+  </div> 
+
+</div> 
+
+<%
+=begin%>
+ <div class='mx-auto px-4 py-10'>
+  <!-- 管理しているグループ -->
+  <h2 class="text-xl font-bold underline underline-offset-8">管理しているグループ</h2>
+  <div class='flex flex-row mx-auto px-4 py-10'>
+    <%= render partial: "group_card", collection: @licenses, as: :group %> 
+  </div>
+  <!-- 参加しているグループ -->
+  <h2 class="text-xl font-bold underline underline-offset-8">参加しているグループ</h2>
+  <div class='flex flex-row mx-auto px-4 py-10'>
+    <%= render partial: "group_card", collection: @licenses, as: :group %> 
+  </div>
+  <!-- グループを見つける -->
+  <h2 class="text-xl font-bold underline underline-offset-8">グループを見つける</h2>
+  <div class='flex flex-row mx-auto px-4 py-10'>
+    <%= render partial: "group_card", collection: @licenses, as: :group %> 
+  </div>
+</div> 
+<%
+=end%>

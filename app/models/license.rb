@@ -1,5 +1,6 @@
 class License < ApplicationRecord
   belongs_to :user
+  has_many :reccurent_histories
 
   validates :user_id, uniqueness: { scope: [:license_category_id, :aircraft_category_id] }
 

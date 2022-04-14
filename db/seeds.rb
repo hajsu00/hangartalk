@@ -12,18 +12,20 @@ User.create!(name: "Example User",
 )
 
 user = User.find(1)
-user.licenses.create!(code: 'A1111111',
+license = user.licenses.create!(code: 'A1111111',
                     license_category_id: 1,
                     aircraft_category_id: 1,
                     date_of_issue: Date.today
 )
+license.reccurent_histories.create!(date: license.date_of_issue, valid_for: 2)
 
 user = User.find(1)
-user.licenses.create!(code: 'A2222222',
+license = user.licenses.create!(code: 'A2222222',
                     license_category_id: 2,
                     aircraft_category_id: 1,
                     date_of_issue: Date.today
 )
+license.reccurent_histories.create!(date: license.date_of_issue, valid_for: 2)
 
 LicenseCategory.create!(name: '自家用操縦士')
 LicenseCategory.create!(name: '事業用操縦士')

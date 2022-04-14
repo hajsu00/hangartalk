@@ -6,22 +6,24 @@
         非公開
       </div>
       <div class="text-gray-900 font-bold text-xl mb-2">
-        <%= "#{@license.show_license_category}（#{@license.show_aircraft_category}）" %>
+        <%= "#{license.show_license_category}（#{license.show_aircraft_category}）" %>
         <%= render partial: "shared/edit_license_button", locals: { item: "編集" } %>
       </div>
       <div class="text-gray-700 text-base text-lg">
-        技能証明番号：第 <%= @license.code %> 号
+        技能証明番号：第 <%= license.code %> 号
       </div>
       <div class="text-gray-700 text-base text-lg">
-        交付日：<%= @license.date_of_issue.strftime("%Y年%m月%d日") %>
+        交付日：<%= license.date_of_issue.strftime("%Y年%m月%d日") %>
       </div>
     </div>
     <div class="flex items-center">
       <div class="text-gray-700 text-base text-xs text-left flex-col">
         <div class="font-bold">特定操縦技能審査</div>
         <div class="text-gray-700 text-base text-sm text-right">
-          <div>有効期限 2021年3月21日から</div>
-          <div>2023年3月21日　　</div>
+          <div><%= "#{license.reccurent_histories.last.date.strftime("%Y年%m月%d日")}から" %></div>
+          <div>
+            <%= "#{(license.reccurent_histories.last.date + license.reccurent_histories.last.valid_for.years).strftime("%Y年%m月%d日")}　　" %>
+          </div>
         </div>
       </div>
     </div>

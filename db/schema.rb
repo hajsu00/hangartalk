@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_12_223845) do
+ActiveRecord::Schema.define(version: 2022_04_14_104910) do
 
   create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", null: false
@@ -266,6 +266,15 @@ ActiveRecord::Schema.define(version: 2022_04_12_223845) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
+  create_table "reccurent_histories", charset: "utf8mb3", force: :cascade do |t|
+    t.date "date"
+    t.integer "valid_for"
+    t.bigint "license_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["license_id"], name: "index_reccurent_histories_on_license_id"
+  end
+
   create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
@@ -332,6 +341,7 @@ ActiveRecord::Schema.define(version: 2022_04_12_223845) do
   add_foreign_key "like_relationships", "microposts"
   add_foreign_key "like_relationships", "users"
   add_foreign_key "microposts", "users"
+  add_foreign_key "reccurent_histories", "licenses"
   add_foreign_key "reply_relationships", "microposts", column: "replied_id"
   add_foreign_key "reply_relationships", "microposts", column: "replying_id"
   add_foreign_key "share_relationships", "microposts", column: "shared_id"
