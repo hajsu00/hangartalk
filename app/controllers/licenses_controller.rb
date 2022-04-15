@@ -1,8 +1,11 @@
 class LicensesController < ApplicationController
+  before_action :set_sideber_data, only: [:new, :show, :edit, :index]
+
   def new
     @license = License.new
     @user = User.find(params[:user_id])
-    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
+    @license_categories = LicenseCategory.all
+    @aircraft_categories = AircraftCategory.all
   end
 
   def create
@@ -20,22 +23,19 @@ class LicensesController < ApplicationController
     users = User.includes([:licenses, following: :active_relationships, followers: :passive_relationships])
     @user = users.find(params[:user_id])
     @license = @user.licenses.find(params[:id])
-    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
   end
 
   def edit
     users = User.includes([:licenses, following: :active_relationships, followers: :passive_relationships])
     @user = users.find(params[:user_id])
-    @license = @user.licenses.find(params[:id])
-    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
+    @license = License.find(params[:id])
+    @license_categories = LicenseCategory.all
+    @aircraft_categories = AircraftCategory.all
   end
 
   def index
     @user = User.find(params[:user_id])
     @licenses = @user.licenses.includes([:reccurent_histories])
-    # @glider_licenses = @user.licenses.where("aircraft_category_id = ?", 1).includes([:reccurent_histories])
-    # @aeroplane_licenses = @user.licenses.where("aircraft_category_id = ?", 2).includes([:reccurent_histories])
-    @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
   end
 
   private
