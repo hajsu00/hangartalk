@@ -1,11 +1,4 @@
 Rails.application.routes.draw do
-  get 'reccurent_histories/new'
-  get 'reccurent_histories/edit'
-  get 'reccurent_histories/show'
-  get 'licenses/show'
-  get 'licenses/edit'
-  get 'licenses/index'
-  # devise_for :users
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions',
@@ -17,7 +10,6 @@ Rails.application.routes.draw do
     root "users/sessions#new"
   end
 
-  # root "users/sessions#new"
   get 'glider_flight_collection/new'
   get 'glider_flight_collection/create'
   get 'glider_initial_logs/new'
@@ -43,15 +35,16 @@ Rails.application.routes.draw do
       get :following, :followers
     end
     resources :glider_flights
-    resources :licenses, only: [:new, :create, :index, :show, :edit]
+    resources :licenses, only: [:new, :create, :index, :show, :edit, :update]
+    resources :licenses do
+      resources :reccurent_histories, only: [:new, :create, :index, :show, :edit, :update]
+    end
   end
+
   resources :users, only: [:show]
-  # resources :account_activations,       only: [:edit]
-  # resources :password_resets,           only: [:new, :create, :edit, :update]
   resources :microposts,                only: [:new, :create, :show, :destroy]
   resources :relationships,             only: [:create, :destroy]
   resources :aeroplane_flights,         only: [:new, :create, :show, :index, :destroy]
-  # resources :glider_flights,            only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :groups,                    only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :glider_group_flights,      only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :glider_initial_logs,       only: [:new, :create, :show, :edit, :update, :destroy]

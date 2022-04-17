@@ -1,5 +1,5 @@
 <% provide(:title, 'ライセンス編集') %>
-<% provide(:button_text, '登録する') %>
+<% provide(:button_text, '更新する') %>
 
 <div class="mx-auto px-4">
   <div class="flex flex-row px-4">
@@ -15,7 +15,7 @@
   <div class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
       <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">ライセンス編集</h2>
-        <%= form_with(model: [@user, @license], local: true) do |f| %> 
+      <%= form_with(model: [@user, @license], local: true) do |f| %> 
         <%= render 'shared/error_messages', object: f.object %>
         <div class="max-w-lg border rounded-lg mx-auto">
           <div class="flex flex-col gap-4 p-4 md:p-8">

@@ -1,17 +1,24 @@
 <% license ||= @license %>
-
-<div class="max-w-sm w-full lg:max-w-full lg:flex px-10 justify-center">
-  <%= link_to user_license_path(@user, license) do %>
-  <div class="bg-blue-200 shadow rounded mt-6 px-8 py-4 flex flex-col justify-between leading-normal">
+<%= link_to user_license_path(@user, license) do %>
+  <div class="my-6 mx-6 px-8 py-4 bg-blue-200 shadow rounded flex flex-col leading-normal"> 
     <div class="mb-8">
       <div class="text-xs text-gray-600 flex items-center mb-2">
-        <i class="fa-solid fa-lock mr-1"></i>
-        非公開
+        <% if license.reccurent_histories.any? && license.is_valid_license? %>
+          <i class="fa-solid fa-circle-check"></i>
+          <div class="text-xs ml-2">
+            特定操縦技能が有効でです
+          </div>
+        <% else %>
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <div class="text-xs ml-2">
+            特定操縦技能が失効しています
+          </div>
+        <% end %>
       </div>
       <div class="text-gray-900 font-bold text-xl mb-2">
         <%= "#{license.show_license_category}（#{license.show_aircraft_category}）" %>
         <% if controller.action_name == "show" %>
-          <%= render partial: "shared/edit_license_button", locals: { item: "編集" } %>
+          <%= render partial: "licenses/edit_button", locals: { item: "編集" } %>
         <% end %>
       </div>
       <div class="text-gray-700 text-base text-lg">
@@ -23,15 +30,43 @@
     </div>
     <div class="flex items-center">
       <div class="text-gray-700 text-base text-xs text-left flex-col">
-        <div class="font-bold">特定操縦技能審査</div>
-        <div class="text-gray-700 text-base text-sm text-right">
-          <div><%= "#{license.reccurent_histories.last.date.strftime("%Y年%m月%d日")}から" %></div>
-          <div>
-            <%= "#{(license.reccurent_histories.last.date + license.reccurent_histories.last.valid_for.years).strftime("%Y年%m月%d日")}まで" %>
-          </div>
+        <div class="font-bold">
+          特定操縦技能審査
         </div>
+        <% if license.reccurent_histories.any? && license.is_valid_license? %>
+          <div class="text-gray-700 text-base text-sm text-right">
+            <div>
+              <%= "#{license.reccurent_histories.last.date.strftime("%Y年%m月%d日")}から" %>
+            </div>
+            <div>
+              <%= "#{(license.reccurent_histories.last.date + license.reccurent_histories.last.valid_for.years).strftime("%Y年%m月%d日")}まで" %>
+            </div>
+          </div>
+        <% else %>
+          <div class="text-gray-700 text-base text-sm text-right">
+            特定操縦技能が失効しています。
+          </div>
+        <% end %>
       </div>
+      <% if controller.action_name == "show" %>
+        <div class="justify-center">
+          <% if license.reccurent_histories.any? && license.is_valid_license? %>
+            <div class="flex">
+              <div class="ml-4">
+                <%= render partial: "reccurent_histories/edit_button", locals: { item: "編集" } %>
+              </div>
+              <div class="ml-4">
+                <%= render partial: "reccurent_histories/show_index_button", locals: { item: "一覧" } %>
+              </div>
+            </div>
+          <% else %>
+            <div class="ml-4">
+              <%= render partial: "reccurent_histories/add_reccurent_history_button", locals: { item: "追加" } %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-  </div>
-  <% end %>
-</div>
+  </div> 
+<% end %>
+

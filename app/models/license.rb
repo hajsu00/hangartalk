@@ -1,6 +1,6 @@
 class License < ApplicationRecord
   belongs_to :user
-  has_many :reccurent_histories
+  has_many :reccurent_histories, dependent: :destroy
 
   validates :user_id, uniqueness: { scope: [:license_category_id, :aircraft_category_id] }
 
@@ -14,6 +14,6 @@ class License < ApplicationRecord
 
   def is_valid_license?
     expired_date = self.reccurent_histories.last.date + self.reccurent_histories.last.valid_for.years
-    expired_date > Date.today ? "有効期限内のライセンス" : "有効期限切れのライセンス"
+    expired_date > Date.today ? true : false
   end
 end

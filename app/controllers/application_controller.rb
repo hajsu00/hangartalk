@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
 
   # サイドバー用のデータをセットする
   def set_sideber_data
-    @glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
+    @current_user = current_user
+    @glider_flights = @current_user.glider_flights.where("user_id = ?", current_user.id).order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
   end
 
   # ユーザーのログインを確認する
