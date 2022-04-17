@@ -74,21 +74,30 @@
     </a>
     <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
       <% if user_signed_in? %>
-      <div><%= link_to '項目１', "#", class: "mr-5 hover:text-gray-900" %></div>
-      <div><%= link_to '項目２', "#", class: "mr-5 hover:text-gray-900" %></div>
-      <div><%= link_to '項目３', "#", class: "mr-5 hover:text-gray-900" %></div>
       <div class="relative group">
-        <%= link_to user_path(current_user.id) do %>
-          <div class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"><%= current_user.name %>
-            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-              <path d="M5 12h14M12 5l7 7-7 7"></path>
-            </svg>
-          </div> 
-        <% end %>
-        <div class="absolute invisible group-hover:visible bg-green-100">
-          <div><%= link_to 'プロフィール', user_path(current_user.id) %></div>
-          <div><%= link_to 'アカウント', user_path(current_user.id) %></div>
-          <div><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></div>
+        <div class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">
+          <%= current_user.name %>
+          <i class="fa-solid fa-arrow-down ml-4"></i>
+        </div> 
+        <div class="absolute invisible group-hover:visible bg-white shadow rounded w-full px-3 py-1"> 
+          <%= link_to edit_user_registration_path(current_user.id) do %>
+          <div class="flex py-1">
+            <i class="fa-regular fa-user my-1"></i>
+            <div class="ml-2">プロフィール</div>
+          </div>
+          <% end %>
+          <%= link_to edit_user_registration_path(current_user.id) do %>
+          <div class="flex py-1">
+            <i class="fa-regular fa-address-card"></i>
+            <div class="ml-2">アカウント</div>
+          </div>
+          <% end %>
+          <%= link_to destroy_user_session_path, method: :delete do %>
+          <div class="flex py-1">
+            <i class="fa-regular fa-right-from-bracket"></i>
+            <div class="ml-2">ログアウト</div>
+          </div>
+          <% end %>
         </div>
       </div>
       <% else %>

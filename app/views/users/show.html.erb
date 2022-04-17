@@ -50,10 +50,12 @@
                 <div class="py-6 px-6 mt-32 sm:mt-0">
                   <% if @user != current_user %>
                     <% if current_user.following?(@user) %>
-                      <%= render partial: "shared/remove_button", locals: { item: "フォロー中" } %>
+                      <%= render partial: "shared/unfollow_button", locals: { item: "フォロー中" } %>
                     <% else %>
-                      <%= render partial: "shared/add_button", locals: { item: "フォロー" } %>
+                      <%= render partial: "shared/follow_button", locals: { item: "フォロー" } %>
                     <% end %>
+                  <% else %>
+                    <%= render partial: "shared/edit_user_button", locals: { item: "プロフィール編集" } %>
                   <% end %>
                 </div>
               </div>
@@ -91,11 +93,17 @@
                   <%= render partial: "users/group_link", collection: @user.groups, as: :group %>
                 </div>
                 <div class="py-2">
-                  <%= render partial: "users/license_link" %>
+                  <% if @user == current_user %>
+                    <%= link_to user_glider_flights_path(@user, @gliderflights) do %> 
+                      <%= render partial: "users/license_link", collection: @user.licenses, as: :license  %>
+                    <% end %>
+                  <% else %>
+                    <%= render partial: "users/license_link", collection: @user.licenses, as: :license  %>
+                  <% end %>
                 </div>
               </div>
             </div>
-            <div class="mt-10 py-10 border-t border-blueGray-200 text-center">
+            <div class="mt-5 py-5 border-t border-blueGray-200 text-center">
               <div class="flex flex-wrap justify-center">
                 <div class="w-full lg:w-9/12 px-4">
                   <span class="text-lg font-bold block uppercase tracking-wide text-blueGray-600">
@@ -133,15 +141,15 @@
 
 <script>
 //初期表示は非表示
-document.getElementById("user-detail").style.visibility ="hidden";
+document.getElementById("user-detail").style.display == "none";
 function clickBtn(){
   const userDetail = document.getElementById("user-detail");
-  if(userDetail.style.visibility=="visible"){
+  if(userDetail.style.display == "none"){
     // hiddenで非表示
-    userDetail.style.visibility ="hidden";
+    userDetail.style.display = "block";
   }else{
     // visibleで表示
-    userDetail.style.visibility ="visible";
+    userDetail.style.display = "none";
   }
 }
 </script>

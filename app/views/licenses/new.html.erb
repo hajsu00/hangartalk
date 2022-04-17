@@ -1,0 +1,46 @@
+<% provide(:title, 'ライセンス新規登録') %>
+<% provide(:button_text, '登録する') %>
+
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4">
+    <%= link_to :back do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
+      <div class="text-xs"></div>
+    </div>
+  </div>
+
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">ライセンス新規登録</h2>
+        <%= form_with(model: [@user, @license], local: true) do |f| %> 
+        <%= render 'shared/error_messages', object: f.object %>
+        <div class="max-w-lg border rounded-lg mx-auto">
+          <div class="flex flex-col gap-4 p-4 md:p-8">
+            <div>
+              <%= f.label :license_category_id, "ライセンスの種類", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+              <%= f.collection_select :license_category_id, @license_categories, :id, :name, prompt: "ライセンスの種類を選択してください", autofocus: true, autocomplete: "date_of_issue", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+            </div>
+            <div>
+              <%= f.label :aircraft_category_id, "航空機の種類", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+              <%= f.collection_select :aircraft_category_id, @aircraft_categories, :id, :name, prompt: "航空機の種類を選択してください", autofocus: true, autocomplete: "date_of_issue", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+            </div>
+            <div>
+              <%= f.label :code, "ライセンス番号", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+              <%= f.text_field :code, autofocus: true, autocomplete: "code", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+            </div>
+            <div>
+              <%= f.label :date_of_issue, "交付日", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+              <%= f.date_field :date_of_issue, autofocus: true, autocomplete: "date_of_issue", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+            </div>
+            <div>
+              <%= f.submit yield(:button_text), class: "block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

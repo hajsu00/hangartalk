@@ -2,8 +2,10 @@ class GroupsController < ApplicationController
   include SessionsHelper
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
+  before_action :set_sideber_data, only: [:new, :show, :edit, :index]
   def new
     @group = Group.new
+    @user = current_user
   end
 
   def create
@@ -19,10 +21,12 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all
     @groups_belonging_to = current_user.groups
+    @user = current_user
   end
 
   def show
     @current_group = Group.find_by(id: params[:id])
+    @user = current_user
   end
 
   def destroy
