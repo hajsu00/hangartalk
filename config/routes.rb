@@ -35,9 +35,10 @@ Rails.application.routes.draw do
       get :following, :followers
     end
     resources :glider_flights
-    resources :licenses, only: [:new, :create, :index, :show, :edit, :update]
+    resources :licenses
+    
     resources :licenses do
-      resources :reccurent_histories, only: [:new, :create, :index, :show, :edit, :update]
+      resources :reccurent_histories
     end
   end
 

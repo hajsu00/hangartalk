@@ -2,15 +2,15 @@
 <%= link_to user_license_path(@user, license) do %>
   <div class="my-6 mx-6 px-8 py-4 bg-blue-200 shadow rounded flex flex-col leading-normal"> 
     <div class="mb-8">
-      <div class="text-xs text-gray-600 flex items-center mb-2">
+      <div class="text-xs flex items-center mb-2">
         <% if license.reccurent_histories.any? && license.is_valid_license? %>
           <i class="fa-solid fa-circle-check"></i>
-          <div class="text-xs ml-2">
+          <div class="text-md text-green-500 ml-2">
             特定操縦技能が有効でです
           </div>
         <% else %>
           <i class="fa-solid fa-triangle-exclamation"></i>
-          <div class="text-xs ml-2">
+          <div class="text-md text-red-600 ml-2">
             特定操縦技能が失効しています
           </div>
         <% end %>
@@ -33,7 +33,7 @@
         <div class="font-bold">
           特定操縦技能審査
         </div>
-        <% if license.reccurent_histories.any? && license.is_valid_license? %>
+        <% if license.reccurent_histories.any? %>
           <div class="text-gray-700 text-base text-sm text-right">
             <div>
               <%= "#{license.reccurent_histories.last.date.strftime("%Y年%m月%d日")}から" %>
@@ -60,8 +60,13 @@
               </div>
             </div>
           <% else %>
-            <div class="ml-4">
-              <%= render partial: "reccurent_histories/add_reccurent_history_button", locals: { item: "追加" } %>
+            <div class="flex">
+              <div class="ml-4">
+                <%= render partial: "reccurent_histories/add_reccurent_history_button", locals: { item: "追加" } %>
+              </div>
+              <div class="ml-4">
+                <%= render partial: "reccurent_histories/show_index_button", locals: { item: "一覧" } %>
+              </div>
             </div>
           <% end %>
         </div>

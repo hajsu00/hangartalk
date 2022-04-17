@@ -10,11 +10,12 @@ class LicensesController < ApplicationController
   def create
     @license = current_user.licenses.build(license_params)
     @reccurent_histories = @license.reccurent_histories.build(date: @license.date_of_issue, valid_for: 2)
+    binding.pry
     if @license.save && @reccurent_histories.save
       flash[:success] = "ライセンスの登録に成功しました"
       redirect_to user_license_url
     else
-      redirect_to enw_user_license_url
+      redirect_to new_user_license_url
     end
   end
 

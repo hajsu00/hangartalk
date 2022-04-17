@@ -308,10 +308,10 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
   create_table "users", charset: "utf8mb3", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.boolean "admin", default: false
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
     t.string "introduction", default: ""
     t.string "location", default: ""
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
