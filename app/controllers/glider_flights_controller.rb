@@ -4,8 +4,7 @@ class GliderFlightsController < ApplicationController
   include ApplicationHelper
   before_action :logged_in_user, only: [:create, :select, :destroy]
   before_action :correct_user,   only: :destroy
-  before_action :set_sideber_data, only: [:new, :show, :edit]
-  skip_before_action :set_sideber_data, only: :index
+  before_action :set_sideber_data, only: [:new, :edit, :show, :index]
 
   def new
     @glider_flight = GliderFlight.new

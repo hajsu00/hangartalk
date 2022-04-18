@@ -25,4 +25,15 @@ module ApplicationHelper
     inputed_date = Date.parse(params[model_name][:date])
     Time.local(inputed_date.year, inputed_date.month, inputed_date.day, inputed_time.hour, inputed_time.min, 0, 0)
   end
+
+  def total_flight_time
+    @total_time = @initial_flight_time
+    @all_glider_flights.each do |glider_flight|
+      @total_time += glider_flight.landing_time - glider_flight.takeoff_time
+    end
+    show_flight_time(@total_time)
+  end
+  def total_flight_number
+    @initial_flight_number + @all_glider_flights.count
+  end
 end

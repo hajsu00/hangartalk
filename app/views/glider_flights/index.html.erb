@@ -1,43 +1,5 @@
-<% provide(:title, 'フライトログブック（滑空機）') %>
+<% provide(:title, 'フライトログブック') %>
 <% @user ||= current_user %>
-
-  <%
-=begin%>
- <% if @user.glider_flights.any? %>
-    <h3>フライトログ (<%= @user.glider_flights.count %>)</h3>
-    <div class="logbook-table">
-      <%= render 'glider_logbook_header' %>
-    </div>
-
-    <!-- 過去のフライトログ -->
-    <%= render 'glider_initial_log' if @glider_flights.current_page == 1 %> 
-    <!-- 一覧表（DBから取得） -->
-    <%= render partial: "show_glider_flight_log", collection: @glider_flights, as: :glider_flight %>
-    <div class="display-flex">
-      <p><%= link_to "新しいフライトを登録する", new_glider_flight_path %></p>
-      <p><%= link_to "所属グループでのフライトを取得する", new_from_groups_glider_flights_path %></p>
-    </div> 
-    <%= paginate @glider_flights, left: 3, right: 3 %> 
-    <!-- まとめ表 -->
-    <%= render 'glider_page_summary' %>
-  <% else %>
-    <h3>フライトログ (<%= @user.glider_flights.count %>)</h3>
-    <p>登録されたフライトログがありません。</p>
-    <%= link_to new_glider_initial_log_path, class:"link" do %> 
-    <div class="entire-row">
-      <div class="logbook-data-row">
-        <p>すでに紙ベースのログブックをお持ちですか？<br>まずはこれまでの飛行経験をまとめて登録しよう！</p>
-      </div> 
-    </div>
-    <p><%= link_to "新しいフライトを登録する", new_glider_flight_path %></p>
-    <% end %>
-  <% end %> 
-<%
-=end%>
-
-
-<% provide(:title, 'ユーザー情報編集') %>
-<% provide(:button_text, '更新する') %>
 
 <div class="mx-auto px-4">
   <div class="flex flex-row px-4">
@@ -51,44 +13,68 @@
 
   <div class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-      <!-- ログブックセクション -->
-      <div class="border rounded-lg mx-auto my-4">
-        <div class="flex flex-col p-4 md:p-8 justify-center">
-          <div class="bg-white py-6 sm:py-8 lg:py-12">
-            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">フライトログブック（滑空機）</h2>
-            <div class="overflow-x-auto">
-              <div class="w-full lg:w-5/6">
-                <div class="bg-white shadow-md rounded my-6">
-                  <table class="min-w-max w-full table-auto">
-                    <%= render 'logbook_header' %>
-                    <tbody class="text-gray-600 text-sm font-light">
-                      <%= render 'logbook_record' %>
-                      <%= render 'logbook_record' %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div><h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">フライトログブック（滑空機）</h2>
-          </div>
-        </div>
-      </div>
       <!-- 合計セクション -->
       <div class="border rounded-lg mx-auto my-4">
         <div class="flex flex-col p-4 md:p-8 justify-center">
           <div class="bg-white py-6 sm:py-8 lg:py-12">
-          <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">サマリー</h2>
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "サマリー（#{@glider_flights.current_page}ページ目）" %></h2>
+            <%= paginate @glider_flights, left: 3, right: 3 %>
             <div class="overflow-x-auto">
               <div class="w-full lg:w-5/6">
                 <div class="bg-white shadow-md rounded my-6">
                   <table class="min-w-max w-full table-auto">
                     <%= render 'logbook_summary_header' %>
                     <tbody class="text-gray-600 text-sm font-light">
-                      <%= render 'flight_summary_table' %>
+                    <%= render partial: 'flight_summary_record', locals: {summary_category: 'page_total'} %>
+                    <%= render partial: 'flight_summary_record', locals: {summary_category: 'up_to_before_current_page'} %>
+                    <%= render partial: 'flight_summary_record', locals: {summary_category: 'all_pages'} %>
                     </tbody>
                   </table>
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <!-- ログブックセクション -->
+      <div class="border rounded-lg mx-auto my-4">
+        <div class="flex flex-col p-4 md:p-8 justify-center">
+          <div class="bg-white py-6 sm:py-8 lg:py-12">
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "フライトログブック（#{@glider_flights.current_page}ページ目）" %></h2>
+            <% if @glider_flights.any? %>
+              <%= paginate @glider_flights, left: 3, right: 3 %> 
+              <div class="overflow-x-auto">
+                <div class="w-full lg:w-5/6">
+                  <div class="bg-white shadow-md rounded my-6">
+                    <table class="min-w-max w-full table-auto">
+                      <%= render 'logbook_header' %>
+                      <tbody class="text-gray-600 text-sm font-light">
+                        <%= render partial: 'logbook_record', collection: @glider_flights, as: :glider_flight %>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <% if @glider_flights.last_page? %>
+                  <div class="flex justify-center items-center p-4">
+                    <%= link_to new_glider_flight_path do %>
+                      <%= render partial: "shared/button", locals: {item: '新しいフライトを登録'} %>
+                    <% end %>
+                    <%= link_to new_from_groups_glider_flights_path do %>
+                      <%= render partial: "shared/button", locals: {item: 'グループからフライトを取得'} %>
+                    <% end %> 
+                  </div>
+                <% end %>
+              </div>
+              <%= paginate @glider_flights, left: 3, right: 3 %> 
+            <% else %>
+              <p>登録されたフライトログがありません。</p>
+              <div class="flex justify-center items-center p-4">
+                <%= link_to "すでに紙ベースのログブックをお持ちの方はこちら", new_glider_initial_log_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+              </div>
+              <div class="flex justify-center items-center p-4">
+                <%= link_to "新しいフライトを登録する方はこちら", new_glider_flight_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

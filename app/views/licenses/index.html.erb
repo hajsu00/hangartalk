@@ -14,7 +14,9 @@
   </div>
 
   <div class='mt-10'>
-    <%= render partial: "licenses/add_button", locals: { item: "ライセンスを追加する" } %>
+    <%= link_to new_user_license_path(@user, @license) do %>
+      <%= render partial: "shared/button", locals: {item: 'ライセンスを追加'} %>
+    <% end %>
   </div>
 
   <div class='mx-auto px-4 py-10'>
