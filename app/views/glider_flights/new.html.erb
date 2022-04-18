@@ -1,4 +1,6 @@
-<% provide(:title, '新しいフライト（滑空機）') %>
+<%
+=begin%>
+ <% provide(:title, '新しいフライト（滑空機）') %>
 <% provide(:button_text, '登録する') %>
 
 <div class="main">
@@ -110,4 +112,31 @@
 
     <%= f.submit yield(:button_text), class: "btn btn-primary" %>
   </div>
-<% end %>
+<% end %> 
+<%
+=end%>
+
+<% provide(:title, '新しいフライト') %>
+<% provide(:button_text, '登録する') %>
+<% @user ||= current_user %>
+
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4">
+    <%= link_to :back do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
+    </div>
+  </div>
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+      <div class="border rounded-lg mx-auto my-4">
+        <div class="flex flex-col p-4 md:p-8 justify-center">
+          <div class="bg-white py-6 sm:py-8 lg:py-12">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
