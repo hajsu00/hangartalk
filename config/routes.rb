@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
+    resources :microposts, only: [:new, :create, :show, :destroy]
     resources :glider_flights
     resources :licenses
     
@@ -43,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show]
-  resources :microposts,                only: [:new, :create, :show, :destroy]
+  # resources :microposts,                only: [:new, :create, :show, :destroy]
   resources :relationships,             only: [:create, :destroy]
   resources :aeroplane_flights,         only: [:new, :create, :show, :index, :destroy]
   resources :groups,                    only: [:new, :create, :show, :index, :edit, :update, :destroy]

@@ -1,11 +1,14 @@
 <% provide(:button_text, '投稿') %>
-<%= form_with(model: @micropost, local: true) do |f| %>
+<%= form_with(model: [@user, @micropost], url: user_micropost_path, local: true) do |f| %>
   <div class="field">
-    <%= f.text_area :content, value: nil, placeholder: "今どうしてる？" %>
+    <%= f.text_area :content, value: nil, placeholder: "どんなフライトでしたか？", size: "40x5", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
   </div>
-  <span class="image">
-    <%= f.file_field :images, accept: "image/jpeg,image/gif,image/png", multiple: true %>
-  </span>
+  <span class="hover:bg-gray-200">
+    <%= f.label :images do %>
+      <i class="far fa-image fa-lg cursor-pointer"></i>
+      <%= f.file_field :images, accept: "image/jpeg,image/gif,image/png", multiple: true, class: "hidden" %>
+    <% end %>
+  </span> 
   <!-- 「フライトの投稿」の場合は対象のフライトデータを保持しておく -->
   <% if !defined? target_flight %>
     <%= f.hidden_field :is_flight_attached, value: false %>
@@ -18,7 +21,7 @@
     <%= f.hidden_field :replied_micropost, multiple: true, value: @replied_micropost.to_json %>
   <% end %>
   <!-- 送信ボタン -->
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <%= f.submit yield(:button_text), class: "mt-4 block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
 <% end %>
 
 <script type="text/javascript">

@@ -4,11 +4,12 @@ class GliderFlightsController < ApplicationController
   include ApplicationHelper
   before_action :logged_in_user, only: [:create, :select, :destroy]
   before_action :correct_user,   only: :destroy
-  before_action :set_sideber_data, only: [:new, :edit, :show, :index]
+  before_action :set_sideber_data, only: [:new, :edit, :show, :index, :destroy, :new_from_groups]
+  before_action :set_glider_flight_selectors, only: [:new, :edit, :new_from_groups]
 
   def new
     @glider_flight = GliderFlight.new
-    @glider_type = AircraftType.where("category = ?", 'glider')
+    # @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def create
@@ -18,7 +19,7 @@ class GliderFlightsController < ApplicationController
       flash[:success] = "フライトログの登録に成功しました！"
       redirect_to glider_flights_url
     else
-      @glider_type = AircraftType.where("category = ?", 'glider')
+      # @glider_type = AircraftType.where("category = ?", 'glider')
       render 'glider_flights/new'
     end
   end
@@ -30,7 +31,7 @@ class GliderFlightsController < ApplicationController
 
   def edit
     @glider_flight = GliderFlight.find_by(id: params[:id])
-    @glider_type = AircraftType.where("category = ?", 'glider')
+    # @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def update
@@ -40,7 +41,7 @@ class GliderFlightsController < ApplicationController
       flash[:success] = "フライトログの更新に成功しました！"
       redirect_to glider_flights_url
     else
-      @glider_type = AircraftType.where("category = ?", 'glider')
+      # @glider_type = AircraftType.where("category = ?", 'glider')
       render 'glider_flights/edit'
     end
   end
@@ -54,7 +55,8 @@ class GliderFlightsController < ApplicationController
     @glider_flight.destroy
     new_log_number
     flash[:success] = "選択したフライトログを削除しました。"
-    redirect_to request.referrer || root_url
+    redirect_to user_glider_flights_path(@current_user.id)
+    # redirect_to request.referrer || root_url
   end
 
   def new_from_groups
@@ -62,6 +64,7 @@ class GliderFlightsController < ApplicationController
     @glider_flights = Form::GliderFlightCollection.new(flights_from_groups, current_user, 'new')
     @logged_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
     @glider_type = AircraftType.where("category = ?", 'glider')
+    render 'glider_flights/from_groups/new_from_groups'
   end
 
   def create_from_groups
@@ -73,7 +76,7 @@ class GliderFlightsController < ApplicationController
       redirect_to glider_flights_url
     else
       @glider_type = AircraftType.where("category = ?", 'glider')
-      render :new_from_groups
+      render 'from_groups/new_from_groups'
     end
   end
 

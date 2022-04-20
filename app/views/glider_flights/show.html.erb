@@ -46,14 +46,56 @@
       <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
     </div>
   </div>
-  <div class="bg-white py-6 sm:py-8 lg:py-12">
-    <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-      <div class="border rounded-lg mx-auto my-4">
-        <div class="flex flex-col p-4 md:p-8 justify-center">
-          <div class="bg-white py-6 sm:py-8 lg:py-12">
+
+  <div class="max-w-screen-2xl bg-white shadow py-6 sm:py-8 lg:py-12 px-4 md:px-8 mx-auto my-4 border rounded-lg flex-col">
+    <div class="bg-white shadow py-6 sm:py-8 lg:py-12 px-4 md:px-8 mx-auto my-4 border rounded-lg flex-col justify-center p-4 md:p-8">
+      <div>
+        No. <%= @glider_flight.log_number %>
+      </div>
+      <div>
+        <%= @glider_flight.date.strftime("%Y年%m月%d日") %>
+      </div>
+      <div>
+        <%= "#{show_aircraft_type(@glider_flight.glider_type)}（#{@glider_flight.glider_ident}）" %>
+      </div>
+      <div>
+        <%= @glider_flight.departure_and_arrival_point %>
+      </div>
+      <div>
+        No. <%= @glider_flight.log_number %>
+      </div>
+      <p class='mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2'>操縦区分</p>
+      <div class="flex">
+        <div class="inline-block align-middle mx-5">
+          <%= @glider_flight.takeoff_time.strftime("%R") %>
+        </div>
+        <i class="fa-solid fa-plane-departure fa-lg inline-block align-middle"></i>
+        <div class="flex-col inline-block align-middle mx-5">
+          <div>
+            <%= @glider_flight.release_alt %>
           </div>
+          <div>
+            <%= @glider_flight.number_of_landing %>
+          </div>
+        </div>
+        <i class="fa-solid fa-plane-arrival fa-lg inline-block align-middle"></i>
+        <div class="mx-5 inline-block align-middle">
+          <%= @glider_flight.landing_time.strftime("%R") %>
+        </div>
+      </div>
+      <div class="flex justify-center">
+        <div>
+          <%= link_to edit_user_glider_flight_path(@current_user.id, @glider_flight.id) do %>
+            <%= render partial: "shared/button", locals: {item: '編集'} %>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to user_glider_flight_path(@current_user.id, @glider_flight.id), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+            <%= render partial: "shared/button", locals: {item: '削除'} %>
+          <% end %>
         </div>
       </div>
     </div>
+    <%= render partial: 'shared/micropost_form', locals: { target_flight: @glider_flight } %>
   </div>
 </div>

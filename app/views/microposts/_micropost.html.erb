@@ -1,7 +1,7 @@
 <div class="name"><%= micropost.user.name %><span class="name_reply">@t_kyab</span></div>
 <div class="date"><%= time_ago_in_words(micropost.created_at) %></div>   
 <% if current_user?(micropost.user) %>
-  <%= link_to "delete", micropost, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+  <%= link_to "delete", user_micropost_path(params[:user_id]), method: :delete, data: { confirm: "本当に削除しますか？" } %>
 <% end %>
 <% if micropost.replying_micropost? %>
 <% replied_microposts = micropost.get_replied_microposts %>

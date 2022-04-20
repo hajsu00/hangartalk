@@ -1,0 +1,102 @@
+<% provide(:title, 'グループフライトから取得') %>
+<% provide(:button_text, '登録する') %>
+
+<%
+=begin%>
+ <div class="main">
+  <h1>グループフライトから取得</h1>
+  <%= form_with model: @glider_flights, url: {controller: 'glider_flights', action: 'create_from_groups' }, local: true do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <div class="glider_flights_collection_header">
+    <div class="log-number-cell">No.</div>
+    <div class="departure-date-cell">出発日</div>
+    <div class="glider-type-cell">航空機<br>の型式</div>
+    <div class="glider-ident-cell">登録記号</div>
+    <div class="departure-and-arrival-point-cell">離着陸の区間</div>
+    <div class="takeoff-time-cell">離陸<br>時刻</div>
+    <div class="landing-time-cell">着陸<br>時刻</div>
+    <div class="landing-number-cell">着陸<br>回数</div>
+    <div class="table-data">離脱<br>高度</div>
+    <div class="table-data">操縦<br>種別</div>
+    <div class="departure-date-cell">曳航<br>タイプ</div>
+    <div class="table-data">野外<br>飛行</div>
+    <div class="table-data">失速<br>からの<br>回復</div>
+    <div class="table-data">備考</div>
+  </div>
+  <div class="table_body">
+  <% n = 0 %>
+  <% @glider_flights.collection.each do |glider_flight| %>
+    <% if !match_takeoff_time?(glider_flight, @logged_flights) %>
+      <div class="logbook-data-row">
+        <%= fields_for 'glider_flights[]', glider_flight do |field| %>
+          <!-- 基本事項 -->
+          <%= f.hidden_field :user_id, value: glider_flight.user_id %>
+          <div class="log-number-cell">
+            <% n += 1 %>
+            <%= n %>
+          </div>
+          <div class="departure-date-cell">
+            <%= field.date_field :date, value: glider_flight.date, class: 'departure-date-cell' %>
+          </div>
+          <div class="glider-type-cell">
+            <%= field.collection_select :glider_type, @glider_type, :id, :aircraft_type, selected: show_aircraft_type(glider_flight.glider_type), class: 'glider-ident-cell' %>
+          </div>
+          <div class="glider-ident-cell">
+            <%= field.text_field :glider_ident, value: glider_flight.glider_ident, class: 'glider-ident-cell' %>
+          </div>
+          <div class="departure-and-arrival-point-cell">
+            <%= field.text_field :departure_and_arrival_point, value: glider_flight.departure_and_arrival_point, class: 'departure-and-arrival-point-cell' %>
+          </div>
+          <div class="takeoff-time-cell">
+            <%= field.time_field :takeoff_time, class: 'takeoff-time-cell' %>
+          </div>
+          <div class="landing-time-cell">
+            <%= field.time_field :landing_time, class: 'landing-time-cell' %>
+          </div> 
+          <div class="landing-number-cell">
+            <%= field.number_field :number_of_landing, value: 1, class: 'landing-number-cell' %>
+          </div>
+          <div class="table-data">
+            <%= field.number_field :release_alt, {value: glider_flight.release_alt, step: 10, class: 'table-data'} %>
+          </div> 
+          <div class="table-data">
+            <%= field.select :flight_role, [["機長", "機長"], ["単独飛行", "単独飛行"], ["同乗教育", "同乗教育"], ["操縦教員", "操縦教員"]], selected: glider_flight.flight_role %>
+          </div>
+          <div class="departure-date-cell">
+            <%= field.select :is_winch, [["ウインチ曳航", true], ["航空機曳航", false]], selected: glider_flight.is_winch ? true : false %>
+          </div>
+          <div class="table-data">
+            <%= field.check_box :is_cross_country, {}, true, false %>
+          </div> 
+          <div class="table-data">
+            <%= field.check_box :is_stall_recovery, {}, true, false %>
+          </div>
+          <div class="table-data">
+            <%= field.text_area :note, value: glider_flight.note, class: 'table-data' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+    <% if n != 0 %>
+      <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+    <% else %>
+      <p>未登録のグループフライトはありません。</p>
+    <% end %>
+  <% end %>
+
+  <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
+  </div> 
+<%
+=end%>
+
+
+
+  <%= form_with model: @glider_flights, url: {controller: 'glider_flights', action: 'create_from_groups' }, local: true do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <%= render partial: 'glider_flights/from_groups/index_header' %>
+    <%= render partial: 'glider_flights/from_groups/index_record', collection: @glider_flights, as: :glider_flight %>
+
+    <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+  <% end %>
