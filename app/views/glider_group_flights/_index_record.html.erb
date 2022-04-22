@@ -1,0 +1,35 @@
+<tr onclick='window.location="<%= glider_group_flight_path(glider_group_flight) %>"' role="link" class="cursor-pointer border-b border-gray-200 hover:bg-gray-100">
+  <td class="py-3 px-6 text-center">
+    <%= glider_group_flight.date %>
+  </td>
+  <td class="py-3 px-6 text-left">
+    <%= show_aircraft(glider_group_flight.fleet) %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= show_user_name(glider_group_flight.front_seat) %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= show_user_name(glider_group_flight.rear_seat) if !glider_group_flight.rear_seat.nil? %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= towing_way(glider_group_flight) %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_group_flight.takeoff_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_group_flight.release_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_group_flight.landing_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    飛行<br>時間
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_group_flight.release_alt %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_group_flight.notes %>
+  </td>
+</tr>

@@ -348,6 +348,7 @@ group.glider_group_flights.create(day_flight_number: nil,
                                 release_time: takeoff_time + 1.minutes,
                                 landing_time: takeoff_time + 12.minutes,
                                 release_alt: 400,
+                                creator: 1,
                                 notes: '備考欄です')
 group = Group.find(1)
 date = Date.new(2022, 2, 21)
@@ -365,4 +366,5 @@ group.glider_group_flights.create(day_flight_number: nil,
                                 release_time: takeoff_time + 1.minutes,
                                 landing_time: takeoff_time + 12.minutes,
                                 release_alt: 400,
+                                creator: 1,
                                 notes: '備考欄です')

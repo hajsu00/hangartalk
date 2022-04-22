@@ -1,6 +1,7 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
+  before_action :set_sideber_data, only: [:show]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -27,6 +28,7 @@ class MicropostsController < ApplicationController
   end
 
   def show
+    @user = User.find(params[:user_id])
     # 返信情報取得
     @replied_micropost = []
     @replied_micropost << Micropost.find(params[:id])
