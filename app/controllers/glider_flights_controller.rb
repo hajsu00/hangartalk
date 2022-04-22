@@ -9,7 +9,6 @@ class GliderFlightsController < ApplicationController
 
   def new
     @glider_flight = GliderFlight.new
-    # @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def create
@@ -19,7 +18,6 @@ class GliderFlightsController < ApplicationController
       flash[:success] = "フライトログの登録に成功しました！"
       redirect_to glider_flights_url
     else
-      # @glider_type = AircraftType.where("category = ?", 'glider')
       render 'glider_flights/new'
     end
   end
@@ -31,7 +29,6 @@ class GliderFlightsController < ApplicationController
 
   def edit
     @glider_flight = GliderFlight.find_by(id: params[:id])
-    # @glider_type = AircraftType.where("category = ?", 'glider')
   end
 
   def update
@@ -41,7 +38,6 @@ class GliderFlightsController < ApplicationController
       flash[:success] = "フライトログの更新に成功しました！"
       redirect_to glider_flights_url
     else
-      # @glider_type = AircraftType.where("category = ?", 'glider')
       render 'glider_flights/edit'
     end
   end
