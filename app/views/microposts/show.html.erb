@@ -1,14 +1,20 @@
-<% provide(:title, '投稿の詳細') %>
+<% provide(:title, "#{@user.name}さんの投稿") %>
 
-<div class="main">
-  <h1>投稿の詳細</h1>
-  <div class="display-flex">
-    <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
-  </div>
-  <div class="twitter-container">
-    <div class="twitter-contents">
-      <%= render partial: 'micropost', locals: { micropost: @replied_micropost[0] } %>
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4">
+    <%= link_to :back do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
     </div>
   </div>
-  <%= render partial: 'shared/micropost_form' %> 
+
+  <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "#{@user.name}さんの投稿" %></h2>
+  <div class="max-w-lg border rounded-lg mx-auto">
+    <div class="flex flex-col gap-4 p-4 md:p-8">
+      <%= render partial: 'micropost_card', locals: { micropost: @replied_micropost[0] } %>
+    </div>
+  </div>
+
 </div>

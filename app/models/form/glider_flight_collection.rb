@@ -29,30 +29,52 @@ class Form::GliderFlightCollection
                         end
                       elsif init_type == 'new'
                         attributes.map do |value|
-                          fleet = Fleet.find_by(id: value.fleet)
-                          pilot.glider_flights.build(
-                            date: value.date,
-                            glider_type: fleet.aircraft_type_id,
-                            glider_ident: fleet.ident,
-                            departure_and_arrival_point: value.departure_and_arrival_point,
-                            number_of_landing: 1,
-                            takeoff_time: value.takeoff_time,
-                            landing_time: value.landing_time,
-                            flight_role: get_flight_role(value, pilot.id),
-                            is_winch: value.is_winch,
-                            release_alt: value.release_alt,
-                            note: value.notes
-                          )
+                          pilot_id = pilot.id
+                          # フライト区分を取得（「ログ対象外」除外用）
+                          flight_role = if value.front_seat == pilot_id
+                                          value.front_flight_role
+                                        elsif value.rear_seat == pilot_id
+                                          value.rear_flight_role
+                                        end
+                          # 遊覧飛行以外の場合
+                          if flight_role != "ログ対象外"
+                            fleet = Fleet.find_by(id: value.fleet)
+                            pilot.glider_flights.build(
+                              date: value.date,
+                              glider_type: fleet.aircraft_type_id,
+                              glider_ident: fleet.ident,
+                              departure_and_arrival_point: value.departure_and_arrival_point,
+                              number_of_landing: 1,
+                              takeoff_time: value.takeoff_time,
+                              landing_time: value.landing_time,
+                              flight_role: get_flight_role(value, pilot_id),
+                              is_winch: value.is_winch,
+                              release_alt: value.release_alt,
+                              note: value.notes
+                            )
+                          end
                         end
                       end
   end
 
   def get_flight_role(value, pilot_id)
     case pilot_id
+    # 前席に登場していた場合
     when value.front_seat
-      value.front_flight_role
+      case value.front_flight_role
+      when "機長", "単独飛行", "同乗教育"
+        value.front_flight_role
+      when "教官"
+        "機長"
+      end
+    # 後席に搭乗していた場合
     when value.rear_seat
-      value.rear_flight_role
+      case value.rear_flight_role
+      when "機長", "同乗教育"
+        value.front_flight_role
+      when "教官"
+        "機長"
+      end
     end
   end
 

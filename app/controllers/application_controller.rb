@@ -4,10 +4,17 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def set_glider_flight_selectors
+    @glider_type = AircraftType.where("category = ?", 'glider')
+  end
+
   # サイドバー用のデータをセットする
   def set_sideber_data
-    @current_user = current_user
-    @glider_flights = @current_user.glider_flights.where("user_id = ?", current_user.id).order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
+    @current_user = User.find(current_user.id)
+    initial_flight_log = @current_user.glider_initial_log
+    @initial_flight_time = initial_flight_log.non_power_total_time
+    @initial_flight_number = initial_flight_log.non_power_total_number
+    @all_glider_flights = @current_user.glider_flights
   end
 
   # ユーザーのログインを確認する

@@ -1,13 +1,13 @@
 <div class="flex justify-center">
   <div class="lg:mr-4 p-3 text-center">
     <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-      <%= show_flight_time(flight_info[:non_power_total_time]) if flight_info[:non_power_total_time] != 0 %>
+      <%= total_flight_time %>
     </span>
     <span class="text-sm text-blueGray-400">総飛行時間</span>
   </div> 
   <div class="lg:mr-4 p-3 text-center">
     <span class="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
-      <%= flight_info[:non_power_total_number] if flight_info[:non_power_total_number] != 0 %>
+      <%= total_flight_number %>
     </span>
     <span class="text-sm text-blueGray-400">総飛行回数</span>
   </div> 

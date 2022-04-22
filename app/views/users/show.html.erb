@@ -1,5 +1,5 @@
 <% provide(:title, @user.name) %>
-<% flight_info = glider_page_total('all_pages') %>
+
 
  <!-- component -->
 <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
@@ -55,7 +55,10 @@
                       <%= render partial: "shared/follow_button", locals: { item: "フォロー" } %>
                     <% end %>
                   <% else %>
-                    <%= render partial: "shared/edit_user_button", locals: { item: "プロフィール編集" } %>
+                    <%= link_to edit_user_registration_path do %>
+                      <%= render partial: "shared/button", locals: {item: 'プロフィール編集'} %>
+                    <% end %>
+
                   <% end %>
                 </div>
               </div>
@@ -106,15 +109,15 @@
             <div class="mt-5 py-5 border-t border-blueGray-200 text-center">
               <div class="flex flex-wrap justify-center">
                 <div class="w-full lg:w-9/12 px-4">
-                  <span class="text-lg font-bold block uppercase tracking-wide text-blueGray-600">
+                  <span class="text-lg font-bold block tracking-wide text-blueGray-600">
                   <h2>グライダー</h2>
                   </span>
                   <% if @user == current_user %>
                     <%= link_to user_glider_flights_path(@user, @gliderflights) do %> 
-                      <%= render partial: "users/glider_flights_link", locals: {flight_info: flight_info} %>
+                      <%= render partial: "users/glider_flights_link" %>
                     <% end %>
                   <% else %>
-                    <%= render partial: "users/glider_flights_link", locals: {flight_info: flight_info} %>
+                    <%= render partial: "users/glider_flights_link" %>
                   <% end %>
                   <p class="text-left mb-4 text-lg leading-relaxed text-blueGray-700">
                     <%= @user.introduction %>

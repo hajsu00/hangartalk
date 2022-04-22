@@ -18,7 +18,9 @@
       <div class="text-gray-900 font-bold text-xl mb-2">
         <%= "#{license.show_license_category}（#{license.show_aircraft_category}）" %>
         <% if controller.action_name == "show" %>
-          <%= render partial: "licenses/edit_button", locals: { item: "編集" } %>
+          <%= link_to edit_user_license_path(@user, @license) do %>
+            <%= render partial: "shared/button", locals: {item: '編集'} %>
+          <% end %>
         <% end %>
       </div>
       <div class="text-gray-700 text-base text-lg">
@@ -53,19 +55,27 @@
           <% if license.reccurent_histories.any? && license.is_valid_license? %>
             <div class="flex">
               <div class="ml-4">
-                <%= render partial: "reccurent_histories/edit_button", locals: { item: "編集" } %>
+                <%= link_to edit_user_license_reccurent_history_path(@user, @license) do %>
+                  <%= render partial: "shared/button", locals: {item: '編集'} %>
+                <% end %>
               </div>
               <div class="ml-4">
-                <%= render partial: "reccurent_histories/show_index_button", locals: { item: "一覧" } %>
+                <%= link_to user_license_reccurent_histories_path(@user, @license) do %>
+                  <%= render partial: "shared/button", locals: {item: '一覧'} %>
+                <% end %>
               </div>
             </div>
           <% else %>
             <div class="flex">
               <div class="ml-4">
-                <%= render partial: "reccurent_histories/add_reccurent_history_button", locals: { item: "追加" } %>
+                <%= link_to new_user_license_reccurent_history_path(@user, @license) do %>
+                  <%= render partial: "shared/button", locals: {item: '追加'} %>
+                <% end %>
               </div>
               <div class="ml-4">
-                <%= render partial: "reccurent_histories/show_index_button", locals: { item: "一覧" } %>
+                <%= link_to user_license_reccurent_histories_path(@user, @license) do %>
+                  <%= render partial: "shared/button", locals: {item: '一覧'} %>
+                <% end %>
               </div>
             </div>
           <% end %>
