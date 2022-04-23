@@ -1,0 +1,3 @@
+<%= link_to user_micropost_path(params[:id]) do %>
+  <%= render partial: "microposts/micropost_card", locals: { micropost: micropost } %>
+<% end %>
