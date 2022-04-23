@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
-  before_action :set_sideber_data, only: [:show, :index]
+  before_action :set_sideber_data, only: [:show, :index, :show_reply_form]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -20,7 +20,7 @@ class MicropostsController < ApplicationController
         end
       end
       flash[:success] = "マイクロポストを投稿しました！"
-      redirect_to root_url
+      redirect_to microposts_url
     else
       @microposts = current_user.feed
       render 'static_pages/top'
@@ -28,18 +28,25 @@ class MicropostsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:user_id])
-    # 返信情報取得
-    @replied_micropost = []
-    @replied_micropost << Micropost.find(params[:id])
-    replying_micropost_ids = ReplyRelationship.where("replying_id = ?", @replied_micropost[0][:id]).pluck(:replied_id)
-    replying_micropost_ids.each do |replying_micropost_id|
-      if @replied_micropost[0][:id] != replying_micropost_id
-        @replied_micropost << Micropost.find(replying_micropost_id)
-      end
+    @replied_micropost = Micropost.find(params[:id])
+    @user = @replied_micropost.user
+    @replying_relationships = ReplyRelationship.where("replied_id = ?", @replied_micropost.id)
+    @replying_microposts = []
+    @replying_relationships.each do |replying_relationship|
+      @replying_microposts << Micropost.find(replying_relationship.replying_id)
     end
-    # micropostインスタンス作成
     @micropost = Micropost.new
+  end
+
+  def create_reply
+    @replying_micropost = current_user.microposts.build(micropost_params)
+    if @replying_micropost.save && @replying_micropost.replying_relationships.create!(replied_id: params[:micropost_id])
+      flash[:success] = "マイクロポストを投稿しました！"
+      redirect_to user_microposts_url
+    else
+      @microposts = current_user.feed
+      redirect_to microposts_url
+    end
   end
 
   def index
@@ -60,7 +67,7 @@ class MicropostsController < ApplicationController
     @shared_relationship.destroy if !@shared_relationship.nil?
     @sharing_relationship.destroy if !@sharing_relationship.nil?
     flash[:success] = "マイクロポストを削除しました。"
-    redirect_to request.referrer || root_url
+    redirect_to request.referrer || microposts_url
   end
 
   def share_micropost

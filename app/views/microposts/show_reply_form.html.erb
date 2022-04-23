@@ -1,4 +1,4 @@
-<% provide(:title, "#{@user.name}さんの投稿") %>
+<% provide(:title, "#{@user.name}さんへの返信") %>
 
 <div class="mx-auto px-4">
   <div class="flex flex-row px-4">
@@ -10,10 +10,10 @@
     </div>
   </div>
 
-  <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "#{@user.name}さんの投稿" %></h2>
+  <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "#{@user.name}さんへの返信" %></h2>
   <div class="max-w-lg border rounded-lg mx-auto">
     <div class="flex flex-col gap-4 p-4 md:p-8">
-      <%= render partial: "microposts/micropost_card", locals: { micropost: @replied_micropost } %>
+      <%= render partial: 'micropost_card', locals: { micropost: @replied_micropost } %>
       <%= render 'shared/reply_form', locals: {item: '返信', message: '返信しましょう' } %>
     </div>
   </div>
@@ -22,7 +22,7 @@
   <div class="max-w-lg border-b-2 border-gray-600 py-2 mx-auto"></div>
   <div class="max-w-lg py-2 mx-auto"></div>
   <!-- ボーダー（終わり） -->
-
+  
   <div class="max-w-lg border rounded-lg mx-auto">
     <div class="flex flex-col gap-4 p-4 md:p-8">
       <%= render partial: 'micropost_card', collection: @replying_microposts, as: :micropost %>
