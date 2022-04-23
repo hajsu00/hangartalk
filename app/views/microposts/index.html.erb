@@ -1,0 +1,21 @@
+<% @user ||= @current_user %>
+
+ <div class="mx-auto px-4">
+  <div class="flex flex-row px-4">
+    <%= link_to :back do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
+    </div>
+  </div>
+  <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">おすすめユーザー</h2>
+  <div class="flex flex-row mx-auto px-4 py-5 overflow-x-auto border border-gray-200 shadow rounded">
+    <%= render partial: "users/recommended_user_card", collection: @reccomended_users, as: :user %> 
+  </div>
+  <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">フィード</h2>
+  <div class="flex flex-col items-center justify-center overflow-x-auto">
+    <%= render partial: "microposts/micropost_card", collection: @microposts, as: :micropost %>
+  </div>
+  <%= paginate @microposts, left: 3, right: 3 %> 
+</div>

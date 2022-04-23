@@ -1,7 +1,7 @@
 class MicropostsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
-  before_action :set_sideber_data, only: [:show]
+  before_action :set_sideber_data, only: [:show, :index]
 
   def create
     @micropost = current_user.microposts.build(micropost_params)
@@ -40,6 +40,11 @@ class MicropostsController < ApplicationController
     end
     # micropostインスタンス作成
     @micropost = Micropost.new
+  end
+
+  def index
+    @microposts = @current_user.feed.order(created_at: :desc).includes([:like_relationships, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
+    @reccomended_users = User.where.not("id = ?", @current_user.id) - @current_user.following
   end
 
   def destroy
