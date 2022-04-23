@@ -11,10 +11,42 @@
   </div>
 
   <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "#{@user.name}さんの投稿" %></h2>
+
+  <!-- リプライ投稿の場合、リプライ先投稿を表示 -->
+  <% if !@replied_micropost.nil? %>
   <div class="max-w-lg border rounded-lg mx-auto">
     <div class="flex flex-col gap-4 p-4 md:p-8">
-      <%= render partial: 'micropost_card', locals: { micropost: @replied_micropost[0] } %>
+      <%= render partial: 'micropost_card', locals: { micropost: @replied_micropost} %>
     </div>
   </div>
+  <!-- ボーダー（始まり） -->
+  <div class="max-w-md border-l-2 border-gray-600 py-4 mx-auto"></div>
+  <!-- ボーダー（終わり） -->
+  <% end %>
+
+  <div class="max-w-lg border rounded-lg mx-auto">
+    <div class="flex flex-col gap-4 p-4 md:p-8">
+      <%= render partial: "microposts/micropost_card", locals: { micropost: @target_micropost } %>
+      <%= render 'shared/reply_form' %>
+    </div>
+  </div>
+
+  <!-- ボーダー（始まり） -->
+  <div class="max-w-lg border-b-2 border-gray-600 py-2 mx-auto"></div>
+  <div class="max-w-lg py-2 mx-auto"></div>
+  <!-- ボーダー（終わり） -->
+
+  <!-- リプライ投稿を表示 -->
+  <% if @replying_microposts.any? && @replied_micropost.nil? %>
+  <div class="max-w-lg border rounded-lg mx-auto">
+    <div class="flex flex-col gap-4 p-4 md:p-8">
+      <%= render partial: 'micropost_card', collection: @replying_microposts, as: :micropost %>
+    </div>
+  </div>
+  <% else %>
+    <div class="max-w-lg mx-auto text-center text-gray-800">
+      <p>まだ返信はありません</p>
+    </div>
+  <% end %>
 
 </div>
