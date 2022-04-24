@@ -1,23 +1,14 @@
-<div class='px-4 py-4'>
- <%= link_to user_path(id: user.id) do %> 
-    <div class="max-w-sm rounded shadow-lg">
-      <div class="h-1/3">
-        <%= image_tag "image_sample.jpg", calss: "object-cover h-48 w-full" %>
+<%= link_to user_path(id: user.id) do %> 
+  <div class="max-w-sm rounded shadow-lg">
+    <%= image_tag 'image_sample.jpg', class: 'w-full' %>
+    <div class="px-6 py-4">
+      <div class="font-bold text-xs mb-2">
+        <%= user.name %>
       </div>
-      <div class="h-2/3">
-        <div class="px-6 py-4">
-          <div class="font-bold text-md mb-2 whitespace-normal">
-            <%= user.name %>
-          </div>
-        </div>
-        <div class="px-6 pt-4 pb-2">
-          <%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>
-            <div class="bg-gray-800 text-white rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 justify-center text-center mx-auto">
-              フォローする
-            </div>
-          <% end %>
-        </div>
+      <div class="text-gray-700 text-sm overflow-hidden">
+        自己紹介文です。文字数制限は１６０文字です。
       </div>
     </div>
- <% end %> 
-</div>
+  </div>
+
+<% end %>  
