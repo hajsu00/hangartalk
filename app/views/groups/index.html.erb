@@ -1,19 +1,53 @@
-<% provide(:title, 'グループ') %>
+<% provide(:title, 'フライトクラブ') %>
 
-<div class='mx-auto px-4 py-10'>
-  <!-- 管理しているグループ -->
-  <h2 class="text-xl font-bold underline underline-offset-8">管理しているグループ</h2>
-  <div class='flex flex-row mx-auto px-4 py-10'>
-    <%= render partial: "group_card", collection: @groups_belonging_to, as: :group %> 
+<% @user ||= @current_user %>
+
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4 mb-4">
+    <%= link_to :back do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= yield(:title) %></div>
+    </div>
   </div>
-  <!-- 参加しているグループ -->
-  <h2 class="text-xl font-bold underline underline-offset-8">参加しているグループ</h2>
-  <div class='flex flex-row mx-auto px-4 py-10'>
-    <%= render partial: "group_card", collection: @groups_belonging_to, as: :group %> 
-  </div>
-  <!-- グループを見つける -->
-  <h2 class="text-xl font-bold underline underline-offset-8">グループを見つける</h2>
-  <div class='flex flex-row mx-auto px-4 py-10'>
-    <%= render partial: "group_card", collection: @groups, as: :group %> 
+
+  <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">参加中のフライトクラブ</h2>
+  <% if @belonging_group.any? %>
+    <div class="w-full mx-auto">
+      <div class="flex flex-row gap-4 p-4 md:p-8 overflow-x-auto ">
+        <%= render partial: "group_card", collection: @belonging_group, as: :group %> 
+      </div>
+    </div>
+  <% else %>
+    <p class="text-gray-800">参加しているフライトクラブはありません</p>
+  <% end %>
+
+  <!-- ボーダー（始まり） -->
+  <div class="w-full border-b-2 border-gray-600 py-5 mx-auto"></div>
+  <div class="w-full py-2 mx-auto"></div>
+  <!-- ボーダー（終わり） -->
+
+  <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">おすすめのフライトクラブ</h2>
+  <% if @recommended_groups.any? %>
+    <div class="w-full mx-auto">
+      <div class="flex flex-row gap-4 p-4 md:p-8 overflow-x-auto ">
+        <%= render partial: "group_card", collection: @recommended_groups, as: :group %> 
+      </div>
+    </div>
+  <% else %>
+    <p class="text-gray-800 text-center py-2">全てのフライトクラブに参加済みです</p>
+  <% end %>
+
+  <!-- ボーダー（始まり） -->
+  <div class="w-full border-b-2 border-gray-600 py-5 mx-auto"></div>
+  <div class="w-full py-2 mx-auto"></div>
+  <!-- ボーダー（終わり） -->
+
+  <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">新しいフライトクラブを作る</h2>
+  <div class="justify-center">
+    <%= link_to new_group_path do %>
+      <% render partial: 'shared/button', locals: {item: '新しいグループを作る'} %>
+    <% end %>
   </div>
 </div>
