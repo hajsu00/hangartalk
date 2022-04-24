@@ -2,12 +2,12 @@
 <% @user ||= current_user %>
 
 <div class="mx-auto px-4">
-  <div class="flex flex-row px-4">
+  <div class="flex flex-row px-4 mb-4">
     <%= link_to :back do %>
       <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
     <% end %>
     <div class="flex flex-col">
-      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
+      <div class="text-2xl font-bold pr-4"><%= yield(:title) %></div>
     </div>
   </div>
 

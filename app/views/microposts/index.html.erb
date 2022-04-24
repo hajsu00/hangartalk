@@ -1,17 +1,21 @@
+<% provide(:title, 'フィード') %>
+
 <% @user ||= @current_user %>
 
 <div class="mx-auto px-4">
-  <div class="flex flex-row px-4">
+  <div class="flex flex-row px-4 mb-4">
     <%= link_to :back do %>
       <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
     <% end %>
     <div class="flex flex-col">
-      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
+      <div class="text-2xl font-bold pr-4"><%= yield(:title) %></div>
     </div>
   </div>
   <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">おすすめユーザー</h2>
-  <div class="flex flex-row mx-auto px-4 pt-5 overflow-x-auto border border-gray-200 shadow rounded">
-    <%= render partial: "users/recommended_user_card", collection: @reccomended_users, as: :user %> 
+  <div class="mx-auto">
+    <div class="flex flex-row gap-4 p-4 md:p-8 overflow-x-auto">
+      <%= render partial: "users/recommended_user_card", collection: @reccomended_users, as: :user %>  
+    </div>
   </div>
   <!-- ボーダー（始まり） -->
   <div class="w-full border-b-2 border-gray-600 py-5 mx-auto"></div>

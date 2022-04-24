@@ -1,69 +1,4 @@
 <% provide(:title, "グループフライト") %>
-
-<%
-=begin%>
- <div class="create-group-form">
-  <h1><%= "#{@current_group.name}のグループフライト" %></h1>
-  <% if @glider_group_flights.any? %>
-  <div class="display-flex">
-    <%= form_with(url: glider_group_flights_path, method: :get, local: true) do |f| %>
-      <div class="input-field">
-        <%= f.label :date, "日付", class: 'label' %>
-        <%= f.date_field :date, value: Date.today, class: 'form-control' %>
-      </div>
-      <%= f.submit value:"更新", class: 'button' %>
-    </div>
-    <% end %>
-    <div class="logbook-table">
-      <div class="logbook-header">
-        <div class="departure-date-cell">日付</div>
-        <div class="log-number-cell">発航<br>No.</div>
-        <div class="departure-and-arrival-point-cell">航空機<br>の型式<br>および<br>登録記号</div>
-        <div class="departure-and-arrival-point-cell">前席</div>
-        <div class="departure-and-arrival-point-cell">後席</div>
-        <div class="departure-date-cell">曳航タイプ</div>
-        <div class="table-data">離陸<br>時刻</div>
-        <div class="table-data">離脱<br>時刻</div>
-        <div class="table-data">着陸<br>時刻</div>
-        <div class="table-data">飛行<br>時間</div>
-        <div class="table-data">離脱<br>高度</div>
-        <div class="table-data">備考</div>
-      </div>
-      <% @glider_group_flights.each do |glider_group_flight| %>
-        <%= link_to glider_group_flight_path(id: glider_group_flight.id), class:"link" do %> 
-        <div class="entire-row">
-          <div class="logbook-data-row">
-            <div class="departure-date-cell"><%= glider_group_flight.date %></div>
-            <div class="log-number-cell"><%= glider_group_flight.day_flight_number %></div>
-            <div class="departure-and-arrival-point-cell"><%= show_aircraft(glider_group_flight.fleet) %></div>
-            <div class="departure-and-arrival-point-cell"><%= show_user_name(glider_group_flight.front_seat) %></div>
-            <div class="departure-and-arrival-point-cell"><%= show_user_name(glider_group_flight.rear_seat) if !glider_group_flight.rear_seat.nil? %></div>
-            <div class="departure-date-cell"><%= towing_way(glider_group_flight) %></div>
-            <div class="table-data"><%= glider_group_flight.takeoff_time.strftime("%R") %></div>
-            <div class="table-data"><%= glider_group_flight.release_time.strftime("%R") %></div>
-            <div class="table-data"><%= glider_group_flight.landing_time.strftime("%R") %></div>
-            <div class="table-data">飛行<br>時間</div>
-            <div class="table-data"><%= glider_group_flight.release_alt %></div>
-            <div class="table-data"><%= glider_group_flight.notes %></div>
-          </div>
-          <div class="edit-delete-link">
-            <%= link_to "編集", edit_glider_group_flight_path(id: glider_group_flight.id) %>
-            <%= link_to "削除", glider_group_flight, method: :delete, data: { confirm: "本当に削除しますか？" } %>
-          </div> 
-        </div>
-        <% end %>
-      <% end %>
-      <p><%= link_to "新しいフライトを登録する", new_glider_group_flight_path %></p>
-    </div>
-    <% else %>
-      <p>まだフライトログが登録されていません。</p>
-      <p><%= link_to "新しいフライトを登録する", new_glider_group_flight_path %></p>
-    <% end %>
-</div> 
-<%
-=end%>
-
-<% provide(:title, 'グループフライト') %>
 <% @user ||= current_user %>
 
 <div class="mx-auto px-4">
@@ -82,7 +17,9 @@
       <div class="border rounded-lg mx-auto my-4">
         <div class="flex flex-col p-4 md:p-8 justify-center">
           <div class="bg-white py-6 sm:py-8 lg:py-12">
-            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "#{@current_group.name}のフライト（#{@glider_group_flights.current_page}ページ目）" %></h2>
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
+              <%= "#{@current_group.name}のフライト（#{@glider_group_flights.current_page}ページ目）" %>
+            </h2>
             <% if @glider_group_flights.any? %>
               <%= paginate @glider_group_flights, left: 3, right: 3 %> 
               <div class="overflow-x-auto">
@@ -106,8 +43,8 @@
               </div>
               <%= paginate @glider_group_flights, left: 3, right: 3 %> 
             <% else %>
-              <p>まだグループフライトが登録されていません。</p>
-              <div class="flex justify-center items-center p-4">
+              <div class="justify-center items-center p-4">
+                <p class="text-center">まだグループフライトが登録されていません。</p>
                 <%= link_to "新しいフライトを登録する方はこちら", new_glider_group_flight_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
               </div>
             <% end %>

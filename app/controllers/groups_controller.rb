@@ -10,8 +10,10 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    if @group.save
-      @group.users << current_user
+    binding.pry
+    if @group.save && @group.group_users.create!(user_id: current_user.id)
+      binding.pry
+      # @group.users << current_user
       redirect_to group_path(id: @group.id), notice: 'グループを作成しました'
     else
       render :new
@@ -19,20 +21,35 @@ class GroupsController < ApplicationController
   end
 
   def index
-    @groups = Group.all
-    @groups_belonging_to = current_user.groups
-    @user = current_user
+    @user = @current_user
+    @belonging_group = @user.groups
+    @recommended_groups = Group.all - @belonging_group
+  end
+
+  def edit
+    @group = Group.find_by(id: params[:id])
+  end
+
+  def update
+    @group = Group.find_by(id: params[:id])
+    if @group.update(group_params)
+      flash[:success] = "グループの更新に成功しました！"
+      redirect_to groups_url
+    else
+      render 'groups/edit'
+    end
   end
 
   def show
     @current_group = Group.find_by(id: params[:id])
+    @glider_group_flights = @current_group.glider_group_flights.order(takeoff_time: :asc).page(params[:page]).per(10)
     @user = current_user
   end
 
   def destroy
     @group.destroy
     flash[:success] = "グループを削除しました。"
-    redirect_to request.referrer || root_url
+    redirect_to groups_url
   end
 
   private
