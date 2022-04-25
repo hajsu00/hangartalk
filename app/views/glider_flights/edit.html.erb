@@ -2,8 +2,6 @@
 <% provide(:button_text, '登録する') %>
 <% @user ||= current_user %>
 
-<%
-=begin%>
  <div class="mx-auto px-4">
   <div class="flex flex-row px-4 mb-4">
     <%= link_to :back do %>
@@ -110,12 +108,4 @@
       <%= f.submit yield(:button_text), class: "mt-4 block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
     <% end %>
   </div> 
-</div> 
-<%
-=end%>
-
-<div class="justify-center">
-  <div>
-    テスト
-  </div>
 </div> 

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
     # resources :microposts, only: [:new, :create, :show, :index, :destroy]
-    resources :glider_flights
+    # resources :glider_flights
     resources :licenses
     
     resources :licenses do
@@ -46,7 +46,9 @@ Rails.application.routes.draw do
   resources :microposts do
     # get :show_reply_form
     post :create_reply
+    post :share_flight
   end
+  resources :glider_flights
   resources :users, only: [:show]
   resources :microposts,                only: [:new, :create, :show, :index, :destroy]
   resources :relationships,             only: [:create, :destroy]
