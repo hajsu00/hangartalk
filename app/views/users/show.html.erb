@@ -88,7 +88,7 @@
                 </div>
                 <div class="py-2">
                   <% if @user == current_user %>
-                    <%= link_to user_glider_flights_path(@user, @gliderflights) do %> 
+                    <%= link_to glider_flights_path(@gliderflights) do %> 
                       <%= render partial: "users/license_link", collection: @user.licenses, as: :license  %>
                     <% end %>
                   <% else %>
@@ -104,7 +104,7 @@
                   <h2>グライダー</h2>
                   </span>
                   <% if @user == current_user %>
-                    <%= link_to user_glider_flights_path(@user, @gliderflights) do %> 
+                    <%= link_to glider_flights_path(@gliderflights) do %> 
                       <%= render partial: "users/glider_flights_link" %>
                     <% end %>
                   <% else %>
