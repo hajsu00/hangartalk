@@ -85,17 +85,17 @@
       </div>
       <div class="flex justify-center">
         <div>
-          <%= link_to edit_user_glider_flight_path(@current_user.id, @glider_flight.id) do %>
+          <%= link_to edit_glider_flight_path(@glider_flight) do %>
             <%= render partial: "shared/button", locals: {item: '編集'} %>
           <% end %>
         </div>
         <div>
-          <%= link_to user_glider_flight_path(@current_user.id, @glider_flight.id), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+          <%= link_to glider_flight_path(@glider_flight), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
             <%= render partial: "shared/button", locals: {item: '削除'} %>
           <% end %>
         </div>
       </div>
     </div>
-    <%= render partial: 'shared/micropost_form', locals: { target_flight: @glider_flight } %>
+    <%= render partial: 'shared/share_flight_form', locals: { target_flight: @glider_flight } %>
   </div>
 </div>

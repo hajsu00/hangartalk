@@ -6,10 +6,6 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
-      # # フライト情報の有無を確認
-      # if !params[:micropost][:glider_flight_id].nil?
-      #   @micropost.glider_micropost_relationships.create!(glider_micropost_relationship_params)
-      # end
       flash[:success] = "マイクロポストを投稿しました！"
       redirect_to microposts_url
     else
@@ -32,9 +28,20 @@ class MicropostsController < ApplicationController
   end
 
   def create_reply
-    @replying_micropost = current_user.microposts.build(micropost_params)
+    @replying_micropost = current_user.microposts.build(reply_params)
     if @replying_micropost.save && @replying_micropost.replying_relationships.create!(replied_id: params[:micropost_id])
       flash[:success] = "マイクロポストを投稿しました！"
+      redirect_to microposts_url
+    else
+      @microposts = current_user.feed
+      redirect_to microposts_url
+    end
+  end
+
+  def share_flight
+    @micropost = current_user.microposts.build(sharing_flight_params)
+    if @micropost.save && @micropost.glider_micropost_relationships.create!(glider_flight_id: params[:micropost][:glider_flight_id])
+      flash[:success] = "フライトをシェアしました！"
       redirect_to microposts_url
     else
       @microposts = current_user.feed
@@ -48,37 +55,27 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    # @glider_micropost = GliderMicropostRelationship.find_by(micropost_id: @micropost.id)
-    # @replying_relationship = ReplyRelationship.find_by(replying_id: @micropost.id)
-    # @replied_relationship = ReplyRelationship.find_by(replied_id: @micropost.id)
-    # @shared_relationship = ShareRelationship.find_by(shared_id: @micropost.id)
-    # @sharing_relationship = ShareRelationship.find_by(sharing_id: @micropost.id)
     @micropost.destroy
-    # @glider_micropost.destroy if !@glider_micropost.nil?
-    # @replying_relationship.destroy if !@replying_relationship.nil?
-    # @replied_relationship.destroy if !@replied_relationship.nil?
-    # @shared_relationship.destroy if !@shared_relationship.nil?
-    # @sharing_relationship.destroy if !@sharing_relationship.nil?
     flash[:success] = "マイクロポストを削除しました。"
     redirect_to request.referrer || microposts_url
-  end
-
-  def share_micropost
-    @micropost = Micropost.find(params[:id])
   end
 
   private
 
   def micropost_params
+    params.permit(:content, :is_flight_attached, images: [])
+  end
+
+  def reply_params
     params.require(:micropost).permit(:content, :is_flight_attached, images: [])
   end
 
-  def glider_micropost_relationship_params
+  def sharing_flight_params
+    params.require(:micropost).permit(:content, :is_flight_attached, images: [])
+  end
+
+  def shared_flight_params
     params.require(:micropost).permit(:glider_flight_id)
-  end
-
-  def reply_relationship_params
-    params.require(:micropost).permit(:content, :is_flight_attached, images: [])
   end
 
   def correct_user
