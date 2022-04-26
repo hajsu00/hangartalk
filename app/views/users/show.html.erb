@@ -113,10 +113,6 @@
                   <p class="text-left mb-4 text-lg leading-relaxed text-blueGray-700">
                     <%= @user.introduction %>
                   </p>
-                  <button onclick="clickBtn()" class="font-normal text-pink-500">詳細を見る</button>
-                  <div id="user-detail">
-                    コンテンツ1
-                  </div>
                 </div>
               </div>
             </div>
@@ -139,18 +135,3 @@
     </div>
   </div>
 </div>
-
-<script>
-//初期表示は非表示
-document.getElementById("user-detail").style.display == "none";
-function clickBtn(){
-  const userDetail = document.getElementById("user-detail");
-  if(userDetail.style.display == "none"){
-    // hiddenで非表示
-    userDetail.style.display = "block";
-  }else{
-    // visibleで表示
-    userDetail.style.display = "none";
-  }
-}
-</script>
