@@ -10,10 +10,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    binding.pry
     if @group.save && @group.group_users.create!(user_id: current_user.id)
-      binding.pry
-      # @group.users << current_user
       redirect_to group_path(id: @group.id), notice: 'グループを作成しました'
     else
       render :new
@@ -27,11 +24,11 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find_by(id: params[:id])
+    @group = Group.find(params[:id])
   end
 
   def update
-    @group = Group.find_by(id: params[:id])
+    @group = Group.find(params[:id])
     if @group.update(group_params)
       flash[:success] = "グループの更新に成功しました！"
       redirect_to groups_url
@@ -41,7 +38,8 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @current_group = Group.find_by(id: params[:id])
+    @current_group = Group.find(params[:id])
+    @group_members = @current_group.users
     @glider_group_flights = @current_group.glider_group_flights.order(takeoff_time: :asc).page(params[:page]).per(10)
     @user = current_user
   end
@@ -55,7 +53,7 @@ class GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :introduction, :security, user_ids: [])
+    params.require(:group).permit(:name, :introduction, :security, :group_cover, user_ids: [])
   end
 
   def correct_user

@@ -19,15 +19,8 @@ class User < ApplicationRecord
   has_one :aeroplane_initial_log, dependent: :destroy
   has_one :glider_initial_log, dependent: :destroy
 
-  # before_save   :downcase_email
-  # before_create :create_activation_digest
-  # before_save { email.downcase! }
-
-  # validates :name,  presence: true, length: { maximum: 50 }
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  # has_secure_password
-  # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  has_one_attached :avatar
+  has_one_attached :user_cover
 
   # cookieを使いログイン情報を保持
   def remember_me
@@ -93,8 +86,7 @@ class User < ApplicationRecord
   # ユーザーのステータスフィードを返す
   def feed
     following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
-    # Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
-    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).includes([:like_relationships, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships])
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id).includes([:images_attachments, :like_relationships, :replying, :replied, :sharing, :shared, :glider_flight, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships])
   end
 
   # ユーザーをフォローする

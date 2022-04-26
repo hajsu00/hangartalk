@@ -1,6 +1,6 @@
+# ユーザー
 # メインのサンプルユーザーを1人作成する
-# User.create!(name: "Example User", email: "example@railstutorial.org", password: "foobar", password_confirmation: "foobar", admin: true, activated: true, activated_at: Time.zone.now)
-User.create!(name: "Example User",
+user = User.create!(name: "Example User",
             email: "example@railstutorial.org",
             introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
             ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
@@ -10,6 +10,8 @@ User.create!(name: "Example User",
             admin: true,
             confirmed_at: Time.zone.now
 )
+user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
+user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
 
 user = User.find(1)
 license = user.licenses.create!(code: 'A1111111',
@@ -40,7 +42,7 @@ AircraftCategory.create!(name: '飛行機')
   name  = Faker::Name.name
   email = "example-#{n + 1}@railstutorial.org"
   password = "password"
-  User.create!(name: name,
+  user = User.create!(name: name,
     email: email,
     introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
     ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
@@ -48,6 +50,8 @@ AircraftCategory.create!(name: '飛行機')
     password: password,
     password_confirmation: password
   )
+  user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
+  user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
 end
 
 # ユーザーの一部を対象にマイクロポストを生成する
@@ -177,139 +181,12 @@ user = User.find_by(email: "example@railstutorial.org")
                               note: '備考欄です。')
 end
 
-# user = User.find_by(email: "example@railstutorial.org")
-# 13.times do |n|
-#   departure_date = Time.zone.today
-#   takeoff_time = Time.current + ((n+1) * 60).minutes
-#   landing_time = takeoff_time + 6.minutes
-#   user.glider_flights.create!(log_number: 24 + n,
-#                               date: departure_date,
-#                               aircraft_type: 'ASK21',
-#                               glider_ident: 1,
-#                               departure_and_arrival_point: '宝珠花滑空場',
-#                               number_of_landing: 1,
-#                               takeoff_time: takeoff_time,
-#                               landing_time: landing_time,
-#                               flight_role: '同乗教育',
-#                               is_motor_glider: true,
-#                               is_power_flight: true,
-#                               is_winch: false,
-#                               is_cross_country: false,
-#                               release_alt: 420,
-#                               is_instructor: false,
-#                               is_stall_recovery: false,
-#                               close_log: false,
-#                               note: '備考欄です。')
-# end
-# user = User.find_by(email: "example@railstutorial.org")
-# 13.times do |n|
-#   departure_date = Time.zone.today
-#   takeoff_time = Time.current + ((n+1) * 60).minutes
-#   landing_time = takeoff_time + 6.minutes
-#   user.glider_flights.create!(log_number: 37 + n,
-#                               date: departure_date,
-#                               aircraft_type: 1,
-#                               glider_ident: 'JA21MA',
-#                               departure_and_arrival_point: '宝珠花滑空場',
-#                               number_of_landing: 1,
-#                               takeoff_time: takeoff_time,
-#                               landing_time: landing_time,
-#                               flight_role: '単独飛行',
-#                               is_motor_glider: true,
-#                               is_power_flight: true,
-#                               is_winch: false,
-#                               is_cross_country: true,
-#                               release_alt: 420,
-#                               is_instructor: false,
-#                               is_stall_recovery: false,
-#                               close_log: false,
-#                               note: '備考欄です。')
-#end
-# user = User.find_by(id: 1)
-# departure_date = Time.zone.today
-# takeoff_time = Time.current
-# moving_time = takeoff_time - 6.minutes
-# landing_time = takeoff_time + 10.minutes
-# stop_time = landing_time + 6.minutes
-# user.aeroplane_flights.create!(log_number: 1,
-#                               departure_date: departure_date,
-#                               aeroplane_type: 'ask21',
-#                               aeroplane_ident: 'ja21ma',
-#                               departure_point: 'RJTT',
-#                               arrival_point: 'RJTT',
-#                               exercises_or_maneuvers: 'T/G, normal procedures',
-#                               number_of_takeoff: 3,
-#                               number_of_landing: 3,
-#                               moving_time: moving_time,
-#                               stop_time: stop_time,
-#                               is_pic: true,
-#                               is_dual: false,
-#                               is_cross_country: false,
-#                               is_night_flight: false,
-#                               is_hood: false,
-#                               is_instrument: false,
-#                               is_simulator: false,
-#                               is_instructor: true,
-#                               is_stall_recovery: false,
-#                               note: '備考欄です。')
-# departure_date = Time.zone.today
-# takeoff_time = Time.current + 60.minutes
-# moving_time = takeoff_time - 6.minutes
-# landing_time = takeoff_time + 10.minutes
-# stop_time = landing_time + 6.minutes
-# user.aeroplane_flights.create!(log_number: 2,
-#                               departure_date: departure_date,
-#                               aeroplane_type: 'ask21',
-#                               aeroplane_ident: 'ja21ma',
-#                               departure_point: 'RJTT',
-#                               arrival_point: 'RJAA',
-#                               exercises_or_maneuvers: 'T/G, normal procedures',
-#                               number_of_takeoff: 3,
-#                               number_of_landing: 3,
-#                               moving_time: moving_time,
-#                               stop_time: stop_time,
-#                               is_pic: false,
-#                               is_dual: false,
-#                               is_cross_country: false,
-#                               is_night_flight: false,
-#                               is_hood: false,
-#                               is_instrument: false,
-#                               is_simulator: false,
-#                               is_instructor: false,
-#                               is_stall_recovery: false,
-#                               note: '備考欄です。')
-# departure_date = Time.zone.today
-# takeoff_time = Time.current + 120.minutes
-# moving_time = takeoff_time - 6.minutes
-# landing_time = takeoff_time + 10.minutes
-# stop_time = landing_time + 6.minutes
-# user.aeroplane_flights.create!(log_number: 3,
-#                               departure_date: departure_date,
-#                               aeroplane_type: 'ask21',
-#                               aeroplane_ident: 'ja21ma',
-#                               departure_point: 'RJTT',
-#                               arrival_point: 'RJOO',
-#                               exercises_or_maneuvers: 'night cross country practice',
-#                               number_of_takeoff: 1,
-#                               number_of_landing: 1,
-#                               moving_time: moving_time,
-#                               stop_time: stop_time,
-#                               is_pic: false,
-#                               is_dual: true,
-#                               is_cross_country: true,
-#                               is_night_flight: true,
-#                               is_hood: false,
-#                               is_instrument: false,
-#                               is_simulator: false,
-#                               is_instructor: false,
-#                               is_stall_recovery: false,
-#                               note: '備考欄です。')
-
 user = User.find_by(email: "example@railstutorial.org")
 3.times do |n|
   n += 1
   group = Group.new(name: "テストグループ#{n}", introduction: "これはグループ#{n}の紹介文です。字数制限は今のところありません。", privacy: "プライベート")
   group.users << user if group.save
+  group.group_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
 end
 
 users = User.order(created_at: :DESC).take(3)
