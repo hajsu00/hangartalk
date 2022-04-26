@@ -1,6 +1,6 @@
 <%= link_to group_path(id: group.id) do %>
   <div class="max-w-sm rounded overflow-hidden shadow-lg">
-    <%= image_tag 'image_sample.jpg', class: 'w-full' %>
+    <%= image_tag group.group_cover, class: 'w-full' %>
     <div class="px-6 py-4">
       <div class="font-bold lg:text-xl md:text-lg sm:text-base mb-2"><%= "#{group.name}" %></div>
       <p class="text-gray-700 lg:text-base md:text-sm sm:text-base">

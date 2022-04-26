@@ -12,7 +12,7 @@
 
   <div class="break-words bg-white rounded w-full h-full shadow-xl">
     <section class="relative block h-500-px">
-      <%= image_tag 'image_sample.jpg', class: 'w-full' %>
+      <%= image_tag @current_group.group_cover, class: 'w-full' %>
     </section>
     <section class="relative pt-16 bg-blueGray-200 rounded">
       <div class="container mx-auto px-4">
@@ -33,9 +33,7 @@
                   <div class="my-2 text-blueGray-600">
                     <div class="flex items-center justify-center">
                       グループメンバー：
-                      <%= image_tag 'image_sample.jpg', class: 'w-6 h-6 rounded-full border-gray-200 border transform hover:scale-125' %>
-                      <%= image_tag 'image_sample.jpg', class: 'w-6 h-6 rounded-full border-gray-200 border transform hover:scale-125' %>
-                      <%= image_tag 'image_sample.jpg', class: 'w-6 h-6 rounded-full border-gray-200 border transform hover:scale-125' %>
+                      <%= render partial: 'show_members', collection: @group_members, as: :member %>
                   </div>
                   <div class="pt-4">
                     <%= render 'join_form' %>

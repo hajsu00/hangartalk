@@ -1,7 +1,7 @@
 <%= link_to micropost_path(micropost) do %>
   <div class="cursor-pointer hover:bg-gray-100 border border-gray-600 px-5 py-4 my-1 bg-white dark:bg-gray-800 shadow rounded-lg w-full">
     <div class="flex mb-4">
-      <%= image_tag 'image_sample.jpg', class: 'w-12 h-12 rounded-full' %>
+      <%= image_tag micropost.user.avatar, class: 'w-12 h-12 rounded-full' %>
       <div class="ml-2 mt-0.5">
         <span class="block font-medium text-base leading-snug text-black dark:text-gray-100">
           <%= micropost.user.name %>

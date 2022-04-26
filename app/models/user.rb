@@ -19,15 +19,8 @@ class User < ApplicationRecord
   has_one :aeroplane_initial_log, dependent: :destroy
   has_one :glider_initial_log, dependent: :destroy
 
-  # before_save   :downcase_email
-  # before_create :create_activation_digest
-  # before_save { email.downcase! }
-
-  # validates :name,  presence: true, length: { maximum: 50 }
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  # has_secure_password
-  # validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
+  has_one_attached :avatar
+  has_one_attached :user_cover
 
   # cookieを使いログイン情報を保持
   def remember_me

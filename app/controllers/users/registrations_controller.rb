@@ -19,11 +19,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/edit
   # def edit
   #   super
+  #   user_url(resource)
   # end
 
   # PUT /resource
   # def update
   #   super
+  #   user_url(resource)
   # end
 
   # DELETE /resource
