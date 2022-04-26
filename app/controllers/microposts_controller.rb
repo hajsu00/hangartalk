@@ -50,8 +50,8 @@ class MicropostsController < ApplicationController
   end
 
   def index
-    @microposts = @current_user.feed.order(created_at: :desc).includes([:like_relationships, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
-    @reccomended_users = User.where.not("id = ?", @current_user.id) - @current_user.following
+    @microposts = @current_user.feed.order(created_at: :desc).includes([:images_attachments, :like_relationships, :replying, :replied, :sharing, :shared, :glider_flight, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
+    @reccomended_users = User.where.not("id = ?", @current_user.id).includes([:avatar_attachment, :user_cover_attachment]) - @current_user.following
   end
 
   def destroy
