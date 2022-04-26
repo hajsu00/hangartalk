@@ -4,7 +4,7 @@ module GliderFlightsHelper
     logged_flights.each do |logged_flight|
       return true if logged_flight.takeoff_time == glider_flight.takeoff_time
     end
-    return false
+    false
   end
 
   # showページ用

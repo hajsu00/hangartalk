@@ -1,32 +1,29 @@
 # ユーザー
 # メインのサンプルユーザーを1人作成する
 user = User.create!(name: "Example User",
-            email: "example@railstutorial.org",
-            introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
+                    email: "example@railstutorial.org",
+                    introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
             ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
-            location: "東京",
-            password: "foobar",
-            password_confirmation: "foobar",
-            admin: true,
-            confirmed_at: Time.zone.now
-)
+                    location: "東京",
+                    password: "foobar",
+                    password_confirmation: "foobar",
+                    admin: true,
+                    confirmed_at: Time.zone.now)
 user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
 user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
 
 user = User.find(1)
 license = user.licenses.create!(code: 'A1111111',
-                    license_category_id: 1,
-                    aircraft_category_id: 1,
-                    date_of_issue: Date.today - 3.years
-)
+                                license_category_id: 1,
+                                aircraft_category_id: 1,
+                                date_of_issue: Date.today - 3.years)
 license.reccurent_histories.create!(date: license.date_of_issue, valid_for: 2)
 
 user = User.find(1)
 license = user.licenses.create!(code: 'A2222222',
-                    license_category_id: 2,
-                    aircraft_category_id: 1,
-                    date_of_issue: Date.today - 3.years
-)
+                                license_category_id: 2,
+                                aircraft_category_id: 1,
+                                date_of_issue: Date.today - 3.years)
 license.reccurent_histories.create!(date: license.date_of_issue, valid_for: 2)
 
 LicenseCategory.create!(name: '自家用操縦士')
@@ -43,13 +40,12 @@ AircraftCategory.create!(name: '飛行機')
   email = "example-#{n + 1}@railstutorial.org"
   password = "password"
   user = User.create!(name: name,
-    email: email,
-    introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
+                      email: email,
+                      introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
     ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
-    location: "東京",
-    password: password,
-    password_confirmation: password
-  )
+                      location: "東京",
+                      password: password,
+                      password_confirmation: password)
   user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
   user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
 end
@@ -58,7 +54,10 @@ end
 users = User.order(:created_at).take(6)
 50.times do |n|
   content = Faker::Lorem.sentence(word_count: 5)
-  users.each { |user| user.microposts.create!(content: content, is_flight_attached: false, is_sharing_micropost: false, created_at: Time.zone.now - n.minutes, updated_at: Time.zone.now - n.minutes) }
+  users.each do |user|
+    user.microposts.create!(content: content, is_flight_attached: false, is_sharing_micropost: false, created_at: Time.zone.now - n.minutes,
+                            updated_at: Time.zone.now - n.minutes)
+  end
 end
 
 # 以下のリレーションシップを作成する
@@ -88,77 +87,77 @@ user.create_aeroplane_initial_log(total_flight_number: 20,
                                   number_of_stall_recovery: 3)
 
 user = User.find_by(email: "example@railstutorial.org")
-date = Date.new(2022, 02, 10)
+date = Date.new(2022, 0o2, 10)
 user.create_glider_initial_log(at_present: date,
-                              non_power_total_time: 67_680,
-                              non_power_total_number: 188,
-                              pic_winch_time: 7_560,
-                              pic_winch_number: 21,
-                              pic_aero_tow_time: 0,
-                              pic_aero_tow_number: 0,
-                              solo_winch_time: 15_840,
-                              solo_winch_number: 44,
-                              solo_aero_tow_time: 0,
-                              solo_aero_tow_number: 0,
-                              dual_winch_time: 44_280,
-                              dual_winch_number: 123,
-                              dual_aero_tow_time: 0,
-                              dual_aero_tow_number: 0,
-                              power_total_time: 0,
-                              power_total_number: 0,
-                              pic_power_time: 0,
-                              pic_power_number: 0,
-                              pic_power_off_time: 0,
-                              pic_power_off_number: 0,
-                              solo_power_time: 0,
-                              solo_power_number: 0,
-                              solo_power_off_time: 0,
-                              solo_power_off_number: 0,
-                              dual_power_time: 0,
-                              dual_power_number: 0,
-                              dual_power_off_time: 0,
-                              dual_power_off_number: 0,
-                              cross_country_time: 0,
-                              instructor_time: 0,
-                              instructor_number: 0,
-                              number_of_stall_recovery: 3)
+                               non_power_total_time: 67_680,
+                               non_power_total_number: 188,
+                               pic_winch_time: 7_560,
+                               pic_winch_number: 21,
+                               pic_aero_tow_time: 0,
+                               pic_aero_tow_number: 0,
+                               solo_winch_time: 15_840,
+                               solo_winch_number: 44,
+                               solo_aero_tow_time: 0,
+                               solo_aero_tow_number: 0,
+                               dual_winch_time: 44_280,
+                               dual_winch_number: 123,
+                               dual_aero_tow_time: 0,
+                               dual_aero_tow_number: 0,
+                               power_total_time: 0,
+                               power_total_number: 0,
+                               pic_power_time: 0,
+                               pic_power_number: 0,
+                               pic_power_off_time: 0,
+                               pic_power_off_number: 0,
+                               solo_power_time: 0,
+                               solo_power_number: 0,
+                               solo_power_off_time: 0,
+                               solo_power_off_number: 0,
+                               dual_power_time: 0,
+                               dual_power_number: 0,
+                               dual_power_off_time: 0,
+                               dual_power_off_number: 0,
+                               cross_country_time: 0,
+                               instructor_time: 0,
+                               instructor_number: 0,
+                               number_of_stall_recovery: 3)
 
 # 一部のユーザーを対象にフライト記録を生成する
 # users = User.order(:created_at).take(6)
 user = User.find_by(email: "example@railstutorial.org")
 123.times do |n|
   departure_date = Time.zone.today
-  takeoff_time = Time.current + ((n+1) * 60).minutes
+  takeoff_time = Time.current + ((n + 1) * 60).minutes
   moving_time = takeoff_time + 6.minutes
   landing_time = takeoff_time + 20.minutes
   stop_time = landing_time + 6.minutes
   user.aeroplane_flights.create!(log_number: 1 + n,
-                              date: departure_date,
-                              aeroplane_type: 'ASK21',
-                              aeroplane_ident: 'JA21MA',
-                              departure_point: 'RJTT',
-                              arrival_point: 'RJTT',
-                              exercises_or_maneuvers: 'T/G, normal procedures',
-                              number_of_takeoff: 3,
-                              number_of_landing: 3,
-                              moving_time: moving_time,
-                              stop_time: stop_time,
-                              flight_role: '単独飛行',
-                              is_cross_country: true,
-                              is_night_flight: true,
-                              is_hood: false,
-                              is_instrument: false,
-                              is_simulator: false,
-                              is_instructor: true,
-                              is_stall_recovery: true,
-                              close_log: false,
-                              note: '備考欄です。')
+                                 date: departure_date,
+                                 aeroplane_type: 'ASK21',
+                                 aeroplane_ident: 'JA21MA',
+                                 departure_point: 'RJTT',
+                                 arrival_point: 'RJTT',
+                                 exercises_or_maneuvers: 'T/G, normal procedures',
+                                 number_of_takeoff: 3,
+                                 number_of_landing: 3,
+                                 moving_time: moving_time,
+                                 stop_time: stop_time,
+                                 flight_role: '単独飛行',
+                                 is_cross_country: true,
+                                 is_night_flight: true,
+                                 is_hood: false,
+                                 is_instrument: false,
+                                 is_simulator: false,
+                                 is_instructor: true,
+                                 is_stall_recovery: true,
+                                 close_log: false,
+                                 note: '備考欄です。')
 end
 
 user = User.find_by(email: "example@railstutorial.org")
 23.times do |n|
   # departure_date = Time.zone.today
-  takeoff_time = Time.current + ((n+1) * 60).minutes
+  takeoff_time = Time.current + ((n + 1) * 60).minutes
   departure_date = Date.new(takeoff_time.year, takeoff_time.month, takeoff_time.day)
   landing_time = takeoff_time + 6.minutes
   user.glider_flights.create!(log_number: 1 + n,
@@ -211,37 +210,37 @@ group.fleets.create!(ident: 'JA2400', aircraft_type_id: 1)
 
 group = Group.find(1)
 date = Date.new(2022, 2, 21)
-takeoff_time = Time.new(2022,2,21,21,0,0)
+takeoff_time = Time.zone.local(2022, 2, 21, 21, 0, 0)
 group.glider_group_flights.create(day_flight_number: nil,
-                                date: date,
-                                departure_and_arrival_point: '宝珠花滑空場',
-                                is_winch: true,
-                                fleet: 1,
-                                front_seat: 100,
-                                front_flight_role: '同乗教育',
-                                rear_seat: 1,
-                                rear_flight_role: '教官',
-                                takeoff_time: takeoff_time,
-                                release_time: takeoff_time + 1.minutes,
-                                landing_time: takeoff_time + 12.minutes,
-                                release_alt: 400,
-                                creator: 1,
-                                notes: '備考欄です')
+                                  date: date,
+                                  departure_and_arrival_point: '宝珠花滑空場',
+                                  is_winch: true,
+                                  fleet: 1,
+                                  front_seat: 100,
+                                  front_flight_role: '同乗教育',
+                                  rear_seat: 1,
+                                  rear_flight_role: '教官',
+                                  takeoff_time: takeoff_time,
+                                  release_time: takeoff_time + 1.minute,
+                                  landing_time: takeoff_time + 12.minutes,
+                                  release_alt: 400,
+                                  creator: 1,
+                                  notes: '備考欄です')
 group = Group.find(1)
 date = Date.new(2022, 2, 21)
-takeoff_time = Time.new(2022,2,21,21,20,0)
+takeoff_time = Time.zone.local(2022, 2, 21, 21, 20, 0)
 group.glider_group_flights.create(day_flight_number: nil,
-                                date: date,
-                                departure_and_arrival_point: '宝珠花滑空場',
-                                is_winch: true,
-                                fleet: 1,
-                                front_seat: 99,
-                                front_flight_role: '同乗教育',
-                                rear_seat: 1,
-                                rear_flight_role: '教官',
-                                takeoff_time: takeoff_time,
-                                release_time: takeoff_time + 1.minutes,
-                                landing_time: takeoff_time + 12.minutes,
-                                release_alt: 400,
-                                creator: 1,
-                                notes: '備考欄です')
+                                  date: date,
+                                  departure_and_arrival_point: '宝珠花滑空場',
+                                  is_winch: true,
+                                  fleet: 1,
+                                  front_seat: 99,
+                                  front_flight_role: '同乗教育',
+                                  rear_seat: 1,
+                                  rear_flight_role: '教官',
+                                  takeoff_time: takeoff_time,
+                                  release_time: takeoff_time + 1.minute,
+                                  landing_time: takeoff_time + 12.minutes,
+                                  release_alt: 400,
+                                  creator: 1,
+                                  notes: '備考欄です')

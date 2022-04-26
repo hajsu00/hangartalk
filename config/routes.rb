@@ -17,13 +17,13 @@ Rails.application.routes.draw do
   get 'glider_initial_logs/show'
   get 'glider_initial_logs/edit'
   get 'glider_initial_logs/update'
-  
+
   get  '/top', to: 'static_pages#top'
   get  '/about', to: 'static_pages#about'
   get  '/faq',   to: 'static_pages#faq'
   get  '/inquiry', to: 'static_pages#inquiry'
   get  '/policy', to: 'static_pages#policy'
-  
+
   resources :glider_flights do
     collection do
       get :new_from_groups
@@ -37,12 +37,12 @@ Rails.application.routes.draw do
     # resources :microposts, only: [:new, :create, :show, :index, :destroy]
     # resources :glider_flights
     resources :licenses
-    
+
     resources :licenses do
       resources :reccurent_histories
     end
   end
-  
+
   resources :microposts do
     # get :show_reply_form
     post :create_reply

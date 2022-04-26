@@ -2,11 +2,11 @@ class Micropost < ApplicationRecord
   belongs_to :user
   # 返信機能
   has_many :replying_relationships, class_name: 'ReplyRelationship',
-                                   foreign_key: 'replying_id',
-                                   dependent: :destroy
+                                    foreign_key: 'replying_id',
+                                    dependent: :destroy
   has_many :replied_relationships, class_name: 'ReplyRelationship',
-                                  foreign_key: 'replied_id',
-                                  dependent: :destroy
+                                   foreign_key: 'replied_id',
+                                   dependent: :destroy
   has_many :replying, through: :replying_relationships
   has_many :replied, through: :replied_relationships
   # シェア機能
@@ -25,11 +25,11 @@ class Micropost < ApplicationRecord
   has_many :glider_flight, through: :glider_micropost_relationships
   # 画像投稿
   has_many_attached :images
-  #バリデーション
+  # バリデーション
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }, unless: :is_sharing_micropost?
   validates :images, content_type: { in: %w[image/jpeg image/gif image/png], message: "must be a valid image format" },
-                      size: { less_than: 5.megabytes, message: "画像サイズの最大値は５MBです" }
+                     size: { less_than: 5.megabytes, message: "画像サイズの最大値は５MBです" }
 
   def display_image
     self.images.each do |image|
@@ -75,7 +75,7 @@ class Micropost < ApplicationRecord
     share_relationships.each do |share_relationship|
       return true if current_user_micropost_ids.include?(share_relationship.sharing_id)
     end
-    return false
+    false
   end
 
   def is_liked_by_current_user?(user)
