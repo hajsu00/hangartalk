@@ -12,8 +12,10 @@ class ApplicationController < ActionController::Base
   def set_sideber_data
     @current_user = User.find(current_user.id)
     initial_flight_log = @current_user.glider_initial_log
-    @initial_flight_time = initial_flight_log.non_power_total_time
-    @initial_flight_number = initial_flight_log.non_power_total_number
+    if !initial_flight_log.nil?
+      @initial_flight_time = initial_flight_log.non_power_total_time
+      @initial_flight_number = initial_flight_log.non_power_total_number
+    end
     @all_glider_flights = @current_user.glider_flights
   end
 

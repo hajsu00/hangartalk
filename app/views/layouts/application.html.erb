@@ -15,18 +15,24 @@
   <body>
     <%= render 'layouts/header' %>
     <% if flash.any? %>
-      <%= render 'layouts/notification' %>
-    <% end %>
+      <div class="flex justify-center items-center p-4">
+        <%= render 'layouts/notification' %>
+      </div>
+    <% end %> 
 
     <main class='container flex flex-wrap-reverse mx-auto px-4'>
-      <article class='w-full lg:w-4/12'>
-        <% if user_signed_in? %>
+      <% if user_signed_in? %>
+        <article class='w-full lg:w-4/12'>
           <%= render 'layouts/sidebar' %>
-        <% end %>
-      </article>
-      <article class='w-full lg:w-8/12'>
-        <%= yield %> 
-      </article>
+        </article>
+        <article class='w-full lg:w-8/12'>
+          <%= yield %> 
+        </article>
+      <% else %>
+        <article class='w-full'>
+          <%= yield %> 
+        </article>
+      <% end %>
     </main>
 
     <%= render 'layouts/footer' %>
