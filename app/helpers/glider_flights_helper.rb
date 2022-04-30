@@ -100,8 +100,8 @@ module GliderFlightsHelper
     if !initial_flight_log.nil?
       case with_or_without
       when 'without_initial'
-        { non_power_total_time: 0,
-          non_power_total_number: 0,
+        { total_time: 0,
+          total_number: 0,
           pic_winch_time: 0,
           pic_winch_number: 0,
           pic_aero_tow_time: 0,
@@ -114,27 +114,13 @@ module GliderFlightsHelper
           dual_winch_number: 0,
           dual_aero_tow_time: 0,
           dual_aero_tow_number: 0,
-          power_total_time: 0,
-          power_total_number: 0,
-          pic_power_time: 0,
-          pic_power_number: 0,
-          pic_power_off_time: 0,
-          pic_power_off_number: 0,
-          solo_power_time: 0,
-          solo_power_number: 0,
-          solo_power_off_time: 0,
-          solo_power_off_number: 0,
-          dual_power_time: 0,
-          dual_power_number: 0,
-          dual_power_off_time: 0,
-          dual_power_off_number: 0,
           cross_country_time: 0,
           instructor_time: 0,
           instructor_number: 0,
           number_of_stall_recovery: 0 }
       when 'with_initial'
-        { non_power_total_time: initial_flight_log.non_power_total_time,
-          non_power_total_number: initial_flight_log.non_power_total_number,
+        { total_time: initial_flight_log.total_time,
+          total_number: initial_flight_log.total_number,
           pic_winch_time: initial_flight_log.pic_winch_time,
           pic_winch_number: initial_flight_log.pic_winch_number,
           pic_aero_tow_time: initial_flight_log.pic_aero_tow_time,
@@ -147,28 +133,14 @@ module GliderFlightsHelper
           dual_winch_number: initial_flight_log.dual_winch_number,
           dual_aero_tow_time: initial_flight_log.dual_aero_tow_time,
           dual_aero_tow_number: initial_flight_log.dual_aero_tow_number,
-          power_total_time: initial_flight_log.power_total_time,
-          power_total_number: initial_flight_log.power_total_number,
-          pic_power_time: initial_flight_log.pic_power_time,
-          pic_power_number: initial_flight_log.pic_power_number,
-          pic_power_off_time: initial_flight_log.pic_power_off_time,
-          pic_power_off_number: initial_flight_log.pic_power_off_number,
-          solo_power_time: initial_flight_log.solo_power_time,
-          solo_power_number: initial_flight_log.solo_power_number,
-          solo_power_off_time: initial_flight_log.solo_power_off_time,
-          solo_power_off_number: initial_flight_log.solo_power_off_number,
-          dual_power_time: initial_flight_log.dual_power_time,
-          dual_power_number: initial_flight_log.dual_power_number,
-          dual_power_off_time: initial_flight_log.dual_power_off_time,
-          dual_power_off_number: initial_flight_log.dual_power_off_number,
           cross_country_time: initial_flight_log.cross_country_time,
           instructor_time: initial_flight_log.instructor_time,
           instructor_number: initial_flight_log.instructor_number,
           number_of_stall_recovery: initial_flight_log.number_of_stall_recovery }
       end
     else
-      { non_power_total_time: 0,
-        non_power_total_number: 0,
+      { total_time: 0,
+        total_number: 0,
         pic_winch_time: 0,
         pic_winch_number: 0,
         pic_aero_tow_time: 0,
@@ -181,20 +153,6 @@ module GliderFlightsHelper
         dual_winch_number: 0,
         dual_aero_tow_time: 0,
         dual_aero_tow_number: 0,
-        power_total_time: 0,
-        power_total_number: 0,
-        pic_power_time: 0,
-        pic_power_number: 0,
-        pic_power_off_time: 0,
-        pic_power_off_number: 0,
-        solo_power_time: 0,
-        solo_power_number: 0,
-        solo_power_off_time: 0,
-        solo_power_off_number: 0,
-        dual_power_time: 0,
-        dual_power_number: 0,
-        dual_power_off_time: 0,
-        dual_power_off_number: 0,
         cross_country_time: 0,
         instructor_time: 0,
         instructor_number: 0,
@@ -207,64 +165,32 @@ module GliderFlightsHelper
       target_flight_time = target.landing_time - target.takeoff_time
 
       # 滑空機による時間
-      if !target.is_motor_glider?
-        flight_info[:non_power_total_time] += target_flight_time
-        flight_info[:non_power_total_number] += 1
-        case target.flight_role
-        when '機長'
-          if target.is_winch?
-            flight_info[:pic_winch_time] += target_flight_time
-            flight_info[:pic_winch_number] += 1
-          else
-            flight_info[:pic_aero_tow_time] += target_flight_time
-            flight_info[:pic_aero_tow_number] += 1
-          end
-        when '単独飛行'
-          if target.is_winch?
-            flight_info[:solo_winch_time] += target_flight_time
-            flight_info[:solo_winch_number] += 1
-          else
-            flight_info[:solo_aero_tow_time] += target_flight_time
-            flight_info[:solo_aero_tow_number] += 1
-          end
-        when '同乗教育'
-          if target.is_winch?
-            flight_info[:dual_winch_time] += target_flight_time
-            flight_info[:dual_winch_number] += 1
-          else
-            flight_info[:dual_aero_tow_time] += target_flight_time
-            flight_info[:dual_aero_tow_number] += 1
-          end
+      flight_info[:total_time] += target_flight_time
+      flight_info[:total_number] += 1
+      case target.flight_role
+      when '機長'
+        if target.is_winch?
+          flight_info[:pic_winch_time] += target_flight_time
+          flight_info[:pic_winch_number] += 1
+        else
+          flight_info[:pic_aero_tow_time] += target_flight_time
+          flight_info[:pic_aero_tow_number] += 1
         end
-      # 動力滑空機による時間
-      elsif target.is_motor_glider?
-        flight_info[:power_total_time] += target_flight_time
-        flight_info[:power_total_number] += 1
-        case target.flight_role
-        when '機長'
-          if target.is_power_flight?
-            flight_info[:pic_power_time] += target_flight_time
-            flight_info[:pic_power_number] += 1
-          else
-            flight_info[:pic_power_off_time] += target_flight_time
-            flight_info[:pic_power_off_number] += 1
-          end
-        when '単独飛行'
-          if target.is_power_flight?
-            flight_info[:solo_power_time] += target_flight_time
-            flight_info[:solo_power_number] += 1
-          else
-            flight_info[:solo_power_off_time] += target_flight_time
-            flight_info[:solo_power_off_number] += 1
-          end
-        when '同乗教育'
-          if target.is_power_flight?
-            flight_info[:dual_power_time] += target_flight_time
-            flight_info[:dual_power_number] += 1
-          else
-            flight_info[:dual_power_off_time] += target_flight_time
-            flight_info[:dual_power_off_number] += 1
-          end
+      when '単独飛行'
+        if target.is_winch?
+          flight_info[:solo_winch_time] += target_flight_time
+          flight_info[:solo_winch_number] += 1
+        else
+          flight_info[:solo_aero_tow_time] += target_flight_time
+          flight_info[:solo_aero_tow_number] += 1
+        end
+      when '同乗教育'
+        if target.is_winch?
+          flight_info[:dual_winch_time] += target_flight_time
+          flight_info[:dual_winch_number] += 1
+        else
+          flight_info[:dual_aero_tow_time] += target_flight_time
+          flight_info[:dual_aero_tow_number] += 1
         end
       end
       # その他の飛行時間

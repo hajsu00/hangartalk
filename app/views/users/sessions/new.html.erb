@@ -31,7 +31,7 @@
 
           <% if devise_mapping.rememberable? %>
             <div class="field">
-              <%= f.check_box :remember_me %>
+              <%= f.check_box :remember_me, checked: false %>
               <%= f.label :remember_me, "次回から自動でログインする" %>
             </div>
           <% end %>
