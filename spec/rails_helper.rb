@@ -22,4 +22,6 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # for omiting indicating class name 
   config.include FactoryBot::Syntax::Methods
+  config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include LoginModule
 end

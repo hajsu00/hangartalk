@@ -12,8 +12,8 @@ class AeroplaneFlight < ApplicationRecord
         errors.add(:base, "到着時刻が出発時刻よりも前になっています。")
       elsif self.moving_time == stop_time
         errors.add(:base, "出発時刻と到着時刻が同じです。")
-      # elsif self.date < initial_date
-      #   errors.add(:base, "フライト日がログ取得開始日より前になっています。")
+        # elsif self.date < initial_date
+        #   errors.add(:base, "フライト日がログ取得開始日より前になっています。")
       end
     end
   end

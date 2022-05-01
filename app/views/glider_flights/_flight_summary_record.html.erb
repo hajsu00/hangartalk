@@ -10,10 +10,10 @@
   <% end %>
   <td class="py-3 px-6 text-center">
     <div>
-      <%= show_flight_time(flight_info[:non_power_total_time]) if flight_info[:non_power_total_time] != 0 %>
+      <%= show_flight_time(flight_info[:total_time]) if flight_info[:total_time] != 0 %>
     </div>
     <div>
-      <%= flight_info[:non_power_total_number] if flight_info[:non_power_total_number] != 0 %>
+      <%= flight_info[:total_number] if flight_info[:total_number] != 0 %>
     </div>
   </td>
   <td class="py-3 px-6 text-center">

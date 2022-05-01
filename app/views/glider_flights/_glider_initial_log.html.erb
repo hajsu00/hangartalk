@@ -23,10 +23,10 @@
     <div>
       <div>
         <div>
-          <%= show_flight_time(@glider_initial_log.non_power_total_time) if @glider_initial_log.non_power_total_time != 0 %>
+          <%= show_flight_time(@glider_initial_log.total_time) if @glider_initial_log.total_time != 0 %>
         </div> 
         <div class="table-data">
-          <%= @glider_initial_log.non_power_total_number if @glider_initial_log.non_power_total_number != 0 %>
+          <%= @glider_initial_log.total_number if @glider_initial_log.total_number != 0 %>
         </div>
       </div>
     </div>

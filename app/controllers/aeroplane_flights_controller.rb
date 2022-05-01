@@ -29,6 +29,7 @@ class AeroplaneFlightsController < ApplicationController
   private
 
   def aeroplane_flight_params
-    params.require(:aeroplane_flight).permit(:log_number, :date, :aeroplane_type, :aeroplane_ident, :departure_point, :arrival_point, :exercises_or_maneuvers, :number_of_takeoff, :number_of_landing, :moving_time, :stop_time, :flight_role, :is_cross_country, :is_night_flight, :is_hood, :is_instrument, :is_simulator, :is_instructor, :is_stall_recovery, :close_log, :note)
+    params.require(:aeroplane_flight).permit(:log_number, :date, :aeroplane_type, :aeroplane_ident, :departure_point, :arrival_point, :exercises_or_maneuvers,
+                                             :number_of_takeoff, :number_of_landing, :moving_time, :stop_time, :flight_role, :is_cross_country, :is_night_flight, :is_hood, :is_instrument, :is_simulator, :is_instructor, :is_stall_recovery, :close_log, :note)
   end
 end

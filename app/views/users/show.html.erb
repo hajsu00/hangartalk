@@ -105,10 +105,10 @@
                   </span>
                   <% if @user == current_user %>
                     <%= link_to glider_flights_path(@gliderflights) do %> 
-                      <%= render partial: "users/glider_flights_link" %>
+                      <%= render partial: "users/glider_flights_link", locals: {user: @user} %>
                     <% end %>
                   <% else %>
-                    <%= render partial: "users/glider_flights_link" %>
+                    <%= render partial: "users/glider_flights_link", locals: {user: @user} %>
                   <% end %>
                   <p class="text-left mb-4 text-lg leading-relaxed text-blueGray-700">
                     <%= @user.introduction %>

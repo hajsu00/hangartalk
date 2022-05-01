@@ -49,9 +49,7 @@ class PasswordResetsController < ApplicationController
 
   # 正しいユーザーかどうか確認する
   def valid_user
-    unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
-      redirect_to root_url
-    end
+    redirect_to root_url unless @user&.activated? && @user&.authenticated?(:reset, params[:id])
   end
 
   # トークンが期限切れかどうか確認する

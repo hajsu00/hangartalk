@@ -5,7 +5,7 @@ class GroupUsersController < ApplicationController
     @current_group = Group.find(params[:group_id])
     @current_group.join(current_user)
     respond_to do |format|
-      format.html { request.referrer || root_url }
+      format.html { request.referer || root_url }
       format.js
     end
   end
@@ -15,7 +15,7 @@ class GroupUsersController < ApplicationController
     @current_group = Group.find(@group_user.group_id)
     @current_group.leave(current_user)
     respond_to do |format|
-      format.html { request.referrer || root_url }
+      format.html { request.referer || root_url }
       format.js
     end
   end

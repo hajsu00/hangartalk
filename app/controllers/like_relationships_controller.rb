@@ -4,12 +4,12 @@ class LikeRelationshipsController < ApplicationController
   def create
     @micropost = Micropost.find(params[:id])
     @micropost.like_relationships.create!(user_id: current_user.id)
-    redirect_to request.referrer || root_url
+    redirect_to request.referer || root_url
   end
 
   def destroy
     @like_rekationship.destroy
-    redirect_to request.referrer || root_url
+    redirect_to request.referer || root_url
   end
 
   private

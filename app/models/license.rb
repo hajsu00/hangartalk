@@ -14,6 +14,6 @@ class License < ApplicationRecord
 
   def is_valid_license?
     expired_date = self.reccurent_histories.last.date + self.reccurent_histories.last.valid_for.years
-    expired_date > Date.today ? true : false
+    expired_date > Date.today
   end
 end

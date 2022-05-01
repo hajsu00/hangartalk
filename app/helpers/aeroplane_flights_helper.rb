@@ -4,7 +4,7 @@ module AeroplaneFlightsHelper
     all_flights = current_user.aeroplane_flights
     flight_info = init_aeroplane_experience('with_initial')
     flight_info = aeroplane_time_calculation(all_flights, flight_info)
-    if attribute == :number_of_takeoff || attribute == :number_of_landing
+    if [:number_of_takeoff, :number_of_landing].include?(attribute)
       flight_info[attribute]
     else
       show_flight_time(flight_info[attribute])
@@ -125,7 +125,6 @@ module AeroplaneFlightsHelper
   #     flight_info[:instructor_time] += target_flight_time if target.is_instructor?
   #     flight_info[:number_of_takeoff] += target.number_of_takeoff
   #     flight_info[:number_of_landing] += target.number_of_landing
-
 
   #     flight_info[:total_time] += target_flight_time
   #     case target.flight_role

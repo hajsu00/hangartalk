@@ -42,7 +42,7 @@ class GliderInitialLogsController < ApplicationController
     @glider_initial_log.destroy
     current_user.reload_glider_initial_log
     flash[:success] = "過去のフライトログを削除しました。"
-    redirect_to request.referrer || root_url
+    redirect_to request.referer || root_url
   end
 
   private
@@ -82,7 +82,8 @@ class GliderInitialLogsController < ApplicationController
     params[:glider_initial_log][:instructor_number] = 0 if params[:glider_initial_log][:instructor_number].empty?
     params[:glider_initial_log][:number_of_stall_recovery] = 0 if params[:glider_initial_log][:number_of_stall_recovery].empty?
 
-    params.require(:glider_initial_log).permit(:date, :non_power_total_time, :non_power_total_number, :pic_winch_time, :pic_winch_number, :pic_aero_tow_time, :pic_aero_tow_number, :solo_winch_time, :solo_winch_number, :solo_aero_tow_time, :solo_aero_tow_number, :dual_winch_time, :dual_winch_number, :dual_aero_tow_time, :dual_aero_tow_number, :power_total_time, :power_total_number, :pic_power_time, :pic_power_number, :pic_power_off_time, :pic_power_off_number, :solo_power_time, :solo_power_number, :solo_power_off_time, :solo_power_off_number, :dual_power_time, :dual_power_number, :dual_power_off_time, :dual_power_off_number, :cross_country_time, :instructor_time, :instructor_number, :number_of_stall_recovery)
+    params.require(:glider_initial_log).permit(:date, :non_power_total_time, :non_power_total_number, :pic_winch_time, :pic_winch_number, :pic_aero_tow_time,
+                                               :pic_aero_tow_number, :solo_winch_time, :solo_winch_number, :solo_aero_tow_time, :solo_aero_tow_number, :dual_winch_time, :dual_winch_number, :dual_aero_tow_time, :dual_aero_tow_number, :power_total_time, :power_total_number, :pic_power_time, :pic_power_number, :pic_power_off_time, :pic_power_off_number, :solo_power_time, :solo_power_number, :solo_power_off_time, :solo_power_off_number, :dual_power_time, :dual_power_number, :dual_power_off_time, :dual_power_off_number, :cross_country_time, :instructor_time, :instructor_number, :number_of_stall_recovery)
   end
 
   def correct_user

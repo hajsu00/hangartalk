@@ -7,11 +7,10 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     if @micropost.save
       flash[:success] = "マイクロポストを投稿しました！"
-      redirect_to microposts_url
     else
       # @microposts = current_user.feed
-      redirect_to microposts_url
     end
+    redirect_to microposts_url
   end
 
   def show
@@ -23,7 +22,7 @@ class MicropostsController < ApplicationController
       @replying_microposts << Micropost.find(replying_relationship.replying_id)
     end
     replied_relationships = ReplyRelationship.find_by(replying_id: @target_micropost.id)
-    @replied_micropost = Micropost.find(replied_relationships.replied_id) if !replied_relationships.nil?
+    @replied_micropost = Micropost.find(replied_relationships.replied_id) unless replied_relationships.nil?
     @micropost = Micropost.new
   end
 
@@ -31,33 +30,32 @@ class MicropostsController < ApplicationController
     @replying_micropost = current_user.microposts.build(reply_params)
     if @replying_micropost.save && @replying_micropost.replying_relationships.create!(replied_id: params[:micropost_id])
       flash[:success] = "マイクロポストを投稿しました！"
-      redirect_to microposts_url
     else
       @microposts = current_user.feed
-      redirect_to microposts_url
     end
+    redirect_to microposts_url
   end
 
   def share_flight
     @micropost = current_user.microposts.build(sharing_flight_params)
     if @micropost.save && @micropost.glider_micropost_relationships.create!(glider_flight_id: params[:micropost][:glider_flight_id])
       flash[:success] = "フライトをシェアしました！"
-      redirect_to microposts_url
     else
       @microposts = current_user.feed
-      redirect_to microposts_url
     end
+    redirect_to microposts_url
   end
 
   def index
-    @microposts = @current_user.feed.order(created_at: :desc).includes([:images_attachments, :like_relationships, :replying, :replied, :sharing, :shared, :glider_flight, replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships]).page(params[:page]).per(10)
+    @microposts = @current_user.feed.order(created_at: :desc).includes([:images_attachments, :like_relationships, :replying, :replied, :sharing, :shared,
+                                                                        :glider_flight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships }]).page(params[:page]).per(10)
     @reccomended_users = User.where.not("id = ?", @current_user.id).includes([:avatar_attachment, :user_cover_attachment]) - @current_user.following
   end
 
   def destroy
     @micropost.destroy
     flash[:success] = "マイクロポストを削除しました。"
-    redirect_to request.referrer || microposts_url
+    redirect_to request.referer || microposts_url
   end
 
   private
