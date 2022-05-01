@@ -17,7 +17,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    # users = User.includes([following: :active_relationships, followers: :passive_relationships])
     @user = users.find(params[:id])
   end
 
@@ -25,7 +24,6 @@ class UsersController < ApplicationController
     @title = "フォロー"
     @user  = User.find(params[:id])
     @users = @user.following.order(created_at: :desc).includes([following: :active_relationships, followers: :passive_relationships]).page(params[:page]).per(10)
-    # @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
     render 'show_follow'
   end
 
@@ -33,7 +31,6 @@ class UsersController < ApplicationController
     @title = "フォロワー"
     @user  = User.find(params[:id])
     @users = @user.followers.order(created_at: :desc).includes([following: :active_relationships, followers: :passive_relationships]).page(params[:page]).per(10)
-    # @glider_flights = @user.glider_flights.order(created_at: :asc).order(log_number: :asc).page(params[:page]).per(10)
     render 'show_follow'
   end
 

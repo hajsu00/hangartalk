@@ -23,4 +23,5 @@ RSpec.configure do |config|
   # for omiting indicating class name 
   config.include FactoryBot::Syntax::Methods
   config.include Devise::Test::IntegrationHelpers, type: :request
+  config.include LoginModule
 end

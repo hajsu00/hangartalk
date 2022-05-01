@@ -26,13 +26,9 @@ class GliderFlight < ApplicationRecord
 
   # 値がnilの場合はfalseを代入する
   def convert_nil_to_false
-    # self.is_motor_glider = false if self.is_motor_glider.nil?
-    # self.is_power_flight = false if self.is_power_flight.nil?
     self.is_cross_country = false if self.is_cross_country.nil?
     self.is_instructor = false if self.is_instructor.nil?
     self.is_stall_recovery = false if self.is_stall_recovery.nil?
-    # self.close_log = false if self.close_log.nil?
-    # self.is_motor_glider = false if self.is_motor_glider.nil?
   end
 
   # バリデーション

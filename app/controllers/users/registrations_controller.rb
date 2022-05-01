@@ -17,8 +17,8 @@ module Users
       user = User.find_by(email: params[:user][:email])
       if !user.nil?
         user.create_glider_initial_log!(at_present: Date.today,
-                                        non_power_total_time: 0,
-                                        non_power_total_number: 0,
+                                        total_time: 0,
+                                        total_number: 0,
                                         pic_winch_time: 0,
                                         pic_winch_number: 0,
                                         pic_aero_tow_time: 0,
@@ -31,20 +31,6 @@ module Users
                                         dual_winch_number: 0,
                                         dual_aero_tow_time: 0,
                                         dual_aero_tow_number: 0,
-                                        power_total_time: 0,
-                                        power_total_number: 0,
-                                        pic_power_time: 0,
-                                        pic_power_number: 0,
-                                        pic_power_off_time: 0,
-                                        pic_power_off_number: 0,
-                                        solo_power_time: 0,
-                                        solo_power_number: 0,
-                                        solo_power_off_time: 0,
-                                        solo_power_off_number: 0,
-                                        dual_power_time: 0,
-                                        dual_power_number: 0,
-                                        dual_power_off_time: 0,
-                                        dual_power_off_number: 0,
                                         cross_country_time: 0,
                                         instructor_time: 0,
                                         instructor_number: 0,
@@ -59,10 +45,10 @@ module Users
     # end
 
     # PUT /resource
-    # def update
-    #   super
-    #   user_url(resource)
-    # end
+    def update
+      super
+      user_url(resource)
+    end
 
     # DELETE /resource
     # def destroy
