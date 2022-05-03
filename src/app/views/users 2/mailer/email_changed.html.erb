@@ -1,0 +1,26 @@
+<%
+=begin%>
+ <p>Hello <%= @email %>!</p>
+
+<% if @resource.try(:unconfirmed_email?) %>
+  <p>We're contacting you to notify you that your email is being changed to <%= @resource.unconfirmed_email %>.</p>
+<% else %>
+  <p>We're contacting you to notify you that your email has been changed to <%= @resource.email %>.</p>
+<% end %> 
+<%
+=end%>
+
+<p>こんにちは <%= @user.name %> さん！</p>
+
+<% if @resource.try(:unconfirmed_email?) %>
+  <p>あなたのメールアドレスが <%= @resource.unconfirmed_email %> に変更されようとしています。</p>
+<% else %>
+  <p>あなたのメールアドレスは <%= @resource.email %>に変更されました。<br></p>
+<% end %>
+
+<p>※このメールは送信専用です。ご返信をいただいてもご連絡できかねますのでご了承ください。<br></p> 
+
+<p>--------------------------------------------------</p> 
+<p>Hanger Talk</p> 
+<p>hangertalk@example.com</p> 
+<p>--------------------------------------------------</p> 

@@ -5,7 +5,8 @@ threads min_threads_count, max_threads_count
 
 preload_app!
 rackup DefaultRackup
-rails_env = ENV.fetch("RAILS_ENV") { "development" }
+# rails_env = ENV.fetch("RAILS_ENV") { "development" }
+rails_env = "production"
 environment rails_env
 bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
 # if rails_env == "production"

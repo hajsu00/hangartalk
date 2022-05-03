@@ -1,0 +1,36 @@
+<% provide(:title, 'パスワードの変更') %>
+<% provide(:button_text, 'パスワードを変更する') %>
+
+ <div class="bg-white py-6 sm:py-8 lg:py-12">
+  <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+  
+    <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">パスワードの変更</h2>
+    <div class="flex justify-center items-center p-4 ">新しいパスワードを設定してください。</div>
+    <form class="max-w-lg border rounded-lg mx-auto">
+      <div class="flex flex-col gap-4 p-4 md:p-8">
+      <%= form_with model: @user, url: user_password_path, class: 'registration-main', local: true do |f| %>
+        <%= render "devise/shared/error_messages", resource: @user %>
+        <div>
+          <%= f.label :password, "パスワード", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+        </div>
+        <div>
+          <%= f.label :password_confirmation, "パスワード（確認）", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+        </div>
+        <!-- トークンも一緒に送る -->
+        <%= f.hidden_field :reset_password_token %>
+        <!-- 送信ボタン -->
+        <%= f.submit yield(:button_text), class: "block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+      <% end %>
+      </div>
+      <!-- ナビゲーション -->
+      <div class="flex justify-center items-center p-4">
+        <%= link_to "通常ログインの方はこちら", new_user_session_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+      </div>
+    </form>
+  </div>
+</div>
