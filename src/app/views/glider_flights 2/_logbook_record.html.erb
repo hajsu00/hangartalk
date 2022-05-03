@@ -1,0 +1,95 @@
+<% flight_time = glider_each_flight_time(glider_flight) %>
+
+<tr onclick='window.location="<%= glider_flight_path(glider_flight) %>"' role="link" class="cursor-pointer border-b border-gray-200 hover:bg-gray-100">
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.log_number %>
+  </td>
+  <td class="py-3 px-6 text-left">
+    <%= glider_flight.date.strftime("%Y年%m月%d日") %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= show_aircraft_type(glider_flight.glider_type) %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.glider_ident %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.departure_and_arrival_point %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.takeoff_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.landing_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.number_of_landing %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= show_flight_time(flight_time) %>
+  </td>
+  <!-- 「滑空機による時間」カラム-->
+  <% is_winch_tow = glider_flight.is_winch? %>
+  <% flight_role = glider_flight.flight_role %>
+  <!-- 「単独又は機長」カラム -->
+  <% case flight_role %>
+    <% when '機長' %>
+      <td class="py-3 px-6 text-center">
+        <%= show_flight_time(flight_time) if is_winch_tow %>
+      </td>
+      <td class="py-3 px-6 text-center">
+        <%= show_flight_time(flight_time) if !is_winch_tow %>
+      </td>
+    <% when '単独飛行' %>
+      <td class="py-3 px-6 text-center">
+        <%= show_flight_time(flight_time) if is_winch_tow %>
+      </td>
+      <td class="py-3 px-6 text-center">
+        <%= show_flight_time(flight_time) if !is_winch_tow %>
+      </td>
+    <% when '同乗教育' %>
+      <td class="py-3 px-6 text-center">
+      </td>
+      <td class="py-3 px-6 text-center">
+      </td>
+  <% end %>
+  <!-- 「同乗教育」カラム -->
+  <% case flight_role %>
+    <% when '同乗教育' %>
+      <td class="py-3 px-6 text-center">
+        <%= show_flight_time(flight_time) if is_winch_tow %>
+      </td>
+      <td class="py-3 px-6 text-center">
+        <%= show_flight_time(flight_time) if !is_winch_tow %>
+      </td>
+    <% else %>
+      <td class="py-3 px-6 text-center">
+      </td>
+      <td class="py-3 px-6 text-center">
+      </td>
+  <% end %>
+
+  <td class="py-3 px-6 text-center">
+    <%= show_flight_time(flight_time) if glider_flight.is_cross_country? %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.release_alt %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= show_flight_time(flight_time) if glider_flight.is_instructor? %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <%= glider_flight.note %>
+  </td>
+  <td class="py-3 px-6 text-left">
+    <% case flight_role %>
+      <% when '機長' %>
+        <%= glider_flight.user.name %>
+      <% else %>
+        同乗教育
+    <% end %>
+  </td>
+  <td class="py-3 px-6 text-center">
+    <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">教育証明番号</span>
+  </td>
+</tr>

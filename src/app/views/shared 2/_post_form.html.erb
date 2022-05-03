@@ -1,0 +1,23 @@
+<% provide(:button_text, "投稿") %>
+
+<%= form_with(model: @micropost, local: true) do |f| %>
+  <%= f.hidden_field :is_flight_attached, value: false %>
+  <div class="field">
+    <%= f.text_area :content, value: nil, placeholder: "いま何してる？", size: "40x5", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+  </div>
+  <span class="hover:bg-gray-200">
+    <%= f.file_field :images, accept: "image/jpeg,image/gif,image/png", direct_upload: true, multiple: true %>
+  </span> 
+  <!-- 送信ボタン -->
+  <%= f.submit yield(:button_text), class: "mt-4 block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+<% end %>
+
+<script type="text/javascript">
+  $("#micropost_image").bind("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert("Maximum file size is 5MB. Please choose a smaller file.");
+      $("#micropost_image").val("");
+    }
+  });
+</script>

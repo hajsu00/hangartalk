@@ -7,12 +7,12 @@ preload_app!
 rackup DefaultRackup
 rails_env = ENV.fetch("RAILS_ENV") { "development" }
 environment rails_env
-
-if rails_env == "production"
-  bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
-else
-  port ENV['PORT'] || 3000
-end
+bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
+# if rails_env == "production"
+#   bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
+# else
+#   port ENV['PORT'] || 3000
+# end
 
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 plugin :tmp_restart

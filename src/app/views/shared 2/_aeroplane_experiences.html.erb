@@ -1,0 +1,15 @@
+<% @user ||= current_user %>
+<div class="aeroplane_experiences">
+  <% if @user.aeroplane_flights.any? %>
+    <ul>
+      <li>総飛行時間 <%= aeroplane_total_flight_time(:total_time) %></li>
+      <li>総離陸回数 <%= aeroplane_total_flight_time(:number_of_takeoff) %></li>
+      <li>総着陸回数 <%= aeroplane_total_flight_time(:number_of_landing) %></li>
+      <%
+=begin%>
+ <li>機長時間 <%= aeroplane_total_flight_time(:pic_time) %></li> 
+<%
+=end%>
+    </ul>
+  <% end %>
+</div>
