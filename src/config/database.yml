@@ -9,13 +9,13 @@ default: &default
 
 development:
   <<: *default
-  database: hanger-talk_development
+  database: hangartalk_development
   socket: /tmp/mysql.sock
 test:
   <<: *default
-  database: hanger-talk_test
+  database: hangartalk_test
   socket: /tmp/mysql.sock
 production:
   <<: *default
-  database: hanger-talk_production
+  database: hangartalk_production
   socket: /var/run/mysqld/mysqld.sock
