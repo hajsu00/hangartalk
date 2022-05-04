@@ -1,6 +1,6 @@
 default: &default
   adapter: mysql2
-  encoding: utf8
+  encoding: utf8mb4
   reconnect: false
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
@@ -16,9 +16,7 @@ test:
   database: hangartalk_test
   socket: /tmp/mysql.sock
 production:
-  # <<: *default
   database: hangartalk_production
-  # socket: /var/run/mysqld/mysqld.sock
   adapter: mysql2
   encoding: utf8mb4
   charset: utf8mb4
@@ -28,3 +26,5 @@ production:
   host: <%= Rails.application.credentials.db[:endpoint] %>
   pool: 20
   timeout: 1000
+  # socket: /var/run/mysqld/mysqld.sock
+  socket: /tmp/mysql.sock
