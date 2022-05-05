@@ -4,21 +4,13 @@ min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
 
 preload_app!
-rackup DefaultRackup
-
-# # 開発環境の場合
-# rails_env = "development"
-
-# 本番環境の場合
-rails_env = "production"
-
+rails_env = ENV.fetch("RAILS_ENV") { "development" }
 environment rails_env
-
-if rails_env == "production"
-  # bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
-  port 3306
-else
-  port 3000
+case rails_env
+  when "development"
+    port ENV.fetch("PORT") { 3000 }
+  when "production"
+    bind "unix:///var/www/test_app/tmp/sockets/puma.sock"
 end
 
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
