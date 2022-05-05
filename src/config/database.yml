@@ -26,6 +26,6 @@ production:
   host: <%= Rails.application.credentials.db[:endpoint] %>
   pool: 20
   timeout: 1000
-  # socket: /var/run/mysqld/mysqld.sock
+  socket: /var/lib/mysql/mysql.sock
   # socket: /tmp/mysql.sock
   port: 3306
