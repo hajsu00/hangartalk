@@ -5,15 +5,21 @@ threads min_threads_count, max_threads_count
 
 preload_app!
 rackup DefaultRackup
-# rails_env = ENV.fetch("RAILS_ENV") { "development" }
+
+# # 開発環境の場合
+# rails_env = "development"
+
+# 本番環境の場合
 rails_env = "production"
+
 environment rails_env
-bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
-# if rails_env == "production"
-#   bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
-# else
-#   port ENV['PORT'] || 3000
-# end
+
+if rails_env == "production"
+  # bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
+  port 3306
+else
+  port 3000
+end
 
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
 plugin :tmp_restart
