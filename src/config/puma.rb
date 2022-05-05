@@ -10,7 +10,7 @@ case rails_env
   when "development"
     port ENV.fetch("PORT") { 3000 }
   when "production"
-    bind "unix:///var/www/hangartalk/src/tmp/sockets/puma.sock"
+    bind "unix:/var/www/hangartalk/src/tmp/sockets/puma.sock"
 end
 
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }
