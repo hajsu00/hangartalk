@@ -27,5 +27,5 @@ production:
   pool: 20
   timeout: 1000
   # socket: /var/run/mysqld/mysqld.sock
-  # socket: /tmp/mysql.sock
-  port: 3306
+  socket: /tmp/mysql.sock
+  # port: 3306
