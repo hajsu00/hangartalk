@@ -5,7 +5,6 @@ threads min_threads_count, max_threads_count
 
 preload_app!
 rails_env = ENV.fetch("RAILS_ENV") { "development" }
-binding.pry
 environment rails_env
 case rails_env
   when "development"
