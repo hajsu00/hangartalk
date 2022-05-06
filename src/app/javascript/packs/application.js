@@ -12,6 +12,3 @@ import '@fortawesome/fontawesome-free/js/all';
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-import "../css/tailwindcss.css";
-import "stylesheets/application"
