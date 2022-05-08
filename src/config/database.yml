@@ -5,19 +5,16 @@ default: &default
   username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: localhost
-
+  socket: /tmp/mysql.sock
 development:
   <<: *default
   database: hangartalk_development
-  socket: /tmp/mysql.sock
 test:
   <<: *default
   database: hangartalk_test
-  socket: /tmp/mysql.sock
 production:
   <<: *default
   database: hangartalk_production
   username: <%= Rails.application.credentials.db[:user_name] %>
   password: <%= Rails.application.credentials.db[:password] %>
   host: <%= Rails.application.credentials.db[:endpoint] %>
-  port: 3306
