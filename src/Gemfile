@@ -22,10 +22,16 @@ gem 'kaminari'
 gem 'rails-i18n', '~> 6.0'
 gem 'devise'
 gem 'devise-i18n'
+gem "tailwindcss-rails", "~> 2.0"
+
+gem 'pry-rails'
+gem 'pry-byebug'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rspec-rails', '~> 5.0.0'
+  gem 'factory_bot_rails'
 end
 
 group :development do
@@ -37,8 +43,8 @@ group :development do
   gem 'pre-commit'
   gem 'rubocop'
   gem 'rubocop-rails'
-  gem 'pry-rails'
-  gem 'pry-byebug'
+  # gem 'pry-rails'
+  # gem 'pry-byebug'
 end
 
 group :test do
@@ -47,9 +53,3 @@ group :test do
   gem 'webdrivers'  # Easy installation and use of web drivers to run system tests with browsers
 end
 
-# Run against this stable release
-group :development, :test do
-  gem 'rspec-rails', '~> 5.0.0'
-  gem 'factory_bot_rails'
-end
-gem "tailwindcss-rails", "~> 2.0"
