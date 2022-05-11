@@ -27,7 +27,7 @@ class User < ApplicationRecord
     if user.nil?
       user = User.create!(name: "ゲストユーザー",
         email: "guest@example.com",
-        introduction: "パイロットになりたい22歳大学生。大学の部活でグライダーを飛ばしていて、2年生の時に操縦ライセンスを取得しました。同じ志の方と仲良くなりたいです。よろしくお願いします！",
+        introduction: "パイロットになりたい22歳大学生。大学の部活でグライダーを飛ばしていて、2年生の時に操縦ライセンスを取得しました。同じ志を持つ方と仲良くなりたいです。よろしくお願いします！",
         location: "東京",
         password: SecureRandom.urlsafe_base64,
         admin: false,
@@ -69,7 +69,7 @@ class User < ApplicationRecord
         instructor_number: 0,
         number_of_stall_recovery: 0)
       # フライトを追加する
-      55.times do |n|
+      75.times do |n|
         takeoff_time = Time.current + ((n + 1) * 60).minutes
         departure_date = Date.new(takeoff_time.year, takeoff_time.month, takeoff_time.day) - 3.years + 3.month
         landing_time = takeoff_time + 6.minutes
@@ -89,11 +89,11 @@ class User < ApplicationRecord
                                     is_stall_recovery: false,
                                     note: '備考欄です。')
       end
-      32.times do |n|
+      42.times do |n|
         # departure_date = Time.zone.today
         takeoff_time = Time.current + ((n + 1) * 60).minutes
         departure_date = Date.new(takeoff_time.year, takeoff_time.month, takeoff_time.day) - 2.years
-        landing_time = takeoff_time + 6.minutes
+        landing_time = takeoff_time + 10.minutes
         user.glider_flights.create!(log_number: 1 + n,
                                     date: departure_date,
                                     glider_type: 1,
