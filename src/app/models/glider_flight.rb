@@ -2,6 +2,7 @@ class GliderFlight < ApplicationRecord
   include ActionView::Helpers
   has_many :micropost, through: :glider_micropost_relationships
   has_many :glider_micropost_relationships, dependent: :destroy
+  has_one :aircraft_type
   belongs_to :user, optional: true
 
   validates :user_id, :date, :takeoff_time, :landing_time, presence: true

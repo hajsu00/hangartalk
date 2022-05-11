@@ -48,17 +48,17 @@ module GliderFlightsHelper
 
   # ページ毎のフライトタイム合計を計算する
   def glider_page_total(which_page)
-    current_page = @glider_flights.current_page
-    last_page = @glider_flights.total_pages
+    current_page = @logbook_flights.current_page
+    last_page = @logbook_flights.total_pages
     target_flights = []
     # 「ページ小計」
     case which_page
     when 'page_total'
       if current_page == last_page
-        total_flights = current_user.glider_flights.count
+        total_flights = @glider_flights.count
         target_num = total_flights % 10
         target_num.times do |n|
-          target_flights.push(current_user.glider_flights.find_by(log_number: total_flights - n))
+          target_flights.push(@glider_flights.find_by(log_number: total_flights - n))
         end
         flight_info = init_glider_experience('without_initial')
         glider_time_calculation(target_flights, flight_info)
@@ -71,7 +71,7 @@ module GliderFlightsHelper
       if current_page != 1
         target_num = (current_page - 1) * 10
         target_num.times do |n|
-          target_flights.push(current_user.glider_flights.find_by(log_number: target_num - n))
+          target_flights.push(@glider_flights.find_by(log_number: target_num - n))
         end
         flight_info = init_glider_experience('with_initial')
         glider_time_calculation(target_flights, flight_info)
@@ -82,9 +82,9 @@ module GliderFlightsHelper
     when 'all_pages'
       if current_page != 1
         # 最終ページの場合は端数を計算してtarget_numに代入
-        target_num = current_page != last_page ? current_page * 10 : current_user.glider_flights.count
+        target_num = current_page != last_page ? current_page * 10 : @glider_flights.count
         target_num.times do |n|
-          target_flights.push(current_user.glider_flights.find_by(log_number: target_num - n))
+          target_flights.push(@glider_flights.find_by(log_number: target_num - n))
         end
         flight_info = init_glider_experience('with_initial')
         glider_time_calculation(target_flights, flight_info)
@@ -93,6 +93,47 @@ module GliderFlightsHelper
         glider_time_calculation(@glider_flights, flight_info)
       end
     end
+    # case which_page
+    # when 'page_total'
+    #   if current_page == last_page
+    #     total_flights = current_user.glider_flights.count
+    #     target_num = total_flights % 10
+    #     target_num.times do |n|
+    #       target_flights.push(current_user.glider_flights.find_by(log_number: total_flights - n))
+    #     end
+    #     flight_info = init_glider_experience('without_initial')
+    #     glider_time_calculation(target_flights, flight_info)
+    #   else
+    #     flight_info = init_glider_experience('without_initial')
+    #     glider_time_calculation(@glider_flights, flight_info)
+    #   end
+    # # 前ページまでの合計
+    # when 'up_to_before_current_page'
+    #   if current_page != 1
+    #     target_num = (current_page - 1) * 10
+    #     target_num.times do |n|
+    #       target_flights.push(current_user.glider_flights.find_by(log_number: target_num - n))
+    #     end
+    #     flight_info = init_glider_experience('with_initial')
+    #     glider_time_calculation(target_flights, flight_info)
+    #   else
+    #     init_glider_experience('with_initial')
+    #   end
+    # # 合計
+    # when 'all_pages'
+    #   if current_page != 1
+    #     # 最終ページの場合は端数を計算してtarget_numに代入
+    #     target_num = current_page != last_page ? current_page * 10 : current_user.glider_flights.count
+    #     target_num.times do |n|
+    #       target_flights.push(current_user.glider_flights.find_by(log_number: target_num - n))
+    #     end
+    #     flight_info = init_glider_experience('with_initial')
+    #     glider_time_calculation(target_flights, flight_info)
+    #   elsif current_page == 1
+    #     flight_info = init_glider_experience('with_initial')
+    #     glider_time_calculation(@glider_flights, flight_info)
+    #   end
+    # end
   end
 
   def init_glider_experience(with_or_without)

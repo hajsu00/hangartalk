@@ -18,9 +18,9 @@
         <div class="flex flex-col p-4 md:p-8 justify-center">
           <div class="bg-white py-6 sm:py-8 lg:py-12">
             <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
-              <%= "サマリー（#{@glider_flights.current_page}ページ目）" %>
+              <%= "サマリー（#{@logbook_flights.current_page}ページ目）" %>
             </h2>
-            <%= paginate @glider_flights, left: 3, right: 3 %>
+            <%= paginate @logbook_flights, left: 3, right: 3 %>
             <div class="overflow-x-auto">
               <div class="w-full lg:w-5/6">
                 <div class="bg-white shadow-md rounded my-6">
@@ -49,21 +49,21 @@
       <div class="border rounded-lg mx-auto my-4">
         <div class="flex flex-col p-4 md:p-8 justify-center">
           <div class="bg-white py-6 sm:py-8 lg:py-12">
-            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "フライトログブック（#{@glider_flights.current_page}ページ目）" %></h2>
-            <% if @glider_flights.any? %>
-              <%= paginate @glider_flights, left: 3, right: 3 %> 
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "フライトログブック（#{@logbook_flights.current_page}ページ目）" %></h2>
+            <% if @logbook_flights.any? %>
+              <%= paginate @logbook_flights, left: 3, right: 3 %> 
               <div class="overflow-x-auto">
                 <div class="w-full lg:w-5/6">
                   <div class="bg-white shadow-md rounded my-6">
                     <table class="min-w-max w-full table-auto">
                       <%= render 'logbook_header' %>
                       <tbody class="text-gray-600 text-sm font-light">
-                        <%= render partial: 'logbook_record', collection: @glider_flights, as: :glider_flight %>
+                        <%= render partial: 'logbook_record', collection: @logbook_flights, as: :glider_flight %>
                       </tbody>
                     </table>
                   </div>
                 </div>
-                <% if @glider_flights.last_page? %>
+                <% if @logbook_flights.last_page? %>
                   <div class="flex justify-center items-center p-4">
                     <%= link_to new_glider_flight_path do %>
                       <%= render partial: "shared/button", locals: {item: '新しいフライトを登録'} %>
@@ -74,7 +74,7 @@
                   </div>
                 <% end %>
               </div>
-              <%= paginate @glider_flights, left: 3, right: 3 %> 
+              <%= paginate @logbook_flights, left: 3, right: 3 %> 
             <% else %>
               <p>登録されたフライトログがありません。</p>
               <div class="flex justify-center items-center p-4">

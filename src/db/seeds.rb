@@ -12,6 +12,12 @@ user = User.create!(name: "Example User",
 user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
 user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
 
+AircraftType.create!(aircraft_type: 'ASK21', category: 'glider')
+AircraftType.create!(aircraft_type: 'ASK21B', category: 'glider')
+AircraftType.create!(aircraft_type: 'ASK23b', category: 'glider')
+AircraftType.create!(aircraft_type: 'Cessna 152', category: 'aeroplane')
+AircraftType.create!(aircraft_type: 'Cessna 172', category: 'aeroplane')
+
 user = User.find(1)
 license = user.licenses.create!(code: 'A1111111',
                                 license_category_id: 1,
@@ -76,7 +82,7 @@ following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 
 user = User.find_by(email: "example@railstutorial.org")
-date = Date.new(2021, 0o2, 10)
+date = Date.today - 3.year
 user.create_glider_initial_log(at_present: date,
                                total_time: 67_680,
                                total_number: 188,
@@ -100,14 +106,11 @@ user.create_glider_initial_log(at_present: date,
 # 一部のユーザーを対象にフライト記録を生成する
 user = User.find_by(email: "example@railstutorial.org")
 23.times do |n|
-  # departure_date = Time.zone.today
-  # takeoff_time = Time.current + ((n + 1) * 60).minutes
-  departure_date = Date.today - 1.year
-  takeoff_time = Time.current.change(year: departure_date.year) + ((n + 1) * 60).minutes
+  departure_date = Date.today - 2.year + (n + 1).day
+  takeoff_time = Time.current.change(year: departure_date.year, day: departure_date.day) + (((n + 3) % 3) * 60).minute
   landing_time = takeoff_time + 6.minutes
-  user.glider_flights.create!(log_number: 1 + n,
+  glider_flight = user.glider_flights.build(log_number: 1 + n,
                               date: departure_date,
-                              glider_type: 1,
                               glider_ident: 'JA21MA',
                               departure_and_arrival_point: '宝珠花滑空場',
                               number_of_landing: 1,
@@ -120,6 +123,8 @@ user = User.find_by(email: "example@railstutorial.org")
                               is_instructor: false,
                               is_stall_recovery: false,
                               note: '備考欄です。')
+  glider_flight.aircraft_type_id = 1
+  glider_flight.save(validate: false)
 end
 
 user = User.find_by(email: "example@railstutorial.org")
@@ -135,12 +140,6 @@ group = Group.find_by(name: "テストグループ1")
 users.each do |user|
   group.users << user
 end
-
-AircraftType.create!(aircraft_type: 'ASK21', category: 'glider')
-AircraftType.create!(aircraft_type: 'ASK21B', category: 'glider')
-AircraftType.create!(aircraft_type: 'ASK23b', category: 'glider')
-AircraftType.create!(aircraft_type: 'Cessna 152', category: 'aeroplane')
-AircraftType.create!(aircraft_type: 'Cessna 172', category: 'aeroplane')
 
 group = Group.find(1)
 group.fleets.create!(ident: 'JA21MA', aircraft_type_id: 1)
