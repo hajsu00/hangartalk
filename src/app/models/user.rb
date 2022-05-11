@@ -22,10 +22,97 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :user_cover
 
-  # validates :name,  presence: true, length: { maximum: 50 }
-  # VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  # validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
-  # validates :password, presence: true, length: { minimum: 6 }
+  def self.guest
+    user = find_by(email: 'guest@example.com')
+    if user.nil?
+      user = User.create!(name: "ゲストユーザー",
+        email: "guest@example.com",
+        introduction: "パイロットになりたい22歳大学生。大学の部活でグライダーを飛ばしていて、2年生の時に操縦ライセンスを取得しました。同じ志の方と仲良くなりたいです。よろしくお願いします！",
+        location: "東京",
+        password: SecureRandom.urlsafe_base64,
+        admin: false,
+        confirmed_at: Time.zone.now)
+      # プロフィール画像等の登録
+      user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/guest_user_avatar.jpg')), filename: 'guest_user_avatar.jpg')
+      user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/guest_user_cover.jpg')), filename: 'guest_user_cover.jpg')
+      # ライセンスの登録
+      license = user.licenses.create!(code: 'A1111111',
+        license_category_id: 1,
+        aircraft_category_id: 1,
+        date_of_issue: Date.today - 3.years)
+      license.reccurent_histories.create!(date: license.date_of_issue, valid_for: 2)
+      license.reccurent_histories.create!(date: license.date_of_issue + 2.years, valid_for: 2)
+      # ユーザーのリレーションシップを作成する
+      users = User.all
+      following = users[2..38]
+      followers = users[3..25]
+      following.each { |followed| user.follow(followed) }
+      followers.each { |follower| follower.follow(user) }
+      # フライト経験
+      user.create_glider_initial_log(at_present: Date.today - 3.years,
+        total_time: 0,
+        total_number: 0,
+        pic_winch_time: 0,
+        pic_winch_number: 0,
+        pic_aero_tow_time: 0,
+        pic_aero_tow_number: 0,
+        solo_winch_time: 0,
+        solo_winch_number: 0,
+        solo_aero_tow_time: 0,
+        solo_aero_tow_number: 0,
+        dual_winch_time: 0,
+        dual_winch_number: 0,
+        dual_aero_tow_time: 0,
+        dual_aero_tow_number: 0,
+        cross_country_time: 0,
+        instructor_time: 0,
+        instructor_number: 0,
+        number_of_stall_recovery: 0)
+      # フライトを追加する
+      55.times do |n|
+        takeoff_time = Time.current + ((n + 1) * 60).minutes
+        departure_date = Date.new(takeoff_time.year, takeoff_time.month, takeoff_time.day) - 3.years + 3.month
+        landing_time = takeoff_time + 6.minutes
+        user.glider_flights.create!(log_number: 1 + n,
+                                    date: departure_date,
+                                    glider_type: 1,
+                                    glider_ident: 'JA21MA',
+                                    departure_and_arrival_point: '宝珠花滑空場',
+                                    number_of_landing: 1,
+                                    takeoff_time: takeoff_time,
+                                    landing_time: landing_time,
+                                    flight_role: '同乗教育',
+                                    is_winch: true,
+                                    is_cross_country: false,
+                                    release_alt: 420,
+                                    is_instructor: false,
+                                    is_stall_recovery: false,
+                                    note: '備考欄です。')
+      end
+      32.times do |n|
+        # departure_date = Time.zone.today
+        takeoff_time = Time.current + ((n + 1) * 60).minutes
+        departure_date = Date.new(takeoff_time.year, takeoff_time.month, takeoff_time.day) - 2.years
+        landing_time = takeoff_time + 6.minutes
+        user.glider_flights.create!(log_number: 1 + n,
+                                    date: departure_date,
+                                    glider_type: 1,
+                                    glider_ident: 'JA21MA',
+                                    departure_and_arrival_point: '宝珠花滑空場',
+                                    number_of_landing: 1,
+                                    takeoff_time: takeoff_time,
+                                    landing_time: landing_time,
+                                    flight_role: '機長',
+                                    is_winch: true,
+                                    is_cross_country: false,
+                                    release_alt: 420,
+                                    is_instructor: false,
+                                    is_stall_recovery: false,
+                                    note: '備考欄です。')
+      end
+    end
+    return user
+  end
 
   # cookieを使いログイン情報を保持
   def remember_me

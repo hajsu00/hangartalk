@@ -4,6 +4,7 @@ module Users
   class RegistrationsController < Devise::RegistrationsController
     before_action :configure_sign_up_params, only: [:create]
     before_action :set_sideber_data, only: [:edit, :update]
+    before_action :ensure_normal_user, only: %i[update destroy]
     # before_action :configure_account_update_params, only: [:update]
 
     # GET /resource/sign_up
@@ -16,6 +17,8 @@ module Users
       super
       user = User.find_by(email: params[:user][:email])
       if !user.nil?
+        user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
+        user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
         user.create_glider_initial_log!(at_present: Date.today,
                                         total_time: 0,
                                         total_number: 0,
@@ -63,6 +66,12 @@ module Users
     # def cancel
     #   super
     # end
+
+    def ensure_normal_user
+      if resource.email == 'guest@example.com'
+        redirect_to user_url(resource), alert: 'ゲストユーザーの更新・削除はできません。'
+      end
+    end
 
     # protected
 

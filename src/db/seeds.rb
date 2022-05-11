@@ -3,8 +3,7 @@
 ActionMailer::Base.perform_deliveries = false
 user = User.create!(name: "Example User",
                     email: "example@railstutorial.org",
-                    introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
-            ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
+                    introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
                     location: "東京",
                     password: "foobar",
                     password_confirmation: "foobar",
@@ -37,19 +36,25 @@ AircraftCategory.create!(name: '飛行機')
 
 # 追加のユーザーをまとめて生成する
 ActionMailer::Base.perform_deliveries = false
+m = 0
 39.times do |n|
   name  = Faker::Name.name
   email = "example-#{n + 1}@railstutorial.org"
   password = "password"
   user = User.create!(name: name,
                       email: email,
-                      introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。
-    ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
+                      introduction: "ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。ここはユーザーのプロフィール文です。入力可能な文字数は１６０字にする予定です。",
                       location: "東京",
                       password: password,
                       password_confirmation: password)
-  user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
-  user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
+  if (2 * n + 1) % 3 == 0
+    m += 1
+    user.avatar.attach(io: File.open(Rails.root.join("app/assets/images/test/user_test_avatar/user_test_avatar_#{m + 1}.png")), filename: "user_test_avatar_#{m + 1}.png")
+    user.user_cover.attach(io: File.open(Rails.root.join("app/assets/images/test/user_test_cover/user_test_cover_#{m + 1}.jpg")), filename: "user_test_cover_#{m + 1}.jpg")
+  else
+    user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
+    user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
+  end
 end
 
 # ユーザーの一部を対象にマイクロポストを生成する
@@ -71,7 +76,7 @@ following.each { |followed| user.follow(followed) }
 followers.each { |follower| follower.follow(user) }
 
 user = User.find_by(email: "example@railstutorial.org")
-date = Date.new(2022, 0o2, 10)
+date = Date.new(2021, 0o2, 10)
 user.create_glider_initial_log(at_present: date,
                                total_time: 67_680,
                                total_number: 188,
@@ -96,8 +101,9 @@ user.create_glider_initial_log(at_present: date,
 user = User.find_by(email: "example@railstutorial.org")
 23.times do |n|
   # departure_date = Time.zone.today
-  takeoff_time = Time.current + ((n + 1) * 60).minutes
-  departure_date = Date.new(takeoff_time.year, takeoff_time.month, takeoff_time.day)
+  # takeoff_time = Time.current + ((n + 1) * 60).minutes
+  departure_date = Date.today - 1.year
+  takeoff_time = Time.current.change(year: departure_date.year) + ((n + 1) * 60).minutes
   landing_time = takeoff_time + 6.minutes
   user.glider_flights.create!(log_number: 1 + n,
                               date: departure_date,

@@ -2,7 +2,7 @@
   <%= link_to user_path(id: user.id) do %>
     <div class="max-w-sm rounded shadow-lg">
       <%= image_tag user.user_cover, calss: "relative object-cover w-full" %>
-      <%= image_tag @user.avatar, class: 'shadow-xl rounded-full h-auto align-middle border-none absolute m-16 ml-16 max-w-150-px' %>
+      <%= image_tag user.avatar, class: 'shadow-xl rounded-full h-auto align-middle border-none absolute m-16 ml-16 max-w-150-px' %>
       <div class="px-6 py-4 justify-center">
         <div class="font-bold text-xl text-center mb-2">
           <%= user.name %>

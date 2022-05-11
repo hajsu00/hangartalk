@@ -28,25 +28,28 @@
             <%= f.label :password, "パスワード（半角英数字で６文字以上）*", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
             <%= f.password_field :password, autocomplete: "current-password", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
           </div>
-
           <% if devise_mapping.rememberable? %>
             <div class="field">
               <%= f.check_box :remember_me, checked: false %>
               <%= f.label :remember_me, "次回から自動でログインする" %>
             </div>
           <% end %>
-
           <!-- 認証メール送信ボタン -->
           <%= f.submit yield(:button_text), class: "block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %> 
-        <% end %>
+          <div class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
+            <%= link_to users_guest_sign_in_path, method: :post do %>
+              ゲストログイン（閲覧用）
+            <% end %>
+          </div>
         </div>
       </div>
-      <!-- ナビゲーション -->
-      <div class="flex justify-center items-center p-5 ">
-        <%= link_to "パスワードをお忘れの方はこちら", new_user_password_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
-      </div>
-      <div class="flex justify-center items-center p-1 ">
-        <%= link_to "アカウントをお持ちでない方はこちら", new_user_registration_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
-      </div>
+    <% end %>
+    <!-- ナビゲーション -->
+    <div class="flex justify-center items-center p-5 ">
+      <%= link_to "パスワードをお忘れの方はこちら", new_user_password_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+    </div>
+    <div class="flex justify-center items-center p-1 ">
+      <%= link_to "アカウントをお持ちでない方はこちら", new_user_registration_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+    </div>
   </div>
 </div>
