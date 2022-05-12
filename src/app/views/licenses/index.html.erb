@@ -4,76 +4,33 @@
 
 <div class="mx-auto px-4">
   <div class="flex flex-row px-4">
-    <%= link_to :back do %>
-      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <%= link_to 'javascript:history.back()' do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4 mt-2"></i>
     <% end %>
     <div class="flex flex-col">
-      <div class="text-2xl font-bold pr-4"><%= @user.name %></div>
-      <div class="text-xs"><%= "#{@licenses.count}個の保有ライセンス" %></div>
+      <div class="text-xl font-bold pr-4">保有ライセンス管理</div>
+      <div class="text-sm"><%= "#{@licenses.count}個の保有ライセンス" %></div>
     </div>
   </div>
 
   <div class='mx-auto px-4 py-10'>
     <!-- 上級滑空機 -->
-    <h2 class="text-xl font-bold underline underline-offset-8">上級滑空機</h2>
+    <div class="flex-col">
+      <h2 class="text-xl font-bold underline underline-offset-8">上級滑空機</h2>
+      <div class="mt-6">
+        <%= link_to new_user_license_path(@user, @license) do %>
+          <%= render partial: "shared/button", locals: {item: 'ライセンスを追加'} %>
+        <% end %>
+      </div>
+    </div>
     <% if glider_licenses.any? %>
-      <div class='flex flex-row px-4 py-2 justify-center'> 
+      <div class='flex flex-wrap justify-center'> 
         <%= render partial: "licenses/license_card", collection: glider_licenses, as: :license %>
       </div> 
-      <div class="mb-5">
-        <%= link_to new_user_license_path(@user, @license) do %>
-          <%= render partial: "shared/button", locals: {item: 'ライセンスを追加'} %>
-        <% end %>
-      </div>
     <% else %>
-      <p class="mt-5">まだライセンスを保有していません。</p>
-      <div class="mb-5">
-        <%= link_to new_user_license_path(@user, @license) do %>
-          <%= render partial: "shared/button", locals: {item: 'ライセンスを追加'} %>
-        <% end %>
-      </div>
-    <% end %>
-    <!-- 管理しているグループ -->
-    <h2 class="text-xl font-bold underline underline-offset-8">飛行機</h2>
-    <% if aeroplane_licenses.any? %>
-      <div class='flex flex-row px-4 py-2 justify-center'> 
-        <%= render partial: "licenses/license_card", collection: aeroplane_licenses, as: :license %>
-      </div>
-      <div class="mb-5">
-        <%= link_to new_user_license_path(@user, @license) do %>
-          <%= render partial: "shared/button", locals: {item: 'ライセンスを追加'} %>
-        <% end %>
-      </div>
-    <% else %>
-      <p class="mt-5">まだライセンスを保有していません。</p>
-      <div class="mt-5">
-        <%= link_to new_user_license_path(@user, @license) do %>
-          <%= render partial: "shared/button", locals: {item: 'ライセンスを追加'} %>
-        <% end %>
+      <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-4 my-4" role="alert">
+        まだライセンスを保有していません。
       </div>
     <% end %>
   </div> 
-
 </div> 
-
-<%
-=begin%>
- <div class='mx-auto px-4 py-10'>
-  <!-- 管理しているグループ -->
-  <h2 class="text-xl font-bold underline underline-offset-8">管理しているグループ</h2>
-  <div class='flex flex-row mx-auto px-4 py-10'>
-    <%= render partial: "group_card", collection: @licenses, as: :group %> 
-  </div>
-  <!-- 参加しているグループ -->
-  <h2 class="text-xl font-bold underline underline-offset-8">参加しているグループ</h2>
-  <div class='flex flex-row mx-auto px-4 py-10'>
-    <%= render partial: "group_card", collection: @licenses, as: :group %> 
-  </div>
-  <!-- グループを見つける -->
-  <h2 class="text-xl font-bold underline underline-offset-8">グループを見つける</h2>
-  <div class='flex flex-row mx-auto px-4 py-10'>
-    <%= render partial: "group_card", collection: @licenses, as: :group %> 
-  </div>
-</div> 
-<%
-=end%>

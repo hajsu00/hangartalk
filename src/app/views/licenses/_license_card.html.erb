@@ -1,16 +1,16 @@
 <% license ||= @license %>
 <%= link_to user_license_path(@user, license) do %>
-  <div class="w-100 my-6 mx-6 px-8 py-4 bg-blue-200 shadow rounded flex flex-col leading-normal"> 
+  <div class="mx-6 my-6 px-8 py-4 bg-blue-200 shadow rounded flex flex-col leading-normal"> 
     <div class="mb-8">
       <div class="text-xs flex items-center mb-2">
         <% if license.reccurent_histories.any? && license.is_valid_license? %>
-          <i class="fa-solid fa-circle-check"></i>
-          <div class="text-md text-green-500 ml-2">
+          <i class="fa-solid fa-circle-check fa-lg text-green-500"></i>
+          <div class="text-sm font-bold text-green-500 ml-2">
             特定操縦技能が有効でです
           </div>
         <% else %>
-          <i class="fa-solid fa-triangle-exclamation"></i>
-          <div class="text-md text-red-600 ml-2">
+          <i class="fa-solid fa-triangle-exclamation fa-lg text-red-600"></i>
+          <div class="text-sm font-bold text-red-600 ml-2">
             特定操縦技能が失効しています
           </div>
         <% end %>

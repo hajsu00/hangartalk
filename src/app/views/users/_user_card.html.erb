@@ -1,23 +1,22 @@
-<div class='px-4 py-4'>
-  <%= link_to user_path(id: user.id) do %>
-    <div class="max-w-sm rounded shadow-lg">
-      <%= image_tag user.user_cover, calss: "relative object-cover w-full" %>
-      <%= image_tag user.avatar, class: 'shadow-xl rounded-full h-auto align-middle border-none absolute m-16 ml-16 max-w-150-px' %>
-      <div class="px-6 py-4 justify-center">
-        <div class="font-bold text-xl text-center mb-2">
-          <%= user.name %>
-        </div>
-        <p class="text-gray-700 text-base">
-          <%= user.introduction %>
-        </p>
-        <div class="px-6 pt-4 pb-2">
-          <%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>
-            <div class="bg-gray-800 text-white rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 justify-center text-center mx-auto">
-              フォローする
-            </div>
-          <% end %>
-        </div>
+<%= link_to user_path(id: user.id) do %>
+  <div class="relative w-80 h-120 rounded shadow-lg mx-4 my-4">
+    <%= image_tag user.user_cover, calss: "relative object-cover w-full" %>
+    <%= image_tag user.avatar, class: 'shadow-xl rounded-full align-middle border-none absolute ml-50 -mt-50 w-28' %>
+    <div class="px-6 py-4 justify-center">
+      <div class="font-bold text-xl text-center mb-2">
+        <%= user.name %>
+      </div>
+      <p class="text-gray-700 text-base">
+        <%= user.introduction %>
+      </p>
+      <div class="px-6 pt-4 pb-2">
+        <%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>
+          <div class="bg-gray-800 text-white rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 justify-center text-center mx-auto">
+            フォローする
+          </div>
+        <% end %>
       </div>
     </div>
-  <% end %>
-</div>  
+  </div>
+<% end %>
+
