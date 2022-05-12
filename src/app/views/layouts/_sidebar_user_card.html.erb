@@ -25,13 +25,13 @@
             </div>
           <% end %>
             <%= link_to glider_flights_path(@gliderflights) do %>  
-            <div class="lg:mr-4 p-3 text-center">
-              <span class="text-lg font-bold block uppercase tracking-wide text-blueGray-600">
-                <%= !@current_user.glider_initial_log.nil? ? total_flight_time : "00 + 00" %>
-              </span>
-              <span class="text-sm text-blueGray-400">総飛行時間</span>
-            </div>
-          <% end %>
+              <div class="lg:mr-4 p-3 text-center">
+                <span class="text-lg font-bold block uppercase tracking-wide text-blueGray-600">
+                  <%= !@current_user.glider_initial_log.nil? && !@current_user.glider_flights.nil? ? total_flight_time(@current_user) : "00 + 00" %>
+                </span>
+                <span class="text-sm text-blueGray-400">総飛行時間</span>
+              </div>
+            <% end %>
         </div>
       </div>
     </div>

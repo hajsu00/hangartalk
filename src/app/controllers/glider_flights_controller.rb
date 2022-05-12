@@ -43,7 +43,8 @@ class GliderFlightsController < ApplicationController
   end
 
   def index
-    @glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc).page(params[:page]).per(10)
+    @glider_flights = GliderFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
+    @logbook_flights = @glider_flights.page(params[:page]).per(10)
     @glider_initial_log = @current_user.glider_initial_log
   end
 
@@ -79,8 +80,21 @@ class GliderFlightsController < ApplicationController
   private
 
   def glider_flight_params
-    params.require(:glider_flight).permit(:log_number, :date, :glider_type, :glider_ident, :departure_and_arrival_point, :number_of_landing, :takeoff_time,
-                                          :landing_time, :release_alt, :flight_role, :is_motor_glider, :is_power_flight, :is_winch, :is_cross_country, :is_instructor, :is_stall_recovery, :close_log, :note)
+    params.require(:glider_flight).permit(:log_number,
+                                          :date,
+                                          :glider_type,
+                                          :glider_ident, :departure_and_arrival_point, :number_of_landing,
+                                          :takeoff_time,
+                                          :landing_time,
+                                          :release_alt,
+                                          :flight_role,
+                                          :is_motor_glider,
+                                          :is_power_flight,
+                                          :is_winch,
+                                          :is_cross_country,
+                                          :is_instructor,
+                                          :is_stall_recovery,
+                                          :note)
   end
 
   def new_from_groups_params

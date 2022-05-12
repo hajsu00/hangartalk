@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_04_14_104910) do
 
-  create_table "active_storage_attachments", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_attachments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
     t.bigint "record_id", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
   end
 
-  create_table "active_storage_blobs", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_blobs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "key", null: false
     t.string "filename", null: false
     t.string "content_type"
@@ -34,13 +34,13 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
-  create_table "active_storage_variant_records", charset: "utf8mb3", force: :cascade do |t|
+  create_table "active_storage_variant_records", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "aeroplane_flights", charset: "utf8mb3", force: :cascade do |t|
+  create_table "aeroplane_flights", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "log_number"
     t.date "date"
     t.string "aeroplane_type"
@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["user_id"], name: "index_aeroplane_flights_on_user_id"
   end
 
-  create_table "aeroplane_initial_logs", charset: "utf8mb3", force: :cascade do |t|
+  create_table "aeroplane_initial_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "total_flight_number"
     t.integer "number_of_takeoff"
     t.integer "number_of_landing"
@@ -92,20 +92,20 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["user_id"], name: "index_aeroplane_initial_logs_on_user_id"
   end
 
-  create_table "aircraft_categories", charset: "utf8mb3", force: :cascade do |t|
+  create_table "aircraft_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "aircraft_types", charset: "utf8mb3", force: :cascade do |t|
+  create_table "aircraft_types", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "aircraft_type"
     t.string "category"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "fleets", charset: "utf8mb3", force: :cascade do |t|
+  create_table "fleets", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "ident"
     t.integer "aircraft_type_id"
     t.bigint "group_id", null: false
@@ -114,10 +114,9 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["group_id"], name: "index_fleets_on_group_id"
   end
 
-  create_table "glider_flights", charset: "utf8mb3", force: :cascade do |t|
+  create_table "glider_flights", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "log_number"
     t.date "date"
-    t.integer "glider_type"
     t.string "glider_ident"
     t.string "departure_and_arrival_point"
     t.integer "number_of_landing"
@@ -131,12 +130,14 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.boolean "is_stall_recovery"
     t.string "note"
     t.bigint "user_id", null: false
+    t.bigint "aircraft_type_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["aircraft_type_id"], name: "index_glider_flights_on_aircraft_type_id"
     t.index ["user_id"], name: "index_glider_flights_on_user_id"
   end
 
-  create_table "glider_group_flights", charset: "utf8mb3", force: :cascade do |t|
+  create_table "glider_group_flights", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "day_flight_number"
     t.date "date"
     t.string "departure_and_arrival_point"
@@ -159,7 +160,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["group_id"], name: "index_glider_group_flights_on_group_id"
   end
 
-  create_table "glider_initial_logs", charset: "utf8mb3", force: :cascade do |t|
+  create_table "glider_initial_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "at_present"
     t.integer "total_time"
     t.integer "total_number"
@@ -185,7 +186,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["user_id"], name: "index_glider_initial_logs_on_user_id"
   end
 
-  create_table "glider_micropost_relationships", charset: "utf8mb3", force: :cascade do |t|
+  create_table "glider_micropost_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "micropost_id", null: false
     t.bigint "glider_flight_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -194,7 +195,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["micropost_id"], name: "index_glider_micropost_relationships_on_micropost_id"
   end
 
-  create_table "group_users", charset: "utf8mb3", force: :cascade do |t|
+  create_table "group_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "group_id", null: false
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -203,7 +204,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["user_id"], name: "index_group_users_on_user_id"
   end
 
-  create_table "groups", charset: "utf8mb3", force: :cascade do |t|
+  create_table "groups", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.text "introduction"
     t.string "privacy"
@@ -211,13 +212,13 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "license_categories", charset: "utf8mb3", force: :cascade do |t|
+  create_table "license_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "licenses", charset: "utf8mb3", force: :cascade do |t|
+  create_table "licenses", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "code", null: false
     t.integer "license_category_id", null: false
     t.integer "aircraft_category_id", null: false
@@ -228,7 +229,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["user_id", "license_category_id", "aircraft_category_id"], name: "index_for_user_license", unique: true
   end
 
-  create_table "like_relationships", charset: "utf8mb3", force: :cascade do |t|
+  create_table "like_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "micropost_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -238,7 +239,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["user_id"], name: "index_like_relationships_on_user_id"
   end
 
-  create_table "microposts", charset: "utf8mb3", force: :cascade do |t|
+  create_table "microposts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content"
     t.boolean "is_flight_attached"
     t.boolean "is_sharing_micropost"
@@ -249,7 +250,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["user_id"], name: "index_microposts_on_user_id"
   end
 
-  create_table "reccurent_histories", charset: "utf8mb3", force: :cascade do |t|
+  create_table "reccurent_histories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "date"
     t.integer "valid_for"
     t.bigint "license_id", null: false
@@ -258,7 +259,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["license_id"], name: "index_reccurent_histories_on_license_id"
   end
 
-  create_table "relationships", charset: "utf8mb3", force: :cascade do |t|
+  create_table "relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
@@ -268,7 +269,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "reply_relationships", charset: "utf8mb3", force: :cascade do |t|
+  create_table "reply_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "replying_id", null: false
     t.bigint "replied_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -278,7 +279,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["replying_id"], name: "index_reply_relationships_on_replying_id"
   end
 
-  create_table "share_relationships", charset: "utf8mb3", force: :cascade do |t|
+  create_table "share_relationships", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.bigint "sharing_id", null: false
     t.bigint "shared_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -288,7 +289,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["sharing_id"], name: "index_share_relationships_on_sharing_id"
   end
 
-  create_table "users", charset: "utf8mb3", force: :cascade do |t|
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.boolean "admin", default: false
     t.string "introduction", default: ""
@@ -313,6 +314,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
   add_foreign_key "aeroplane_flights", "users"
   add_foreign_key "aeroplane_initial_logs", "users"
   add_foreign_key "fleets", "groups"
+  add_foreign_key "glider_flights", "aircraft_types"
   add_foreign_key "glider_flights", "users"
   add_foreign_key "glider_group_flights", "groups"
   add_foreign_key "glider_initial_logs", "users"

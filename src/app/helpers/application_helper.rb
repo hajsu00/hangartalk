@@ -26,14 +26,18 @@ module ApplicationHelper
     Time.local(inputed_date.year, inputed_date.month, inputed_date.day, inputed_time.hour, inputed_time.min, 0, 0)
   end
 
-  def total_flight_time
-    @total_time = @initial_flight_time
-    @all_glider_flights.each do |glider_flight|
-      @total_time += glider_flight.landing_time - glider_flight.takeoff_time
+  def total_flight_time(user)
+    @target_total_time = user.glider_initial_log.total_time
+    target_flights = user.glider_flights
+    target_flights.each do |glider_flight|
+      @target_total_time += glider_flight.landing_time - glider_flight.takeoff_time
     end
-    show_flight_time(@total_time)
+    show_flight_time(@target_total_time)
   end
-  def total_flight_number
-    @initial_flight_number + @all_glider_flights.count
+
+  def total_flight_number(user)
+    target_total_number = user.glider_initial_log.total_number
+    target_flights = user.glider_flights
+    target_total_number + target_flights.count
   end
 end
