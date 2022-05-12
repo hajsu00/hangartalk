@@ -1,6 +1,6 @@
 <% license ||= @license %>
 <%= link_to user_license_path(@user, license) do %>
-  <div class="my-6 mx-6 px-8 py-4 bg-blue-200 shadow rounded flex flex-col leading-normal"> 
+  <div class="w-100 my-6 mx-6 px-8 py-4 bg-blue-200 shadow rounded flex flex-col leading-normal"> 
     <div class="mb-8">
       <div class="text-xs flex items-center mb-2">
         <% if license.reccurent_histories.any? && license.is_valid_license? %>

@@ -153,6 +153,4 @@ class User < ApplicationRecord
     any_group = GroupUser.find_by(user_id: self.id)
     true unless any_group.nil?
   end
-
-  # private
 end

@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :logged_in_user, only: [:index, :following, :followers]
   before_action :authenticate_user!, only: [:show, :edit, :index, :following, :followers]
-  # before_action :correct_user,   only: [:edit, :update]
-  # before_action :admin_user,     only: :destroy
   before_action :set_sideber_data, only: [:show, :edit, :index, :following, :followers]
-  # before_action :set_user_data, only: [:show, :edit, :index, :following, :followers]
 
   def index
     @user = User.find(params[:id])
