@@ -4,7 +4,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: localhost
+  host: db  # Docker用
+  # host: localhost  # Local用
   socket: /tmp/mysql.sock
 development:
   <<: *default
