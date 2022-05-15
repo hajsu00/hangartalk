@@ -40,58 +40,6 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "aeroplane_flights", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "log_number"
-    t.date "date"
-    t.string "aeroplane_type"
-    t.string "aeroplane_ident"
-    t.string "departure_point"
-    t.string "arrival_point"
-    t.string "exercises_or_maneuvers"
-    t.integer "number_of_takeoff"
-    t.integer "number_of_landing"
-    t.datetime "moving_time"
-    t.datetime "stop_time"
-    t.string "flight_role"
-    t.boolean "is_cross_country"
-    t.boolean "is_night_flight"
-    t.boolean "is_hood"
-    t.boolean "is_instrument"
-    t.boolean "is_simulator"
-    t.boolean "is_instructor"
-    t.boolean "is_stall_recovery"
-    t.boolean "close_log"
-    t.string "note"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "created_at"], name: "index_aeroplane_flights_on_user_id_and_created_at"
-    t.index ["user_id"], name: "index_aeroplane_flights_on_user_id"
-  end
-
-  create_table "aeroplane_initial_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "total_flight_number"
-    t.integer "number_of_takeoff"
-    t.integer "number_of_landing"
-    t.integer "total_time"
-    t.integer "pic_time"
-    t.integer "solo_time"
-    t.integer "cross_country_time"
-    t.integer "night_time"
-    t.integer "dual_time"
-    t.integer "dual_crosss_country_time"
-    t.integer "dual_night_time"
-    t.integer "hood_time"
-    t.integer "instrument_time"
-    t.integer "simulator_time"
-    t.integer "instructor_time"
-    t.integer "number_of_stall_recovery"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_aeroplane_initial_logs_on_user_id"
-  end
-
   create_table "aircraft_categories", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -134,6 +82,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["aircraft_type_id"], name: "index_glider_flights_on_aircraft_type_id"
+    t.index ["user_id", "log_number"], name: "index_glider_flights_on_user_id_and_log_number"
     t.index ["user_id"], name: "index_glider_flights_on_user_id"
   end
 
@@ -311,8 +260,6 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "aeroplane_flights", "users"
-  add_foreign_key "aeroplane_initial_logs", "users"
   add_foreign_key "fleets", "groups"
   add_foreign_key "glider_flights", "aircraft_types"
   add_foreign_key "glider_flights", "users"

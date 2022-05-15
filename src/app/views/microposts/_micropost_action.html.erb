@@ -1,32 +1,32 @@
-<div class="micropost_actions">
-  <div class="micropost_action_block">
+<div class="flex justify-between mt-5">
+  <div>
     <%= link_to micropost_path(micropost) do %>
-      <i class="fa-solid fa-comment"></i>
+      <i class="fa-solid fa-comment text-gray-600"></i>
     <% end %>
-    <span><%= micropost.number_of_replied%></span>
+    <span class=" text-gray-600"><%= micropost.number_of_replied%></span>
   </div>
-  <div class="micropost_action_block">
+  <div>
   <% if micropost.is_shared_by_current_user?(current_user) %>
       <%= link_to share_relationship_url(id: micropost.id), method: :delete do %>
-      <i class="fa-solid fa-retweet"></i>
+      <i class="fa-solid fa-retweet text-gray-600"></i>
     <% end %>
   <% else %>
     <%= link_to share_relationships_path(shared_id: micropost.id), method: :post do %>
-      <i class="fa-solid fa-retweet"></i>
+      <i class="fa-solid fa-retweet text-gray-600"></i>
     <% end %>
   <% end %>  
-    <span><%= micropost.number_of_shared %></span>
+    <span class=" text-gray-600"><%= micropost.number_of_shared %></span>
   </div>
-  <div class="micropost_action_block">
+  <div>
   <% if micropost.is_liked_by_current_user?(current_user) %>
     <%= link_to like_relationship_path(id: micropost.id), method: :delete do %>
-      <i class="fa-solid fa-thumbs-up"></i>
+      <i class="fa-solid fa-thumbs-up text-gray-600"></i>
     <% end %>
   <% else %>
     <%= link_to like_relationships_path(id: micropost.id), method: :post do %>
-      <i class="fa-solid fa-thumbs-up"></i>
+      <i class="fa-solid fa-thumbs-up text-gray-600"></i>
     <% end %>
   <% end %>
-    <span><%= micropost.number_of_liked %></span>
+    <span class=" text-gray-600"><%= micropost.number_of_liked %></span>
   </div>
 </div>

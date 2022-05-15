@@ -43,7 +43,7 @@ AircraftCategory.create!(name: '飛行機')
 # 追加のユーザーをまとめて生成する
 ActionMailer::Base.perform_deliveries = false
 m = 0
-39.times do |n|
+49.times do |n|
   name  = Faker::Name.name
   email = "example-#{n + 1}@railstutorial.org"
   password = "password"

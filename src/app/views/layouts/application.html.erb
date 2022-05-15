@@ -13,11 +13,6 @@
   </head>
   <body>
     <%= render 'layouts/header' %>
-    <% if flash.any? %>
-      <div class="flex justify-center items-center p-4">
-        <%= render 'layouts/notification' %>
-      </div>
-    <% end %> 
 
     <main class='container flex flex-wrap-reverse mx-auto px-4'>
       <% if user_signed_in? %>
@@ -25,10 +20,16 @@
           <%= render 'layouts/sidebar' %>
         </article>
         <article class='w-full lg:w-8/12'>
+          <% if flash.any? %>
+            <%= render 'layouts/notification' %>
+          <% end %> 
           <%= yield %> 
         </article>
       <% else %>
         <article class='w-full'>
+          <% if flash.any? %>
+            <%= render 'layouts/notification' %>
+          <% end %> 
           <%= yield %> 
         </article>
       <% end %>

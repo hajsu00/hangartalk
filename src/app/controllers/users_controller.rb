@@ -8,7 +8,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc).includes([:images_attachments, :like_relationships, :replying, :replied, :sharing, :shared,
+    @microposts = @user.microposts.order(created_at: :desc).includes([:images_attachments,
+                                                                      :like_relationships,
+                                                                      :replying,
+                                                                      :replied,
+                                                                      :sharing,
+                                                                      :shared,
                                                                       :glider_flight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships }]).page(params[:page]).per(10)
   end
 

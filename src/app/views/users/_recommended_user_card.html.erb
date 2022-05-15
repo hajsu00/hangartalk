@@ -7,7 +7,7 @@
         <%= user.name %>
       </div>
       <div class="h-7/8 text-gray-700 text-sm overflow-visible">
-        自己紹介文です。文字数制限は１６０文字です。ああああああああああああああああああああああああああああああああああ
+        <%= user.introduction.truncate(24) %>
       </div>
     </div>
   </div>

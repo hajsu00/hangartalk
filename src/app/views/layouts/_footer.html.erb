@@ -1,25 +1,17 @@
 <footer class="text-gray-600 body-font">
-  <div class="container px-5 py-24 mx-auto flex md:items-center lg:items-start md:flex-row md:flex-nowrap flex-wrap flex-col">
-    <div class="flex flex-wrap justify-evenly">
-      <div class="px-4">
-        <%= link_to "Hanger Talkとは？", about_path, class: "title-font font-medium text-gray-900 tracking-widest text-sm mb-3" %>
-      </div>
-      <div class="px-4">
-        <%= link_to "プライバシーポリシー", policy_path, class: "title-font font-medium text-gray-900 tracking-widest text-sm mb-3" %>
-      </div>
-      <div class="px-4">
-        <%= link_to "お問合せ", inquiry_path, class: "title-font font-medium text-gray-900 tracking-widest text-sm mb-3" %>
-      </div>
-    </div>
-    <div class="md:mx-auto sm:mx-auto xs:mx-auto md:mt-0 mt-10 items-center">
+  <%
+=begin%>
+ <div class="bg-gray-100 mt-10"> 
+<%
+=end%>
+  <div class="bg-gray-100 mt-10">
+    <div class="container mx-auto flex flex-wrap pt-5 flex-col items-center">
       <% if user_signed_in? %>
         <%= link_to image_tag('hangartalk_logo.png', class: "w-64"), user_path(current_user.id) %>
       <% else %>
         <%= link_to image_tag('hangartalk_logo.png', class: "w-64"), new_user_session_path %>
       <% end %>
     </div>
-  </div>
-  <div class="bg-gray-100">
     <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
       <p class="text-gray-500 text-sm text-center sm:text-left">© 2022 Hangar Talk</p>
       <span class="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">

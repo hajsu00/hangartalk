@@ -7,7 +7,7 @@
         <%= user.name %>
       </div>
       <p class="text-gray-700 text-base">
-        <%= user.introduction %>
+        <%= user.introduction.truncate(50) %>
       </p>
       <div class="px-6 pt-4 pb-2">
         <%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>

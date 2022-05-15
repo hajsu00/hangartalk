@@ -24,12 +24,12 @@
           <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
         </div>
         <!-- 送信ボタン -->
-        <%= f.submit yield(:button_text), class: "block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+        <%= f.submit yield(:button_text), class: "block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3 mt-4" %>
       <% end %>
       </div>
       <!-- ナビゲーション -->
       <div class="flex justify-center items-center p-4">
-        <%= link_to "通常ログインの方はこちら", new_user_session_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+        <%= link_to "通常ログインの方はこちら", new_user_session_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100 mt-2" %>
       </div>
     </form>
   </div>

@@ -13,38 +13,6 @@
 
   <div class="bg-white py-6 sm:py-8 lg:py-12">
     <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-      <!-- 合計セクション -->
-      <div class="border rounded-lg mx-auto my-4">
-        <div class="flex flex-col p-4 md:p-8 justify-center">
-          <div class="bg-white py-6 sm:py-8 lg:py-12">
-            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
-              <%= "サマリー（#{@logbook_flights.current_page}ページ目）" %>
-            </h2>
-            <%= paginate @logbook_flights, left: 3, right: 3 %>
-            <div class="overflow-x-auto">
-              <div class="w-full lg:w-5/6">
-                <div class="bg-white shadow-md rounded my-6">
-                  <table class="min-w-max w-full table-auto">
-                    <%= render 'logbook_summary_header' %>
-                    <tbody class="text-gray-600 text-sm font-light">
-                      <%= render partial: 'flight_summary_record', locals: {summary_category: 'page_total'} %>
-                      <%= render partial: 'flight_summary_record', locals: {summary_category: 'up_to_before_current_page'} %>
-                      <%= render partial: 'flight_summary_record', locals: {summary_category: 'all_pages'} %>
-                      <% if !@glider_initial_log.nil? %>
-                        <%= render partial: 'glider_initial_log' %>
-                      <% else %>
-                        <%= link_to new_glider_initial_log_path do %>
-                          <p>過去のフライト経験をまとめて登録できます。<br>作成はこちら！</p>
-                        <% end %>
-                      <% end %>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <!-- ログブックセクション -->
       <div class="border rounded-lg mx-auto my-4">
         <div class="flex flex-col p-4 md:p-8 justify-center">
@@ -80,12 +48,34 @@
                 登録されたフライトログがありません。
               </div>
               <div class="flex justify-center items-center pt-4">
-                <%= link_to "すでに紙ベースのログブックをお持ちの方はこちら", new_glider_initial_log_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+                <%= link_to "すでに紙ベースのログブックをお持ちの方はこちら", new_glider_initial_log_path, class: "font-bold text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
               </div>
               <div class="flex justify-center items-center pt-4">
-                <%= link_to "新しいフライトを登録する方はこちら", new_glider_flight_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+                <%= link_to "新しいフライトを登録する方はこちら", new_glider_flight_path, class: "font-bold text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
               </div>
             <% end %>
+          </div>
+        </div>
+      </div>
+      <!-- 合計セクション -->
+      <div class="border rounded-lg mx-auto my-4">
+        <div class="flex flex-col p-4 md:p-8 justify-center">
+          <div class="bg-white py-6 sm:py-8 lg:py-12">
+            <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8">
+              <%= "サマリー（#{@logbook_flights.current_page}ページ目まで）" %>
+            </h2>
+            <%= paginate @logbook_flights, left: 3, right: 3 %>
+            <div class="overflow-x-auto">
+                <table class="min-w-max w-full table-auto shadow-md rounded my-6">
+                  <%= render 'logbook_summary_header' %>
+                  <tbody class="text-gray-600 text-sm font-light">
+                    <%= render partial: 'flight_summary_record', locals: {summary_category: 'page_total'} %>
+                    <%= render partial: 'flight_summary_record', locals: {summary_category: 'up_to_before_current_page'} %>
+                    <%= render partial: 'flight_summary_record', locals: {summary_category: 'all_pages'} %>
+                    <%= render partial: 'glider_initial_log' %>
+                  </tbody>
+                </table>
+            </div>
           </div>
         </div>
       </div>
