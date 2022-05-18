@@ -35,12 +35,14 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-node-
       - name: bundle install
-        run: gem install bundler
-        run: bundle install --jobs 4 --retry 3 --path vendor/bundle
+        run: |
+          gem install bundler
+          bundle install --jobs 4 --retry 3 --path vendor/bundle
       - name: yarn install
         run:  yarn install --check-files
       - name: migrate db
-        run: bundle exec rails db:create
-        run: bundle exec rails db:test:prepare
+        run: |
+          bundle exec rails db:create
+          bundle exec rails db:test:prepare
       - name: run rspec
         run: bundle exec rspec
