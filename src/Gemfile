@@ -33,7 +33,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   gem 'factory_bot_rails'
   gem 'capybara', '>= 3.26'  # Adds support for Capybara system testing and selenium driver
-  gem 'selenium-webdriver'
+  gem 'selenium-webdriver',  require: !ENV['SELENIUM_REMOTE_URL']
   gem 'webdrivers'  # Easy installation and use of web drivers to run system tests with browsers
 end
 
