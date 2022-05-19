@@ -53,4 +53,4 @@ jobs:
       - name: run rspec
         env:
           LANG: ja-JP
-          run: bundle exec rspec
+        run: bundle exec rspec
