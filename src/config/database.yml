@@ -16,7 +16,9 @@ test:
 production:
   <<: *default
   database: hangartalk_production
-  username: <%= Rails.application.credentials.db[:user_name] %>
-  password: <%= Rails.application.credentials.db[:password] %>
-  host: <%= Rails.application.credentials.db[:endpoint] %>
+  <% if Rails.application.credentials.db.present? %>
+    username: <%= Rails.application.credentials.db[:user_name] %>
+    password: <%= Rails.application.credentials.db[:password] %>
+    host: <%= Rails.application.credentials.db[:endpoint] %>
+  <% end %>
   port: 3306
