@@ -16,13 +16,14 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
-Capybara.server_host = Socket.ip_address_list.detect{|addr| addr.ipv4_private?}.ip_address
-Capybara.server_port = 3000
-
-Capybara.register_driver :selenium_remote do |app|
-  url = "http://chrome:4444/wd/hub"
-  opts = { desired_capabilities: :chrome, browser: :remote, url: url }
-  driver = Capybara::Selenium::Driver.new(app, opts)
+Capybara.default_driver = :selenium_chrome_headless
+Capybara.register_driver :selenium_chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-gpu')
+  options.add_argument('--window-size=1280,1024')
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
 end
 
 RSpec.configure do |config|
