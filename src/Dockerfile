@@ -1,4 +1,4 @@
-FROM ruby:3.0.3
+FROM ruby:3.0.1
 
 RUN apt-get update -qq && apt-get install -y nodejs
 RUN mkdir -p /var/www/hangartalk
