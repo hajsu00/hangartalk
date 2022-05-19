@@ -48,5 +48,9 @@ jobs:
           bundle exec rails db:test:prepare
       - name: build tailwind CSS
         run: bundle exec rails tailwindcss:build
+      - name: Install fonts
+        run: sudo apt-get install fonts-ipafont-gothic fonts-ipafont-mincho
       - name: run rspec
-        run: bundle exec rspec
+        env:
+          LANG: ja-JP
+          run: bundle exec rspec
