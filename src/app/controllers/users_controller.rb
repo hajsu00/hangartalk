@@ -1,10 +1,6 @@
 class UsersController < ApplicationController
-  # before_action :logged_in_user, only: [:index, :following, :followers]
   before_action :authenticate_user!, only: [:show, :edit, :index, :following, :followers]
-  # before_action :correct_user,   only: [:edit, :update]
-  # before_action :admin_user,     only: :destroy
   before_action :set_sideber_data, only: [:show, :edit, :index, :following, :followers]
-  # before_action :set_user_data, only: [:show, :edit, :index, :following, :followers]
 
   def index
     @user = User.find(params[:id])
@@ -12,7 +8,12 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.order(created_at: :desc).includes([:images_attachments, :like_relationships, :replying, :replied, :sharing, :shared,
+    @microposts = @user.microposts.order(created_at: :desc).includes([:images_attachments,
+                                                                      :like_relationships,
+                                                                      :replying,
+                                                                      :replied,
+                                                                      :sharing,
+                                                                      :shared,
                                                                       :glider_flight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships }]).page(params[:page]).per(10)
   end
 

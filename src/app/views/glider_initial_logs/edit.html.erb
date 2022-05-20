@@ -1,197 +1,152 @@
 <% provide(:title, '過去のフライト記録を編集') %>
-<% provide(:button_text, '修正する') %>
+<% provide(:button_text, '更新する') %>
 
-<div class="main">
-  <h1>過去のフライト記録を編集</h1>
-  <div class="display-flex">
-    <button class="page-nav"><%= link_to "戻る", 'javascript:history.back()' %></button>
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4 mb-4">
+    <%= link_to 'javascript:history.back()' do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= yield(:title) %></div>
+    </div>
   </div>
-  <%= form_with(model: @glider_initial_log, local: true) do |f| %>
-    <%= render 'shared/error_messages', object: f.object %>
-    <!-- 過去ログ計算上の最終日 -->
-    <h2>基準日</h2>
-    <div class="content-outer-block">
-      <div class="input-field">
-        <%= f.label :at_present, "過去ログ計算上の最終日", class: 'label' %>
-        <%= f.date_field :at_present, class: 'form-control' %>
-      </div>
-      <p>※個人ログブックでは、この日付以降のログを自動で取得できるようになります。</p>
-      <p>※過去ログとして登録する既存の飛行経歴のうち、最新の日付を入力してください。</p>
-    </div>
-    <div class="content-outer-block">
-      <!-- 動力滑空機による時間 -->
-      <h2>滑空機による飛行時間</h2>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :non_power_total_time, "総飛行時間", class: 'label' %>
-          <%= f.number_field :non_power_total_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :non_power_total_number, "総飛行回数", class: 'label' %>
-          <%= f.number_field :non_power_total_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :pic_winch_time, "ウインチ曳航による機長時間", class: 'label' %>
-          <%= f.number_field :pic_winch_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :pic_winch_number, "ウインチ曳航による機長回数", class: 'label' %>
-          <%= f.number_field :pic_winch_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :pic_aero_tow_time, "航空機曳航による機長時間", class: 'label' %>
-          <%= f.number_field :pic_aero_tow_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :pic_aero_tow_number, "航空機曳航による機長回数", class: 'label' %>
-          <%= f.number_field :pic_aero_tow_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :solo_winch_time, "ウインチ曳航による単独飛行時間", class: 'label' %>
-          <%= f.number_field :solo_winch_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :solo_winch_number, "ウインチ曳航による単独飛行回数", class: 'label' %>
-          <%= f.number_field :solo_winch_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :solo_aero_tow_time, "航空機曳航による単独飛行時間", class: 'label' %>
-          <%= f.number_field :solo_aero_tow_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :solo_aero_tow_number, "航空機曳航による単独飛行回数", class: 'label' %>
-          <%= f.number_field :solo_aero_tow_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :dual_winch_time, "ウインチ曳航による同乗教育時間", class: 'label' %>
-          <%= f.number_field :dual_winch_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :dual_winch_number, "ウインチ曳航による同乗教育回数", class: 'label' %>
-          <%= f.number_field :dual_winch_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :dual_aero_tow_time, "航空機曳航による同乗教育時間", class: 'label' %>
-          <%= f.number_field :dual_aero_tow_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :dual_aero_tow_number, "航空機曳航による同乗教育回数", class: 'label' %>
-          <%= f.number_field :dual_aero_tow_number, class: 'form-control' %>
-        </div>
-      </div>
-    </div>
-    <!-- 動力滑空機による時間 -->
-    <div class="content-outer-block">
-      <h2>動力滑空機による飛行時間</h2>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :power_total_time, "総飛行時間", class: 'label' %>
-          <%= f.number_field :power_total_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :power_total_number, "総飛行回数", class: 'label' %>
-          <%= f.number_field :power_total_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :pic_power_time, "動力による機長時間", class: 'label' %>
-          <%= f.number_field :pic_power_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :pic_power_number, "動力による機長回数", class: 'label' %>
-          <%= f.number_field :pic_power_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :pic_power_off_time, "滑空による機長時間", class: 'label' %>
-          <%= f.number_field :pic_power_off_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :pic_power_off_number, "滑空による機長回数", class: 'label' %>
-          <%= f.number_field :pic_power_off_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :solo_power_time, "動力による単独飛行時間", class: 'label' %>
-          <%= f.number_field :solo_power_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :solo_power_number, "動力による単独飛行回数", class: 'label' %>
-          <%= f.number_field :solo_power_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :solo_power_off_time, "滑空による単独飛行時間", class: 'label' %>
-          <%= f.number_field :solo_power_off_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :solo_power_off_number, "滑空による単独飛行回数", class: 'label' %>
-          <%= f.number_field :solo_power_off_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :dual_power_time, "動力による同乗教育時間", class: 'label' %>
-          <%= f.number_field :dual_power_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :dual_power_number, "動力よる同乗教育回数", class: 'label' %>
-          <%= f.number_field :dual_power_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :dual_power_off_time, "滑空による同乗教育時間", class: 'label' %>
-          <%= f.number_field :dual_power_off_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :dual_power_off_number, "滑空による同乗教育回数", class: 'label' %>
-          <%= f.number_field :dual_power_off_number, class: 'form-control' %>
+  <div class="bg-white py-6 sm:py-8 lg:py-12">
+    <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
+      <div class="border rounded-lg mx-auto my-4">
+        <div class="flex flex-col p-4 md:p-8 justify-center">
+          <div class="bg-white py-6 sm:py-8 lg:py-12">
+            <%= form_with(model: @glider_initial_log, local: true) do |f| %>
+              <%= render 'shared/error_messages', object: f.object %>
+              <!-- 過去ログ計算上の最終日 -->
+              <div class="p-4 border rounded-lg shadow-md">
+                <div>
+                  <%= f.label :at_present, "過去ログ計算上の最終日", class: 'mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                  <%= f.date_field :at_present, autofocus: true, autocomplete: "at_present", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+                </div>
+                <p class="mt-2 text-gray-800">※個人フライトログブック機能では、この日付以降のログを自動で取得できるようになります。</p>
+                <p class="text-gray-800">※過去ログとして登録する既存の飛行経歴のうち、最新の日付を入力してください。</p>
+              </div>
+
+              <!-- 総飛行時間・回数 -->
+              <div class="flex flex-col mt-6">
+                <h2 class="font-bold underline underline-offset-8">総飛行時間・回数</h2>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :total_time, "総飛行時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :total_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :total_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :total_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+              </div>
+              <!-- 機長としての飛行時間・回数 -->
+              <div class="flex flex-col mt-6">
+                <h2 class="font-bold underline underline-offset-8">機長としての飛行時間・回数</h2>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :pic_winch_time, "ウインチ曳航による時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :pic_winch_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :pic_winch_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :pic_winch_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :pic_aero_tow_time, "航空機曳航による時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :pic_aero_tow_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :pic_aero_tow_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :pic_aero_tow_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 単独による飛行時間・回数 -->
+              <div class="flex flex-col mt-6">
+                <h2 class="font-bold underline underline-offset-8">単独による飛行時間・回数</h2>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :solo_winch_time, "ウインチ曳航による時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :solo_winch_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :solo_winch_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :solo_winch_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :solo_aero_tow_time, "航空機曳航による時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :solo_aero_tow_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :solo_aero_tow_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :solo_aero_tow_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 同乗教育による飛行時間・回数 -->
+              <div class="flex flex-col mt-6">
+                <h2 class="font-bold underline underline-offset-8">同乗教育による飛行時間・回数</h2>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :dual_winch_time, "ウインチ曳航による時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :dual_winch_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :dual_winch_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :dual_winch_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :dual_aero_tow_time, "航空機曳航による時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :dual_aero_tow_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :dual_aero_tow_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :dual_aero_tow_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+              </div>
+
+              <!-- その他の飛行時間・回数 -->
+              <div class="flex flex-col mt-6">
+                <h2 class="font-bold underline underline-offset-8">その他の飛行時間・回数</h2>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :cross_country_time, "野外飛行時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :cross_country_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+                <div class="flex mt-4">
+                  <div>
+                    <%= f.label :instructor_time, "操縦教員としての時間", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :instructor_time, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                  <div class="ml-4">
+                    <%= f.label :instructor_number, "回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                      <%= f.number_field :instructor_number, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <%= f.label :number_of_stall_recovery, "「失速からの回復」実施回数", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                    <%= f.number_field :number_of_stall_recovery, {value: 1, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+                </div>
+
+              </div>
+              
+              <%= f.submit yield(:button_text), class: "mt-4 block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>
-    <!-- その他の時間 -->
-    <div class="content-outer-block">
-      <h2>その他の飛行時間</h2>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :cross_country_time, "野外飛行時間", class: 'label' %>
-          <%= f.number_field :cross_country_time, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :instructor_time, "操縦教員としての時間", class: 'label' %>
-          <%= f.number_field :instructor_time, class: 'form-control' %>
-        </div>
-        <div class="input-field">
-          <%= f.label :instructor_number, "操縦教員としての飛行回数", class: 'label' %>
-          <%= f.number_field :instructor_number, class: 'form-control' %>
-        </div>
-      </div>
-      <div class="content-inner-block">
-        <div class="input-field">
-          <%= f.label :number_of_stall_recovery, "「失速からの回復」実施回数", class: 'label' %>
-          <%= f.number_field :number_of_stall_recovery, class: 'form-control' %>
-        </div>
-      </div>
   </div>
-  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
-<% end %>
 </div>

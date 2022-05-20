@@ -1,5 +1,5 @@
 <%= link_to micropost_path(micropost) do %>
-  <div class="cursor-pointer hover:bg-gray-100 border border-gray-600 px-5 py-4 my-1 bg-white dark:bg-gray-800 shadow rounded-lg w-full">
+  <div class="cursor-pointer hover:bg-gray-100 border border-gray-300 px-5 py-4 bg-white dark:bg-gray-800 shadow rounded-lg w-full">
     <div class="flex mb-4">
       <%= image_tag micropost.user.avatar, class: 'w-12 h-12 rounded-full' %>
       <div class="ml-2 mt-0.5">
@@ -45,11 +45,9 @@
       <%= render partial: 'microposts/flight_card', locals: { micropost: micropost } %>
     <% end %>
     <!-- アクションボタン -->
-    <div class="flex justify-between items-center mt-5">
-      <%= render partial: 'microposts/micropost_action', locals: { micropost: micropost } %> 
-      <% if current_user?(micropost.user) %>
-        <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-      <% end %>
-    </div>  
+    <%= render partial: 'microposts/micropost_action', locals: { micropost: micropost } %> 
+    <% if current_user?(micropost.user) %>
+      <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    <% end %>
   </div>
 <% end %>

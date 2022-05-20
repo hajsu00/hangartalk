@@ -3,6 +3,7 @@ class GliderInitialLogsController < ApplicationController
   before_action :logged_in_user, only: [:create, :select, :destroy]
   before_action :correct_user,   only: :destroy
   before_action :set_sideber_data, only: [:new, :edit, :show, :index]
+  before_action :set_glider_flight_selectors, only: [:edit]
 
   def new
     @glider_initial_log = current_user.build_glider_initial_log

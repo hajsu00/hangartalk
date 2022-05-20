@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/var/www/hangartalk
+      - ./nginx/hangartalk.conf:/etc/nginx/conf.d/hangartalk.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    tty: true
+  
+  app:
+    container_name: hangartalk_app
+    build: 
+      context: .
+      dockerfile: ./src/Dockerfile
+    command: bundle exec puma -C config/puma.rb
+    volumes:
+      - ./src:/var/www/hangartalk
+      - ./src/vendor/bundle:/var/www/hangartalk/vendor/bundle
+    environment:
+      TZ: 'Asia/Tokyo'
+      RAILS_ENV: development
+    ports:
+      - 3000:3000
+    depends_on:
+      - db
+      - nginx
+    tty: true
+
+  db:
+    image: mysql:8.0.28
+    container_name: hangartalk_db
+    volumes:
+      - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf
+      - hangartalk_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      TZ: 'Asia/Tokyo'
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    tty: true
+
+volumes: 
+  hangartalk_data:
+    external: true

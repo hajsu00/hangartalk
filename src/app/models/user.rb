@@ -22,6 +22,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
   has_one_attached :user_cover
 
+  validates :name, presence: true, length: { minimum: 3, maximum: 50 }
+
   def self.guest
     user = find_by(email: 'guest@example.com')
     if user.nil?
@@ -153,6 +155,4 @@ class User < ApplicationRecord
     any_group = GroupUser.find_by(user_id: self.id)
     true unless any_group.nil?
   end
-
-  # private
 end

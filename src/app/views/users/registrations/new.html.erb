@@ -21,7 +21,7 @@
       <div class="max-w-lg border rounded-lg mx-auto">
         <div class="flex flex-col gap-4 p-4 md:p-8">
           <div>
-            <%= f.label :name, "アカウント名（任意）", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+            <%= f.label :name, "アカウント名 *", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
             <%= f.text_field :name, autofocus: true, autocomplete: "name", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
           </div> 
           <div>
@@ -40,10 +40,13 @@
             <%= f.password_field :password_confirmation, autocomplete: "password_confirmation", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
           </div>
           <!-- 認証メール送信ボタン -->
-          <%= f.submit yield(:button_text), class: "cursor-pointer block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+          <%= f.submit yield(:button_text), class: "cursor-pointer block bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-600 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3 mt-4" %>
         <% end %>
+        <!-- ボーダー（始まり） -->
+        <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
+        <!-- ボーダー（終わり） -->
         <%= link_to users_guest_sign_in_path, method: :post do %>
-          <div class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">
+          <div class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3 mt-3">
             ゲストログイン（閲覧用）
           </div>
         <% end %>
@@ -52,7 +55,7 @@
     
     <!-- ナビゲーション -->
     <div class="flex justify-center items-center p-4">
-      <%= link_to "アカウントをお持ちの方はこちら", new_user_session_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+      <%= link_to "アカウントをお持ちの方はこちら", new_user_session_path, class: "text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100 mt-2" %>
     </div>
   </div>
 </div>

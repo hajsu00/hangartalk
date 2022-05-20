@@ -4,7 +4,8 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
-  host: localhost
+  host: <%= ENV.fetch("MYSQL_DATABASE_HOST") { 'db' } %>  # Docker用
+  # host: localhost  # Local用
   socket: /tmp/mysql.sock
 development:
   <<: *default
@@ -15,8 +16,9 @@ test:
 production:
   <<: *default
   database: hangartalk_production
+  <% if Rails.application.credentials.db.present? %>
   username: <%= Rails.application.credentials.db[:user_name] %>
   password: <%= Rails.application.credentials.db[:password] %>
   host: <%= Rails.application.credentials.db[:endpoint] %>
-  pool: 20
+  <% end %>
   port: 3306

@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'Hanger Talk(ハンガートーク)'
+  default from: 'Hangar Talk(ハンガートーク)'
   layout 'mailer'
 end

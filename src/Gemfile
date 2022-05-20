@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
+ruby '3.0.1'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.4'
 gem 'bcrypt',  '3.1.16'
 gem 'mysql2', '~> 0.5'
@@ -32,6 +32,9 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 5.0.0'
   gem 'factory_bot_rails'
+  gem 'capybara', '>= 3.26'  # Adds support for Capybara system testing and selenium driver
+  gem 'selenium-webdriver',  require: !ENV['SELENIUM_REMOTE_URL']
+  gem 'webdrivers'  # Easy installation and use of web drivers to run system tests with browsers
 end
 
 group :development do
@@ -43,13 +46,4 @@ group :development do
   gem 'pre-commit'
   gem 'rubocop'
   gem 'rubocop-rails'
-  # gem 'pry-rails'
-  # gem 'pry-byebug'
 end
-
-group :test do
-  gem 'capybara', '>= 3.26'  # Adds support for Capybara system testing and selenium driver
-  gem 'selenium-webdriver'
-  gem 'webdrivers'  # Easy installation and use of web drivers to run system tests with browsers
-end
-
