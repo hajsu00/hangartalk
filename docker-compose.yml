@@ -25,7 +25,7 @@ services:
       - ./src/vendor/bundle:/var/www/hangartalk/vendor/bundle
     environment:
       TZ: 'Asia/Tokyo'
-      RAILS_ENV: development
+      RILS_ENV: development
     ports:
       - 3000:3000
     depends_on:

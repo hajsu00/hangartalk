@@ -4,14 +4,6 @@ min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
 threads min_threads_count, max_threads_count
 
 preload_app!
-# rails_env = ENV.fetch("RAILS_ENV") { "development" }
-# environment rails_env
-# case rails_env
-#   when "development"
-#     port ENV.fetch("PORT") { 3000 }
-#   when "production"
-#     bind "unix:///var/www/hangartalk/tmp/sockets/puma.sock"
-# end
 environment ENV.fetch("RAILS_ENV") { "development" }
 bind "unix:////var/www/hangartalk/tmp/sockets/puma.sock"
 

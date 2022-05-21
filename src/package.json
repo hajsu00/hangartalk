@@ -1,5 +1,5 @@
 {
-  "name":"hangartalk",
+  "name": "hangartalk",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.0.0",
@@ -13,6 +13,7 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "tailwindcss": "^3.0.24",
     "webpack-dev-server": "^3"
   },
   "description": "This README would normally document whatever steps are necessary to get the application up and running.",
