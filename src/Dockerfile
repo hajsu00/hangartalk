@@ -1,9 +1,10 @@
 FROM ruby:3.0.1
 
-ENV RAILS_ENV=development
-ENV NODE_ENV=development
+ENV RAILS_ENV=production
 RUN apt-get update -qq && apt-get install -y nodejs
 RUN mkdir -p /var/www/hangartalk
+RUN mkdir -p /var/www/hangartalk/tmp/sockets
+RUN mkdir -p /var/www/hangartalk/tmp/pids
 WORKDIR /var/www/hangartalk
 COPY /src/Gemfile /var/www/hangartalk/Gemfile
 COPY /src/Gemfile.lock /var/www/hangartalk/Gemfile.lock
@@ -12,6 +13,7 @@ RUN curl https://deb.nodesource.com/setup_16.x | bash
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y nodejs yarn
+
 COPY . /var/www/hangartalk
 
 # Add a script to be executed every time the container starts.
@@ -22,4 +24,4 @@ ENTRYPOINT ["entrypoint.sh"]
 RUN bundle exec rails assets:precompile
 
 # Start the main process.
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -e production"
