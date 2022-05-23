@@ -2,7 +2,7 @@ version: '3'
 
 services:
   nginx:
-    container_name: hangartalk_nginx
+    container_name: hangartalk_nginx_development
     build:
       context: .
       dockerfile: ./nginx/Dockerfile
@@ -15,17 +15,17 @@ services:
     tty: true
 
   app:
-    container_name: hangartalk_app
+    container_name: hangartalk_app_development
     build: 
       context: .
       dockerfile: ./src/Dockerfile
-    command: bundle exec puma -e production
+    command: bundle exec puma -C config/puma.rb
     volumes:
       - ./src:/var/www/hangartalk
       - ./src/vendor/bundle:/var/www/hangartalk/vendor/bundle
     environment:
       TZ: 'Asia/Tokyo'
-      RAILS_ENV: production
+      RAILS_ENV: development
     ports:
       - 3000:3000
     depends_on:

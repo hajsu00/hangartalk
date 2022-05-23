@@ -6,8 +6,8 @@ RUN mkdir -p /var/www/hangartalk
 RUN mkdir -p /var/www/hangartalk/tmp/sockets
 RUN mkdir -p /var/www/hangartalk/tmp/pids
 WORKDIR /var/www/hangartalk
-COPY /src/Gemfile /var/www/hangartalk/Gemfile
-COPY /src/Gemfile.lock /var/www/hangartalk/Gemfile.lock
+COPY Gemfile /var/www/hangartalk/Gemfile
+COPY Gemfile.lock /var/www/hangartalk/Gemfile.lock
 RUN bundle install
 RUN curl https://deb.nodesource.com/setup_16.x | bash
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
@@ -17,11 +17,14 @@ RUN apt-get update && apt-get install -y nodejs yarn
 COPY . /var/www/hangartalk
 
 # Add a script to be executed every time the container starts.
-COPY /src/entrypoint.sh /usr/bin/
+COPY ./entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 RUN bundle exec rails assets:precompile
+
+VOLUME /var/www/hangartalk/public
+VOLUME /var/www/hangartalk/tmp
 
 # Start the main process.
 CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -e production"
