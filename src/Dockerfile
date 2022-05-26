@@ -1,6 +1,5 @@
 FROM ruby:3.0.1
 
-ENV RAILS_ENV=production
 RUN apt-get update -qq && apt-get install -y nodejs
 RUN mkdir -p /var/www/hangartalk
 RUN mkdir -p /var/www/hangartalk/tmp/sockets
@@ -17,14 +16,15 @@ RUN apt-get update && apt-get install -y nodejs yarn
 COPY . /var/www/hangartalk
 
 # Add a script to be executed every time the container starts.
-COPY ./entrypoint.sh /usr/bin/
+COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
 RUN bundle exec rails assets:precompile
+RUN bundle exec rails tailwindcss:build
 
 VOLUME /var/www/hangartalk/public
 VOLUME /var/www/hangartalk/tmp
 
 # Start the main process.
-CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -e production"
+CMD bash -c "bundle exec puma -e production"
