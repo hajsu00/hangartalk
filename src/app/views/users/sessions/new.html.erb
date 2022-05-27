@@ -35,11 +35,9 @@
             </div>
           <% end %>
           <!-- 認証メール送信ボタン -->
-          <div class="cursor-pointer block bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-600 focus-visible:ring ring-indigo-500 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3 mt-4">
-            <%= f.submit yield(:button_text) %>
-          </div>
+          <%= f.submit yield(:button_text), class: "cursor-pointer block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3 mt-4" %>
           <!-- ボーダー（始まり） -->
-          <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
+          <div class="w-full border-b-2 border-gray-400 py-2 mx-auto"></div>
           <!-- ボーダー（終わり） -->
           <%= link_to users_guest_sign_in_path, method: :post do %>
             <div class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3 mt-3">

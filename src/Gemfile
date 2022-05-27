@@ -24,9 +24,6 @@ gem 'devise'
 gem 'devise-i18n'
 gem "tailwindcss-rails", "~> 2.0"
 
-gem 'pry-rails'
-gem 'pry-byebug'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -35,6 +32,9 @@ group :development, :test do
   gem 'capybara', '>= 3.26'  # Adds support for Capybara system testing and selenium driver
   gem 'selenium-webdriver',  require: !ENV['SELENIUM_REMOTE_URL']
   gem 'webdrivers'  # Easy installation and use of web drivers to run system tests with browsers
+  gem 'pry-rails'
+  gem 'pry-byebug'
+
 end
 
 group :development do
