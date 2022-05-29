@@ -41,11 +41,7 @@ jobs:
       - name: yarn install
         run:  yarn install --check-files
       - name: migrate db
-        env:
-          RAILS_ENV: test
-        run: |
-          bundle exec rails db:create
-          bundle exec rails db:test:prepare
+        run: bundle exec rails db:test:prepare RAILS_ENV=test
       - name: build tailwind CSS
         run: bundle exec rails tailwindcss:build
       - name: run rspec

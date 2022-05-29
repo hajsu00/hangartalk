@@ -1,6 +1,6 @@
 module.exports = {
   plugins: [
-    require("tailwindcss")("./src/config/tailwind.config.js"),
+    require("tailwindcss")("./config/tailwind.config.js"),
     require("autoprefixer"),
     require('postcss-import'),
     require('postcss-flexbugs-fixes'),
@@ -18,11 +18,11 @@ if (process.env.RAILS_ENV === "production") {
     require('@fullhuman/postcss-purgecss')({
       content: [
         './app/**/*.html.erb',
-        './app/**/*.html.slim',
         './app/**/*.js.erb',
         './app/helpers/**/*.rb',
       ],
-      whitelist: ['img', 'video', ':root'],
+      safelist: ['a', 'open'],
+      defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
     })
   )
 }

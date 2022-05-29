@@ -18,15 +18,15 @@
       <div class="flex justify-center items-center p-4">
         <%= render "devise/shared/error_messages", resource: resource %>
       </div>  
-      <div class="max-w-lg border rounded-lg mx-auto">
+      <div class="max-w-lg border border-gray-300 rounded-lg shadow mx-auto">
         <div class="flex flex-col gap-4 p-4 md:p-8">
           <div>
             <%= f.label :email, "メールアドレス *", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
-            <%= f.text_field :email, autofocus: true, autocomplete: "email", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+            <%= f.text_field :email, autofocus: true, autocomplete: "email", class: 'w-full bg-gray-50 text-gray-800 border border-gray-300 focus:ring ring-indigo-500 rounded outline-none transition duration-100 px-3 py-2' %>
           </div>
           <div>
             <%= f.label :password, "パスワード（半角英数字で６文字以上）*", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
-            <%= f.password_field :password, autocomplete: "current-password", class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+            <%= f.password_field :password, autocomplete: "current-password", class: 'w-full bg-gray-50 text-gray-800 border border-gray-300 focus:ring ring-indigo-500 rounded outline-none transition duration-100 px-3 py-2' %>
           </div>
           <% if devise_mapping.rememberable? %>
             <div class="field">
@@ -35,7 +35,7 @@
             </div>
           <% end %>
           <!-- 認証メール送信ボタン -->
-          <%= f.submit yield(:button_text), class: "cursor-pointer block bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-600 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3 mt-4" %> 
+          <%= f.submit yield(:button_text), class: "cursor-pointer block bg-indigo-800 hover:bg-indigo-700 active:bg-indigo-600 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3 mt-4" %>
           <!-- ボーダー（始まり） -->
           <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
           <!-- ボーダー（終わり） -->

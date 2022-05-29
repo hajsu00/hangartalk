@@ -1,5 +1,7 @@
 module.exports = {
-  content: ["./app/**/*.{html,js}"],
+  content: [
+    "../hangartalk/app/**/*.{html.erb, html, js}",
+  ],
   theme: {
     extend: {},
   },

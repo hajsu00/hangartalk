@@ -10,7 +10,7 @@ RSpec.describe User, type: :system do
         context 'フォームの入力値が正常' do
           it 'ユーザーの新規作成が成功' do
             visit new_user_registration_path
-            fill_in 'アカウント名 *', with: 'test'
+            fill_in 'user_name', with: 'test'
             fill_in 'メールアドレス *', with: 'test@example.com'
             fill_in 'パスワード', with: 'password'
             fill_in 'パスワード（確認） *', with: 'password'
@@ -22,7 +22,7 @@ RSpec.describe User, type: :system do
         context 'メールアドレス未記入' do
           it 'ユーザーの新規作成が失敗' do
             visit new_user_registration_path
-            fill_in 'アカウント名 *', with: 'test'
+            fill_in 'user[name]', with: 'test'
             fill_in 'メールアドレス *', with: nil
             fill_in 'パスワード', with: 'password'
             fill_in 'パスワード（確認） *', with: 'password'
