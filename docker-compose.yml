@@ -3,7 +3,7 @@ version: '3'
 services:
   nginx:
     container_name: hangartalk_nginx_development
-    image: hangartalk_nginx_development
+    image: hangartalk_nginx
     ports:
       - 80:80
     volumes:
@@ -15,7 +15,7 @@ services:
 
   app:
     container_name: hangartalk_app_development
-    image: hangartalk_app_development
+    image: hangartalk_app
     environment:
       RAILS_ENV: development
     command: "bundle exec puma -C config/puma.rb"
@@ -31,6 +31,8 @@ services:
   db:
     image: mysql:8.0.28
     container_name: hangartalk_db_development
+    cap_add:
+      - SYS_NICE
     volumes:
       - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf
       - hangartalk_data:/var/lib/mysql

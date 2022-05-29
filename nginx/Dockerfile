@@ -1,4 +1,4 @@
-FROM nginx:1.21
+FROM nginx:alpine
 # インクルード用のディレクトリ内を削除
 RUN rm -f /etc/nginx/conf.d/*
 # Nginxの設定ファイルをコンテナにコピー

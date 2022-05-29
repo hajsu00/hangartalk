@@ -1,5 +1,6 @@
 FROM ruby:3.0.1
 
+ENV RAILS_ENV=production
 RUN apt-get update -qq && apt-get install -y nodejs
 RUN mkdir -p /var/www/hangartalk
 RUN mkdir -p /var/www/hangartalk/tmp/sockets
@@ -27,4 +28,4 @@ VOLUME /var/www/hangartalk/public
 VOLUME /var/www/hangartalk/tmp
 
 # Start the main process.
-CMD bash -c "bundle exec puma -e production"
+CMD bash -c "rm -f tmp/pids/server.pid && bundle exec puma -C config/puma.rb"
