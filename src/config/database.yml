@@ -5,7 +5,6 @@ default: &default
   username: root
   password: <%= ENV['DATABASE_PASSWORD'] %>
   host: <%= ENV.fetch("MYSQL_DATABASE_HOST") { 'db' } %>  # Docker用
-  # host: localhost  # Local用
   socket: /tmp/mysql.sock
 development:
   <<: *default
