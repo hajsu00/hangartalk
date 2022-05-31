@@ -5,7 +5,7 @@
     <% end %>
     <div class="flex flex-col">
       <div class="text-xl font-bold pr-4">
-        <%= @user.name.empty? ? "（アカウント名未設定）" : current_user.name %>
+        <%= @user.name %>
       </div>
       <% if controller.action_name == "following_index" %>
         <div class="text-sm"><%= "#{@user.following.count}人をフォロー中" %></div>
