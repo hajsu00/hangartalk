@@ -12,7 +12,7 @@
   </div>
 </div>
 <% if @users.any? %>
-  <div class='flex flex-wrap w-full items-center'>
+  <div class='flex justify-center flex-col'>
     <%= render partial: "users/user_card", collection: @users, as: :user %>
   </div>
 <% end %>
