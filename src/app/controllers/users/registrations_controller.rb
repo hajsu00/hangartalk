@@ -13,33 +13,33 @@ module Users
     # end
 
     # POST /resource
-    # def create
-    #   super
-    #   user = User.find_by(email: params[:user][:email])
-    #   if !user.nil?
-    #     user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
-    #     user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
-    #     user.create_glider_initial_log!(at_present: Date.today,
-    #                                     total_time: 0,
-    #                                     total_number: 0,
-    #                                     pic_winch_time: 0,
-    #                                     pic_winch_number: 0,
-    #                                     pic_aero_tow_time: 0,
-    #                                     pic_aero_tow_number: 0,
-    #                                     solo_winch_time: 0,
-    #                                     solo_winch_number: 0,
-    #                                     solo_aero_tow_time: 0,
-    #                                     solo_aero_tow_number: 0,
-    #                                     dual_winch_time: 0,
-    #                                     dual_winch_number: 0,
-    #                                     dual_aero_tow_time: 0,
-    #                                     dual_aero_tow_number: 0,
-    #                                     cross_country_time: 0,
-    #                                     instructor_time: 0,
-    #                                     instructor_number: 0,
-    #                                     number_of_stall_recovery: 0)
-    #   end
-    # end
+    def create
+      super
+      user = User.find_by(email: params[:user][:email])
+      if !user.nil?
+        user.avatar.attach(io: File.open(Rails.root.join('app/assets/images/default_avatar.png')), filename: 'default_avatar.png')
+        user.user_cover.attach(io: File.open(Rails.root.join('app/assets/images/default_cover.png')), filename: 'default_cover.png')
+        user.create_glider_initial_log!(at_present: Date.today,
+                                        total_time: 0,
+                                        total_number: 0,
+                                        pic_winch_time: 0,
+                                        pic_winch_number: 0,
+                                        pic_aero_tow_time: 0,
+                                        pic_aero_tow_number: 0,
+                                        solo_winch_time: 0,
+                                        solo_winch_number: 0,
+                                        solo_aero_tow_time: 0,
+                                        solo_aero_tow_number: 0,
+                                        dual_winch_time: 0,
+                                        dual_winch_number: 0,
+                                        dual_aero_tow_time: 0,
+                                        dual_aero_tow_number: 0,
+                                        cross_country_time: 0,
+                                        instructor_time: 0,
+                                        instructor_number: 0,
+                                        number_of_stall_recovery: 0)
+      end
+    end
 
     # GET /resource/edit
     # def edit
