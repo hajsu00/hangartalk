@@ -21,6 +21,7 @@ jobs:
     env:
       RAILS_ENV: test
       MYSQL_DATABASE_HOST: 127.0.0.1
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
     steps:
       - uses: actions/checkout@v2.3.4
       - name: set up ruby
@@ -41,8 +42,6 @@ jobs:
       - name: yarn install
         run:  yarn install --check-files
       - name: migrate db
-        env:
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
           bundle exec rails db:create
           bundle exec rails db:test:prepare
