@@ -12,5 +12,5 @@ services:
       file: docker-compose.yml
       service: app
     container_name: hangartalk_app
-    env:
+    environment:
       RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
