@@ -19,21 +19,20 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
       - name : ecr login
-        # id: login-ecr
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
       - name: build and push
         id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
-          docker-compose build
-          docker image tag hangartalk_app $ECR_REGISTRY/api:latest
-          docker image tag hangartalk_nginx $ECR_REGISTRY/front:latest
-          docker push $ECR_REGISTRY/api:latest
-          docker push $ECR_REGISTRY/front:latest
+          docker-compose -f docker-compose.production.yml build
+          docker image tag hangartalk_app $ECR_REGISTRY/app:latest
+          docker image tag hangartalk_nginx $ECR_REGISTRY/nginx:latest
+          docker push $ECR_REGISTRY/app:latest
+          docker push $ECR_REGISTRY/nginx:latest
       - name: sleep
         run: sleep 10
       - name: update service
         run: |
-          aws ecs update-service --cluster hangartalk --service hangartalk_app --force-new-deployment
-          aws ecs update-service --cluster hangartalk --service hangartalk_nginx --force-new-deployment
+          aws ecs update-service --cluster hangartalk --service hangartalk --force-new-deployment

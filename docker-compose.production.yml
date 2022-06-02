@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  nginx:
+    extends:
+      file: docker-compose.yml
+      service: nginx
+    container_name: hangartalk_nginx
+
+  app:
+    extends:
+      file: docker-compose.yml
+      service: app
+    container_name: hangartalk_app

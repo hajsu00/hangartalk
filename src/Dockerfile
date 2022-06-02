@@ -6,18 +6,18 @@ RUN mkdir -p /var/www/hangartalk
 RUN mkdir -p /var/www/hangartalk/tmp/sockets
 RUN mkdir -p /var/www/hangartalk/tmp/pids
 WORKDIR /var/www/hangartalk
-COPY Gemfile /var/www/hangartalk/Gemfile
-COPY Gemfile.lock /var/www/hangartalk/Gemfile.lock
+COPY ./src/Gemfile /var/www/hangartalk/Gemfile
+COPY ./src/Gemfile.lock /var/www/hangartalk/Gemfile.lock
 RUN bundle install
 RUN curl https://deb.nodesource.com/setup_16.x | bash
 RUN curl https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
 RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 RUN apt-get update && apt-get install -y nodejs yarn
 
-COPY . /var/www/hangartalk
+COPY ./src /var/www/hangartalk
 
 # Add a script to be executed every time the container starts.
-COPY entrypoint.sh /usr/bin/
+COPY ./src/entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
