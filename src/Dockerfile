@@ -1,6 +1,8 @@
 FROM ruby:3.0.1
 
 ENV RAILS_ENV=production
+ARG RAILS_MASTER_KEY
+ENV RAILS_MASTER_KEY ${RAILS_MASTER_KEY}
 RUN apt-get update -qq && apt-get install -y nodejs
 RUN mkdir -p /var/www/hangartalk
 RUN mkdir -p /var/www/hangartalk/tmp/sockets
