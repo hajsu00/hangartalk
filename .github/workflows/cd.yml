@@ -28,10 +28,10 @@ jobs:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: |
           docker-compose -f docker-compose.production.yml build --build-arg RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
-          docker image tag hangartalk_app $ECR_REGISTRY/app:latest
-          docker image tag hangartalk_nginx $ECR_REGISTRY/nginx:latest
-          docker push $ECR_REGISTRY/app:latest
-          docker push $ECR_REGISTRY/nginx:latest
+          docker image tag hangartalk_app $ECR_REGISTRY/hangartalk_app:latest
+          docker image tag hangartalk_nginx $ECR_REGISTRY/hangartalk_nginx:latest
+          docker push $ECR_REGISTRY/hangartalk_app:latest
+          docker push $ECR_REGISTRY/hangartalk_nginx:latest
       - name: sleep
         run: sleep 10
       - name: update service
