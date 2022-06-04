@@ -1,32 +1,38 @@
-<div class="flex justify-between mt-5">
-  <div>
-    <%= link_to micropost_path(micropost) do %>
-      <i class="fa-solid fa-comment text-gray-600"></i>
-    <% end %>
-    <span class=" text-gray-600"><%= micropost.number_of_replied%></span>
-  </div>
-  <div>
+<div class="flex justify-center mx-auto mt-5">
+  <%= link_to micropost_path(micropost) do %>
+    <div class="flex group mx-8">
+      <i class="fa-solid fa-comment text-gray-600 group-hover:text-indigo-300 my-auto"></i>
+      <p class="ml-2 text-gray-600 group-hover:text-indigo-300"><%= micropost.number_of_replied%></p>
+    </div>
+  <% end %>
   <% if micropost.is_shared_by_current_user?(current_user) %>
       <%= link_to share_relationship_url(id: micropost.id), method: :delete do %>
-      <i class="fa-solid fa-retweet text-gray-600"></i>
-    <% end %>
+        <div class="flex group mx-8">
+          <i class="fa-solid fa-retweet text-gray-600 group-hover:text-indigo-300 my-auto"></i>
+          <p class="ml-2 text-gray-600 group-hover:text-indigo-300"><%= micropost.number_of_shared %></p>
+        </div>
+      <% end %>
   <% else %>
     <%= link_to share_relationships_path(shared_id: micropost.id), method: :post do %>
-      <i class="fa-solid fa-retweet text-gray-600"></i>
+      <div class="flex group mx-8">
+        <i class="fa-solid fa-retweet text-gray-600 group-hover:text-indigo-300 my-auto"></i>
+        <p class="ml-2 text-gray-600 group-hover:text-indigo-300"><%= micropost.number_of_shared %></p>
+      </div>
     <% end %>
   <% end %>  
-    <span class=" text-gray-600"><%= micropost.number_of_shared %></span>
-  </div>
-  <div>
   <% if micropost.is_liked_by_current_user?(current_user) %>
     <%= link_to like_relationship_path(id: micropost.id), method: :delete do %>
-      <i class="fa-solid fa-thumbs-up text-gray-600"></i>
+      <div class="flex group mx-8">
+        <i class="fa-solid fa-thumbs-up text-gray-600 group-hover:text-indigo-300 my-auto"></i>
+        <p class="ml-2 text-gray-600 group-hover:text-indigo-300"><%= micropost.number_of_liked %></p>
+      </div>
     <% end %>
   <% else %>
     <%= link_to like_relationships_path(id: micropost.id), method: :post do %>
-      <i class="fa-solid fa-thumbs-up text-gray-600"></i>
+      <div class="flex group mx-8">
+        <i class="fa-solid fa-thumbs-up text-gray-600 group-hover:text-indigo-300 my-auto"></i>
+        <p class="ml-2 text-gray-600 group-hover:text-indigo-300"><%= micropost.number_of_liked %></p>
+      </div>
     <% end %>
   <% end %>
-    <span class=" text-gray-600"><%= micropost.number_of_liked %></span>
-  </div>
 </div>

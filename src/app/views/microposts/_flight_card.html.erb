@@ -1,6 +1,4 @@
-<% target_relationship = GliderMicropostRelationship.find_by(micropost_id: micropost.id) %>
-<% target_flight = GliderFlight.find(target_relationship.glider_flight_id) %>
-<div class="bg-white shadow p-4 mx-auto my-2 border rounded-lg flex-col justify-center text-gray-800">
+<div class="cursor-pointer hover:bg-gray-200 bg-white shadow p-4 mx-auto my-2 border border-gray-300 hover:border-gray-400 rounded-lg flex-col justify-center text-gray-800">
   <div class="flex justify-evenly">
     <div class="flex-col">
       <p class="text-sm font-bold">出発日</p>
@@ -35,12 +33,11 @@
       </div>
     </div>
     <!-- 補足情報 -->
-
     <div class="flex-col my-auto">
       <div class="flex justify-center mx-auto my-2">
         <i class="fa-solid fa-plane sm:fa-2x fa-lg"></i>
       </div>
-      <p class="text-sm">（飛行時間）</p>
+      <p class="text-sm"><%= "(#{show_flight_time(glider_each_flight_time(target_flight))})" %></p>
     </div>
     <!-- 着陸情報 -->
     <div class="flex-col mx-4 my-auto">

@@ -1,7 +1,7 @@
 <% provide(:title, 'フィード') %>
 <% @user ||= @current_user %>
 
-<div class="mx-auto px-4">
+<div class="mx-auto">
   <div class="flex flex-row px-4 mb-4">
     <%= link_to 'javascript:history.back()' do %>
       <i class="fa-solid fa-angle-left fa-2x pr-4 pt-2"></i>
@@ -11,14 +11,14 @@
     </div>
   </div>
   <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">おすすめユーザー</h2>
-  <div class="mx-auto">
+  <div class="mx-auto px-4">
     <div class="flex flex-row gap-4 p-4 md:p-8 overflow-x-auto">
       <%= render partial: "users/recommended_user_card", collection: @reccomended_users, as: :user %>  
     </div>
   </div>
   <!-- ボーダー（始まり） -->
-  <div class="w-full border-b-2 border-gray-300 py-5 mx-auto"></div>
-  <div class="w-full py-2 mx-auto"></div>
+  <div class="w-full border-b-2 border-gray-300 py-5 mx-4"></div>
+  <div class="w-full py-2 mx-4"></div>
   <!-- ボーダー（終わり） -->
   <h2 class="text-xl font-bold underline underline-offset-8 px-4 py-5 text-center">フィード</h2>
   <div class="max-w-lg border rounded-lg mx-auto">
@@ -31,12 +31,10 @@
   <div class="max-w-lg py-2 mx-auto"></div>
   <!-- ボーダー（終わり） -->
   <% if @microposts.any? %>
-  <div class="max-w-lg border rounded-lg mx-auto">
-    <div class="flex flex-col gap-4 p-4 md:p-8">
+    <div class="flex flex-col max-w-lg mx-auto">
       <%= render partial: "microposts/micropost_card", collection: @microposts, as: :micropost %>
       <%= paginate @microposts, left: 3, right: 3 %> 
     </div>
-  </div>
   <% else %>
     <div class="max-w-lg mx-auto bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-4 my-4" role="alert">
       まだ投稿がありません。
