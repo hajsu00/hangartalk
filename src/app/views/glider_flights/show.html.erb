@@ -19,15 +19,15 @@
         </div>
         <div class="flex justify-evenly">
           <div class="flex-col">
-            <p class="text-base font-bold">出発日</p>
-            <p class="md:text-base text-2xl ml-4">
+            <p class="md:text-xs text-sm font-bold">出発日</p>
+            <p class="md:text-2xl text-base ml-4">
               <%= @glider_flight.date.strftime("%Y年%m月%d日") %>
             </p>
           </div>
           <div>
             <div class="flex-col">
-              <p class="text-base font-bold">搭乗機体</p>
-              <p class="md:text-base text-2xl ml-4">
+              <p class="md:text-xs text-sm font-bold">搭乗機体</p>
+              <p class="md:text-2xl text-base ml-4">
                 <%= "#{show_aircraft_type(@glider_flight.aircraft_type_id)}（#{@glider_flight.glider_ident}）" %>
               </p>
             </div>
@@ -45,7 +45,7 @@
             </div>
             <div class="flex justify-center mt-2">
               <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
-              <div class="text-3xl ml-4">
+              <div class="md:text-3xl text-xl ml-4">
                 <%= @glider_flight.takeoff_time.strftime("%R") %>
               </div>
             </div>
@@ -81,7 +81,7 @@
               <%= @glider_flight.departure_and_arrival_point %>
             </div>
             <div class="flex justify-center mt-2">
-              <div class="text-3xl mr-4">
+              <div class="md:text-3xl text-xl mr-4">
                 <%= @glider_flight.landing_time.strftime("%R") %>
               </div>
               <i class="fa-solid fa-plane-arrival my-auto fa-lg"></i>
