@@ -1,7 +1,7 @@
 <% shared_micropost = micropost.get_shared_micropost %>
 <!-- シェアされているツイートが存在する場合 -->
 <% if !shared_micropost.nil? %>
-    <%= render partial: 'microposts/micropost_card', locals: { micropost: shared_micropost } %>
+  <%= render partial: 'microposts/micropost_card', locals: { micropost: shared_micropost } %>
 <!-- シェアされているツイートが削除された場合 -->
 <% else %>
   <div class="px-5 py-4 my-2 bg-white dark:bg-gray-800 shadow rounded-lg w-full">

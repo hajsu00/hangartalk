@@ -10,7 +10,9 @@
     <%= f.file_field :images, accept: "image/jpeg,image/gif,image/png", direct_upload: true, multiple: true %>
   </span> 
   <!-- 送信ボタン -->
-  <%= f.submit yield(:button_text), class: "mt-4 block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+  <div class="flex justify-end">
+    <%= f.submit yield(:button_text), class: "cursor-pointer mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3" %>
+  </div>
 <% end %>
 
 <script type="text/javascript">

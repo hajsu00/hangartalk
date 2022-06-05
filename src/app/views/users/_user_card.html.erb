@@ -46,12 +46,12 @@
 
 <%= link_to user_path(id: user.id) do %> 
   <div class="flex items-center mx-auto max-w-lg bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 my-2">
-    <div class="flex w-full">
+    <div class="flex">
       <%= image_tag user.avatar, class: 'w-14 h-14 rounded-full ml-6 mr-2 mt-4' %>
       <div class="flex flex-col w-3/4 justify-between mx-auto py-4 pr-4 leading-normal">
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-gray-900">
+        <p class="mb-2 text-xl font-bold tracking-tight text-gray-900">
           <%= user.name %>
-        </h5>
+        </p>
         <p class="mb-3 text-sm font-normal text-gray-700">
           <%= user.introduction.truncate(100) %>
         </p>

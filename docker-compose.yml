@@ -12,3 +12,5 @@ services:
     build: 
       context: .
       dockerfile: ./src/Dockerfile
+      args:    
+        - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}

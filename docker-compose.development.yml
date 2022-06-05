@@ -29,6 +29,7 @@ services:
     depends_on:
       - db
       - nginx
+    stdin_open: true
     tty: true
 
   db:
