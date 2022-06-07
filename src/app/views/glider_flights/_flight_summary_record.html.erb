@@ -8,7 +8,7 @@
     <% when 'all_pages' %>
       <th class="py-3 px-2">本ページまでの総合計<br>（下段は回数）</th>
   <% end %>
-  <td class="py-3 px-2 text-center">
+  <td class="py-3 px-2 text-center border">
     <div>
       <%= show_flight_time(flight_info[:total_time]) if flight_info[:total_time] != 0 %>
     </div>
@@ -16,7 +16,7 @@
       <%= flight_info[:total_number] if flight_info[:total_number] != 0 %>
     </div>
   </td>
-  <td class="py-3 px-2 text-center">
+  <td class="py-3 px-2 text-center border">
     <div>
       <%= show_flight_time(flight_info[:pic_winch_time] + flight_info[:solo_winch_time]) if flight_info[:pic_winch_time] != 0 || flight_info[:solo_winch_time] != 0 %>
     </div>
@@ -24,7 +24,7 @@
       <%= flight_info[:pic_winch_number] + flight_info[:solo_winch_number] if flight_info[:pic_winch_number] != 0 || flight_info[:solo_winch_number] != 0 %>
     </div>
   </td>
-  <td class="py-3 px-2 text-center">
+  <td class="py-3 px-2 text-center border">
   <div>
     <%= show_flight_time(flight_info[:pic_aero_tow_time] + flight_info[:solo_aero_tow_time]) if flight_info[:pic_aero_tow_time] != 0 || flight_info[:solo_aero_tow_time] != 0 %>
   </div>
@@ -32,7 +32,7 @@
     <%= flight_info[:pic_aero_tow_number] + flight_info[:solo_aero_tow_number] if flight_info[:pic_aero_tow_number] != 0 || flight_info[:solo_aero_tow_number] != 0 %>
   </div>
   </td>
-  <td class="py-3 px-2 text-center">
+  <td class="py-3 px-2 text-center border">
     <div>
       <%= show_flight_time(flight_info[:dual_winch_time]) if flight_info[:dual_winch_time] != 0 %>
     </div>
@@ -40,7 +40,7 @@
       <%= flight_info[:dual_winch_number] if flight_info[:dual_winch_number] != 0 %>
     </div>
   </td>
-  <td class="py-3 px-2 text-center">
+  <td class="py-3 px-2 text-center border">
     <div>
       <%= show_flight_time(flight_info[:dual_aero_tow_time]) if flight_info[:dual_aero_tow_time] != 0 %>
     </div>
@@ -48,12 +48,12 @@
       <%= flight_info[:dual_aero_tow_number] if flight_info[:dual_aero_tow_number] != 0 %>
     </div>
   </td>
-  <td class="py-3 px-2 text-center">
+  <td class="py-3 px-2 text-center border">
     <div>
       <%= show_flight_time(flight_info[:cross_country_time]) if flight_info[:cross_country_time] != 0  %>
     </div>
   </td>
-  <td class="py-3 px-2 text-center">
+  <td class="py-3 px-2 text-center border">
     <div class="table-data">
       <%= show_flight_time(flight_info[:instructor_time]) if flight_info[:instructor_time] != 0 %>
     </div>
