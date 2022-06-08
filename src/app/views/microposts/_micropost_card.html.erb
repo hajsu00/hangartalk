@@ -1,53 +1,79 @@
-<%= link_to micropost_path(micropost) do %>
-  <div class="cursor-pointer hover:bg-gray-100 border border-gray-300 px-5 py-4 bg-white dark:bg-gray-800 shadow rounded-lg w-full">
-    <div class="flex mb-4">
-      <%= image_tag micropost.user.avatar, class: 'w-12 h-12 rounded-full' %>
-      <div class="ml-2 mt-0.5">
-        <span class="block font-medium text-base leading-snug text-black dark:text-gray-100">
-          <%= micropost.user.name %>
-        </span>
-        <span class="block text-sm text-gray-500 dark:text-gray-400 font-light leading-snug">
-          <%= time_ago_in_words(micropost.created_at) %>
-        </span>
+<%= link_to micropost_path(id: micropost.id) do %>
+  <div class="block cursor-pointer hover:bg-gray-100 border border-gray-300 px-5 py-4 mt-2 bg-white dark:bg-gray-800 shadow rounded-lg w-full">
+    <div class="flex">
+      <div class="flex">
+        <%= image_tag micropost.user.avatar, class: 'w-12 h-12 rounded-full' %>
+        <div class="ml-2 mt-0.5">
+          <p class="block text-base font-bold text-gray-800 leading-snug">
+            <%= micropost.user.name %>
+          </p>
+          <p class="block text-sm text-gray-500 font-light leading-snug">
+            <%= time_ago_in_words(micropost.created_at) %>
+          </p>
+        </div>
       </div>
+      <% if current_user?(micropost.user) %>
+        <div class="ml-6 mt-1 mx-auto text-sm text-gray-800">
+          <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "hover:underline" %>
+        </div>
+      <% end %>  
     </div>
-    <!-- 返信ツイートの場合は返信先を表示する -->
-    <% if micropost.replying_micropost? %>
-      <% replied_microposts = micropost.get_replied_microposts %>
-      <% replied_microposts.each do |replied_micropost| %>
-        <% if replied_micropost != micropost%>
-          <div class="reply-to">返信先：<%= link_to "@#{replied_micropost.user.name}さん", user_path(id: replied_micropost.user.id) %></div>
+
+
+    <div class="ml-14">
+      <!-- 返信ツイートの場合は返信先を表示する -->
+      <% if micropost.replying_micropost? %>
+        <% replied_microposts = micropost.get_replied_microposts %>
+        <% replied_microposts.each do |replied_micropost| %>
+          <% if replied_micropost != micropost%>
+            <div class="flex">
+              <p class="text-sm text-gray-600">返信先：</p>
+              <span class="text-sm text-blue-500 hover:underline mb-2">
+                <%= link_to "@#{replied_micropost.user.name}", user_path(id: replied_micropost.user.id) %>
+              </span>
+              <p class="text-sm text-gray-600">さん</p>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
-    <% end %>
 
-    <!-- シェアツイートの場合は元ツイートを表示する -->
-    <% if micropost.is_sharing_micropost? %>
-      <i class="fa-solid fa-retweet"></i>
-      <span class="name_reply"><%= micropost.user.name %>さんがシェアしました</span>
-      <% if current_user?(micropost.user) %>
-        <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-      <% end %>
-      <% if !micropost.content.nil? %>
-        <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">
+      <!-- シェアツイートの場合は元ツイートを表示する -->
+      <% if micropost.is_sharing_micropost? %>
+        <div class="flex">
+          <i class="fa-solid fa-retweet fa-xs my-auto text-gray-600"></i>
+          <span class="ml-1 text-sm text-blue-500 hover:underline">
+            <%= link_to "@#{micropost.user.name}", user_path(id: micropost.user.id) %>
+          </span>
+          <p class="text-sm text-gray-600">さんがシェア</p>
+        </div>
+        <% if !micropost.content.nil? %>
+          <p class="text-gray-800 leading-snug md:leading-normal mt-2">
+            <%= render partial: 'microposts/micropost_content', locals: { micropost: micropost } %>
+          </p> 
+        <% end %>
+        <%= render partial: 'microposts/shared_micropost', locals: { micropost: micropost } %>
+      <!-- 返信でもシェアでもない場合 -->
+      <% else %>
+        <p class="text-gray-800 leading-snug md:leading-normal mt-2">
           <%= render partial: 'microposts/micropost_content', locals: { micropost: micropost } %>
         </p> 
       <% end %>
-      <%= render partial: 'microposts/shared_micropost', locals: { micropost: micropost } %>
-    <!-- 返信でもシェアでもない場合 -->
-    <% else %>
-      <p class="text-gray-800 dark:text-gray-100 leading-snug md:leading-normal">
-        <%= render partial: 'microposts/micropost_content', locals: { micropost: micropost } %>
-      </p> 
-    <% end %>
-    <!-- シェアしたフライトを表示する -->
-    <% if micropost.is_flight_attached %>
-      <%= render partial: 'microposts/flight_card', locals: { micropost: micropost } %>
-    <% end %>
+      <!-- シェアしたフライトを表示する -->
+      <% if micropost.is_flight_attached %>
+        <% target_relationship = GliderMicropostRelationship.find_by(micropost_id: micropost.id) %>
+        <% target_flight = GliderFlight.find(target_relationship.glider_flight_id) %>
+        <div class="mt-2">
+          <% if current_user?(micropost.user) %>
+            <%= link_to glider_flight_path(target_flight) do %>
+              <%= render partial: 'microposts/flight_card', locals: { target_flight: target_flight } %>
+            <% end %>
+          <% else %>
+            <%= render partial: 'microposts/flight_card', locals: { target_flight: target_flight } %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
     <!-- アクションボタン -->
     <%= render partial: 'microposts/micropost_action', locals: { micropost: micropost } %> 
-    <% if current_user?(micropost.user) %>
-      <%= link_to "削除", micropost_path(micropost), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-    <% end %>
   </div>
 <% end %>

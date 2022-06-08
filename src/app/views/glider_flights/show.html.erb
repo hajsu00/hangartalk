@@ -3,7 +3,7 @@
 
 <div class="mx-auto px-4">
   <div class="flex flex-row px-4 mb-4">
-    <%= link_to :back do %>
+    <%= link_to 'javascript:history.back()' do %>
       <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
     <% end %>
     <div class="flex flex-col">
@@ -11,49 +11,91 @@
     </div>
   </div>
 
-  <div class="max-w-screen-2xl bg-white shadow py-6 sm:py-8 lg:py-12 px-4 md:px-8 mx-auto my-4 border rounded-lg flex-col">
-    <div class="bg-white shadow py-6 sm:py-8 lg:py-12 px-4 md:px-8 mx-auto my-4 border rounded-lg flex-col justify-center p-4 md:p-8">
-      <div>
-        No. <%= @glider_flight.log_number %>
-      </div>
-      <div>
-        <%= @glider_flight.date.strftime("%Y年%m月%d日") %>
-      </div>
-      <div>
-        <%= "#{show_aircraft_type(@glider_flight.aircraft_type_id)}（#{@glider_flight.glider_ident}）" %>
-      </div>
-      <div>
-        <%= @glider_flight.departure_and_arrival_point %>
-      </div>
-      <div>
-        No. <%= @glider_flight.log_number %>
-      </div>
-      <p class='mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2'>操縦区分</p>
-      <div class="flex">
-        <div class="inline-block align-middle mx-5">
-          <%= @glider_flight.takeoff_time.strftime("%R") %>
+  <div class="max-w-screen-sm bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-200 rounded-lg flex-col">
+    <div class="bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-300 rounded-lg flex-col justify-center p-4 md:p-8">
+      <div class="py-4 px-6 text-gray-800">
+        <div class="text-xl font-bold underline underline-offset-8 mb-6">
+          No. <%= @glider_flight.log_number %>
         </div>
-        <i class="fa-solid fa-plane-departure fa-lg inline-block align-middle"></i>
-        <div class="flex-col inline-block align-middle mx-5">
-          <div>
-            <%= @glider_flight.release_alt %>
+        <div class="flex justify-evenly">
+          <div class="flex-col">
+            <p class="md:text-base font-bold">出発日</p>
+            <p class="md:text-2xl ml-4">
+              <%= @glider_flight.date.strftime("%Y年%m月%d日") %>
+            </p>
           </div>
           <div>
-            <%= @glider_flight.number_of_landing %>
+            <div class="flex-col">
+              <p class="md:text-base font-bold">搭乗機体</p>
+              <p class="md:text-2xl ml-4">
+                <%= "#{show_aircraft_type(@glider_flight.aircraft_type_id)}（#{@glider_flight.glider_ident}）" %>
+              </p>
+            </div>
           </div>
         </div>
-        <i class="fa-solid fa-plane-arrival fa-lg inline-block align-middle"></i>
-        <div class="mx-5 inline-block align-middle">
-          <%= @glider_flight.landing_time.strftime("%R") %>
+        <!-- フライト情報 -->
+        <div class="flex justify-evenly my-6">
+          <!-- 離陸情報 -->
+          <div class="flex-col mx-2">
+            <div class="md:text-base font-bold">
+              FROM
+            </div>
+            <div class="md:text-2xl">
+              <%= @glider_flight.departure_point %>
+            </div>
+            <div class="flex justify-center mt-2">
+              <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
+              <div class="md:text-3xl text-xl ml-4">
+                <%= @glider_flight.takeoff_time.strftime("%R") %>
+              </div>
+            </div>
+          </div>
+          <!-- 補足情報 -->
+          <div class="flex-col my-auto">
+            <div class="flex-col text-center my-auto">
+              <div class="flex-col">
+                <p class="text-xs">離脱高度</p>
+                <p class="text-sm font-bold">
+                  <%= @glider_flight.release_alt %>
+                </p>
+              </div>
+            </div>
+            <div class="flex justify-center mx-auto my-2">
+              <i class="fa-solid fa-plane sm:fa-2x fa-lg"></i>
+            </div>
+            <div class="flex-col text-center my-auto">
+              <div class="flex-col text-center">
+                <p class="text-sm font-bold">
+                  <%= @glider_flight.number_of_landing %>
+                </p>
+                <p class="text-xs">着陸回数</p>
+              </div>
+            </div>
+          </div>
+          <!-- 着陸情報 -->
+          <div class="flex-col mx-4">
+            <div class="md:text-base font-bold">
+              TO
+            </div>
+            <div class="md:text-2xl">
+              <%= @glider_flight.arrival_point %>
+            </div>
+            <div class="flex justify-center mt-2">
+              <div class="md:text-3xl text-xl mr-4">
+                <%= @glider_flight.landing_time.strftime("%R") %>
+              </div>
+              <i class="fa-solid fa-plane-arrival my-auto fa-lg"></i>
+            </div>
+          </div>
         </div>
       </div>
       <div class="flex justify-center">
-        <div>
+        <div class="mx-4">
           <%= link_to edit_glider_flight_path(@glider_flight) do %>
             <%= render partial: "shared/button", locals: {item: '編集'} %>
           <% end %>
         </div>
-        <div>
+        <div class="mx-4">
           <%= link_to glider_flight_path(@glider_flight), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
             <%= render partial: "shared/button", locals: {item: '削除'} %>
           <% end %>

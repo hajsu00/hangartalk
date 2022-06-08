@@ -1,19 +1,18 @@
-<div class="text">
+<div class="text-base text-gray-800">
   <%= micropost.content %>
-  
-    <% if micropost.images.attached? %>
-      <% images = micropost.display_image %>
-      <% number_of_picture = images.size %>
-      <% if number_of_picture == 1 %>
+  <% if micropost.images.attached? %>
+    <% images = micropost.display_image %>
+    <% number_of_picture = images.size %>
+    <% if number_of_picture == 1 %>
+      <% number_of_picture.times do |i|%>
+        <%= image_tag images[i] %>
+      <% end %>
+    <% else %>
+      <div class="grid grid-cols-2 gap-2">
         <% number_of_picture.times do |i|%>
           <%= image_tag images[i] %>
         <% end %>
-      <% else %>
-        <div class="grid grid-cols-2 gap-2">
-          <% number_of_picture.times do |i|%>
-            <%= image_tag images[i] %>
-          <% end %>
-        </div>
-      <% end %>
+      </div>
     <% end %>
+  <% end %>
 </div>

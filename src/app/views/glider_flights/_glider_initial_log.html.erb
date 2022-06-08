@@ -18,9 +18,9 @@
 </tr>
 
 <tr onclick='window.location="<%= edit_glider_initial_log_path(@user) %>"' role="link" class="cursor-pointer hover:bg-gray-100">
-  <th>ログ運用開始前の<br>飛行経歴</th>
+  <th class="py-3 px-2">ログ運用開始前の<br>飛行経歴</th>
   <!-- 飛行時間 -->
-  <td class="py-3 px-6 text-center">
+  <td class="py-3 px-2 text-center">
     <div>
       <div>
         <div>
@@ -33,7 +33,7 @@
     </div>
   </td>
   <!-- ウインチ曳航（単独又は機長） -->
-  <td class="py-3 px-6 text-center">
+  <td class="py-3 px-2 text-center">
     <div>
       <div>
         <%= show_flight_time(@glider_initial_log.pic_winch_time + @glider_initial_log.solo_winch_time) if @glider_initial_log.pic_winch_time != 0 || @glider_initial_log.solo_winch_time != 0 %>
@@ -44,7 +44,7 @@
     </div>
   </td>
   <!-- 航空機曳航（単独又は機長） -->
-  <td class="py-3 px-6 text-center">
+  <td class="py-3 px-2 text-center">
     <div>
       <div>
         <%= show_flight_time(@glider_initial_log.pic_aero_tow_time + @glider_initial_log.solo_aero_tow_time) if @glider_initial_log.pic_aero_tow_time != 0 || @glider_initial_log.solo_aero_tow_time != 0 %>
@@ -55,7 +55,7 @@
     </div>
   </td>
   <!-- ウインチ曳航（同乗教育） -->
-  <td class="py-3 px-6 text-center">
+  <td class="py-3 px-2 text-center">
     <div>
       <div>
         <%= show_flight_time(@glider_initial_log.dual_winch_time) if @glider_initial_log.dual_winch_time != 0 %>
@@ -66,7 +66,7 @@
     </div>
   </td>
   <!-- 航空機曳航（同乗教育） -->
-  <td class="py-3 px-6 text-center">
+  <td class="py-3 px-2 text-center">
     <div>
       <div>
         <%= show_flight_time(@glider_initial_log.dual_aero_tow_time) if @glider_initial_log.dual_aero_tow_time != 0 %>
@@ -77,13 +77,13 @@
     </div>
   </td>
   <!-- 野外飛行時間 -->
-  <td class="py-3 px-6 text-center">
+  <td class="py-3 px-2 text-center">
     <div>
       <%= show_flight_time(@glider_initial_log.cross_country_time) if @glider_initial_log.cross_country_time != 0 %>
     </div>
   </td>
   <!-- 操縦教員としての飛行時間 -->
-  <td class="py-3 px-6 text-center">
+  <td class="py-3 px-2 text-center">
     <div>
       <div>
         <%= show_flight_time(@glider_initial_log.instructor_time) if @glider_initial_log.instructor_time != 0 %>

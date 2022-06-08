@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./nginx/Dockerfile
+    environment:
+      TZ: Asia/Tokyo
     ports:
       - 80:80
 
@@ -12,3 +14,7 @@ services:
     build: 
       context: .
       dockerfile: ./src/Dockerfile
+      args:    
+        - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+    environment:
+      TZ: Asia/Tokyo

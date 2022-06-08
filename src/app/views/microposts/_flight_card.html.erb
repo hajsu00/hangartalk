@@ -1,15 +1,58 @@
-<% target_relationship = GliderMicropostRelationship.find_by(micropost_id: micropost.id) %>
-<% target_flight = GliderFlight.find(target_relationship.glider_flight_id) %>
-<div class="flight-card">
-  <div class=" display-flex">
-    <div class="departure_date">出発日：<%= target_flight.date %></div>
-    <div class="fleet">搭乗機体：<%= target_flight.date %></div>
+<div class="cursor-pointer hover:bg-gray-200 bg-white shadow p-4 mx-auto my-2 border border-gray-300 hover:border-gray-400 rounded-lg flex-col justify-center text-gray-800">
+  <div class="flex justify-evenly">
+    <div class="flex-col">
+      <p class="text-sm font-bold">出発日</p>
+      <p class="text-base ml-4">
+        <%= target_flight.date %>
+      </p>
+    </div>
+    <div>
+      <div class="flex-col">
+        <p class="text-xs font-bold">搭乗機体</p>
+        <p class="text-base ml-4">
+          <%= "#{show_aircraft_type(target_flight.aircraft_type_id)}（#{target_flight.glider_ident}）" %>
+        </p>
+      </div>
+    </div>
   </div>
-  <div class="display-block">
-    <div class="fleet">離陸時刻：<%= target_flight.takeoff_time.strftime("%R") %></div>
-    <div class="fleet">（飛行時間）</div>
-    <div class="fleet">着陸時刻：<%= target_flight.landing_time.strftime("%R") %></div>
-    <div class="fleet">出発地：<%= target_flight.departure_and_arrival_point %></div>
-    <div class="fleet">到着地：<%= target_flight.departure_and_arrival_point %></div>
+  <!-- フライト情報 -->
+  <div class="flex justify-evenly mt-2">
+    <!-- 離陸情報 -->
+    <div class="flex-col mx-2 my-auto">
+      <div class="text-sm font-bold">
+        FROM
+      </div>
+      <div class="sm:text-base text-sm">
+        <%= target_flight.departure_and_arrival_point %>
+      </div>
+      <div class="flex justify-center mt-2">
+        <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
+        <div class="text-xl ml-4">
+          <%= target_flight.takeoff_time.strftime("%R") %>
+        </div>
+      </div>
+    </div>
+    <!-- 補足情報 -->
+    <div class="flex-col my-auto">
+      <div class="flex justify-center mx-auto my-2">
+        <i class="fa-solid fa-plane sm:fa-2x fa-lg"></i>
+      </div>
+      <p class="text-sm"><%= "(#{show_flight_time(glider_each_flight_time(target_flight))})" %></p>
+    </div>
+    <!-- 着陸情報 -->
+    <div class="flex-col mx-4 my-auto">
+      <div class="text-sm font-bold">
+        TO
+      </div>
+      <div class="sm:text-base text-sm">
+        <%= target_flight.departure_and_arrival_point %>
+      </div>
+      <div class="flex justify-center mt-2">
+        <div class="text-xl mr-4">
+          <%= target_flight.landing_time.strftime("%R") %>
+        </div>
+        <i class="fa-solid fa-plane-arrival my-auto fa-lg"></i>
+      </div>
+    </div>
   </div>
 </div>

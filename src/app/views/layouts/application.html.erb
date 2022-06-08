@@ -16,10 +16,10 @@
     <%= render 'layouts/header' %>
     <main class='container flex flex-wrap-reverse mx-auto px-4'>
       <% if user_signed_in? %>
-        <article class='w-full lg:w-4/12'>
+        <article class='w-full xl:w-4/12'>
           <%= render 'layouts/sidebar' %>
         </article>
-        <article class='w-full lg:w-8/12'>
+        <article class='w-full xl:w-8/12'>
           <% if flash.any? %>
             <%= render 'layouts/notification' %>
           <% end %> 
