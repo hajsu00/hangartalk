@@ -51,11 +51,11 @@
                 </div>
               </div>
               <div>
-                <%= f.text_field :departure_and_arrival_point, autofocus: true, autocomplete: "name", class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+                <%= f.text_field :departure_point, autofocus: true, autocomplete: "name", class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
               </div>
               <div class="flex justify-center mt-2">
                 <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
-                <%= f.time_field :takeoff_time, class: 'w-50 ml-4 text-base text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+                <%= f.time_field :takeoff_time, value: @glider_flight.takeoff_time.strftime("%R"), class: 'w-50 ml-4 text-base text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
               </div>
             </div>
 
@@ -64,7 +64,7 @@
               <div class="flex-col text-center my-auto">
                 <div class="flex flex-col">
                   <p class="text-xs text-center">離脱高度</p>
-                  <%= f.number_field :release_alt, {value: 400, step: 10, class: 'w-20 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 mx-auto'} %>
+                  <%= f.number_field :release_alt, {value: 400, step: 10, class: 'w-16 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 mx-auto'} %>
                 </div>
               </div>
 
@@ -74,8 +74,8 @@
 
               <div class="flex-col text-center my-auto">
                 <div class="flex flex-col">
-                  <%= f.time_field :release_time, class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 mx-auto order-2 md:order-1' %>
-                  <p class="text-xs text-center order-1 md:order-2">離脱時刻</p>
+                  <%= f.number_field :number_of_landing, class: 'w-16 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 mx-auto order-2 md:order-1' %>
+                  <p class="text-xs text-center order-1 md:order-2">着陸回数</p>
                 </div>
               </div>
             </div>
@@ -91,9 +91,9 @@
                   （到着地を入力）
                 </div>
               </div>
-              <%= f.text_field :departure_and_arrival_point, autofocus: true, autocomplete: "name", class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+              <%= f.text_field :arrival_point, autofocus: true, autocomplete: "name", class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
               <div class="flex justify-center mt-2">
-                <%= f.time_field :landing_time, class: 'w-50 mr-4  text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 md:order-1 order-2 md:ml-2' %>
+                <%= f.time_field :landing_time, value: @glider_flight.landing_time.strftime("%R"), class: 'w-50 mr-4  text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 md:order-1 order-2 md:ml-2' %>
                 <i class="fa-solid fa-plane-arrival my-auto md:mr-0 mr-4 fa-lg md:order-2 order-1"></i>
               </div>
             </div>
@@ -150,7 +150,7 @@
         </div>
       </div>
       <div class="flex justify-center">
-        <%= f.submit yield(:button_text), class: "mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+        <%= f.submit yield(:button_text), class: "cursor-pointer mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
       </div>
     <% end %>
   </div> 

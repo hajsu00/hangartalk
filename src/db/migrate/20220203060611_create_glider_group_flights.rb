@@ -3,7 +3,8 @@ class CreateGliderGroupFlights < ActiveRecord::Migration[6.1]
     create_table :glider_group_flights do |t|
       t.integer :day_flight_number
       t.date :date
-      t.string :departure_and_arrival_point
+      t.string :departure_point
+      t.string :arrival_point
       t.boolean :is_winch
       t.integer :fleet
       t.integer :front_seat
@@ -16,7 +17,7 @@ class CreateGliderGroupFlights < ActiveRecord::Migration[6.1]
       t.integer :release_alt
       t.string :creator
       t.string :updater
-      t.string :notes
+      t.string :note
       t.references :group, null: false, foreign_key: true
 
       t.timestamps

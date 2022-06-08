@@ -66,7 +66,8 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.integer "log_number"
     t.date "date"
     t.string "glider_ident"
-    t.string "departure_and_arrival_point"
+    t.string "departure_point"
+    t.string "arrival_point"
     t.integer "number_of_landing"
     t.datetime "takeoff_time"
     t.datetime "landing_time"
@@ -89,7 +90,8 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
   create_table "glider_group_flights", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "day_flight_number"
     t.date "date"
-    t.string "departure_and_arrival_point"
+    t.string "departure_point"
+    t.string "arrival_point"
     t.boolean "is_winch"
     t.integer "fleet"
     t.integer "front_seat"
@@ -102,7 +104,7 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.integer "release_alt"
     t.string "creator"
     t.string "updater"
-    t.string "notes"
+    t.string "note"
     t.bigint "group_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

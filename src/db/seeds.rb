@@ -112,7 +112,8 @@ user = User.find_by(email: "example@railstutorial.org")
   glider_flight = user.glider_flights.build(log_number: 1 + n,
                               date: departure_date,
                               glider_ident: 'JA21MA',
-                              departure_and_arrival_point: '宝珠花滑空場',
+                              departure_point: '宝珠花滑空場',
+                              arrival_point: '宝珠花滑空場',
                               number_of_landing: 1,
                               takeoff_time: takeoff_time,
                               landing_time: landing_time,
@@ -154,7 +155,8 @@ date = Date.new(2022, 2, 21)
 takeoff_time = Time.zone.local(2022, 2, 21, 21, 0, 0)
 group.glider_group_flights.create(day_flight_number: nil,
                                   date: date,
-                                  departure_and_arrival_point: '宝珠花滑空場',
+                                  departure_point: '宝珠花滑空場',
+                                  arrival_point: '宝珠花滑空場',
                                   is_winch: true,
                                   fleet: 1,
                                   front_seat: 40,
@@ -166,13 +168,14 @@ group.glider_group_flights.create(day_flight_number: nil,
                                   landing_time: takeoff_time + 12.minutes,
                                   release_alt: 400,
                                   creator: 1,
-                                  notes: '備考欄です')
+                                  note: '備考欄です')
 group = Group.find(1)
 date = Date.new(2022, 2, 21)
 takeoff_time = Time.zone.local(2022, 2, 21, 21, 20, 0)
 group.glider_group_flights.create(day_flight_number: nil,
                                   date: date,
-                                  departure_and_arrival_point: '宝珠花滑空場',
+                                  departure_point: '宝珠花滑空場',
+                                  arrival_point: '宝珠花滑空場',
                                   is_winch: true,
                                   fleet: 1,
                                   front_seat: 39,
@@ -184,4 +187,4 @@ group.glider_group_flights.create(day_flight_number: nil,
                                   landing_time: takeoff_time + 12.minutes,
                                   release_alt: 400,
                                   creator: 1,
-                                  notes: '備考欄です')
+                                  note: '備考欄です')

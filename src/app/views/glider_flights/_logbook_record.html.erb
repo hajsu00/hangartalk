@@ -14,7 +14,10 @@
     <%= glider_flight.glider_ident %>
   </td>
   <td class="py-3 px-2 text-center border">
-    <%= glider_flight.departure_and_arrival_point %>
+    <%= glider_flight.departure_point %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= glider_flight.arrival_point %>
   </td>
   <td class="py-3 px-2 text-center border">
     <%= glider_flight.takeoff_time.strftime("%R") %>
