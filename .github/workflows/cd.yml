@@ -1,6 +1,6 @@
 name: CD
 on:
-    push:
+  push:
   # pull_request:
   #   branches: [develop]
   #   types: [closed]
