@@ -51,12 +51,12 @@ https://hangartalk-app.com
 - 個人フライトログブック機能
 パイロットのフライト記録台帳「フライトログブック」の電子版です。パイロットのこれまでの飛行時間や、離着陸回数などの情報を管理できます。
 
-<img width="1669" alt="スクリーンショット 2022-06-11 21 18 06" src="https://user-images.githubusercontent.com/18317776/173187637-68c79b99-ea4e-4e84-ade4-5bbae7c912e5.png">
+<img width="1956" alt="スクリーンショット 2022-06-12 21 06 15" src="https://user-images.githubusercontent.com/18317776/173232335-1f36f8df-9cff-4682-a93c-0dc9ce4f06fc.png">
 
 - グループフライト機能
 複数のパイロットでグループを作ることで、メンバーのフライトをひとつのテーブルで管理できるようになります。
 
-<img width="1589" alt="スクリーンショット 2022-06-11 21 48 30" src="https://user-images.githubusercontent.com/18317776/173188619-2c2fe0cd-f6f9-4817-b079-2effd4b58d88.png">
+<img width="1959" alt="スクリーンショット 2022-06-12 21 17 39" src="https://user-images.githubusercontent.com/18317776/173232788-397ddfa9-095e-4827-9f49-b22926260fea.png">
 
 このグループフライトの情報は、それぞれの個人フライトログブックからいつでも取得できます。
 

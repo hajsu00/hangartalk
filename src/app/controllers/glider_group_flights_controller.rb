@@ -60,7 +60,6 @@ class GliderGroupFlightsController < ApplicationController
     # new_log_number(glider_flights)
     flash[:success] = "選択したグループフライトを削除しました。"
     redirect_to glider_group_flights_url
-    # redirect_to request.referrer || root_url
   end
 
   private
