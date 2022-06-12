@@ -53,8 +53,7 @@ class GliderFlightsController < ApplicationController
     @glider_flight.destroy
     new_log_number
     flash[:success] = "選択したフライトログを削除しました。"
-    redirect_to user_glider_flights_path(@current_user.id)
-    # redirect_to request.referrer || root_url
+    redirect_to glider_flights_url
   end
 
   def new_from_groups
