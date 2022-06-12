@@ -43,8 +43,6 @@ Rails.application.configure do
   # アップロードされたファイルをAWSに保存する
   config.active_storage.service = :amazon
 
-  config.web_console.whitelisted_ips = '0.0.0.0/0'
-
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
   # config.action_cable.url = 'wss://example.com/cable'
