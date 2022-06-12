@@ -58,9 +58,27 @@ class MicropostsController < ApplicationController
   end
 
   def destroy
-    @micropost.destroy
-    flash[:success] = "マイクロポストを削除しました。"
-    redirect_to request.referer || microposts_url
+    # @micropost.destroy
+    # flash[:success] = "マイクロポストを削除しました。"
+    # redirect_to request.referer || microposts_url
+
+    if @micropost.images.attached?
+      if @micropost.images.purge_later && @micropost.destroy
+        flash[:success] = "マイクロポストを削除しました。"
+        redirect_to request.referer || microposts_url
+      else
+        flash[:success] = "マイクロポストの削除中にエラーが発生しました。"
+        render microposts_url
+      end
+    else
+      if @micropost.destroy
+        flash[:success] = "マイクロポストを削除しました。"
+        redirect_to request.referer || microposts_url
+      else
+        flash[:success] = "マイクロポストの削除中にエラーが発生しました。"
+        render microposts_url
+      end
+    end
   end
 
   private

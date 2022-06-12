@@ -40,4 +40,8 @@ module ApplicationHelper
     target_flights = user.glider_flights
     target_total_number + target_flights.count
   end
+
+  def glider_group_flight(target_flight)
+    target_flight.landing_time - target_flight.takeoff_time
+  end
 end

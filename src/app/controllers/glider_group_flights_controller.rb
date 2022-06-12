@@ -69,8 +69,23 @@ class GliderGroupFlightsController < ApplicationController
     params[:glider_group_flight][:takeoff_time] = fix_inputed_time(:glider_group_flight, :takeoff_time)
     params[:glider_group_flight][:release_time] = fix_inputed_time(:glider_group_flight, :release_time)
     params[:glider_group_flight][:landing_time] = fix_inputed_time(:glider_group_flight, :landing_time)
-    params.require(:glider_group_flight).permit(:day_flight_number, :date, :departure_point, :arrival_point, :is_winch, :fleet, :front_seat, :front_flight_role,
-                                                :rear_seat, :rear_flight_role, :takeoff_time, :release_time, :landing_time, :release_alt, :creator, :updater, :note)
+    params.require(:glider_group_flight).permit(:day_flight_number,
+                                                :date,
+                                                :departure_point,
+                                                :arrival_point,
+                                                :is_winch,
+                                                :fleet,
+                                                :front_seat,
+                                                :front_flight_role,
+                                                :rear_seat,
+                                                :rear_flight_role,
+                                                :takeoff_time,
+                                                :release_time,
+                                                :landing_time,
+                                                :release_alt,
+                                                :creator,
+                                                :updater,
+                                                :note)
   end
 
   def correct_group_member

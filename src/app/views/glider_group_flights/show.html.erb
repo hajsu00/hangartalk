@@ -16,7 +16,7 @@
       <div class="flex flex-col">
         <div class="flex flex-col">
 
-          <div class="flex flex-row">
+          <div class="flex flex-row my-4">
             <div class="flex-col">
               <p class="md:text-base font-bold">出発日</p>
               <p class="md:text-2xl md:ml-4 ml-2">
@@ -34,7 +34,7 @@
           </div>
 
           <!-- 補足情報 -->
-          <div class="flex flex-row mt-4">
+          <div class="flex flex-row  justify-center my-4">
             <p class='font-bold inline-block text-gray-800 text-sm sm:text-base my-auto'>曳航タイプ</p>
             <div class="my-auto text-sm ml-4">
               <%= @glider_group_flight.is_winch ? "ウインチ曳航" : "航空機曳航" %>
@@ -131,15 +131,6 @@
             </div>
           </div>
         </div>
-          <p class='w-full mt-3 font-bold inline-block text-gray-800 text-base text-center underline mb-2'>実施課目</p>
-          <div class="flex justify-evenly">
-            <% if @glider_group_flight.is_cross_country %>
-              <p class='text-gray-800 text-base text-center'>クロスカントリーフライト</p>
-            <% end %>
-            <% if @glider_group_flight.is_stall_recovery %>
-              <p class='text-gray-800 text-base text-center'>失速からの回復</p>
-            <% end %>
-          </div>
       </div>
     </div>
     <div class="my-2">
