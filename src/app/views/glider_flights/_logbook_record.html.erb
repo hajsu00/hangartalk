@@ -1,6 +1,6 @@
 <% flight_time = glider_each_flight_time(glider_flight) %>
 
-<tr onclick='window.location="<%= glider_flight_path(glider_flight) %>"' role="link" class="cursor-pointer border-b border-gray-200 hover:bg-blue-100 odd:bg-gray-200">
+<tr onclick='window.location="<%= glider_flight_path(glider_flight) %>"' role="link" class="cursor-pointer border-b border-gray-200 hover:bg-blue-100 even:bg-gray-200">
   <td class="py-3 px-2 text-center border">
     <%= glider_flight.log_number %>
   </td>

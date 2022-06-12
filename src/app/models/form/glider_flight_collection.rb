@@ -17,9 +17,10 @@ module Form
                           attributes.map do |value|
                             pilot.glider_flights.build(
                               date: value['date'],
-                              glider_type: value['glider_type'],
+                              aircraft_type_id: value['aircraft_type_id'],
                               glider_ident: value['glider_ident'],
-                              departure_and_arrival_point: value['departure_and_arrival_point'],
+                              departure_point: value['departure_point'],
+                              arrival_point: value['arrival_point'],
                               number_of_landing: value['number_of_landing'],
                               takeoff_time: value['takeoff_time'],
                               landing_time: value['landing_time'],
@@ -44,16 +45,17 @@ module Form
                             fleet = Fleet.find_by(id: value.fleet)
                             pilot.glider_flights.build(
                               date: value.date,
-                              glider_type: fleet.aircraft_type_id,
+                              aircraft_type_id: fleet.aircraft_type_id,
                               glider_ident: fleet.ident,
-                              departure_and_arrival_point: value.departure_and_arrival_point,
+                              departure_point: value.departure_point,
+                              arrival_point: value.arrival_point,
                               number_of_landing: 1,
                               takeoff_time: value.takeoff_time,
                               landing_time: value.landing_time,
                               flight_role: get_flight_role(value, pilot_id),
                               is_winch: value.is_winch,
                               release_alt: value.release_alt,
-                              note: value.notes
+                              note: value.note
                             )
                           end
                         end

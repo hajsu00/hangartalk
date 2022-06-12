@@ -1,49 +1,41 @@
 <%= fields_for 'glider_flights[]', glider_flight do |field| %>
-  <tr class="border-b border-gray-200 hover:bg-gray-100">
+  <tr class="border-b border-gray-200">
     <%= field.hidden_field :user_id, value: glider_flight.user_id %>
     <%= field.hidden_field :flight_role, value: glider_flight.flight_role %>
-    <th class="py-3 px-2 text-center border">
+    <td class="py-3 px-2 text-center border">
       <%= field.date_field :date, value: glider_flight.date, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
     </td>
-    <th class="py-3 px-2 text-left">
-      <%= field.collection_select :glider_type, @glider_type, :id, :aircraft_type, selected: show_aircraft_type(glider_flight.glider_type), class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+    <td class="py-3 px-2 text-left">
+      <%= field.collection_select :aircraft_type_id, @glider_type, :id, :aircraft_type, selected: show_aircraft_type(glider_flight.aircraft_type_id), class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
     </td>
-    <th class="py-3 px-2 text-center border">
-      <%= field.text_field :glider_ident, value: glider_flight.glider_ident, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
-    <th class="py-3 px-2 text-center border">
-      <%= field.text_field :departure_and_arrival_point, value: glider_flight.departure_and_arrival_point, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+    <td class="py-3 px-2 text-center border">
+      <%= field.text_field :glider_ident, value: glider_flight.glider_ident, class: 'w-24 bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
     </td>
-    <th class="py-3 px-2 text-center border">
+    <td class="py-3 px-2 text-center border">
+      <%= field.text_field :departure_point, value: glider_flight.departure_point, class: 'w-30 bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+    </td>
+    <td class="py-3 px-2 text-center border">
+      <%= field.text_field :arrival_point, value: glider_flight.arrival_point, class: 'w-30 bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+    </td>
+    <td class="py-3 px-2 text-center border">
       <div class="flex">
         <%= field.select :is_winch, [["ウインチ曳航", true], ["航空機曳航", false]], selected: glider_flight.is_winch ? true : false %>
       </div>
     </td>
-    <th class="py-3 px-2 text-center border">
+    <td class="py-3 px-2 text-center border">
       <%= field.time_field :takeoff_time, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
     </td>
-    <th class="py-3 px-2 text-center border">
+    <td class="py-3 px-2 text-center border">
       <%= field.time_field :landing_time, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
     </td>
-    <th class="py-3 px-2 text-center w-full text-gray-800 border">
-      <%= show_flight_time(glider_each_flight_time(glider_flight)) %>
+    <td class="px-4 text-center ext-gray-800 border text-base font-medium">
+      <%= show_flight_time(glider_group_flight(glider_flight)) %> 
     </td>
-    <th class="py-3 px-2 text-center border">
-      <%= field.number_field :release_alt, {value: glider_flight.release_alt, step: 10, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
+    <td class="py-3 px-2 text-center border">
+      <%= field.number_field :release_alt, {value: glider_flight.release_alt, step: 10, class: 'w-20 bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2'} %>
     </td>
-    <th class="py-3 px-2 text-center border">
-      <div class="flex-col">
-        <div class="flex">
-        <%= field.check_box :is_cross_country, {}, true, false %>
-        <%= field.label :is_cross_country, "クロスカントリー", selected: glider_flight.is_cross_country ? true : false %>
-        </div>
-        <div class="flex">
-        <%= field.check_box :is_stall_recovery, {}, true, false %>
-        <%= field.label :is_stall_recovery, "失速からの回復", selected: glider_flight.is_stall_recovery ? true : false  %>
-        </div>
-      </div>
-    </td>
-    <th class="py-3 px-2 text-center border">
-      <%= field.text_area :note, size: "20x10", value: glider_flight.note, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+    <td class="py-3 px-2 text-center border">
+      <%= field.text_area :note, size: "20x1", value: glider_flight.note, class: 'w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2 my-auto' %>
     </td>
   </tr>
 <% end %>
