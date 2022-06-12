@@ -3,7 +3,7 @@ Hangar Talkは、パイロットの知識や経験、フライト時間をシェ
 操縦ライセンスの有効期限管理機能も備えています。
 https://hangartalk-app.com
 
-（スクショ）
+<img width="1673" alt="スクリーンショット 2022-06-11 21 16 25" src="https://user-images.githubusercontent.com/18317776/173187585-85a79db9-ef6f-46d2-95f2-2946902668d5.png">
 
 ### 使用技術一覧
 ◇バックエンド
@@ -20,18 +20,15 @@ https://hangartalk-app.com
 - GithubActions (CI, CD)
 - Docker 20.20.5
 - Docker-compose 1.29.0
-- Terraform 0.15.5
-
-CI、CDはGithub Actionsを使用しデプロイまでに必要な作業をGitHub上で完結させています。
-ローカル環境から本番環境までdockerを使用しています。
-本番環境の環境変数はSSMで管理しています
-
-◇インフラ構成図
-
-◇ER図
 
 ◇ テスト
 - RSpec
+
+◇インフラ構成図
+<img width="909" alt="スクリーンショット 2022-06-12 10 00 02" src="https://user-images.githubusercontent.com/18317776/173209873-44a73c5a-c626-41d2-b3b9-c3460edc76f7.png">
+
+◇ER図
+<img width="1264" alt="スクリーンショット 2022-06-11 21 09 12" src="https://user-images.githubusercontent.com/18317776/173187398-e204c045-06c4-4c8b-aa31-6f760bc4ab20.png">
 
 ### アプリの主な機能
 パイロット自身のフライトにおける離陸時刻や着陸時刻、出発地と目的地などの記録を電子的に管理をすることが主な機能です。登録されたフライト記録をフィードにシェアすることで、日本中のパイロットとコミュニケーションを取ることができます。
@@ -54,12 +51,12 @@ CI、CDはGithub Actionsを使用しデプロイまでに必要な作業をGitHu
 - 個人フライトログブック機能
 パイロットのフライト記録台帳「フライトログブック」の電子版です。パイロットのこれまでの飛行時間や、離着陸回数などの情報を管理できます。
 
-（スクショ）
+<img width="1669" alt="スクリーンショット 2022-06-11 21 18 06" src="https://user-images.githubusercontent.com/18317776/173187637-68c79b99-ea4e-4e84-ade4-5bbae7c912e5.png">
 
 - グループフライト機能
 複数のパイロットでグループを作ることで、メンバーのフライトをひとつのテーブルで管理できるようになります。
 
-（スクショ）
+<img width="1589" alt="スクリーンショット 2022-06-11 21 48 30" src="https://user-images.githubusercontent.com/18317776/173188619-2c2fe0cd-f6f9-4817-b079-2effd4b58d88.png">
 
 このグループフライトの情報は、それぞれの個人フライトログブックからいつでも取得できます。
 
