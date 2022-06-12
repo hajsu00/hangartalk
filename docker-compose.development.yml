@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  nginx:
+    extends:
+      file: docker-compose.yml
+      service: nginx
+    container_name: hangartalk_nginx_development
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx/hangartalk.conf:/etc/nginx/conf.d/hangartalk.conf
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - public-data:/var/www/hangartalk/public
+      - tmp-data:/var/www/hangartalk/tmp
+    tty: true
+
+  app:
+    extends:
+      file: docker-compose.yml
+      service: app
+    container_name: hangartalk_app_development
+    environment:
+      RAILS_ENV: development
+    volumes:
+      - ./src:/var/www/hangartalk
+      - public-data:/var/www/hangartalk/public
+      - tmp-data:/var/www/hangartalk/tmp
+    depends_on:
+      - db
+      - nginx
+    stdin_open: true
+    tty: true
+
+  db:
+    image: mysql:8.0.28
+    container_name: hangartalk_db_development
+    cap_add:
+      - SYS_NICE
+    volumes:
+      - ./etc/my.cnf:/etc/mysql/conf.d/my.cnf
+      - hangartalk_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    env_file:
+      - .env
+    tty: true
+
+volumes: 
+  public-data:
+  tmp-data:
+  hangartalk_data:
+    external: true

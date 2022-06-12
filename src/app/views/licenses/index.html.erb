@@ -1,0 +1,33 @@
+<% provide(:title, '保有ライセンス管理') %>
+<% glider_licenses = @licenses.where("aircraft_category_id = ?", 1) %>
+<% aeroplane_licenses = @licenses.where("aircraft_category_id = ?", 2) %>
+
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4">
+    <%= link_to 'javascript:history.back()' do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4 mt-2"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-xl font-bold pr-4">保有ライセンス管理</div>
+      <div class="text-sm"><%= "#{@licenses.count}個の保有ライセンス" %></div>
+    </div>
+  </div>
+
+  <div class='mx-auto px-4 py-10'>
+    <!-- 上級滑空機 -->
+    <% if glider_licenses.any? %>
+      <div class='flex flex-wrap justify-center'> 
+        <%= render partial: "licenses/license_card", collection: glider_licenses, as: :license %>
+      </div> 
+      <div class="flex justify-center mt-6">
+        <%= link_to new_user_license_path(@user, @license) do %>
+          <%= render partial: "shared/button", locals: {item: 'ライセンスを登録'} %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-900 p-4 my-4" role="alert">
+        まだライセンスを保有していません。
+      </div>
+    <% end %>
+  </div> 
+</div> 

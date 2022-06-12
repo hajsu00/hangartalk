@@ -1,2 +1,0 @@
-class AircraftType < ApplicationRecord
-end

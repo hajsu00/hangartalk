@@ -1,0 +1,6 @@
+<%= link_to user_license_path(@user, license) do %>
+<div class="text-blueGray-600">
+  <i class="fa-solid fa-address-card mr-2 text-lg text-gray-400"></i>
+  <%= "#{license.show_license_category}（#{license.show_aircraft_category}）" %>
+</div>
+<% end %>

@@ -1,0 +1,61 @@
+<%
+=begin%>
+ <%= link_to user_path(id: user.id) do %>
+  <div class="relative w-80 h-120 rounded shadow-lg mx-4 my-4">
+    <%= image_tag user.user_cover, calss: "relative object-cover w-full" %>
+    <%= image_tag user.avatar, class: 'shadow-xl rounded-full align-middle border-none absolute ml-100 -mt-50 w-28' %>
+    <div class="px-6 py-4 justify-center">
+      <div class="font-bold text-xl text-center mb-2">
+        <%= user.name %>
+      </div>
+      <p class="text-gray-700 text-base">
+        <%= user.introduction.truncate(50) %>
+      </p>
+      <div class="px-6 pt-4 pb-2">
+        <%= form_with(model: current_user.active_relationships.build, local: true) do |f| %>
+          <div class="bg-gray-800 text-white rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2 justify-center text-center mx-auto">
+            フォローする
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %> 
+<%
+=end%>
+
+<%
+=begin%>
+ <%= link_to user_path(id: user.id) do %> 
+  <div class="relative w-60 rounded shadow-lg mx-2 my-2">
+    <%= image_tag user.user_cover, class: 'w-full' %>
+    <%= image_tag user.avatar, class: 'shadow-lg rounded-full h-auto align-middle border-none absolute ml-10 -mt-10 w-20' %>
+    <div class="h-full px-6 pt-12 pb-4 justify-center">
+      <div class="h-1/8 font-bold text-xs text-center mb-2">
+        <%= user.name %>
+      </div>
+      <div class="h-7/8 text-gray-700 text-sm overflow-visible">
+        <%= user.introduction.truncate(50) %>
+      </div>
+    </div>
+  </div>
+<% end %>   
+<%
+=end%>
+
+
+<%= link_to user_path(id: user.id) do %> 
+  <div class="flex items-center mx-auto max-w-lg bg-white rounded-lg border shadow-md md:flex-row md:max-w-xl hover:bg-gray-100 my-2">
+    <div class="flex">
+      <%= image_tag user.avatar, class: 'w-14 h-14 rounded-full ml-6 mr-2 mt-4' %>
+      <div class="flex flex-col w-3/4 justify-between mx-auto py-4 pr-4 leading-normal">
+        <p class="mb-2 text-xl font-bold tracking-tight text-gray-900">
+          <%= user.name %>
+        </p>
+        <p class="mb-3 text-sm font-normal text-gray-700">
+          <%= user.introduction.truncate(100) %>
+        </p>
+      </div>
+    </div>
+  </div>
+<% end %> 

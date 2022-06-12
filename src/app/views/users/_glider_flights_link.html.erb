@@ -1,0 +1,14 @@
+<div class="flex justify-center">
+  <div class="lg:mr-4 p-3 text-center">
+    <span class="text-xl font-bold block tracking-wide text-gray-800">
+      <%= !user.glider_initial_log.nil? ? total_flight_time(@user) : "00 + 00" %>
+    </span>
+    <span class="text-sm text-blueGray-400">総飛行時間</span>
+  </div> 
+  <div class="lg:mr-4 p-3 text-center">
+    <span class="text-xl font-bold block tracking-wide text-gray-800">
+      <%= !user.glider_initial_log.nil? ? total_flight_number(@user) : "0" %>
+    </span>
+    <span class="text-sm text-blueGray-400">総飛行回数</span>
+  </div> 
+</div> 

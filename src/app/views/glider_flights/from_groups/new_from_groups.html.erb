@@ -1,0 +1,60 @@
+<% provide(:title, 'グループからフライトを取得') %>
+<% provide(:button_text, '登録する') %>
+
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4">
+    <%= link_to :back do %>
+      <i class="fa-solid fa-angle-left fa-2x pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= yield(:title) %></div>
+    </div>
+  </div>
+
+  <div class="max-w-screen-2xl bg-white px-4 md:px-8 mx-auto">
+    <!-- ログブックセクション -->
+    <div class="border rounded-lg mx-auto my-4">
+      <div class="flex flex-col p-4 justify-center">
+        <div class="bg-white pt-6">
+          <h2 class="text-gray-800 text-xl sm:text-3xl font-bold text-center mb-4 md:mb-8">未登録のグループフライト一覧</h2>
+          <%= form_with model: @glider_flights, url: {controller: 'glider_flights', action: 'create_from_groups' }, local: true do |f| %>
+            <%= render 'shared/error_messages', object: f.object %>
+            <div class="overflow-x-auto w-full bg-white shadow-md rounded my-6">
+              <table class="min-w-max w-full table-auto">
+                <!-- ヘッダー部分 -->
+                <%= render partial: 'glider_flights/from_groups/index_header' %>
+                <!-- テーブル本体部分 -->
+                <tbody class="text-gray-600 text-sm font-light">
+                  <% n = 0 %>
+                  <% @glider_flights.collection.each do |glider_flight| %>
+                    <% if !glider_flight.nil? && !match_takeoff_time?(glider_flight, @logged_flights) %>
+                      <% n += 1 %>
+                      <%= render partial: 'glider_flights/from_groups/index_record', locals: {glider_flight: glider_flight} %>
+                    <% end %>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+            <!-- 登録可能なフライトログがある場合 -->
+            <% if n != 0 %>
+              <div class="flex justify-center">
+                <%= f.submit yield(:button_text), class: "cursor-pointer mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+              </div>
+              <!-- 登録可能なフライトログがない場合 -->
+            <% else %>
+              <div id="alert-additional-content-1" class="p-4 mt-4 bg-blue-100 border-l-4 border-blue-500 " role="alert">
+                <div class="flex items-center">
+                  <svg class="mr-2 w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                  <h3 class="text-lg font-medium text-blue-700">登録可能なフライトログがありません。</h3>
+                </div>
+                <div class="mt-2 mb-4 text-sm text-blue-700">
+                  すでに全てのフライトが個人ログブックに登録済みか、登録可能なフライトがありません。
+                </div>
+              </div>
+            <% end %>
+          <% end %> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

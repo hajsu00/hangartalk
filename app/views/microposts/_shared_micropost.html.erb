@@ -1,9 +1,0 @@
-<% shared_micropost = micropost.get_shared_micropost %>
-<% if !shared_micropost.nil? %>
-  <%= render partial: 'microposts/micropost', locals: { micropost: shared_micropost } %>
-  <% if !micropost.content.nil? %>
-    <%= render partial: 'microposts/micropost_action', locals: { micropost: micropost } %>  
-  <% end %>
-<% else %>
- <p>投稿は削除されました</p>
-<% end %>

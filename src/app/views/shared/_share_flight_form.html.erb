@@ -1,0 +1,26 @@
+<% provide(:button_text, "フライトをシェア") %>
+
+<%= form_with(model: @micropost, url: micropost_share_flight_path(params[:id]), local: true) do |f| %>
+  <%= f.hidden_field :is_flight_attached, value: true %>
+  <%= f.hidden_field :glider_flight_id, value: target_flight.id %>
+  <div class="flex-col">
+    <%= f.text_area :content, value: nil, placeholder: "どんなフライトでしたか？", size: "40x5", class: 'w-full bg-gray-100 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2' %>
+    <div class="hover:bg-gray-200 w-full">
+      <%= f.file_field :images, accept: "image/jpeg,image/gif,image/png", direct_upload: true, multiple: true %>
+    </div> 
+    <!-- 送信ボタン -->
+    <div class="flex justify-end">
+      <%= f.submit yield(:button_text), class: "cursor-pointer mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3" %>
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $("#micropost_image").bind("change", function() {
+    var size_in_megabytes = this.files[0].size/1024/1024;
+    if (size_in_megabytes > 5) {
+      alert("Maximum file size is 5MB. Please choose a smaller file.");
+      $("#micropost_image").val("");
+    }
+  });
+</script>

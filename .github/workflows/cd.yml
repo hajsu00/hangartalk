@@ -1,0 +1,44 @@
+name: CD
+on:
+  push:
+    # branches: 
+    #   - feature/debug-ecs-deploy
+  pull_request:
+    branches: [main]
+    types: [closed]
+  # workflow_run:
+  #   workflows: ["CI"]
+  #   branches: [main]
+  #   types: [completed]
+jobs:
+  ecs_deploy:
+    runs-on: ubuntu-latest
+    # if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: github.event.pull_request.merged == true
+    steps:
+      - uses: actions/checkout@v2
+      - name: aws authentication
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+      - name : ecr login
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+      - name: build and push
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+        run: |
+          docker-compose -f docker-compose.production.yml build --build-arg RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+          docker image tag hangartalk_app $ECR_REGISTRY/hangartalk_app:latest
+          docker image tag hangartalk_nginx $ECR_REGISTRY/hangartalk_nginx:latest
+          docker push $ECR_REGISTRY/hangartalk_app:latest
+          docker push $ECR_REGISTRY/hangartalk_nginx:latest
+      - name: sleep
+        run: sleep 10
+      - name: update service
+        run: |
+          aws ecs update-service --cluster hangartalk --service hangartalk --force-new-deployment

@@ -1,0 +1,192 @@
+<% provide(:title, 'グループフライトの編集') %>
+<% provide(:button_text, '修正する') %>
+
+<div class="mx-auto px-4">
+  <div class="flex flex-row px-4 mb-4">
+    <%= link_to 'javascript:history.back()' do %>
+      <i class="fa-solid fa-angle-left fa-lg pr-4"></i>
+    <% end %>
+    <div class="flex flex-col">
+      <div class="text-2xl font-bold pr-4"><%= yield(:title) %></div>
+    </div>
+  </div>
+
+  <div class="w-full bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-200 rounded-lg flex-col">
+    <%= form_with(model: @glider_group_flight, local: true) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <!-- 裏処理用データ -->
+      <%= f.hidden_field :group, value: @glider_group_flight.group_id %> 
+      <%= f.hidden_field :day_flight_number, value: day_flight_number %>
+      <%= f.hidden_field :creator, value: @current_user.id %>
+      <%= f.hidden_field :updater, value: @current_user.id %>
+      <!-- 出発日 -->
+      <div class="flex flex-col">
+        <div class="flex justify-evenly mt-2 mb-4">
+          <div class="flex flex-col">
+            <%= f.label :date, "出発日", class: 'mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+            <%= f.date_field :date, autofocus: true, autocomplete: "date_of_issue", class: 'w-36 text-gray-800 border focus:ring ring-indigo-500 rounded outline-none transition duration-100 px-2 py-1' %>
+          </div>
+          <!-- 搭乗機体 -->
+          <div class="flex flex-col ml-6">
+            <%= f.label :aircraft_type_id, "航空機の型式（登録記号）", class: 'mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+            <%= f.collection_select :fleet, @fleet, :id, :ident, prompt: "選択してください", class: 'text-gray-800 border focus:ring ring-indigo-500 rounded outline-none transition duration-100 px-2 py-1' %>
+          </div>
+        </div>
+        <!-- 補足情報 -->
+        <div class="px-4">
+          <p class='mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2'>曳航タイプ</p>
+          <div class="flex">
+            <div class="ml-3">
+              <%= f.radio_button :is_winch, :true, checked: true, class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+              <%= f.label :is_winch, "ウインチ曳航", value: true, class: 'cursor-pointer inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+            </div>
+            <div class="ml-3">
+              <%= f.radio_button :is_winch, :false, class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+              <%= f.label :is_winch, "航空機曳航", value: false, class: 'cursor-pointer inline-block text-gray-800 text-sm sm:text-base mb-2'  %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 搭乗者情報 -->
+      <div class="bg-white shadow py-6 sm:py-8 lg:py-12 px-4 md:px-8 mx-auto my-4 border rounded-lg flex-col justify-center p-4 md:p-8 flex justify-center">
+        <div class="mx-auto text-gray-800">
+          <p class="text-xl font-bold text-center underline">搭乗者情報</p>
+          <!-- 前席搭乗者 -->
+          <div class="flex flex-wrap my-2">
+            <div class="flex flex-col">
+              <%= f.label :front_seat, "前席搭乗者", class: 'mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+              <%= f.collection_select :front_seat, @group_members, :id, :name, prompt: "選択してください", class: 'mx-auto text-gray-800 text-sm border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+            </div>
+            <div class="flex flex-col md:ml-4">
+              <p class='mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2'>操縦区分</p>
+              <div class="flex">
+                <div class="ml-3">
+                  <%= f.radio_button :front_flight_role, :"機長", class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :front_flight_role, "機長", value: :"機長", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+                <div class="ml-3">
+                  <%= f.radio_button :front_flight_role, :"単独飛行", class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :front_flight_role, "単独飛行", value: :"単独飛行", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+                <div class="ml-3">
+                  <%= f.radio_button :front_flight_role, :"同乗教育", checked: true, class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :front_flight_role, "同乗教育", value: :"同乗教育", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+                <div class="ml-3">
+                  <%= f.radio_button :front_flight_role, :"教官", class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :front_flight_role, "教官", value: :"教官", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+                <div class="ml-3">
+                  <%= f.radio_button :front_flight_role, :"ログ対象外", class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :front_flight_role, "ログ対象外", value: :"ログ対象外", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 後席搭乗者 -->
+          <div class="flex flex-wrap my-2">
+            <div class="flex flex-col">
+              <%= f.label :rear_seat, "後席搭乗者", class: 'mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+              <%= f.collection_select :rear_seat, @group_members, :id, :name, prompt: "選択してください", class: 'w-full text-gray-800 text-sm border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+            </div>
+            <div class="flex flex-col md:ml-4">
+              <p class='mt-3 font-bold inline-block text-gray-800 text-sm sm:text-base mb-2'>操縦区分</p>
+              <div class="flex">
+                <div class="ml-3">
+                  <%= f.radio_button :rear_flight_role, :"機長", class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :rear_flight_role, "機長", value: :"機長", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+                <div class="ml-3">
+                  <%= f.radio_button :rear_flight_role, :"同乗教育", class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :rear_flight_role, "同乗教育", value: :"同乗教育", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+                <div class="ml-3">
+                  <%= f.radio_button :rear_flight_role, :"教官", checked: true, class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :rear_flight_role, "教官", value: :"教官", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+                <div class="ml-3">
+                  <%= f.radio_button :rear_flight_role, :"ログ対象外", class: "form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" %>
+                  <%= f.label :rear_flight_role, "ログ対象外", value: :"ログ対象外", class: 'inline-block text-gray-800 text-sm sm:text-base mb-2' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- フライト情報 -->
+      <div class="bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-300 rounded-lg flex-col justify-center p-4 md:p-8">
+        <div class="py-4 px-6 text-gray-800">
+          <p class="text-xl font-bold text-center underline">フライト内容</p>
+
+          <div class="flex md:flex-row flex-col md:justify-evenly mt-4"> 
+            <!-- 離陸情報 -->
+            <div class="flex-col mx-2 my-auto mx-auto">
+              <div class="flex">
+                <div class="text-base font-bold">
+                  FROM
+                </div>
+                <div class="text-xs my-auto">
+                  （出発地を入力）
+                </div>
+              </div>
+              <div>
+                <%= f.text_field :departure_point, autofocus: true, autocomplete: "name", class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+              </div>
+              <div class="flex justify-center mt-2">
+                <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
+                <%= f.time_field :takeoff_time, class: 'w-50 ml-4 text-base text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+              </div>
+            </div>
+
+            <!-- 着陸情報 -->
+            <div class="flex flex-row md:flex-col md:my-0 my-4"> 
+              <div class="flex-col text-center my-auto">
+                <div class="flex flex-col">
+                  <p class="text-xs text-center">離脱高度</p>
+                  <%= f.number_field :release_alt, {value: 400, step: 10, class: 'w-20 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 mx-auto'} %>
+                </div>
+              </div>
+
+              <div class="flex justify-center mx-auto my-4"> 
+                <i class="fa-solid fa-plane fa-lg my-auto md:rotate-0 rotate-90"></i>
+              </div> 
+
+              <div class="flex-col text-center my-auto">
+                <div class="flex flex-col">
+                  <%= f.time_field :release_time, class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 mx-auto order-2 md:order-1' %>
+                  <p class="text-xs text-center order-1 md:order-2">離脱時刻</p>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- 着陸情報 -->
+            <div class="flex-col mx-2 my-auto mx-auto">
+              <div class="flex">
+                <div class="text-base font-bold">
+                  TO
+                </div>
+                <div class="text-xs my-auto">
+                  （到着地を入力）
+                </div>
+              </div>
+              <%= f.text_field :arrival_point, autofocus: true, autocomplete: "name", class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+              <div class="flex justify-center mt-2">
+                <%= f.time_field :landing_time, class: 'w-50 mr-4  text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 md:order-1 order-2 md:ml-2' %>
+                <i class="fa-solid fa-plane-arrival my-auto md:mr-0 mr-4 fa-lg md:order-2 order-1"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p class="text-xl font-bold text-center underline">備考</p>
+        <%= f.text_area :note, class: 'w-full text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 mt-4' %>
+      </div>
+      <div class="flex justify-center">
+        <%= f.submit yield(:button_text), class: "cursor-pointer mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3" %>
+      </div>
+    <% end %>
+  </div> 
+</div>

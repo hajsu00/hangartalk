@@ -1,0 +1,7 @@
+  <div>
+  <% if @current_group.users.include?(current_user) %>
+    <%= render 'groups/leave' %>
+  <% else %>
+    <%= render 'groups/join' %>
+  <% end %>
+</div>
