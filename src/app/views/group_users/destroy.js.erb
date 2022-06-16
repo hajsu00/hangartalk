@@ -1,1 +1,8 @@
-$("#join_form").html("<%= escape_javascript(render('groups/join')) %>");
+'use strict'
+
+{
+  document.getElementById('join_leave_button').addEventListener('click', () => {
+    const join_leave_button = document.getElementById('join_leave_button')
+    join_leave_button.innerHTML = "<%= escape_javascript(render('groups/join')) %>"
+  });
+}

@@ -27,7 +27,7 @@ class User < ApplicationRecord
   def self.guest
     user = find_by(email: 'guest@example.com')
     if user.nil?
-      user = User.create!(name: "ゲストユーザー",
+      user = User.create!(name: "小鳥遊 航太（ゲスト）",
         email: "guest@example.com",
         introduction: "パイロットになりたい22歳大学生。大学の部活でグライダーを飛ばしていて、2年生の時に操縦ライセンスを取得しました。同じ志を持つ方と仲良くなりたいです。よろしくお願いします！",
         location: "東京",
@@ -46,8 +46,8 @@ class User < ApplicationRecord
       license.reccurent_histories.create!(date: license.date_of_issue + 2.years, valid_for: 2)
       # ユーザーのリレーションシップを作成する
       users = User.all
-      following = users[2..38]
-      followers = users[3..25]
+      following = users[1..10]
+      followers = users[6..17]
       following.each { |followed| user.follow(followed) }
       followers.each { |follower| follower.follow(user) }
       # フライト経験
@@ -115,6 +115,11 @@ class User < ApplicationRecord
         glider_flight.aircraft_type_id = 3
         glider_flight.save(validate: false)
       end
+      # フライトを投稿する
+      micropost = user.microposts.build(content: "今日は天気天気良かったけど、すごい揺れた。最後着陸ミスったのは内緒。。笑", is_flight_attached: true, is_sharing_micropost: false)
+      glider_flight_id = user.glider_flights.last.id
+      micropost.save
+      micropost.glider_micropost_relationships.create!(glider_flight_id: glider_flight_id)
     end
     return user
   end
