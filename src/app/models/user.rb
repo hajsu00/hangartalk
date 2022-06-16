@@ -116,7 +116,7 @@ class User < ApplicationRecord
         glider_flight.save(validate: false)
       end
       # フライトを投稿する
-      micropost = user.microposts.build(content: "今日は天気天気良かったけど、すごい揺れた。最後着陸ミスったのは内緒。。笑", is_flight_attached: true, is_sharing_micropost: false)
+      micropost = user.microposts.build(content: "今日は天気良かったけど、すごい揺れた。最後着陸ミスったのは内緒。。笑", is_flight_attached: true, is_sharing_micropost: false)
       glider_flight_id = user.glider_flights.last.id
       micropost.save
       micropost.glider_micropost_relationships.create!(glider_flight_id: glider_flight_id)

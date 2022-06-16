@@ -1,15 +1,10 @@
 <footer class="text-gray-600 body-font">
-  <%
-=begin%>
- <div class="bg-gray-100 mt-10"> 
-<%
-=end%>
   <div class="bg-gray-100 mt-10">
     <div class="container mx-auto flex flex-wrap pt-5 flex-col items-center">
       <% if user_signed_in? %>
         <%= link_to image_tag('hangartalk_logo.png', class: "w-64"), user_path(current_user.id) %>
       <% else %>
-        <%= link_to image_tag('hangartalk_logo.png', class: "w-64"), new_user_session_path %>
+        <%= link_to image_tag('hangartalk_logo.png', class: "w-64"), root_path %>
       <% end %>
     </div>
     <div class="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">

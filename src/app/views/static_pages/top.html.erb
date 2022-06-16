@@ -1,0 +1,18 @@
+<% content_for :header_action do %>
+  <%= link_to new_user_registration_path do %>
+    <%= render partial: 'shared/header_action', locals: { item: 'アカウント登録' } %>
+  <% end %>
+  <%= link_to new_user_session_path do %>
+    <%= render partial: 'shared/header_action', locals: { item: 'ログイン' } %>
+  <% end %>
+<% end %>
+
+<div class="flex flex-col w-full md:relative">
+  <%= image_tag 'top_cover.jpg', class: 'w-full' %>
+  <div class='md:absolute top-16 sm:top-32 md:top-60 right-16 w-78 mx-auto'>
+    <div class="bg-white border border-gray-300 rounded-lg px-2 py-2 overscroll-auto">
+      <%= render partial: "microposts/top_micropost_card", collection: @microposts, as: :micropost %>
+    </div>
+  </div>
+  
+</div>
