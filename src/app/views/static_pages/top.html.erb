@@ -7,10 +7,11 @@
   <% end %>
 <% end %>
 
-<div class="flex flex-col w-full md:relative">
-  <%= image_tag 'top_cover.jpg', class: 'w-full' %>
-  <div class='md:absolute top-16 sm:top-32 md:top-60 right-16 w-78 mx-auto'>
-    <div class="bg-white border border-gray-300 rounded-lg px-2 py-2 overscroll-auto">
+<div class="flex flex-col cover lg:relative">
+  <%= image_tag 'top_cover.jpg' %>
+  <div class='lg:absolute lg:top-1/2 lg:left-3/4 lg:-translate-y-1/2 lg:-translate-x-1/2 bg-white lg:bg-black bg-gray-100 rounded-lg shadow-lg border lg:border-none border-gray-300 mx-auto px-2 pb-2 lg:mt-0 mt-4 lg:bg-opacity-30'>
+    <p class="text-2xl font-bold text-gray-600 lg:text-white leading-normal underline underline-offset-4 text-center my-2">あなたのフライトを<br>シェアしよう！</p>
+    <div class="max-w-md md:max-w-xl bg-white border border-gray-300 mt-4 lg:mt-0 rounded-lg shadow-lg px-2 py-2 overflow-auto h-80">
       <%= render partial: "microposts/top_micropost_card", collection: @microposts, as: :micropost %>
     </div>
   </div>
