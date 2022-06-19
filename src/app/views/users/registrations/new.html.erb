@@ -3,11 +3,7 @@
 
 <% content_for :header_action do %>
   <%= link_to new_user_session_path do %>
-    <div class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">ログイン
-      <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-        <path d="M5 12h14M12 5l7 7-7 7"></path>
-      </svg>
-    </div> 
+    <%= render partial: 'shared/header_action', locals: { item: 'ログイン' } %>
   <% end %>
 <% end %>
 
@@ -40,9 +36,7 @@
             <%= f.password_field :password_confirmation, autocomplete: "password_confirmation", class: 'w-full bg-gray-50 text-gray-800 border border-gray-300 focus:ring ring-indigo-500 rounded outline-none transition duration-100 px-3 py-2' %>
           </div>
           <!-- 認証メール送信ボタン -->
-          <div class="flex justify-end">
-            <%= f.submit yield(:button_text), class: "cursor-pointer mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3" %>
-          </div>
+          <%= f.submit yield(:button_text), class: "cursor-pointer mt-4 block bg-indigo-700 hover:bg-indigo-600 active:bg-indigo-500 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-full outline-none transition duration-100 px-8 py-3" %>
         <% end %>
         <!-- ボーダー（始まり） -->
         <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>

@@ -13,10 +13,10 @@
     </div>
   </div>
 
-  <div class='mx-auto px-4 py-10'>
+  <div class='mx-auto'>
     <!-- 上級滑空機 -->
     <% if glider_licenses.any? %>
-      <div class='flex flex-wrap justify-center'> 
+      <div class='flex flex-wrap justify-evenly'> 
         <%= render partial: "licenses/license_card", collection: glider_licenses, as: :license %>
       </div> 
       <div class="flex justify-center mt-6">

@@ -17,7 +17,9 @@
   <% if users.any? %>
     <div class='flex flex-wrap'>
       <%= render partial: "users/show_follow", collection: users, as: :user %>
+      <div class="flex justify-center">
+        <%= paginate @users %>
+      </div> 
     </div>
   <% end %>
-  <%= paginate @users, left: 3, right: 3 %>  
 </div> 

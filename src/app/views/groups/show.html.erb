@@ -33,10 +33,13 @@
                   <div class="my-2 text-blueGray-600">
                     <div class="flex items-center justify-center">
                       グループメンバー：
-                      <%= render partial: 'show_members', collection: @group_members, as: :member %>
+                      <div id='group_members' class="flex">
+                        <%= render partial: 'show_members', collection: @group_members, as: :member %>
+                      </div>
+                    </div>
                   </div>
                   <div class="pt-4">
-                    <%= render 'join_form' %>
+                    <%= render 'join_leave_button' %>
                   </div>
                   <div class="pt-4">
                     <%= link_to "グループを編集する", edit_group_path %>

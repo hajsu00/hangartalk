@@ -1,25 +1,4 @@
-
-<%
-=begin%>
- <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }, remote: true) do |f| %>
-  <%= f.submit "Unfollow", class: "btn btn-default" %>
-<% end %> 
-<%
-=end%>
-
-<%
-=begin%>
- <button class="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
-  <%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }, remote: true) do |f| %>
-    <%= f.submit "Unfollow", class: "btn btn-default" %>
-  <% end %>
-</button> 
-<%
-=end%>
-
-<%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }, remote: true) do |f| %>
-  <div><%= hidden_field_tag :followed_id, @user.id %></div>
-  <button class="bg-pink-500 active:bg-pink-600 uppercase text-white font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded outline-none focus:outline-none sm:mr-2 mb-1 ease-linear transition-all duration-150" type="button">
-    <%= f.submit "Unfollow" %>
-  </button>
+<%= form_with(model: current_user.active_relationships.find_by(followed_id: @user.id), html: { method: :delete }, local: false) do |f| %>
+  <%= hidden_field_tag :followed_id, @user.id %>
+  <%= f.submit "フォロー中", class: 'cursor-pointer bg-white active:bg-indigo-600 active:text-white text-indigo-600 font-bold hover:shadow-md shadow text-xs px-4 py-2 rounded border-solid border-2 border-indigo-600 sm:mr-2 mb-1 ease-linear transition-all duration-150' %>
 <% end %>
