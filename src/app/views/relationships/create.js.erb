@@ -1,2 +1,19 @@
-$("#follow_form").html("<%= escape_javascript(render('users/unfollow')) %>");
-$("#followers").html('<%= @user.followers.count %>');
+'use strict'
+
+{
+  //フォローボタン更新
+  const join_leave_button = document.getElementById('follow_unfollow_button')
+  join_leave_button.innerHTML = "<%= escape_javascript(render('users/unfollow')) %>"
+  
+  //ユーザー詳細ページののユーザー数カウント更新
+  const main_following_count = document.getElementById('main_following_count')
+  const main_follower_count = document.getElementById('main_follower_count')
+  main_following_count.innerHTML = "<%= @user.following.count %>"
+  main_follower_count.innerHTML = "<%= @user.followers.count %>"
+
+  //サイドバーのユーザー数カウント更新
+  const sidebar_following_count = document.getElementById('sidebar_following_count')
+  const sidebar_follower_count = document.getElementById('sidebar_follower_count')
+  sidebar_following_count.innerHTML = "<%= @current_user.following.count %>"
+  sidebar_follower_count.innerHTML = "<%= @current_user.followers.count %>"
+}

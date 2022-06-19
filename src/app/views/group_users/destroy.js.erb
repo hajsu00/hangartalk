@@ -1,8 +1,10 @@
 'use strict'
 
 {
-  document.getElementById('join_leave_button').addEventListener('click', () => {
-    const join_leave_button = document.getElementById('join_leave_button')
-    join_leave_button.innerHTML = "<%= escape_javascript(render('groups/join')) %>"
-  });
+  //参加・退会ボタン更新
+  const join_leave_button = document.getElementById('join_leave_button')
+  join_leave_button.innerHTML = "<%= escape_javascript(render('groups/join')) %>"
+  //グループメンバーアイコン更新
+  const group_members = document.getElementById('group_members')
+  group_members.innerHTML = "<%= escape_javascript(render partial: 'groups/show_members', collection: @group_members, as: :member) %>"
 }
