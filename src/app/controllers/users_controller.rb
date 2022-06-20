@@ -35,17 +35,6 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
-  # def show_reccomend
-  #   @users = User.all
-  #   @following = @user.following
-  #   @reccomended_users = @users.map! { |user| filter_reccomended_users(user) }
-  #   @reccomended_users.compact
-  # end
-
-  # def filter_reccomended_users(user)
-  #   user if !@following.include(user)
-  # end
-
   private
 
   def user_params
