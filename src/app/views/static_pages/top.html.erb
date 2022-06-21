@@ -9,37 +9,76 @@
 
 <main>
   <!-- ヘッダー -->
-  <div class="flex flex-col cover lg:relative">
-    <%= image_tag 'top_cover.jpg' %>
-    <div class="lg:absolute lg:top-1/2 lg:left-3/4 lg:-translate-y-1/2 lg:-translate-x-1/2 max-w-3xl bg-white border border-gray-300 rounded-lg shadow-lg mx-auto">
-      <div class="flex flex-col gap-4 p-4 md:p-8 mt-4 md:mt-0">
-        <%= link_to new_user_registration_path do %>
-          <%= render partial: 'shared/button', locals: { item: 'アカウント登録' } %>
-        <% end %>
-        <%= link_to new_user_session_path do %>
-          <%= render partial: 'shared/button', locals: { item: 'ログイン' } %>
-        <% end %>
-        <!-- ボーダー（始まり） -->
-        <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
-        <!-- ボーダー（終わり） -->
-        <%= link_to users_guest_sign_in_path, method: :post do %>
-          <div class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3 mt-3">
-            ゲストログイン（閲覧用）
-          </div>
-        <% end %>
+  <div class="">
+    <div class="flex flex-col relative lg:cover object-none">
+      <%= image_tag 'top_cover.jpg' %>
+      <div class="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 lg:left-1/4 text-white">
+        <p class="text-4xl xl:text-7xl md:text-6xl text-center lg:text-left font-bold">Hangar Talk</p>
+        <p class="text-xl xl:text-5xl md:text-4xl text-center lg:text-left font-bold lg:mt-6 mt-1">パイロットのための<br>フライト管理SNS</p>
+      </div>
+      <div class="hidden lg:flex lg:absolute lg:top-1/2 lg:left-3/4 lg:-translate-y-1/2 lg:-translate-x-1/2">
+        <%= render partial: 'static_pages/navigation_card' %>
       </div>
     </div>
-  </div>
-  <!-- コンテンツ -->
-  <div class="flex justify-evenly">
-    <div class="">
-      aaaa
+    <!-- コンテンツ -->
+    <div class="flex lg:justify-evenly justify-center flex-wrap mt-8">
+      <div class="">
+        <div class="flex flex-col w-72 h-84 bg-white border border-gray-300 rounded-lg shadow-lg mx-auto p-8 mx-8 my-4">
+          <i class="fa-regular fa-id-card fa-3x text-gray-700"></i>
+          <p class="text-base font-bold text-gray-800 text-center mt-4">操縦ライセンスの<br>有効期限を管理</p>
+          <!-- ボーダー（始まり） -->
+          <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
+          <!-- ボーダー（終わり） -->
+          <div class="mt-8">
+            <p class="text-base text-gray-800 text-center">あなたのライセンスの有効期限を管理。登録したライセンスはいつでも管理画面から確認できます。</p>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex flex-col w-72 h-84 bg-white border border-gray-300 rounded-lg shadow-lg mx-auto p-8 mx-8 my-4">
+          <i class="fa-solid fa-book fa-3x text-gray-700"></i>
+          <p class="text-base font-bold text-gray-800 text-center mt-4">パイロットの<br>フライトログブックを管理</p>
+          <!-- ボーダー（始まり） -->
+          <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
+          <!-- ボーダー（終わり） -->
+          <div class="mt-8">
+            <p class="text-base text-gray-800 text-center">あなたのフライトログブックを登録すれば、面倒な計算作業から解放されます。</p>
+          </div>
+        </div>
+      </div>
+      <div class="">
+        <div class="flex flex-col w-72 h-84 bg-white border border-gray-300 rounded-lg shadow-lg mx-auto p-8 mx-8 my-4">
+          <i class="fa-regular fa-comments fa-3x text-gray-700"></i>
+          <p class="text-base font-bold text-gray-800 text-center mt-4">パイロット同士で<br>交流</p>
+          <!-- ボーダー（始まり） -->
+          <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
+          <!-- ボーダー（終わり） -->
+          <div class="mt-8">
+            <p class="text-base text-gray-800 text-center">登録したフライト記録をフィードにシェア。友達と共に、フライトについてとことん語り合うことができます。</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="">
-      aaaa
+    <!--  -->
+    <div class='flex justify-center mx-auto m-8'>
+      <div class=''>
+        <p class="text-xl font-bold text-gray-800 leading-normal underline underline-offset-4 text-center my-2">あなたのフライトを<br>シェアしよう！</p>
+        <div class="w-108 lg:w-120 h-108 bg-white border border-gray-300 mt-8 rounded-lg shadow-lg px-4 py-2 overflow-auto">
+          <%= render partial: "microposts/top_micropost_card", collection: @microposts, as: :micropost %>
+        </div>
+      </div>
     </div>
-    <div class="">
-      aaaa
+    <!--  -->
+    <div class="flex lg:hidden">
+      <div class="flex flex-col mx-auto">
+        <!-- ボーダー（始まり） -->
+        <div class="w-full border-b-2 border-gray-300 py-2 mb-8 mx-auto"></div>
+        <!-- ボーダー（終わり） -->
+        <p class="text-xl font-bold text-gray-800 leading-normal underline underline-offset-4 text-center my-2">いますぐ登録しよう！</p>
+        <div class="mt-6">
+          <%= render partial: 'static_pages/navigation_card' %>
+        </div>
+      </div>
     </div>
   </div>
 </main>
