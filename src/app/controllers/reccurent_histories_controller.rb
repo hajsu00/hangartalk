@@ -19,7 +19,6 @@ class ReccurentHistoriesController < ApplicationController
 
   def edit
     @reccurent_history = @license.reccurent_histories.find(params[:id])
-    # @reccurent_history = ReccurentHistory.find(params[:id])
   end
 
   def update
@@ -34,6 +33,7 @@ class ReccurentHistoriesController < ApplicationController
 
   def show
     @reccurent_history = @license.reccurent_histories.find(params[:id])
+    @reccurent_histories = @license.reccurent_histories
   end
 
   def index

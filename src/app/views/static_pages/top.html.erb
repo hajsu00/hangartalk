@@ -1,18 +1,54 @@
 <% content_for :header_action do %>
   <%= link_to new_user_registration_path do %>
-    <%= render partial: 'shared/header_action', locals: { item: 'アカウント登録' } %>
+    <%= render partial: 'layouts/header/header_action', locals: { item: 'アカウント登録' } %>
   <% end %>
   <%= link_to new_user_session_path do %>
-    <%= render partial: 'shared/header_action', locals: { item: 'ログイン' } %>
+    <%= render partial: 'layouts/header/header_action', locals: { item: 'ログイン' } %>
   <% end %>
 <% end %>
 
-<div class="flex flex-col cover lg:relative">
-  <%= image_tag 'top_cover.jpg' %>
-  <div class='lg:absolute lg:top-1/2 lg:left-3/4 lg:-translate-y-1/2 lg:-translate-x-1/2 bg-white lg:bg-black bg-gray-100 rounded-lg shadow-lg border lg:border-none border-gray-300 px-2 pb-2 lg:mt-0 mx-auto mt-4 lg:bg-opacity-30'>
-    <p class="text-2xl font-extrabold text-gray-800 lg:text-white leading-normal underline underline-offset-4 text-center my-2">あなたのフライトを<br>シェアしよう！</p>
-    <div class="max-w-md md:max-w-xl bg-white border border-gray-300 mt-4 lg:mt-0 rounded-lg shadow-lg px-2 py-2 overflow-auto h-80">
-      <%= render partial: "microposts/top_micropost_card", collection: @microposts, as: :micropost %>
+<main>
+  <!-- ヘッダー -->
+  <div class="">
+    <div class="flex flex-col relative lg:cover object-none">
+      <%= image_tag 'top_cover.jpg' %>
+      <div class="flex flex-col absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 lg:left-1/4 text-white">
+        <p class="text-4xl xl:text-7xl md:text-6xl text-center lg:text-left font-bold">Hangar Talk</p>
+        <p class="text-xl xl:text-5xl md:text-4xl text-center lg:text-left font-bold lg:mt-6 mt-1">パイロットのための<br>フライト管理SNS</p>
+      </div>
+      <div class="hidden lg:flex lg:absolute lg:top-1/2 lg:left-3/4 lg:-translate-y-1/2 lg:-translate-x-1/2">
+        <%= render partial: 'static_pages/navigation_card' %>
+      </div>
+    </div>
+    <!-- コンテンツ -->
+    <div class="flex lg:justify-evenly justify-center flex-wrap mt-8">
+      <!-- １ -->
+      <%= render partial: "static_pages/feature_card", locals: { fontawesome_class: "fa-regular fa-id-card", caption: "操縦ライセンスの<br>有効期限を管理", article: "あなたのライセンスの有効期限を管理。登録したライセンスはいつでも管理画面から確認できます。" } %>
+      <!-- ２ -->
+      <%= render partial: "static_pages/feature_card", locals: { fontawesome_class: "fa-regular fa-id-card", caption: "パイロットの<br>フライトログブックを管理", article: "あなたのフライトログブックを登録すれば、面倒な計算作業から解放されます。" } %>
+      <!-- ３ -->
+      <%= render partial: "static_pages/feature_card", locals: { fontawesome_class: "fa-regular fa-id-card", caption: "パイロット同士で<br>交流", article: "登録したフライト記録をフィードにシェア。友達と共に、フライトについてとことん語り合うことができます。" } %>
+    </div>
+    <!--  -->
+    <div class='flex justify-center mx-auto m-8'>
+      <div class=''>
+        <p class="text-xl font-bold text-gray-800 leading-normal underline underline-offset-4 text-center my-2">あなたのフライトを<br>シェアしよう！</p>
+        <div class="w-108 lg:w-120 h-108 bg-white border border-gray-300 mt-8 rounded-lg shadow-lg px-4 py-2 mx-4 overflow-auto">
+          <%= render partial: "microposts/top_micropost_card", collection: @microposts, as: :micropost %>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <div class="flex lg:hidden">
+      <div class="flex flex-col mx-auto">
+        <!-- ボーダー（始まり） -->
+        <div class="w-full border-b-2 border-gray-300 py-2 mb-8 mx-auto"></div>
+        <!-- ボーダー（終わり） -->
+        <p class="text-xl font-bold text-gray-800 leading-normal underline underline-offset-4 text-center my-2">いますぐ登録しよう！</p>
+        <div class="mt-6 mx-4">
+          <%= render partial: 'static_pages/navigation_card' %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</main>
