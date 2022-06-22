@@ -1,6 +1,6 @@
 name: CD
 on:
-  push:
+  # push:
     # branches: 
     #   - feature/debug-ecs-deploy
   pull_request:

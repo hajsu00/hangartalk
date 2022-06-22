@@ -1,0 +1,43 @@
+<header class="text-gray-600 body-font">
+  <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+    <% if user_signed_in? %>
+      <%= link_to image_tag('hangartalk_logo.png', class: "w-64"), user_path(current_user.id) %>
+    <% else %>
+      <%= link_to image_tag('hangartalk_logo.png', class: "w-64"), root_path %>
+    <% end %>
+    <div class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+      <% if user_signed_in? %>
+        <div class="relative group w-64">
+          <div class="flex items-center bg-gray-100 border-0 py-1 px-4 focus:outline-none hover:bg-gray-200 rounded text-base mt-0">
+            <div class="mx-auto">
+              <%= current_user.name.truncate(14) %>
+            </div>
+            <i class="fa-solid fa-arrow-down ml-4 float-right"></i>
+          </div> 
+          <div class="absolute invisible group-hover:visible bg-white shadow rounded w-full px-3 py-2 z-10">
+            <ul class="space-y-2">
+              <li>
+                <%= link_to edit_user_registration_path(current_user.id) do %>
+                  <%= render partial: "layouts/header/personal_menu", locals: { fontawesome_class: "fa-regular fa-user", item: "プロフィール" } %>
+                <% end %>
+                </li>
+                <li>
+                  <%= link_to edit_user_registration_path(current_user.id) do %>
+                    <%= render partial: "layouts/header/personal_menu", locals: { fontawesome_class: "fa-regular fa-address-card", item: "アカウント" } %>
+                  <% end %>
+                </li>
+                <li>
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                    <%= render partial: "layouts/header/personal_menu", locals: { fontawesome_class: "fa-solid fa-right-from-bracket", item: "ログアウト" } %>
+                  <% end %>
+                </li>
+              </ul>
+          </div>
+        </div>
+      <% else %>
+        <%= yield :header_action %>
+      <% end %>
+    </nav>
+  </div>
+</header>
+

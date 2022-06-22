@@ -29,7 +29,7 @@ class MicropostsController < ApplicationController
   def create_reply
     @replying_micropost = current_user.microposts.build(reply_params)
     if @replying_micropost.save && @replying_micropost.replying_relationships.create!(replied_id: params[:micropost_id])
-      flash[:success] = "マイクロポストを投稿しました！"
+      flash[:success] = "フライトをシェアしました！"
     else
       @microposts = current_user.feed
     end
@@ -47,7 +47,7 @@ class MicropostsController < ApplicationController
   end
 
   def index
-    @microposts = @current_user.feed.order(created_at: :desc).includes([:images_attachments,
+    @microposts = @current_user.feed.order(created_at: :desc).includes(                 [:images_attachments,
                                                                         :like_relationships,
                                                                         :replying,
                                                                         :replied,

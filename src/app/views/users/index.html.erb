@@ -1,23 +1,18 @@
-<div class="mx-auto px-4">
-  <div class="flex flex-row px-4">
-    <%= link_to 'javascript:history.back()' do %>
-      <i class="fa-solid fa-angle-left fa-2x pr-4 pt-2"></i>
-    <% end %>
-    <div class="flex flex-col">
-      <div class="text-xl font-bold pr-4">
-        <%= @user.name %>
-      </div>
-      <% if controller.action_name == "following_index" %>
-        <div class="text-sm"><%= "#{@user.following.count}人をフォロー中" %></div>
-      <% else %>
-        <div class="text-sm"><%= "#{@user.followers.count}人のフォロワー" %></div>
-      <% end %>
-    </div>
-  </div>
-  <% if users.any? %>
-    <div class='flex flex-wrap'>
-      <%= render partial: "users/show_follow", collection: users, as: :user %>
-    </div>
+<% provide(:title, 'ユーザー一覧') %>
+
+<% content_for :supplementary_information do %>
+  <% if controller.action_name == "following_index" %>
+    <%= "#{@user.following.count}人をフォロー中" %>
+  <% else %>
+    <%= "#{@user.followers.count}人のフォロワー" %>
   <% end %>
-  <%= paginate @users, left: 3, right: 3 %>  
-</div> 
+<% end %>
+
+<% if users.any? %>
+  <div class='flex flex-wrap'>
+    <%= render partial: "users/show_follow", collection: users, as: :user %>
+    <div class="flex justify-center">
+      <%= paginate @users %>
+    </div> 
+  </div>
+<% end %> 

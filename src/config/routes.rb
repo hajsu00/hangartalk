@@ -7,23 +7,11 @@ Rails.application.routes.draw do
   }
 
   devise_scope :user do
-    root "users/sessions#new"
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
-
+  root 'static_pages#top'
   get 'glider_flight_collection/new'
   get 'glider_flight_collection/create'
-  get 'glider_initial_logs/new'
-  get 'glider_initial_logs/create'
-  get 'glider_initial_logs/show'
-  get 'glider_initial_logs/edit'
-  get 'glider_initial_logs/update'
-
-  get  '/top', to: 'static_pages#top'
-  get  '/about', to: 'static_pages#about'
-  get  '/faq',   to: 'static_pages#faq'
-  get  '/inquiry', to: 'static_pages#inquiry'
-  get  '/policy', to: 'static_pages#policy'
 
   resources :glider_flights do
     collection do
@@ -35,8 +23,6 @@ Rails.application.routes.draw do
     member do
       get :following, :followers
     end
-    # resources :microposts, only: [:new, :create, :show, :index, :destroy]
-    # resources :glider_flights
     resources :licenses
 
     resources :licenses do
@@ -45,7 +31,6 @@ Rails.application.routes.draw do
   end
 
   resources :microposts do
-    # get :show_reply_form
     post :create_reply
     post :share_flight
   end
