@@ -1,0 +1,14 @@
+<div class="flex flex-col w-72 h-84 bg-white border border-gray-300 rounded-lg shadow-lg mx-auto p-8 mx-8 my-4">
+  <i class="<%= fontawesome_class %> fa-3x text-gray-700" ></i>
+  <p class="text-base font-bold text-gray-800 text-center mt-4">
+    <%= sanitize caption, tags: %w(br) %>
+  </p>
+  <!-- ボーダー（始まり） -->
+  <div class="w-full border-b-2 border-gray-300 py-2 mx-auto"></div>
+  <!-- ボーダー（終わり） -->
+  <div class="mt-8">
+    <p class="text-base text-gray-800 text-center">
+      <%= sanitize article, tags: %w(br) %>
+    </p>
+  </div>
+</div>

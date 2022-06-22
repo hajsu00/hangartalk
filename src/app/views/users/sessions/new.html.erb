@@ -3,7 +3,7 @@
 
 <% content_for :header_action do %>
   <%= link_to new_user_registration_path do %>
-    <%= render partial: 'shared/header_action', locals: { item: 'アカウント登録' } %>
+    <%= render partial: 'layouts/header/header_action', locals: { item: 'アカウント登録' } %>
   <% end %>
 <% end %>
 

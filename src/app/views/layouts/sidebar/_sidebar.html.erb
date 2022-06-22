@@ -1,0 +1,45 @@
+<% if user_signed_in? %>
+  <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css">
+  <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"> 
+
+<!-- ボーダー（始まり） -->
+<div class="max-w-screen-sm border-b-2 lg:border-none border-gray-200 py-2 mx-auto"></div>
+<div class="max-w-screen-sm py-2 mx-auto"></div>
+<!-- ボーダー（終わり） -->
+<div class="bg-gray-100 max-w-screen-sm mx-auto">
+  <div class="w-full px-4">
+  <!-- ユーザーカード -->
+    <%= render partial: "layouts/sidebar/sidebar_user_card" %>
+    <!-- サイドバーメニュー -->
+    <div class="py-8 px-4">
+      <ul class="space-y-2">
+        <li>
+          <%= link_to @current_user do %>
+            <%= render partial: "layouts/sidebar/sidebar_menu", locals: { fontawesome_class: "fa-solid fa-house-user", item: "ダッシュボード" } %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to microposts_path() do %>
+            <%= render partial: "layouts/sidebar/sidebar_menu", locals: { fontawesome_class: "fa-solid fa-comments", item: "フィード" } %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to user_licenses_path(@current_user) do %>
+            <%= render partial: "layouts/sidebar/sidebar_menu", locals: { fontawesome_class: "fa-solid fa-id-card", item: "保有ライセンス管理" } %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to glider_flights_path do %>
+            <%= render partial: "layouts/sidebar/sidebar_menu", locals: { fontawesome_class: "fa-solid fa-book-open", item: "フライトログブック" } %>
+          <% end %>
+        </li>
+        <li>
+          <%= link_to groups_path do %>
+            <%= render partial: "layouts/sidebar/sidebar_menu", locals: { fontawesome_class: "fa-solid fa-user-group", item: "フライトクラブ" } %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<% end %>
