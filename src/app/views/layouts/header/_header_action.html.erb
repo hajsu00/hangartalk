@@ -1,6 +1,8 @@
-<div class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 mx-4 md:mt-0">
-  <p><%= item %></p>
-  <% if controller.action_name != 'top' %>
-    <i class="fa-solid fa-arrow-right ml-1"></i>
-  <% end %>
+<div class="flex justify-center bg-gray-100 border-0 py-2 px-6 focus:outline-none hover:bg-gray-200 rounded text-base mt-0 ml-10">
+  <div class="flex flex-row my-auto">
+    <p><%= item %></p>
+    <% if controller.action_name != 'top' %>
+      <i class="fa-solid fa-arrow-right ml-2 my-auto"></i>
+    <% end %>
+  </div> 
 </div> 
