@@ -3,7 +3,7 @@ Hangar Talkは、パイロットの知識や経験、フライト時間をシェ
 操縦ライセンスの有効期限管理機能も備えています。
 https://hangartalk-app.com
 
-<img width="1673" alt="スクリーンショット 2022-06-11 21 16 25" src="https://user-images.githubusercontent.com/18317776/173187585-85a79db9-ef6f-46d2-95f2-2946902668d5.png">
+<img width="1885" alt="スクリーンショット 2022-06-24 9 26 54" src="https://user-images.githubusercontent.com/18317776/175436625-8c00b3c3-6a09-411c-a734-f085f5a8582a.png">
 
 ### 使用技術一覧
 ◇バックエンド
@@ -12,17 +12,20 @@ https://hangartalk-app.com
 - MySQL(8.0.28)
 - Rubocop（コード解析ツール）
 - RSpec（テスト）
+
 ◇フロントエンド
 - Tailwind CSS
 - JavaScript
+
 ◇インフラ
 - AWS(ACM, RDS(MySQL 8.0.28), ECR, ECS(Fargate), S3, Route53, SES)
 - GithubActions (CI, CD)
 - Docker 20.10.12
 - Docker-compose 1.29.2
+開発環境から本番環境までDocker環境を構築しています。またGithub ActionsによりCI/CDパイプラインを構築し、デプロイまでの作業を全てGithub上で完結する仕組みを導入しています。
 
 ◇インフラ構成図
-<img width="909" alt="スクリーンショット 2022-06-12 10 00 02" src="https://user-images.githubusercontent.com/18317776/173209873-44a73c5a-c626-41d2-b3b9-c3460edc76f7.png">
+<img width="926" alt="スクリーンショット 2022-06-24 9 19 58" src="https://user-images.githubusercontent.com/18317776/175436059-2ffa473c-672b-45bc-8f4e-8e90c9f6b56e.png">
 
 ◇ER図
 <img width="1264" alt="スクリーンショット 2022-06-11 21 09 12" src="https://user-images.githubusercontent.com/18317776/173187398-e204c045-06c4-4c8b-aa31-6f760bc4ab20.png">
@@ -78,20 +81,26 @@ https://user-images.githubusercontent.com/18317776/174467095-9d1f39dc-f3af-4af7-
 - 新規登録、ログイン、ログアウト、退会（論理削除）、プロフィール各種変更、アバター画像登録、カバー画像登録等の基本機能
 - メール認証機能
 - ゲストログイン機能
+
 ◇投稿機能
 - テキスト・画像投稿、一覧、詳細等の基本機能
+
 ◇コミュニケーション機能
 - いいね、シェア、コメント等の基本機能
+
 ◇フォロー機能
 - 登録、解除、一覧
+
 ◇個人フライトログブック機能
 - 新規作成、編集、削除の基本機能
 - グループフライトからの一括インポート機能
 - フィードへの投稿機能
+
 ◇グループ機能
 - 新規作成、編集、削除の基本機能
 - カバー画像登録機能
 - 複数パイロットのフライト記録管理機能
+
 ◇操縦ライセンスの有効期限管理機能
 - 新規作成、編集、削除の基本機能
 - ライセンス更新試験受験履歴管理機能
