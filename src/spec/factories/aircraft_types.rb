@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :aircraft_type do
-    type { "" }
-    category { "MyString" }
+    sequence(:aircraft_type, "ASK_1")
+    category { "glider" }
   end
 end
