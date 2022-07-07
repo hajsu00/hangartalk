@@ -79,6 +79,10 @@ class GliderFlightsController < ApplicationController
 
   private
 
+  def practice
+    params.require(:glider_flight).permit(:name, :date)
+  end
+
   def glider_flight_params
     params.require(:glider_flight).permit(:log_number,
                                           :date,
