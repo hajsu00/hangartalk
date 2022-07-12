@@ -7,7 +7,7 @@ module Form
     include ActiveModel::AttributeMethods
     include ActiveModel::Validations
 
-    FLIGHT_NUM = 10  # 同時にフライトを作成する数
+    # FLIGHT_NUM = 10  # 同時にフライトを作成する数
     attr_accessor :collection # ここに、作成したglider_flightsモデルが格納される
 
     # 初期化メソッド

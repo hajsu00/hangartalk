@@ -20,8 +20,8 @@ RSpec.describe GliderFlight, type: :system do
       it 'glider flight can be registered' do
         visit new_glider_flight_path
         fill_in 'glider_flight[date]', with: Date.today
-        binding.pry
-        find("#glider_flight_aircraft_type_id").find("option[value='ASK_4']").select_option
+        # find("#glider_flight_aircraft_type_id").find("option[value='ASK_4']").select_option
+        select 'ASK_4', from: '航空機の型式'
         select 'JA21MA', from: 'glider_flight[glider_ident]'
         fill_in 'glider_flight[departure_point]', with: '宝珠花滑空場'
         fill_in 'glider_flight[takeoff_time]', with: Time.current
