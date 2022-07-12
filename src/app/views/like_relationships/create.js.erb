@@ -1,0 +1,7 @@
+'use strict'
+
+{
+  const micropost_like_button = document.etElementById('micropost_like_button')
+  console.log('ここまできたよ')
+  micropost_like_button.innerHTML = "<%= escape_javascript(render('microposts/like/like'), locals: { micropost: micropost }) %>"
+}
