@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :aircraft_type do
-    sequence(:aircraft_type) { |n| "ASK_#{n}" }
+    aircraft_type { "ASK 21" }
     category { "glider" }
   end
 end
