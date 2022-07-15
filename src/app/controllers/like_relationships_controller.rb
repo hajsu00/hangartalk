@@ -1,15 +1,24 @@
 class LikeRelationshipsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_user,   only: :destroy
+
   def create
-    @micropost = Micropost.find(params[:id])
+    @micropost = Micropost.find(params[:micropost_id])
     @micropost.like_relationships.create!(user_id: current_user.id)
-    redirect_to request.referer || root_url
+    binding.pry
+    respond_to do |format|
+      format.html { redirect_to request.referer }
+      format.js
+    end
   end
 
   def destroy
     @like_rekationship.destroy
-    redirect_to request.referer || root_url
+    respond_to do |format|
+      format.html { redirect_to request.referer }
+      format.js
+    end
+    # redirect_to request.referer || root_url
   end
 
   private
