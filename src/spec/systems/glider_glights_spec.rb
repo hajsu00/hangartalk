@@ -21,8 +21,7 @@ RSpec.describe GliderFlight, type: :system do
       it 'glider flight can be registered' do
         visit new_glider_flight_path
         fill_in 'glider_flight[date]', with: Date.today
-        # binding.pry
-        select 'ASK 21', from: 'glider_flight_aircraft_type_id'
+        select 'ASK21', from: 'glider_flight_aircraft_type_id'
         select 'JA21MA', from: 'glider_flight[glider_ident]'
         fill_in 'glider_flight[departure_point]', with: '宝珠花滑空場'
         fill_in 'glider_flight[takeoff_time]', with: @takeoff_time
@@ -41,7 +40,7 @@ RSpec.describe GliderFlight, type: :system do
     end
     context 'with invalid value' do
       it 'glider flight cannot be registered' do
-  
+
       end
     end
   end
