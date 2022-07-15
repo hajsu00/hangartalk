@@ -15,7 +15,7 @@ class GliderFlightsController < ApplicationController
     @glider_flight = current_user.glider_flights.build(glider_flight_params)
     if @glider_flight.save
       new_log_number
-      flash[:success] = "フライトログの登録に成功しました！"
+      flash[:success] = "フライトログを投稿しました。"
       redirect_to glider_flights_url
     else
       render 'glider_flights/new'
@@ -35,7 +35,7 @@ class GliderFlightsController < ApplicationController
     @glider_flight = GliderFlight.find_by(id: params[:id])
     if @glider_flight.update(glider_flight_params)
       new_log_number
-      flash[:success] = "フライトログの更新に成功しました！"
+      flash[:success] = "フライトログを更新しました。"
       redirect_to glider_flights_url
     else
       render 'glider_flights/edit'
@@ -52,7 +52,7 @@ class GliderFlightsController < ApplicationController
   def destroy
     @glider_flight.destroy
     new_log_number
-    flash[:success] = "選択したフライトログを削除しました。"
+    flash[:success] = "フライトログを削除しました。"
     redirect_to glider_flights_url
   end
 
@@ -68,7 +68,7 @@ class GliderFlightsController < ApplicationController
     @glider_flights = Form::GliderFlightCollection.new(new_from_groups_params, current_user, 'create')
     if @glider_flights.save_collection
       new_log_number
-      flash[:success] = "グループフライトからのログ取得に成功しました！"
+      flash[:success] = "グループフライトからフライトログを取得しました。"
       @glider_type = AircraftType.where("category = ?", 'glider')
       redirect_to glider_flights_url
     else
@@ -78,6 +78,10 @@ class GliderFlightsController < ApplicationController
   end
 
   private
+
+  def practice
+    params.require(:glider_flight).permit(:name, :date)
+  end
 
   def glider_flight_params
     params.require(:glider_flight).permit(:log_number,

@@ -20,21 +20,7 @@
           <p class="ml-2 text-gray-600 group-hover:text-blue-500"><%= micropost.number_of_shared %></p>
         </div>
       <% end %>
-    <% end %>  
-    <% if micropost.is_liked_by_current_user?(current_user) %>
-      <%= link_to like_relationship_path(id: micropost.id), method: :delete do %>
-        <div class="flex group mx-8">
-          <i class="fa-solid fa-thumbs-up text-gray-600 group-hover:text-blue-500 my-auto"></i>
-          <p class="ml-2 text-gray-600 group-hover:text-blue-500"><%= micropost.number_of_liked %></p>
-        </div>
-      <% end %>
-    <% else %>
-      <%= link_to like_relationships_path(id: micropost.id), method: :post do %>
-        <div class="flex group mx-8">
-          <i class="fa-solid fa-thumbs-up text-gray-600 group-hover:text-blue-500 my-auto"></i>
-          <p class="ml-2 text-gray-600 group-hover:text-blue-500"><%= micropost.number_of_liked %></p>
-        </div>
-      <% end %>
-    <% end %>
+    <% end %> 
+      <%= render partial: "microposts/like/like_unlike_button", locals: { micropost: micropost } %>
   </div>
 <% end %>

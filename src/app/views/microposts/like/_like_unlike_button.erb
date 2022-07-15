@@ -1,0 +1,7 @@
+<div class="micropost_like_button">
+  <% if micropost.is_liked_by_current_user?(current_user) %>
+    <%= render partial: "microposts/like/unlike", locals: { micropost: micropost } %>
+  <% else %>
+    <%= render partial: "microposts/like/like", locals: { micropost: micropost } %>
+  <% end %>
+</div>
