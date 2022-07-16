@@ -93,7 +93,7 @@ module Form
         raise ActiveRecord::RecordInvalid unless is_success
       end
     rescue StandardError
-      Rails.logger.debug 'フライトログの保存中にエラーが発生しました。'
+      Rails.logger.debug '離陸時刻と着陸時刻が同じか着陸時刻が離陸時刻よりも前、もしくはフライト時間が既存のフライトと重複しています。'
     ensure
       return is_success
     end

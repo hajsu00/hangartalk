@@ -8,6 +8,7 @@
       <div class="bg-white pt-6">
         <h2 class="text-gray-800 text-xl sm:text-3xl font-bold text-center mb-4 md:mb-8">未登録のグループフライト一覧</h2>
         <%= form_with model: @gliderflights, url: {controller: 'gliderflights', action: 'create_from_groups' }, local: true do |f| %>
+        <% binding.pry %>
           <%= render 'shared/error_messages', object: f.object %>
           <div class="overflow-x-auto w-full bg-white shadow-md rounded my-6">
             <table class="min-w-max w-full table-auto">

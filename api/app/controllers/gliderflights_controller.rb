@@ -66,7 +66,6 @@ class GliderflightsController < ApplicationController
 
   def create_from_groups
     @gliderflights = Form::GliderflightCollection.new(new_from_groups_params, current_user, 'create')
-    binding.pry
     if @gliderflights.save_collection
       new_log_number
       flash[:success] = "グループフライトからフライトログを取得しました。"
@@ -75,7 +74,7 @@ class GliderflightsController < ApplicationController
     else
       @glider_type = AircraftType.where("category = ?", 'glider')
       @logged_flights = Gliderflight.where("user_id = ?", current_user.id).order(log_number: :asc)
-      flash[:danger] = "フライトログブックへの登録中にエラーが発生しました。"
+      # flash[:danger] = "フライトログブックへの登録中にエラーが発生しました。"
       render 'gliderflights/from_groups/new_from_groups'
     end
   end
