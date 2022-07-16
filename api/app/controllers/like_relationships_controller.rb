@@ -5,7 +5,6 @@ class LikeRelationshipsController < ApplicationController
   def create
     @micropost = Micropost.find(params[:micropost_id])
     @micropost.like_relationships.create!(user_id: current_user.id)
-    binding.pry
     respond_to do |format|
       format.html { redirect_to request.referer }
       format.js

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :glider_group_flight do
+  factory :group_gliderflight do
     date { "2022-02-03" }
     place { "MyString" }
     is_winch { false }

@@ -64,26 +64,26 @@
     <div class="flex flex-col p-4 justify-center">
       <div class="bg-white pt-6">
         <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"><%= "#{@current_group.name}のフライト" %></h2>
-        <% if @glider_group_flights.any? %>
-          <%= paginate @glider_group_flights, left: 3, right: 3 %> 
+        <% if @group_gliderflights.any? %>
+          <%= paginate @group_gliderflights, left: 3, right: 3 %> 
           <div class="overflow-x-auto">
             <div class="w-full lg:w-5/6">
               <div class="bg-white shadow-md rounded my-6">
                 <table class="min-w-max w-full table-auto">
-                  <%= render 'glider_group_flights/index_header' %>
+                  <%= render 'group_gliderflights/index_header' %>
                   <tbody class="text-gray-600 text-sm font-light">
-                    <%= render partial: 'glider_group_flights/index_record', collection: @glider_group_flights, as: :glider_group_flight %>
+                    <%= render partial: 'group_gliderflights/index_record', collection: @group_gliderflights, as: :group_gliderflight %>
                   </tbody>
                 </table>
               </div>
             </div>
           </div>
           <div class="flex justify-center mb-4">
-            <%= paginate @glider_group_flights %>
+            <%= paginate @group_gliderflights %>
           </div>
-          <% if @glider_group_flights.last_page? %>
+          <% if @group_gliderflights.last_page? %>
             <div class="flex justify-center items-center p-4">
-              <%= link_to new_glider_group_flight_path do %>
+              <%= link_to new_group_gliderflight_path do %>
                 <%= render partial: "shared/button", locals: {item: '新しいグループフライトを登録'} %>
               <% end %>
             </div>
@@ -93,7 +93,7 @@
             まだグループフライトが登録されていません。
           </div>
           <div class="flex justify-center items-center p-4">
-            <%= link_to "新しいフライトを登録する方はこちら", new_glider_group_flight_path, class: "text-indigo-500 hover:text-indigo-600 hover:underline active:text-indigo-700 transition duration-100" %>
+            <%= link_to "新しいフライトを登録する方はこちら", new_group_gliderflight_path, class: "text-indigo-500 hover:text-indigo-600 hover:underline active:text-indigo-700 transition duration-100" %>
           </div>
         <% end %>
       </div>

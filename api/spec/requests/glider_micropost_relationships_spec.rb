@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "GliderMicropostRelationships", type: :request do
+RSpec.describe "GliderflightMicroposts", type: :request do
   # describe "GET /index" do
   #   pending "add some examples (or delete) #{__FILE__}"
   # end

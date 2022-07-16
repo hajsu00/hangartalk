@@ -9,12 +9,10 @@
 #   describe "GET /show" do
 #     it 'glider_flightインスタンスが作成されること' do
 #       glider_flight
-#       binding.pry
 #       # expect(glider_flight.takeoff_time).to 
 #     end
 #     it 'glider_flightインスタンスが作成されること2' do
 #       glider_flight
-#       binding.pry
 #       # expect(glider_flight.takeoff_time).to 
 #     end
 #   end

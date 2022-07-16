@@ -2,10 +2,10 @@
 <% provide(:button_text, '登録する') %>
 
 <div class="w-full bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-200 rounded-lg flex-col">
-  <%= form_with(model: @glider_group_flight, local: true) do |f| %>
+  <%= form_with(model: @group_gliderflight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <!-- 裏処理用データ -->
-    <%= f.hidden_field :group, value: @glider_group_flight.group_id %> 
+    <%= f.hidden_field :group, value: @group_gliderflight.group_id %> 
     <%= f.hidden_field :day_flight_number, value: day_flight_number %>
     <%= f.hidden_field :creator, value: @current_user.id %>
     <%= f.hidden_field :updater, value: @current_user.id %>

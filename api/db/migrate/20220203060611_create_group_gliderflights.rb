@@ -1,6 +1,6 @@
-class CreateGliderGroupFlights < ActiveRecord::Migration[6.1]
+class CreateGroupGliderflights < ActiveRecord::Migration[6.1]
   def change
-    create_table :glider_group_flights do |t|
+    create_table :group_gliderflights do |t|
       t.integer :day_flight_number
       t.date :date
       t.string :departure_point

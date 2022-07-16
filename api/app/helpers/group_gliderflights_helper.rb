@@ -1,4 +1,4 @@
-module GliderGroupFlightsHelper
+module GroupGliderflightsHelper
   def day_flight_number
     1
   end

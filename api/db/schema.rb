@@ -62,30 +62,6 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["group_id"], name: "index_fleets_on_group_id"
   end
 
-  create_table "glider_group_flights", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.integer "day_flight_number"
-    t.date "date"
-    t.string "departure_point"
-    t.string "arrival_point"
-    t.boolean "is_winch"
-    t.integer "fleet"
-    t.integer "front_seat"
-    t.string "front_flight_role"
-    t.integer "rear_seat"
-    t.string "rear_flight_role"
-    t.datetime "takeoff_time"
-    t.datetime "release_time"
-    t.datetime "landing_time"
-    t.integer "release_alt"
-    t.string "creator"
-    t.string "updater"
-    t.string "note"
-    t.bigint "group_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["group_id"], name: "index_glider_group_flights_on_group_id"
-  end
-
   create_table "glider_initial_logs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.date "at_present"
     t.integer "total_time"
@@ -144,6 +120,30 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
     t.index ["aircraft_type_id"], name: "index_gliderflights_on_aircraft_type_id"
     t.index ["user_id", "log_number"], name: "index_gliderflights_on_user_id_and_log_number"
     t.index ["user_id"], name: "index_gliderflights_on_user_id"
+  end
+
+  create_table "group_gliderflights", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "day_flight_number"
+    t.date "date"
+    t.string "departure_point"
+    t.string "arrival_point"
+    t.boolean "is_winch"
+    t.integer "fleet"
+    t.integer "front_seat"
+    t.string "front_flight_role"
+    t.integer "rear_seat"
+    t.string "rear_flight_role"
+    t.datetime "takeoff_time"
+    t.datetime "release_time"
+    t.datetime "landing_time"
+    t.integer "release_alt"
+    t.string "creator"
+    t.string "updater"
+    t.string "note"
+    t.bigint "group_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_gliderflights_on_group_id"
   end
 
   create_table "group_users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -264,12 +264,12 @@ ActiveRecord::Schema.define(version: 2022_04_14_104910) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "fleets", "groups"
-  add_foreign_key "glider_group_flights", "groups"
   add_foreign_key "glider_initial_logs", "users"
   add_foreign_key "gliderflight_microposts", "gliderflights"
   add_foreign_key "gliderflight_microposts", "microposts"
   add_foreign_key "gliderflights", "aircraft_types"
   add_foreign_key "gliderflights", "users"
+  add_foreign_key "group_gliderflights", "groups"
   add_foreign_key "group_users", "groups"
   add_foreign_key "group_users", "users"
   add_foreign_key "licenses", "users"

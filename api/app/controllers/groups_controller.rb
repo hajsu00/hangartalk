@@ -40,7 +40,7 @@ class GroupsController < ApplicationController
   def show
     @current_group = Group.find(params[:id])
     @group_members = @current_group.users
-    @glider_group_flights = @current_group.glider_group_flights.order(takeoff_time: :asc).page(params[:page]).per(10)
+    @group_gliderflights = @current_group.group_gliderflights.order(takeoff_time: :asc).page(params[:page]).per(10)
     @user = current_user
   end
 

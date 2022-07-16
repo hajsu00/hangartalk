@@ -1,4 +1,4 @@
-class GliderGroupFlight < ApplicationRecord
+class GroupGliderflight < ApplicationRecord
   belongs_to :group
 
   def each_egroup_flight_time

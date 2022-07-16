@@ -193,7 +193,7 @@ group.fleets.create!(ident: 'JA2400', aircraft_type_id: 1)
 group = Group.find(1)
 date = Date.new(2022, 2, 21)
 takeoff_time = Time.zone.local(2022, 2, 21, 21, 0, 0)
-group.glider_group_flights.create(day_flight_number: nil,
+group.group_gliderflights.create(day_flight_number: nil,
                                   date: date,
                                   departure_point: '宝珠花滑空場',
                                   arrival_point: '宝珠花滑空場',
@@ -212,7 +212,7 @@ group.glider_group_flights.create(day_flight_number: nil,
 group = Group.find(1)
 date = Date.new(2022, 2, 21)
 takeoff_time = Time.zone.local(2022, 2, 21, 21, 20, 0)
-group.glider_group_flights.create(day_flight_number: nil,
+group.group_gliderflights.create(day_flight_number: nil,
                                   date: date,
                                   departure_point: '宝珠花滑空場',
                                   arrival_point: '宝珠花滑空場',
