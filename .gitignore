@@ -5,44 +5,44 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-src/.bundle
+api/.bundle
 
 # Ignore all logfiles and tempfiles.
-src/log/*
-src/tmp/*
-!src/log/.keep
-!src/tmp/.keep
+api/log/*
+api/tmp/*
+!api/log/.keep
+!api/tmp/.keep
 
 # Ignore pidfiles, but keep the directory.
-src/tmp/pids/*
-!src/tmp/pids/
-!src/tmp/pids/.keep
+api/tmp/pids/*
+!api/tmp/pids/
+!api/tmp/pids/.keep
 
 # Ignore uploaded files in development.
-src/storage/*
-!src/storage/.keep
+api/storage/*
+!api/storage/.keep
 
-src/public/assets
-src/.byebug_history
+api/public/assets
+api/.byebug_history
 
 # Ignore master key for decrypting credentials and more.
-src/config/master.key
+api/config/master.key
 
 # ignore .env which is for database.ylm
 .env
 
 # Node.js, webpacker周辺
-src/public/packs
-src/public/packs-test
-src/node_modules
-src/yarn-error.log
-src/yarn-debug.log*
-src/.yarn-integrity
+api/public/packs
+api/public/packs-test
+api/node_modules
+api/yarn-error.log
+api/yarn-debug.log*
+api/.yarn-integrity
 
 # Rspec
-src/vendor/bundle
+api/vendor/bundle
 
-src/app/assets/builds/*
-!src/app/assets/builds/.keep
+api/app/assets/builds/*
+!api/app/assets/builds/.keep
 
 .DS_Store

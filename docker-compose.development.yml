@@ -23,7 +23,7 @@ services:
     environment:
       RAILS_ENV: development
     volumes:
-      - ./src:/var/www/hangartalk
+      - ./api:/var/www/hangartalk
       - public-data:/var/www/hangartalk/public
       - tmp-data:/var/www/hangartalk/tmp
     depends_on:

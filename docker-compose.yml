@@ -13,7 +13,7 @@ services:
   app:
     build: 
       context: .
-      dockerfile: ./src/Dockerfile
+      dockerfile: ./api/Dockerfile
       args:    
         - RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
     environment:
