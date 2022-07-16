@@ -1,4 +1,4 @@
-class GliderFlight < ApplicationRecord
+class Gliderflight < ApplicationRecord
   include ActionView::Helpers
   has_many :micropost, through: :glider_micropost_relationships
   has_many :glider_micropost_relationships, dependent: :destroy
@@ -48,12 +48,12 @@ class GliderFlight < ApplicationRecord
   end
 
   def duplication_check
-    glider_flights = GliderFlight.where("user_id = ?", user.id).order(takeoff_time: :asc)
-    glider_flights.each do |glider_flight|
-      if self.log_number != glider_flight.log_number
-        if (self.takeoff_time..self.landing_time).cover? glider_flight.takeoff_time
+    gliderflights = GliderFlight.where("user_id = ?", user.id).order(takeoff_time: :asc)
+    gliderflights.each do |gliderflight|
+      if self.log_number != gliderflight.log_number
+        if (self.takeoff_time..self.landing_time).cover? gliderflight.takeoff_time
           errors.add(:base, "フライト時間が既存のフライトと重複しています。")
-        elsif (self.takeoff_time..self.landing_time).cover? glider_flight.landing_time
+        elsif (self.takeoff_time..self.landing_time).cover? gliderflight.landing_time
           errors.add(:base, "フライト時間が既存のフライトと重複しています。")
         end
       end

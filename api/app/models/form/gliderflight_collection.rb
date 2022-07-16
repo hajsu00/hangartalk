@@ -8,14 +8,14 @@ module Form
     include ActiveModel::Validations
 
     # FLIGHT_NUM = 10  # 同時にフライトを作成する数
-    attr_accessor :collection # ここに、作成したglider_flightsモデルが格納される
+    attr_accessor :collection # ここに、作成したgliderflightsモデルが格納される
 
     # 初期化メソッド
     def initialize(attributes, pilot, init_type)
       self.collection = case init_type
                         when 'create'
                           attributes.map do |value|
-                            pilot.glider_flights.build(
+                            pilot.gliderflights.build(
                               date: value['date'],
                               aircraft_type_id: value['aircraft_type_id'],
                               glider_ident: value['glider_ident'],
@@ -43,7 +43,7 @@ module Form
                             next unless flight_role != "ログ対象外"
 
                             fleet = Fleet.find_by(id: value.fleet)
-                            pilot.glider_flights.build(
+                            pilot.gliderflights.build(
                               date: value.date,
                               aircraft_type_id: fleet.aircraft_type_id,
                               glider_ident: fleet.ident,

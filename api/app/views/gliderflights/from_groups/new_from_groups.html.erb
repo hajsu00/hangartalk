@@ -7,19 +7,19 @@
     <div class="flex flex-col p-4 justify-center">
       <div class="bg-white pt-6">
         <h2 class="text-gray-800 text-xl sm:text-3xl font-bold text-center mb-4 md:mb-8">未登録のグループフライト一覧</h2>
-        <%= form_with model: @glider_flights, url: {controller: 'glider_flights', action: 'create_from_groups' }, local: true do |f| %>
+        <%= form_with model: @gliderflights, url: {controller: 'gliderflights', action: 'create_from_groups' }, local: true do |f| %>
           <%= render 'shared/error_messages', object: f.object %>
           <div class="overflow-x-auto w-full bg-white shadow-md rounded my-6">
             <table class="min-w-max w-full table-auto">
               <!-- ヘッダー部分 -->
-              <%= render partial: 'glider_flights/from_groups/index_header' %>
+              <%= render partial: 'gliderflights/from_groups/index_header' %>
               <!-- テーブル本体部分 -->
               <tbody class="text-gray-600 text-sm font-light">
                 <% n = 0 %>
-                <% @glider_flights.collection.each do |glider_flight| %>
-                  <% if !glider_flight.nil? && !match_takeoff_time?(glider_flight, @logged_flights) %>
+                <% @gliderflights.collection.each do |gliderflight| %>
+                  <% if !gliderflight.nil? && !match_takeoff_time?(gliderflight, @logged_flights) %>
                     <% n += 1 %>
-                    <%= render partial: 'glider_flights/from_groups/index_record', locals: {glider_flight: glider_flight} %>
+                    <%= render partial: 'gliderflights/from_groups/index_record', locals: {gliderflight: gliderflight} %>
                   <% end %>
                 <% end %>
               </tbody>

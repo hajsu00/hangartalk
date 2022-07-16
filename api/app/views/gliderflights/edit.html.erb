@@ -3,7 +3,7 @@
 <% @user ||= current_user %>
 
 <div class="max-w-screen-sm bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-200 rounded-lg flex-col">
-  <%= form_with(model: @glider_flight, local: true) do |f| %>
+  <%= form_with(model: @gliderflight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div class="bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-300 rounded-lg flex-col justify-center p-4 md:p-8">
       <div class="py-4 px-6 text-gray-800">
@@ -45,7 +45,7 @@
             </div>
             <div class="flex justify-center mt-2">
               <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
-              <%= f.time_field :takeoff_time, value: @glider_flight.takeoff_time.strftime("%R"), class: 'w-50 ml-4 text-base text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
+              <%= f.time_field :takeoff_time, value: @gliderflight.takeoff_time.strftime("%R"), class: 'w-50 ml-4 text-base text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
             </div>
           </div>
 
@@ -83,7 +83,7 @@
             </div>
             <%= f.text_field :arrival_point, autofocus: true, autocomplete: "name", class: 'w-30 text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1' %>
             <div class="flex justify-center mt-2">
-              <%= f.time_field :landing_time, value: @glider_flight.landing_time.strftime("%R"), class: 'w-50 mr-4  text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 md:order-1 order-2 md:ml-2' %>
+              <%= f.time_field :landing_time, value: @gliderflight.landing_time.strftime("%R"), class: 'w-50 mr-4  text-gray-800 text-base border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-2 py-1 md:order-1 order-2 md:ml-2' %>
               <i class="fa-solid fa-plane-arrival my-auto md:mr-0 mr-4 fa-lg md:order-2 order-1"></i>
             </div>
           </div>

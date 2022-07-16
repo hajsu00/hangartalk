@@ -22,7 +22,7 @@ class Micropost < ApplicationRecord
   has_many :like_relationships, dependent: :destroy
   # フライト投稿機能（グライダー）
   has_many :glider_micropost_relationships, dependent: :destroy
-  has_many :glider_flight, through: :glider_micropost_relationships
+  has_many :gliderflight, through: :glider_micropost_relationships
   # 画像投稿
   has_many_attached :images
   # バリデーション

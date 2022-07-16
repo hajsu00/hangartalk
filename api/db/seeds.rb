@@ -143,7 +143,7 @@ user = User.find_by(email: "example@railstutorial.org")
   departure_date = Date.today - 2.year + (n + 1).day
   takeoff_time = Time.current.change(year: departure_date.year, day: departure_date.day) + (((n + 3) % 3) * 60).minute
   landing_time = takeoff_time + 6.minutes
-  glider_flight = user.glider_flights.build(log_number: 1 + n,
+  gliderflight = user.gliderflights.build(log_number: 1 + n,
                               date: departure_date,
                               glider_ident: 'JA21MA',
                               departure_point: '宝珠花滑空場',
@@ -158,8 +158,8 @@ user = User.find_by(email: "example@railstutorial.org")
                               is_instructor: false,
                               is_stall_recovery: false,
                               note: '備考欄です。')
-  glider_flight.aircraft_type_id = 1
-  glider_flight.save(validate: false)
+  gliderflight.aircraft_type_id = 1
+  gliderflight.save(validate: false)
 end
 
 user = User.find_by(email: "example@railstutorial.org")

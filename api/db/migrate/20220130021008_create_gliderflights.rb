@@ -1,6 +1,6 @@
-class CreateGliderFlights < ActiveRecord::Migration[6.1]
+class CreateGliderflights < ActiveRecord::Migration[6.1]
   def change
-    create_table :glider_flights do |t|
+    create_table :gliderflights do |t|
       t.integer :log_number
       t.date :date
       t.string :glider_ident
@@ -21,6 +21,6 @@ class CreateGliderFlights < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
-    add_index :glider_flights, [:user_id, :log_number]
+    add_index :gliderflights, [:user_id, :log_number]
   end
 end

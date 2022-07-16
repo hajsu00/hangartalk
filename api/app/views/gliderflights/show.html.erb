@@ -5,20 +5,20 @@
   <div class="bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-300 rounded-lg flex-col justify-center p-4 md:p-8">
     <div class="py-4 px-6 text-gray-800">
       <div class="text-xl font-bold underline underline-offset-8 mb-6">
-        No. <%= @glider_flight.log_number %>
+        No. <%= @gliderflight.log_number %>
       </div>
       <div class="flex justify-evenly">
         <div class="flex-col">
           <p class="md:text-base font-bold">出発日</p>
           <p class="md:text-2xl ml-4">
-            <%= @glider_flight.date.strftime("%Y年%m月%d日") %>
+            <%= @gliderflight.date.strftime("%Y年%m月%d日") %>
           </p>
         </div>
         <div>
           <div class="flex-col">
             <p class="md:text-base font-bold">搭乗機体</p>
             <p class="md:text-2xl ml-4">
-              <%= "#{show_aircraft_type(@glider_flight.aircraft_type_id)}（#{@glider_flight.glider_ident}）" %>
+              <%= "#{show_aircraft_type(@gliderflight.aircraft_type_id)}（#{@gliderflight.glider_ident}）" %>
             </p>
           </div>
         </div>
@@ -31,12 +31,12 @@
             FROM
           </div>
           <div class="md:text-2xl">
-            <%= @glider_flight.departure_point %>
+            <%= @gliderflight.departure_point %>
           </div>
           <div class="flex justify-center mt-2">
             <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
             <div class="md:text-3xl text-xl ml-4">
-              <%= @glider_flight.takeoff_time.strftime("%R") %>
+              <%= @gliderflight.takeoff_time.strftime("%R") %>
             </div>
           </div>
         </div>
@@ -46,7 +46,7 @@
             <div class="flex-col">
               <p class="text-xs">離脱高度</p>
               <p class="text-sm font-bold">
-                <%= @glider_flight.release_alt %>
+                <%= @gliderflight.release_alt %>
               </p>
             </div>
           </div>
@@ -56,7 +56,7 @@
           <div class="flex-col text-center my-auto">
             <div class="flex-col text-center">
               <p class="text-sm font-bold">
-                <%= @glider_flight.number_of_landing %>
+                <%= @gliderflight.number_of_landing %>
               </p>
               <p class="text-xs">着陸回数</p>
             </div>
@@ -68,11 +68,11 @@
             TO
           </div>
           <div class="md:text-2xl">
-            <%= @glider_flight.arrival_point %>
+            <%= @gliderflight.arrival_point %>
           </div>
           <div class="flex justify-center mt-2">
             <div class="md:text-3xl text-xl mr-4">
-              <%= @glider_flight.landing_time.strftime("%R") %>
+              <%= @gliderflight.landing_time.strftime("%R") %>
             </div>
             <i class="fa-solid fa-plane-arrival my-auto fa-lg"></i>
           </div>
@@ -81,16 +81,16 @@
     </div>
     <div class="flex justify-center">
       <div class="mx-4">
-        <%= link_to edit_glider_flight_path(@glider_flight) do %>
+        <%= link_to edit_gliderflight_path(@gliderflight) do %>
           <%= render partial: "shared/button", locals: {item: '編集'} %>
         <% end %>
       </div>
       <div class="mx-4">
-        <%= link_to glider_flight_path(@glider_flight), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+        <%= link_to gliderflight_path(@gliderflight), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
           <%= render partial: "shared/button", locals: {item: '削除'} %>
         <% end %>
       </div>
     </div>
   </div>
-  <%= render partial: 'shared/share_flight_form', locals: { target_flight: @glider_flight } %>
+  <%= render partial: 'shared/share_flight_form', locals: { target_flight: @gliderflight } %>
 </div>

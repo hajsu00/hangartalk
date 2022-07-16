@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
   has_many :aeroplane_flights, dependent: :destroy
-  has_many :glider_flights, dependent: :destroy
+  has_many :gliderflights, dependent: :destroy
   has_many :group_users, dependent: :destroy
   has_many :groups, through: :group_users
   has_many :like_rekationships, dependent: :destroy
@@ -75,7 +75,7 @@ class User < ApplicationRecord
         departure_date = Date.today - 2.year + (n + 1).day
         takeoff_time = Time.current.change(year: departure_date.year, day: departure_date.day) + (((n + 3) % 3) * 60).minute
         landing_time = takeoff_time + 6.minutes
-        glider_flight = user.glider_flights.build(log_number: 1 + n,
+        gliderflight = user.gliderflights.build(log_number: 1 + n,
                                     date: departure_date,
                                     glider_ident: 'JA21MA',
                                     departure_point: '宝珠花滑空場',
@@ -90,14 +90,14 @@ class User < ApplicationRecord
                                     is_instructor: false,
                                     is_stall_recovery: false,
                                     note: '備考欄です。')
-        glider_flight.aircraft_type_id = 1
-        glider_flight.save(validate: false)
+        gliderflight.aircraft_type_id = 1
+        gliderflight.save(validate: false)
       end
       42.times do |n|
         departure_date = Date.today - 1.year + (n + 1).day
         takeoff_time = Time.current.change(year: departure_date.year, day: departure_date.day) + (((n + 3) % 3) * 60).minute
         landing_time = takeoff_time + 10.minutes
-        glider_flight = user.glider_flights.build(log_number: 76 + n,
+        gliderflight = user.gliderflights.build(log_number: 76 + n,
                                     date: departure_date,
                                     glider_ident: 'JA2381',
                                     departure_point: '宝珠花滑空場',
@@ -112,14 +112,14 @@ class User < ApplicationRecord
                                     is_instructor: false,
                                     is_stall_recovery: false,
                                     note: '備考欄です。')
-        glider_flight.aircraft_type_id = 3
-        glider_flight.save(validate: false)
+        gliderflight.aircraft_type_id = 3
+        gliderflight.save(validate: false)
       end
       # フライトを投稿する
       micropost = user.microposts.build(content: "今日は天気良かったけど、すごい揺れた。最後着陸ミスったのは内緒。。笑", is_flight_attached: true, is_sharing_micropost: false)
-      glider_flight_id = user.glider_flights.last.id
+      gliderflight_id = user.gliderflights.last.id
       micropost.save
-      micropost.glider_micropost_relationships.create!(glider_flight_id: glider_flight_id)
+      micropost.glider_micropost_relationships.create!(gliderflight_id: gliderflight_id)
     end
     return user
   end
@@ -138,8 +138,8 @@ class User < ApplicationRecord
                       :replied,
                       :sharing,
                       :shared,
-                      :glider_flight,
-                      { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships }])
+                      :gliderflight,
+                      { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :glider_micropost_relationships }])
   end
 
   # ユーザーをフォローする

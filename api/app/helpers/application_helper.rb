@@ -28,16 +28,16 @@ module ApplicationHelper
 
   def total_flight_time(user)
     @target_total_time = user.glider_initial_log.total_time
-    target_flights = user.glider_flights
-    target_flights.each do |glider_flight|
-      @target_total_time += glider_flight.landing_time - glider_flight.takeoff_time
+    target_flights = user.gliderflights
+    target_flights.each do |gliderflight|
+      @target_total_time += gliderflight.landing_time - gliderflight.takeoff_time
     end
     show_flight_time(@target_total_time)
   end
 
   def total_flight_number(user)
     target_total_number = user.glider_initial_log.total_number
-    target_flights = user.glider_flights
+    target_flights = user.gliderflights
     target_total_number + target_flights.count
   end
 

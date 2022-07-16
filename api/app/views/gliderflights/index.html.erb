@@ -12,7 +12,7 @@
             <table class="min-w-max w-full table-auto">
               <%= render 'logbook_header' %>
               <tbody class="text-gray-600 text-sm font-light">
-                <%= render partial: 'logbook_record', collection: @logbook_flights, as: :glider_flight %>
+                <%= render partial: 'logbook_record', collection: @logbook_flights, as: :gliderflight %>
               </tbody>
             </table>
           </div>
@@ -20,10 +20,10 @@
             <%= paginate @logbook_flights %>
           </div>
           <div class="flex justify-evenly items-center mt-4">
-            <%= link_to new_glider_flight_path do %>
+            <%= link_to new_gliderflight_path do %>
               <%= render partial: "shared/button", locals: {item: '新しいフライト'} %>
             <% end %>
-            <%= link_to new_from_groups_glider_flights_path do %>
+            <%= link_to new_from_groups_gliderflights_path do %>
               <%= render partial: "shared/button", locals: {item: 'グループから取得'} %>
             <% end %> 
           </div>
@@ -35,7 +35,7 @@
             <%= link_to "すでに紙ベースのログブックをお持ちの方はこちら", new_glider_initial_log_path, class: "font-bold text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
           </div>
           <div class="flex justify-center items-center pt-4">
-            <%= link_to "新しいフライトを登録する方はこちら", new_glider_flight_path, class: "font-bold text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
+            <%= link_to "新しいフライトを登録する方はこちら", new_gliderflight_path, class: "font-bold text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100" %>
           </div>
         <% end %>
       </div>

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get 'glider_flight_collection/new'
   get 'glider_flight_collection/create'
 
-  resources :glider_flights do
+  resources :gliderflights do
     collection do
       get :new_from_groups
       post :create_from_groups
@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     post :create_reply
     post :share_flight
   end
-  resources :glider_flights
+  resources :gliderflights
   resources :users, only: [:show]
   resources :microposts,                only: [:new, :create, :show, :index, :destroy]
   resources :relationships,             only: [:create, :destroy]

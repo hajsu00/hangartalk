@@ -3,7 +3,7 @@
 <% @user ||= current_user %>
 
 <div class="max-w-screen-sm bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-200 rounded-lg flex-col">
-  <%= form_with(model: @glider_flight, local: true) do |f| %>
+  <%= form_with(model: @gliderflight, local: true) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
     <div class="bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-300 rounded-lg flex-col justify-center p-4 md:p-8">
       <div class="py-4 px-6 text-gray-800">
