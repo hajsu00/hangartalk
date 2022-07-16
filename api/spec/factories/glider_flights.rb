@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :glider_flight do
+  factory :gliderflight do
     # association :user
 
     date { "2022-01-30" }

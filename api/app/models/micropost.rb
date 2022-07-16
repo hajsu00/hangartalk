@@ -21,8 +21,8 @@ class Micropost < ApplicationRecord
   # いいね！機能
   has_many :like_relationships, dependent: :destroy
   # フライト投稿機能（グライダー）
-  has_many :glider_micropost_relationships, dependent: :destroy
-  has_many :gliderflight, through: :glider_micropost_relationships
+  has_many :gliderflight_microposts, dependent: :destroy
+  has_many :gliderflight, through: :gliderflight_microposts
   # 画像投稿
   has_many_attached :images
   # バリデーション

@@ -4,7 +4,7 @@ class GliderGroupFlightsController < ApplicationController
   before_action :logged_in_user, only: [:create, :destroy]
   before_action :correct_group_member,   only: :destroy
   before_action :set_sideber_data, only: [:new, :show, :edit, :index, :destroy]
-  before_action :set_glider_flight_selectors, only: [:new, :create, :edit]
+  before_action :set_gliderflight_selectors, only: [:new, :create, :edit]
 
   def new
     current_group = Group.find_by(params[:id])
@@ -56,8 +56,8 @@ class GliderGroupFlightsController < ApplicationController
 
   def destroy
     @glider_group_flight.destroy
-    glider_flights = GliderGroupFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
-    # new_log_number(glider_flights)
+    gliderflights = GliderGroupFlight.where("user_id = ?", current_user.id).order(log_number: :asc)
+    # new_log_number(gliderflights)
     flash[:success] = "選択したグループフライトを削除しました。"
     redirect_to glider_group_flights_url
   end

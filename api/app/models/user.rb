@@ -119,7 +119,7 @@ class User < ApplicationRecord
       micropost = user.microposts.build(content: "今日は天気良かったけど、すごい揺れた。最後着陸ミスったのは内緒。。笑", is_flight_attached: true, is_sharing_micropost: false)
       gliderflight_id = user.gliderflights.last.id
       micropost.save
-      micropost.glider_micropost_relationships.create!(gliderflight_id: gliderflight_id)
+      micropost.gliderflight_microposts.create!(gliderflight_id: gliderflight_id)
     end
     return user
   end
@@ -139,7 +139,7 @@ class User < ApplicationRecord
                       :sharing,
                       :shared,
                       :gliderflight,
-                      { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :glider_micropost_relationships }])
+                      { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :gliderflight_microposts }])
   end
 
   # ユーザーをフォローする

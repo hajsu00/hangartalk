@@ -1,5 +1,5 @@
 module Form
-  class GliderFlightCollection
+  class GliderflightCollection
     include ActiveModel::Conversion
     extend ActiveModel::Naming
     extend ActiveModel::Translation

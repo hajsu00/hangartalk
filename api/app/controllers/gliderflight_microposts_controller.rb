@@ -1,0 +1,2 @@
+class GliderflightMicropostsController < ApplicationController
+end

@@ -1,7 +1,7 @@
 class Gliderflight < ApplicationRecord
   include ActionView::Helpers
-  has_many :micropost, through: :glider_micropost_relationships
-  has_many :glider_micropost_relationships, dependent: :destroy
+  has_many :micropost, through: :gliderflight_microposts
+  has_many :gliderflight_microposts, dependent: :destroy
   has_one :aircraft_type
   belongs_to :user, optional: true
 
@@ -48,7 +48,7 @@ class Gliderflight < ApplicationRecord
   end
 
   def duplication_check
-    gliderflights = GliderFlight.where("user_id = ?", user.id).order(takeoff_time: :asc)
+    gliderflights = Gliderflight.where("user_id = ?", user.id).order(takeoff_time: :asc)
     gliderflights.each do |gliderflight|
       if self.log_number != gliderflight.log_number
         if (self.takeoff_time..self.landing_time).cover? gliderflight.takeoff_time

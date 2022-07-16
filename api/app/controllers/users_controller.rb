@@ -14,7 +14,7 @@ class UsersController < ApplicationController
                                                                       :replied,
                                                                       :sharing,
                                                                       :shared,
-                                                                      :gliderflight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :glider_micropost_relationships }]).page(params[:page]).per(10)
+                                                                      :gliderflight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :gliderflight_microposts }]).page(params[:page]).per(10)
   end
 
   def edit

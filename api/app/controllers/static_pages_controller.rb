@@ -7,7 +7,7 @@ class StaticPagesController < ApplicationController
       :replied,
       :sharing,
       :shared,
-      :glider_flight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, glider_flight: :glider_micropost_relationships }])
+      :gliderflight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :gliderflight_microposts }])
     # @microposts = Micropost.where("is_flight_attached = ?", true).limit(10).order(:created_at)
   end
 

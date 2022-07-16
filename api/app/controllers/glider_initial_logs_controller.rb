@@ -3,7 +3,7 @@ class GliderInitialLogsController < ApplicationController
   before_action :logged_in_user, only: [:create, :select, :destroy]
   before_action :correct_user,   only: :destroy
   before_action :set_sideber_data, only: [:new, :edit, :show, :index]
-  before_action :set_glider_flight_selectors, only: [:edit]
+  before_action :set_gliderflight_selectors, only: [:edit]
 
   def new
     @glider_initial_log = current_user.build_glider_initial_log
@@ -13,7 +13,7 @@ class GliderInitialLogsController < ApplicationController
     @glider_initial_log = current_user.build_glider_initial_log(glider_initial_log_params)
     if @glider_initial_log.save
       flash[:success] = "過去ログの登録に成功しました！"
-      redirect_to glider_flights_url
+      redirect_to gliderflights_url
     else
       flash[:danger] = "過去ログの登録に失敗しました"
       render 'static_pages/top'

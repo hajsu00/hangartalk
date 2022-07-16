@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
   root 'static_pages#top'
-  get 'glider_flight_collection/new'
-  get 'glider_flight_collection/create'
+  get 'gliderflight_collection/new'
+  get 'gliderflight_collection/create'
 
   resources :gliderflights do
     collection do
@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     post :share_flight
   end
   resources :gliderflights
-  resources :users, only: [:show]
+  resources :users,                     only: [:show]
   resources :microposts,                only: [:new, :create, :show, :index, :destroy]
   resources :relationships,             only: [:create, :destroy]
   resources :aeroplane_flights,         only: [:new, :create, :show, :index, :destroy]
@@ -43,9 +43,9 @@ Rails.application.routes.draw do
   resources :glider_group_flights,      only: [:new, :create, :show, :index, :edit, :update, :destroy]
   resources :glider_initial_logs,       only: [:new, :create, :show, :edit, :update, :destroy]
   resources :group_users,               only: [:create, :destroy]
-  resources :glider_flight_collection,  only: [:new, :create]
-  resources :glider_micropost_relationships,  only: [:new, :create]
-  resources :reply_relationships,  only: [:new, :create]
-  resources :share_relationships,  only: [:new, :create, :destroy]
-  resources :like_relationships,  only: [:create, :destroy]
+  resources :gliderflight_collection,   only: [:new, :create]
+  resources :gliderflight_microposts,   only: [:new, :create]
+  resources :reply_relationships,       only: [:new, :create]
+  resources :share_relationships,       only: [:new, :create, :destroy]
+  resources :like_relationships,        only: [:create, :destroy]
 end

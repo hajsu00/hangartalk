@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :glider_micropost_relationship do
     micropost { nil }
-    glider_flight { nil }
+    gliderflight { nil }
   end
 end

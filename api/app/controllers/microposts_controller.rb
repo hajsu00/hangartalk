@@ -38,7 +38,7 @@ class MicropostsController < ApplicationController
 
   def share_flight
     @micropost = current_user.microposts.build(sharing_flight_params)
-    if @micropost.save && @micropost.glider_micropost_relationships.create!(gliderflight_id: params[:micropost][:gliderflight_id])
+    if @micropost.save && @micropost.gliderflight_microposts.create!(gliderflight_id: params[:micropost][:gliderflight_id])
       flash[:success] = "フライトをシェアしました！"
     else
       @microposts = current_user.feed
@@ -53,7 +53,7 @@ class MicropostsController < ApplicationController
                                                                         :replied,
                                                                         :sharing,
                                                                         :shared,
-                                                                        :gliderflight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :glider_micropost_relationships }]).page(params[:page]).per(10)
+                                                                        :gliderflight, { replying: :replying_relationships, replied: :replied_relationships, sharing: :sharing_relationships, shared: :shared_relationships, gliderflight: :gliderflight_microposts }]).page(params[:page]).per(10)
     @reccomended_users = User.where.not("id = ?", @current_user.id).includes([:avatar_attachment, :user_cover_attachment]) - @current_user.following
   end
 

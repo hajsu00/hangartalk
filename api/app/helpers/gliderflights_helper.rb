@@ -21,7 +21,7 @@ module GliderflightsHelper
 
   # ログNo.を新しくふり直す
   def new_log_number
-    gliderflights = GliderFlight.where("user_id = ?", current_user.id).order(date: :asc, takeoff_time: :asc)
+    gliderflights = Gliderflight.where("user_id = ?", current_user.id).order(date: :asc, takeoff_time: :asc)
     n = 1
     gliderflights.each do |gliderflight|
       gliderflight.update_attribute(:log_number, n)
