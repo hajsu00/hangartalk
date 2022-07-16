@@ -1,0 +1,143 @@
+<% provide(:title, 'グループフライト詳細') %>
+<% @user ||= current_user %>
+
+<div class="max-w-screen-sm bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-200 rounded-lg flex-col">
+  <div class="flex justify-center">
+    <div class="flex flex-col">
+      <div class="flex flex-col">
+        <div class="flex flex-row my-4">
+          <div class="flex-col">
+            <p class="md:text-base font-bold">出発日</p>
+            <p class="md:text-2xl md:ml-4 ml-2">
+              <%= @group_gliderflight.date.strftime("%Y年%m月%d日") %>
+            </p>
+          </div>
+          <div>
+            <div class="flex-col ml-4">
+              <p class="md:text-base font-bold">搭乗機体</p>
+              <p class="md:text-2xl md:ml-4 ml-2">
+                <%= show_aircraft(@group_gliderflight.fleet) %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 補足情報 -->
+        <div class="flex flex-row  justify-center my-4">
+          <p class='font-bold inline-block text-gray-800 text-sm sm:text-base my-auto'>曳航タイプ</p>
+          <div class="my-auto text-sm ml-4">
+            <%= @group_gliderflight.is_winch ? "ウインチ曳航" : "航空機曳航" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      <!-- 搭乗者情報 -->
+      <div class="bg-white shadow py-6 sm:py-8 lg:py-12 px-4 md:px-8 w-full my-4 border rounded-lg flex-col justify-center p-4 md:p-8 flex justify-center">
+        <div class="w-full text-gray-800">
+          <p class="text-xl font-bold text-center underline mb-2">搭乗者情報</p>
+          <!-- 前席搭乗者 -->
+          <div class="flex flex-wrap justify-center my-2">
+            <div class="flex flex-row">
+              <p class="font-bold inline-block text-gray-800 text-base">前席搭乗者</p>
+              <div class="text-gray-800 text-base ml-2 my-auto">
+                <%= show_user_name(@group_gliderflight.front_seat) %>
+              </div>
+            </div>
+            <div class="text-gray-800 ml-0 md:ml-2 text-sm my-auto">
+              <%= "（操縦区分：#{@group_gliderflight.front_flight_role}）" %>
+            </div>
+          </div>
+          <!-- 後席搭乗者 -->
+          <div class="flex flex-wrap justify-center my-2">
+            <div class="flex flex-row">
+              <p class="font-bold inline-block text-gray-800 text-base">後席搭乗者</p>
+              <div class="text-gray-800 text-base ml-2 my-auto">
+                <%= show_user_name(@group_gliderflight.rear_seat) %>
+              </div>
+            </div>
+            <div class="text-gray-800 ml-0 md:ml-2 text-sm my-auto">
+              <%= "（操縦区分：#{@group_gliderflight.rear_flight_role}）" %>
+            </div>
+          </div>
+        </div>
+      </div>
+  <div class="bg-white shadow py-3 px-4 mx-auto my-4 border border-gray-300 rounded-lg flex-col justify-center p-4 md:p-8">
+    <div class="py-4 px-6 text-gray-800">
+      <p class="text-xl font-bold text-center underline">フライト情報</p>
+      <!-- フライト情報 -->
+      <div class="flex justify-evenly my-6">
+        <!-- 離陸情報 -->
+        <div class="flex-col mx-2">
+          <div class="md:text-base font-bold">
+            FROM
+          </div>
+          <div class="md:text-2xl">
+            <%= @group_gliderflight.departure_point %>
+          </div>
+          <div class="flex justify-center mt-2">
+            <i class="fa-solid fa-plane-departure my-auto fa-lg"></i>
+            <div class="md:text-3xl text-xl ml-4">
+              <%= @group_gliderflight.takeoff_time.strftime("%R") %>
+            </div>
+          </div>
+        </div>
+        <!-- 補足情報 -->
+        <div class="flex-col my-auto">
+          <div class="flex-col text-center my-auto">
+            <div class="flex-col">
+              <p class="text-xs">離脱高度</p>
+              <p class="text-sm font-bold">
+                <%= @group_gliderflight.release_alt %>
+              </p>
+            </div>
+          </div>
+          <div class="flex justify-center mx-auto my-2">
+            <i class="fa-solid fa-plane sm:fa-2x fa-lg"></i>
+          </div>
+          <div class="flex-col text-center my-auto">
+            <div class="flex-col text-center">
+              <p class="text-sm font-bold">
+                <%= @group_gliderflight.release_time.strftime("%R") %>
+              </p>
+              <p class="text-xs">離陸時刻</p>
+            </div>
+          </div>
+        </div>
+        <!-- 着陸情報 -->
+        <div class="flex-col mx-4">
+          <div class="md:text-base font-bold">
+            TO
+          </div>
+          <div class="md:text-2xl">
+            <%= @group_gliderflight.arrival_point %>
+          </div>
+          <div class="flex justify-center mt-2">
+            <div class="md:text-3xl text-xl mr-4">
+              <%= @group_gliderflight.landing_time.strftime("%R") %>
+            </div>
+            <i class="fa-solid fa-plane-arrival my-auto fa-lg"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-2">
+    <p class="text-xl font-bold text-center underline">備考</p>
+    <div class="text-gray-800 text-base ml-2 my-auto">
+      <%= @group_gliderflight.note %>
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <div class="mx-4">
+      <%= link_to edit_group_gliderflight_path(@group_gliderflight) do %>
+        <%= render partial: "shared/button", locals: {item: '編集'} %>
+      <% end %>
+    </div>
+    <div class="mx-4">
+      <%= link_to group_gliderflight_path(@group_gliderflight), method: :delete, data: { confirm: "本当に削除しますか？" } do %>
+        <%= render partial: "shared/button", locals: {item: '削除'} %>
+      <% end %>
+    </div>
+  </div>
+</div>

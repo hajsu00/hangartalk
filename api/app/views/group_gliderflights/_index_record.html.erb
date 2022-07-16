@@ -1,0 +1,41 @@
+<tr onclick='window.location="<%= group_gliderflight_path(group_gliderflight) %>"' role="link" class="cursor-pointer text-gray-800 border-b border-gray-200 hover:bg-gray-100 even:bg-gray-200">
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.date %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= show_aircraft(group_gliderflight.fleet) %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.departure_point %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.arrival_point %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= show_user_name(group_gliderflight.front_seat) %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= show_user_name(group_gliderflight.rear_seat) if !group_gliderflight.rear_seat.nil? %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= towing_way(group_gliderflight) %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.takeoff_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.release_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.landing_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= show_flight_time(group_gliderflight.each_egroup_flight_time) %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.release_alt %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= group_gliderflight.note %>
+  </td>
+</tr>

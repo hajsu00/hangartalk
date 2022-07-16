@@ -1,0 +1,93 @@
+<% flight_time = glider_each_flight_time(gliderflight) %>
+
+<tr onclick='window.location="<%= gliderflight_path(gliderflight) %>"' role="link" class="cursor-pointer border-b border-gray-200 hover:bg-blue-100 even:bg-gray-200">
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.log_number %>
+  </td>
+  <td class="py-3 px-2 text-left">
+    <%= gliderflight.date.strftime("%Y年%m月%d日") %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= show_aircraft_type(gliderflight.aircraft_type_id) %> 
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.glider_ident %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.departure_point %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.arrival_point %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.takeoff_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.landing_time.strftime("%R") %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.number_of_landing %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= show_flight_time(flight_time) %>
+  </td>
+  <!-- 「滑空機による時間」カラム-->
+  <% is_winch_tow = gliderflight.is_winch? %>
+  <% flight_role = gliderflight.flight_role %>
+  <!-- 「単独又は機長」カラム -->
+  <% case flight_role %>
+    <% when '機長' %>
+      <td class="py-3 px-2 text-center border">
+        <%= show_flight_time(flight_time) if is_winch_tow %>
+      </td>
+      <td class="py-3 px-2 text-center border">
+        <%= show_flight_time(flight_time) if !is_winch_tow %>
+      </td>
+    <% when '単独飛行' %>
+      <td class="py-3 px-2 text-center border">
+        <%= show_flight_time(flight_time) if is_winch_tow %>
+      </td>
+      <td class="py-3 px-2 text-center border">
+        <%= show_flight_time(flight_time) if !is_winch_tow %>
+      </td>
+    <% when '同乗教育' %>
+      <td class="py-3 px-2 text-center border">
+      </td>
+      <td class="py-3 px-2 text-center border">
+      </td>
+  <% end %>
+  <!-- 「同乗教育」カラム -->
+  <% case flight_role %>
+    <% when '同乗教育' %>
+      <td class="py-3 px-2 text-center border">
+        <%= show_flight_time(flight_time) if is_winch_tow %>
+      </td>
+      <td class="py-3 px-2 text-center border">
+        <%= show_flight_time(flight_time) if !is_winch_tow %>
+      </td>
+    <% else %>
+      <td class="py-3 px-2 text-center border">
+      </td>
+      <td class="py-3 px-2 text-center border">
+      </td>
+  <% end %>
+
+  <td class="py-3 px-2 text-center border">
+    <%= show_flight_time(flight_time) if gliderflight.is_cross_country? %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.release_alt %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= show_flight_time(flight_time) if gliderflight.is_instructor? %>
+  </td>
+  <td class="py-3 px-2 text-center border">
+    <%= gliderflight.note %>
+  </td>
+  <td class="py-3 px-2 text-left">
+    <% case flight_role %>
+      <% when '機長' %>
+        <p class="text-center"><%= gliderflight.user.name %></p>
+    <% end %>
+  </td>
+</tr>

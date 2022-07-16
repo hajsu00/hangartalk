@@ -1,0 +1,2 @@
+module GliderflightMicropostsHelper
+end

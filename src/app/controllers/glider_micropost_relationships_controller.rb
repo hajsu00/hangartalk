@@ -1,2 +1,0 @@
-class GliderMicropostRelationshipsController < ApplicationController
-end
